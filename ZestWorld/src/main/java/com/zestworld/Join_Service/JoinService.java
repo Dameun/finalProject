@@ -1,7 +1,6 @@
 package com.zestworld.Join_Service;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import com.zestworld.Table_DTO.Users_DTO;
 @Service
 public class JoinService {
 
+	
 	@Autowired
 	private SqlSession sqlsession;
 	
@@ -43,4 +43,28 @@ public class JoinService {
 		return users;
 	}
 	
+	/*//비번 찾기 폐기예정
+	public String getPw(Map<String, Object> paramMap) throws ClassNotFoundException, SQLException{
+		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
+		String result = dao.getPw(paramMap);
+		return result;
+		//return getSqlSession().selectOne("getPw",paramMap);
+		//return joindao.getPw(paramMap);
+	}
+	*/
+		
+		//비번 변경
+	public int pwEdit(Users_DTO member) throws ClassNotFoundException, SQLException {
+		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
+		int result = dao.pwEdit(member);
+		return result;
+		// return getSqlSession().selectOne("getPw",paramMap);
+		// return joindao.getPw(paramMap);
+	}
+
+	public int updateUser(Users_DTO member){
+	JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
+	int result = dao.updateUser(member);
+	return result;
+	}
 }

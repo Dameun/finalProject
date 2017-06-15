@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zestworld.Join_DAO.JoinDAO">
 	<insert id="insert" parameterType="com.zestworld.Table_DTO.Users_DTO">
-		insert into users(userid, password)
-		values(#{userid}, #{password})
+		insert into users(userid, password,name,phone)
+		values(#{userid}, #{password},#{name},#{phone})
 	</insert>
 	<insert id="insertRoll" parameterType="com.zestworld.Table_DTO.Role_DTO">
 		insert into Role(userid, authority_name)
@@ -12,6 +12,15 @@
 	<select id="GetSearchUser" resultType="com.zestworld.Table_DTO.Users_DTO">
 		select * from users where userid=#{userid}
 	</select>
+	
+	<update id="pwEdit" >
+		update users set password=#{password} where userid=#{userid} or phone =#{phone}
+	</update>
+	
+	<update id="updateUser">
+		update users set password=#{password} name=#{name}, phone=#{phone} ,img=#{img} where userid=#{userid}
+	</update>
+	
 	
 	<!--
 	<select id="idCheck" resultType="int">
@@ -30,4 +39,11 @@
 		where userid = #{userid}
 	</update>
 	-->
+	
+	<!-- 비밀번호 찾기 -->
+	 <select id="getPw" parameterType="hashMap" resultType="String">
+		select password
+		from users where userid=#{userid} or phone=#{phone}
+	</select>	  
+	
 </mapper>

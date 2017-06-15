@@ -7,6 +7,7 @@ import com.zestworld.Table_DTO.Role_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 
 public interface JoinDAO {
+	
 	//회원정보 얻기
 	public Users_DTO getMember(String userid) throws ClassNotFoundException, SQLException;
 	
@@ -24,4 +25,18 @@ public interface JoinDAO {
 	
 	
 	public Users_DTO GetSearchUser(String userid);
+	
+	
+	//비번 찾기
+	public String getPw(Map<String, Object> paramMap);
+	
+	
+	//비밀번호 수정
+	public int pwEdit(Users_DTO member) throws ClassNotFoundException, SQLException; 
+	
+	
+	
+	
+	
+	
 }

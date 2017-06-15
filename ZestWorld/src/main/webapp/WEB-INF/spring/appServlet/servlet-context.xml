@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/mvc
-		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 
@@ -27,16 +24,8 @@
 	<context:component-scan base-package="com.zestworld.Join_Service" />
 	<context:component-scan base-package="com.zestworld.Join_Controller" />
 	<context:component-scan base-package="com.zestworld.workspaceController"/>
-	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
-	<context:component-scan base-package="com.zestworld.taskListController"/>
-	<context:component-scan base-package="com.zestworld.taskListService"/>
-	
-	<beans:bean class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
-	<beans:bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-	
-	
-	
+	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	
 	<beans:bean id="dataController" class="com.zestworld.util.DataController" factory-method="getInstance">
 	</beans:bean>
@@ -61,5 +50,23 @@
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="order" value="2" />
 	</beans:bean>
+
+<!-- 메일보내기 부분 --> 
+    <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <beans:property name="host" value="smtp.gmail.com"/>
+        <beans:property name="port" value="587"/>
+        <beans:property name="username" value="yg19990@gmail.com"/>
+        <beans:property name="password" value="aksen417"/>
+        <beans:property name="javaMailProperties">
+            
+            <beans:props>
+                <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+                <beans:prop key="mail.debug">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean> 
+
 
 </beans:beans>
