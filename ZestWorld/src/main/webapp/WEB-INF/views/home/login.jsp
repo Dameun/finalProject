@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>ZESTWORLD - Login</title>
+    <title>Sing - Login</title>
     <link href="./build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
     <!--[if IE 9]>
@@ -23,66 +23,125 @@
          https://code.google.com/p/chromium/issues/detail?id=332189
          */
     </script>
-</head>
-<body class="login-page">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://www.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+function search() {
+	if ((pwsearch.userid.value != null)&&(pwsearch.phone.value != null)){
+		pwsearch.submit();
+	} else if (pwsearch.userid.value == null) {
+		alert("아이디를 입력하세요.")
+	} else if (pwsearch.phone.value == null) {
+		alert("아이디를 입력하세요.")
+	} 
 
-<div class="container">
-    <main id="content" class="widget-login-container" role="main">
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
-                <h4 class="widget-login-logo animated fadeInUp">
-                    <i class="fa fa-circle text-gray"></i>
-                    ZESTWORLD
-                    <i class="fa fa-circle text-warning"></i>
-                </h4>
-                <section class="widget widget-login animated fadeInUp">
-                    <header>
-                        <h3>Login to your ZestWorld</h3>
-                    </header>
-                    <div class="widget-body">
-                        <p class="widget-login-info">
-                            Use Facebook, Twitter or your email to sign in.
-                        </p>
-                        <p class="widget-login-info">
-                            Don't have an account? Sign up now!
-                        </p>
-                        <c:url value="/login" var="loginURL"/>
-                        <form name="f" action="${loginURL}" method="post" class="login-form mt-lg">
-                            <div class="form-group">
-                                <input type="text" name="username"class="form-control" id="exampleInputEmail1" placeholder="email">
-                            </div>
-                            <div class="form-group">
-                                <input name="password" class="form-control" id="pswd" type="text" placeholder="Password">
-                            </div>
-                            <div class="clearfix">
-                                <div class="btn-toolbar pull-right">
-                                    <button type="button" class="btn btn-default btn-sm" onclick="location.href='join.htm' ">Create an Account</button>
-                                     <button type="submit" class="btn btn-default btn-sm">Login</button>
-                                    <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 col-sm-push-6">
-                                    <div class="clearfix">
-                                        <div class="checkbox widget-login-info pull-right ml-n-lg">
+}
+
+</script>
+</head>
+<body class="l	ogin-page">
+
+	<div class="container">
+		<main id="content" class="widget-login-container" role="main">
+		<div class="row">
+			<div
+				class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+				<h4 class="widget-login-logo animated fadeInUp">
+					<i class="fa fa-circle text-gray"></i> 로그인 <i
+						class="fa fa-circle text-warning"></i>
+				</h4>
+				<section class="widget widget-login animated fadeInUp"> <header>
+				<h3>welcome to the zestworld</h3>
+				</header>
+				<div class="widget-body">
+					<p class="widget-login-info">다들고생했습니다</p>
+					<p class="widget-login-info">이쁘게봐주세요</p>
+					<c:url value="/login" var="loginURL" />
+					<form name="f" action="${loginURL}" method="post"
+						class="login-form mt-lg">
+						<div class="form-group">
+							<input type="text" name="username" class="form-control"
+								id="exampleInputEmail1" placeholder="email">
+						</div>
+						<div class="form-group">
+							<input name="password" class="form-control" id="pswd" type="text"
+								placeholder="Password">
+
+
+						</div>
+
+						<div class="clearfix">
+							<div class="btn-toolbar pull-right">
+								<!-- 회원가입  -->
+								<button type="button" class="btn btn-default btn-sm"
+									onclick="location.href='join.htm' ">회원가입 하러가기</button>
+								<button type="submit" class="btn btn-default btn-sm">Login</button>
+								<!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6 col-sm-push-6">
+						<div class="clearfix">
+							<!-- <div class="checkbox widget-login-info pull-right ml-n-lg">
                                             <input type="checkbox" id="checkbox1" value="1">
                                             <label for="checkbox1">Keep me signed in </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </div> -->
+						</div>
+					</div>
+				</div>
+				</section>
+			<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">비밀번호 변경</button>
 
-                                <div class="col-sm-6 col-sm-pull-6">
-                                    <a class="mr-n-lg" href="#">Trouble with account?</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">비밀번호 찾기</h4>
         </div>
-    </main>
-   
+        <div class="modal-body">
+         <!-- 내용 -->
+         	<c:url value="/sendpw.htm" var="loginURL"/>
+<form action="${loginURL}" name="pwsearch" method="post"  id="pwsearch" >
+         <tr>
+			<td>아이디</td>
+			<td><input type="text" name="userid"/></td>
+		</tr>
+		<tr>
+			<td>phone</td>
+			 <td><input type="text" name="phone" /></td> 
+		</tr>
+		<!-- <tr align="center">
+			<td colspan="2">
+			<input type="button" value="비밀번호 찾기 " onclick="search()" /></td>
+			
+		</tr> -->
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="search()">전송</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 </div>
+			
+
+		</div>
+		</main>
+		</div>
 
 </body>
 
