@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Sing - Login</title>
+    <title>ZESTWORLD - Login</title>
     <link href="./build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
     <!--[if IE 9]>
@@ -32,12 +32,12 @@
             <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
                 <h4 class="widget-login-logo animated fadeInUp">
                     <i class="fa fa-circle text-gray"></i>
-                    sing
+                    ZESTWORLD
                     <i class="fa fa-circle text-warning"></i>
                 </h4>
                 <section class="widget widget-login animated fadeInUp">
                     <header>
-                        <h3>Login to your Sing App</h3>
+                        <h3>Login to your ZestWorld</h3>
                     </header>
                     <div class="widget-body">
                         <p class="widget-login-info">

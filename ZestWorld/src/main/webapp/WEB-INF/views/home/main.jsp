@@ -13,7 +13,7 @@ $(function() {
 
 </script>
 <div>
-	<>
+	
 	<div id="binContent">
 		
 		

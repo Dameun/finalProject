@@ -22,10 +22,11 @@
          https://code.google.com/p/chromium/issues/detail?id=332189
          */
     </script>
+    
   </head>
 <body>
 
-<header>
+
 <nav class="page-controls navbar navbar-default">
     <div class="container-fluid">
         <!-- .navbar-header contains links seen on xs & sm screens -->
@@ -33,11 +34,11 @@
             <ul class="nav navbar-nav">
                 <li>
                     <!-- whether to automatically collapse sidebar on mouseleave. If activated acts more like usual admin templates -->
-                    <a class="hidden-sm hidden-xs" id="nav-state-toggle" href="#" title="Turn on/off sidebar collapsing" data-placement="bottom">
+                    <a class="hidden-sm hidden-xs" id="nav-state-toggle" href="#" title="" data-placement="bottom" data-original-title="Turn on/off sidebar collapsing">
                         <i class="fa fa-bars fa-lg"></i>
                     </a>
                     <!-- shown on xs & sm screen. collapses and expands navigation -->
-                    <a class="visible-sm visible-xs" id="nav-collapse-toggle" href="#" title="Show/hide sidebar" data-placement="bottom">
+                    <a class="visible-sm visible-xs" id="nav-collapse-toggle" href="#" title="" data-placement="bottom" data-original-title="Show/hide sidebar">
                         <span class="rounded rounded-lg bg-gray text-white visible-xs"><i class="fa fa-bars fa-lg"></i></span>
                         <i class="fa fa-bars fa-lg hidden-xs"></i>
                     </a>
@@ -104,22 +105,13 @@
                                     <label class="btn btn-default active">
                                         <!-- ajax-load plugin in action. setting data-ajax-load & data-ajax-target is the
                                              only requirement for async reloading -->
-                                        <input type="radio" checked
-                                               data-ajax-trigger="change"
-                                               data-ajax-load="demo/ajax/notifications.html"
-                                               data-ajax-target="#notifications-list"> Notifications
+                                        <input type="radio" checked="" data-ajax-trigger="change" data-ajax-load="demo/ajax/notifications.html" data-ajax-target="#notifications-list"> Notifications
                                     </label>
                                     <label class="btn btn-default">
-                                        <input type="radio"
-                                               data-ajax-trigger="change"
-                                               data-ajax-load="demo/ajax/messages.html"
-                                               data-ajax-target="#notifications-list"> Messages
+                                        <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/messages.html" data-ajax-target="#notifications-list"> Messages
                                     </label>
                                     <label class="btn btn-default">
-                                        <input type="radio"
-                                               data-ajax-trigger="change"
-                                               data-ajax-load="demo/ajax/progress.html"
-                                               data-ajax-target="#notifications-list"> Progress
+                                        <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/progress.html" data-ajax-target="#notifications-list"> Progress
                                     </label>
                                 </div>
                             </header>
@@ -211,11 +203,7 @@
                             <footer class="panel-footer text-sm">
                                 <!-- ajax-load button. loads demo/ajax/notifications.php to #notifications-list
                                      when clicked -->
-                                <button class="btn btn-xs btn-link pull-right"
-                                        id="load-notifications-btn"
-                                        data-ajax-load="demo/ajax/notifications.php"
-                                        data-ajax-target="#notifications-list"
-                                        data-loading-text="<i class='fa fa-refresh fa-spin mr-xs'></i> Loading...">
+                                <button class="btn btn-xs btn-link pull-right" id="load-notifications-btn" data-ajax-load="demo/ajax/notifications.php" data-ajax-target="#notifications-list" data-loading-text="<i class='fa fa-refresh fa-spin mr-xs'></i> Loading...">
                                     <i class="fa fa-refresh"></i>
                                 </button>
                                 <span class="fs-mini">Synced at: 21 Apr 2014 18:36</span>
@@ -239,8 +227,8 @@
                 <li>
                     <a href="#" data-toggle="chat-sidebar">
                         <i class="fa fa-globe fa-lg"></i>
-                    </a>
-                    <div id="chat-notification" class="chat-notification hide">
+                    <i class="chat-notification-sing animated bounceIn"></i></a>
+                    <div id="chat-notification" class="chat-notification animated fadeOut hide">
                         <div class="chat-notification-inner">
                             <h6 class="title">
                                 <span class="thumb-xs">
@@ -257,264 +245,41 @@
     </div>
 </nav>
 
-<div class="chat-sidebar" id="chat">
-    <div class="chat-sidebar-content">
-        <header class="chat-sidebar-header">
-            <h4 class="chat-sidebar-title">Contacts</h4>
-            <div class="form-group no-margin">
-                <div class="input-group input-group-dark">
-                    <input class="form-control fs-mini" id="chat-sidebar-search" type="text" placeholder="Search...">
-                    <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                </div>
-            </div>
-        </header>
-        <div class="chat-sidebar-contacts chat-sidebar-panel open">
-            <h5 class="sidebar-nav-title">Today</h5>
-            <div class="list-group chat-sidebar-user-group">
-                <a class="list-group-item" href="#chat-sidebar-user-1">
-                    <i class="fa fa-circle text-success pull-right"></i>
-                    <span class="thumb-sm pull-left mr">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
-                    </span>
-                    <h5 class="message-sender">Chris Gray</h5>
-                    <p class="message-preview">Hey! What's up? So many times since we</p>
-                </a>
-                <a class="list-group-item" href="#chat-sidebar-user-2">
-                    <i class="fa fa-circle text-gray-light pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="img/avatar.png" alt="...">
-                </span>
-                    <h5 class="message-sender">Jamey Brownlow</h5>
-                    <p class="message-preview">Good news coming tonight. Seems they agreed to proceed</p>
-                </a>
-                <a class="list-group-item" href="#chat-sidebar-user-3">
-                    <i class="fa fa-circle text-danger pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a1.jpg" alt="...">
-                </span>
-                    <h5 class="message-sender">Livia Walsh</h5>
-                    <p class="message-preview">Check out my latest email plz!</p>
-                </a>
-                <a class="list-group-item" href="#chat-sidebar-user-4">
-                    <i class="fa fa-circle text-gray-light pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="img/avatar.png" alt="...">
-                </span>
-                    <h5 class="message-sender">Jaron Fitzroy</h5>
-                    <p class="message-preview">What about summer break?</p>
-                </a>
-                <a class="list-group-item" href="#chat-sidebar-user-5">
-                    <i class="fa fa-circle text-success pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a4.jpg" alt="...">
-                </span>
-                    <h5 class="message-sender">Mike Lewis</h5>
-                    <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
-                </a>
-            </div>
-            <h5 class="sidebar-nav-title">Last Week</h5>
-            <div class="list-group chat-sidebar-user-group">
-                <a class="list-group-item" href="#chat-sidebar-user-6">
-                    <i class="fa fa-circle text-gray-light pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a6.jpg" alt="...">
-                </span>
-                    <h5 class="message-sender">Freda Edison</h5>
-                    <p class="message-preview">Hey what's up? Me and Monica going for a lunch somewhere. Wanna join?</p>
-                </a>
-                <a class="list-group-item" href="#chat-sidebar-user-7">
-                    <i class="fa fa-circle text-success pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
-                </span>
-                    <h5 class="message-sender">Livia Walsh</h5>
-                    <p class="message-preview">Check out my latest email plz!</p>
-                </a>
-                <a class="list-group-item" href="#chat-sidebar-user-8">
-                    <i class="fa fa-circle text-warning pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a3.jpg" alt="...">
-                </span>
-                    <h5 class="message-sender">Jaron Fitzroy</h5>
-                    <p class="message-preview">What about summer break?</p>
-                </a>
-                <a class="list-group-item" href="#chat-sidebar-user-9">
-                    <i class="fa fa-circle text-gray-light pull-right"></i>
-                <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="img/avatar.png" alt="...">
-                </span>
-                    <h5 class="message-sender">Mike Lewis</h5>
-                    <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
-                </a>
-            </div>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-1">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Chris Gray
-                </a>
-            </h5>
-            <ul class="message-list">
-                <li class="message">
-                    <span class="thumb-sm">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
-                    </span>
-                    <div class="message-body">
-                        Hey! What's up?
-                    </div>
-                </li>
-                <li class="message">
-                    <span class="thumb-sm">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
-                    </span>
-                    <div class="message-body">
-                        Are you there?
-                    </div>
-                </li>
-                <li class="message">
-                    <span class="thumb-sm">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
-                    </span>
-                    <div class="message-body">
-                        Let me know when you come back.
-                    </div>
-                </li>
-                <li class="message from-me">
-                    <span class="thumb-sm">
-                        <img class="img-circle" src="img/avatar.png" alt="...">
-                    </span>
-                    <div class="message-body">
-                        I am here!
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-2">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Jamey Brownlow
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-3">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Livia Walsh
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-4">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Jaron Fitzroy
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-5">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Mike Lewis
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-6">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Freda Edison
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-7">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Livia Walsh
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-8">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Jaron Fitzroy
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <div class="chat-sidebar-chat chat-sidebar-panel" id="chat-sidebar-user-9">
-            <h5 class="title">
-                <a class="js-back" href="#">
-                    <i class="fa fa-angle-left mr-xs"></i>
-                    Mike Lewis
-                </a>
-            </h5>
-            <ul class="message-list">
-            </ul>
-        </div>
-        <footer class="chat-sidebar-footer form-group">
-            <input class="form-control input-dark fs-mini" id="chat-sidebar-input" type="text"  placeholder="Type your message">
-        </footer>
-    </div>
-</div>
 
-</header>
-
-</div>
 <!-- common libraries. required for every page-->
-<script src="vendor/jquery/dist/jquery.min.js"></script>
-<script src="vendor/jquery-pjax/jquery.pjax.js"></script>
-<script src="vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
-<script src="vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
-<script src="vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
-<script src="vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
-<script src="vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
-<script src="vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
-<script src="vendor/slimScroll/jquery.slimscroll.min.js"></script>
-<script src="vendor/widgster/widgster.js"></script>
-<script src="vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
-<script src="vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
-<script src="vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="./build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
+<script src="./build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+<script src="./build/bootstrap/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="./build/bootstrap/vendor/widgster/widgster.js"></script>
+<script src="./build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+<script src="./build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="./build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 
 <!-- common app js -->
-<script src="Js/settings.js"></script>
-<script src="Js/app.js"></script>
+<script src="./webapp/Js/settings.js"></script>
+<script src="./webapp/Js/app.js"></script>
 
 <!-- page specific libs -->
-<script id="test" src="vendor/underscore/underscore.js"></script>
-<script src="vendor/jquery.sparkline/index.js"></script>
-<script src="vendor/jquery.sparkline/index.js"></script>
-<script src="vendor/d3/d3.min.js"></script>
-<script src="vendor/rickshaw/rickshaw.min.js"></script>
-<script src="vendor/raphael/raphael-min.js"></script>
-<script src="vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
-<script src="vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
-<script src="vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
-<script src="vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
-<script src="vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
-<script src="vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
+<script id="test" src="./build/bootstrap/vendor/underscore/underscore.js"></script>
+<script src="./build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="./build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="./build/bootstrap/vendor/d3/d3.min.js"></script>
+<script src="./build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
+<script src="./build/bootstrap/vendor/raphael/raphael-min.js"></script>
+<script src="./build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
+<script src="./build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
+<script src="./build/bootstrap/vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+<script src="./build/bootstrap/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
+<script src="./build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
 
 <!-- page specific js -->
-<script src="Js/index.js"></script>
+<script src="./webapp/Js/index.js"></script>
 </body>
 </html>
