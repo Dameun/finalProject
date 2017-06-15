@@ -49,6 +49,7 @@ function CreateWorkspace()
 </script>
 </head>
 <body>
+<div id="contentDiv">
  	<div class="container">
     <main id="content" class="widget-login-container" role="main">
         <div class="row">
@@ -77,7 +78,7 @@ function CreateWorkspace()
 		                                </div>
 		                                <h3 class="fw-normal">참여 맴버:)</h3>
 		                                <div class="widget-footer-bottom">
-		                                    <div class="mb-sm">dbsl@naver.com / zest@kosta.com </div>
+		                                    <div class="mb-sm">dbsl@naver.com /zest@kosta.com </div>
 		                                    <p><button class="btn btn-gray btn-block"  onclick="location.href='selectWorkspace.htm?selectWorkspaceID=${workSpace.workspace_id}'">Enter</button></p>
 		                                </div>
 		                            </div>
@@ -88,43 +89,13 @@ function CreateWorkspace()
 		            </c:forEach>
 		            <div class="clearfix">
                                 <div class="btn-toolbar pull-right">
-                                    <button type="button" class="btn btn-default btn-sm" ononclick="CreateWorkspace()" >+새로운 워크스페이스</button>
+                                    <button type="button" class="btn btn-default btn-sm" onclick="CreateWorkspace()" >+새로운 워크스페이스</button>
                                     <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
                                 </div>
                      </div>  
            </div>
-           </main>
-           </div>
-<%-- 	<div class="container">
-		<div class="col-sm-12">
-			<div id="contentDiv" name= "contentDiv">
-				<c:forEach items="${workspaceList}" var="workSpace">
-					<div class="bs-calltoaction bs-calltoaction-primary">
-						<div class="row">
-							<div class="col-md-9 cta-contents">
-
-								<h1 class="cta-title">${workSpace.workspace_name}</h1>
-	
-								<div class="cta-desc">
-									<p>${workSpace.description}</p>
-								</div>
-							</div>
-							
-							<div class="col-md-3 cta-button">
-								<button type="button" onclick="location.href='selectWorkspace.htm?selectWorkspaceID=${workSpace.workspace_id}'"
-									class="btn btn-lg btn-block btn-primary" >Enter</button>
-							</div>
-	 						
-						</div>
-					</div>
-				</c:forEach>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CreateWorkspace()">
-					<span aria-hidden="true">+새로운 워크스페이스</span>
-				</button>
-			</div>
-		</div>
-	</div> --%>
-
-
+      </main>
+    </div>
+</div>
 </body>
 </html>
