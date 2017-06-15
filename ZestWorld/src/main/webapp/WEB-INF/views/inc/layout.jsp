@@ -9,34 +9,25 @@
 	<link href="index.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
-        <tr>          
 
-            <td height="30" colspan="2">
+      
 
             	<tiles:insertAttribute name="header" />
 
-            </td>
+   
 
-        </tr>
-
-        <tr>
-
-            <td height="300" style="width:10%;">
+           
 
             	<tiles:insertAttribute name="aside" />
 
-            </td>
+          
 
-            <td width="90%">
-
+     <div class="content-wrap">
             	<tiles:insertAttribute name="content" />
 
-            </td>
+   </div>
 
-        </tr>
 
-    </table>
 
 	
 </body>
