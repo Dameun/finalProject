@@ -25,9 +25,8 @@
          https://code.google.com/p/chromium/issues/detail?id=332189
          */
     </script>
-    
+    <script type="text/javascript" src="./Js/ajaxView.js"></script>
   </head>
-<body>
 
 
 <nav class="page-controls navbar navbar-default">
@@ -248,7 +247,6 @@
     </div>
 </nav>
 
-
 <!-- common libraries. required for every page-->
 <script src="./build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
 <script src="./build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
@@ -265,15 +263,16 @@
 <script src="./build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 
 <!-- common app js -->
-<script src="./webapp/Js/settings.js"></script>
-<script src="./webapp/Js/app.js"></script>
+<script src="./build/bootstrap/js/settings.js"></script>
+<script src="./build/bootstrap/js/app.js"></script>
+
 
 <!-- page specific libs -->
 <script id="test" src="./build/bootstrap/vendor/underscore/underscore.js"></script>
 <script src="./build/bootstrap/vendor/jquery.sparkline/index.js"></script>
 <script src="./build/bootstrap/vendor/jquery.sparkline/index.js"></script>
 <script src="./build/bootstrap/vendor/d3/d3.min.js"></script>
-<script src="./build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
+<script src="./webapp/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
 <script src="./build/bootstrap/vendor/raphael/raphael-min.js"></script>
 <script src="./build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
 <script src="./build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
@@ -283,6 +282,6 @@
 <script src="./build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
 
 <!-- page specific js -->
-<script src="./webapp/Js/index.js"></script>
-</body>
+<script src="./build/bootstrap/js/index.js"></script>
+
 </html>

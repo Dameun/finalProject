@@ -40,8 +40,8 @@ function projectClick(project_id)
 	});	
 }
 </script>
-<div class="container">
-  <main id="content" class="widget-login-container" role="main">
+
+
 		 <div class="row">
 		 		<c:forEach items="${projectList}" var="project">
 		            <div class="col-md-6 widget-container">
@@ -67,8 +67,7 @@ function projectClick(project_id)
 		      	</div>
 		    </c:forEach>
 		</div>
-</main>
-</div>
+
 	<%-- <div class="container">
 		<div class="col-sm-12">
 			<div id="contentDiv" name= "contentDiv">

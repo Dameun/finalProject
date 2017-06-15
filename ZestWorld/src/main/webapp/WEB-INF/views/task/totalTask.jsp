@@ -6,8 +6,9 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<!-- common app js -->
+<script src="./build/bootstrap/js/settings.js"></script>
+<script src="./build/bootstrap/js/app.js"></script>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -487,4 +488,3 @@ function categorychange(){
 </div>
 
 
- 

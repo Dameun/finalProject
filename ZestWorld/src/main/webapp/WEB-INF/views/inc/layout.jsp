@@ -8,27 +8,24 @@
 	<title>Index</title>
 	<link href="index.css" type="text/css" rel="stylesheet">
 </head>
-<body>
-
-      
+<body class=" nav-collapsed chat-sidebar-container pace-done">
 
             	<tiles:insertAttribute name="header" />
-
-   
-
-           
-
             	<tiles:insertAttribute name="aside" />
-
-          
-
+     
      <div class="content-wrap">
-            	<tiles:insertAttribute name="content" />
+   
+     <main id="content" class="content" role="main">
+   
+	
+	<div id="binContent">
+		<tiles:insertAttribute name="content" />
+		
+	
+</div>
+            	
+	</main>
 
    </div>
-
-
-
-	
 </body>
 </html>

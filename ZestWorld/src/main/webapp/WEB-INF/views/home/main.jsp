@@ -12,10 +12,3 @@ $(function() {
 });	
 
 </script>
-<div>
-	
-	<div id="binContent">
-		
-		
-	</div>
-</div>
