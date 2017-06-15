@@ -23,7 +23,7 @@ public class mainController {
    }
    
    @RequestMapping("/main.htm")
-   public String login(){
+   public String main(){
       return "home.main";
    }
    
