@@ -1,0 +1,209 @@
+@charset "utf-8";
+
+#container {
+  margin: 8px auto 0 auto; max-width: 800px;
+}
+
+#container > div.section {
+  position: relative; padding: 12px 16px; border-bottom: 1px solid #d6d6d6; background-color: #fff;
+}
+#container > div.section.poster {
+  padding: 0;
+}
+
+#container > div.section > h1 {
+  color: #292929; font-size: 18px; font-weight: bold; word-wrap: break-word;
+}
+#container > div.section > span.viewcount {
+  padding-left: 14px; line-height: 14px;
+  color: #0aafdf; font-size: 10px; letter-spacing: 0; background: transparent url('/images/viewcount.png') no-repeat left top; background-size: 12px 8px;
+}
+#container > div.section > h2 {
+  float: left; line-height: 20px; color: #737373; font-size: 12px; font-weight: bold;
+}
+#container > div.section > p,
+#container > div.section > ol,
+#container > div.section > dl {
+  margin-left: 56px;
+}
+#container > div.section > p > span,
+#container > div.section > p > a,
+#container > div.section > ol > li,
+#container > div.section > dl > dt,
+#container > div.section > dl > dd {
+  line-height: 20px;
+}
+#container > div.section > p > span.dday {
+  display: inline-block; margin-right: 8px; padding: 0 4px; border-radius: 3px;
+  color: #fff; font-size: 12px; background-color: #a6a6a6;
+}
+#container > div.section > p > span.dday.active {
+  background-color: #ffcc1c;
+}
+#container > div.section > p > span.date {
+  display: inline-block; color: #292929; font-size: 12px;
+}
+#container > div.section > p > a.link {
+  display: inline-block; margin-right: 8px; padding: 0 4px; border: 1px solid #d6d6d6; border-radius: 3px;
+  color: #a6a6a6; font-size: 12px; font-weight: bold;
+}
+#container > div.section > ol > li {
+  display: inline-block; margin-right: 8px; line-height: 20px; color: #292929; font-size: 12px;
+}
+#container > div.section > dl > dt {
+  display: inline-block; width: 56px; color: #ffa81f; font-size: 12px; font-weight: bold;
+}
+#container > div.section > dl > dd {
+  display: inline-block; color: #292929; font-size: 12px;
+}
+#container > div.section > img.poster {
+  margin: 0 auto; max-width: 100%; height: auto;
+}
+#container > div.section > article {
+  position: relative; margin-top: 12px; line-height: 16px;
+  color: #292929; font-size: 12px; letter-spacing: 0; word-wrap: break-word;
+}
+#container > div.section > article > a {
+  color: #737373; text-decoration: underline;
+}
+#container > div.articlesteam > ol.group > li.comment {
+    padding: 12px 16px;
+    background-color: #fff;
+}
+#container > div.articlesteam > h2 {
+    padding: 16px 0 8px 8px;
+    color: #737373;
+    font-size: 12px;
+    font-weight: bold;
+}
+#container > div.articlesteam > ol.group > li.comment > a.remove {
+    float: right;
+    line-height: 14px;
+    color: #737373;
+    font-size: 12px;
+}
+#container > div.articlesteam > ol.group > li {
+    border-bottom: 1px solid #f2f2f2;
+}
+#container > div.articlesteam > ol.group > li.comment > p.text {
+    line-height: 20px;
+    color: #292929;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+#container > div.articlesteam > ol.group > li.comment > time {
+    float: left;
+    line-height: 14px;
+    color: #a6a6a6;
+    font-size: 10px;
+    letter-spacing: 0;
+}
+#container > div.articles > h2 {
+  padding: 16px 0 8px 8px; color: #737373; font-size: 12px; font-weight: bold;
+}
+#container > div.articles > ol.group > li.empty {
+  padding: 24px 0; color: #a6a6a6; font-size: 14px; text-align: center; background-color: #fff;
+}
+#container > div.articles > ol.group > li > a.item {
+  display: block; padding: 12px 16px; border-bottom: 1px solid #f2f2f2; background-color: #fff;
+}
+#container > div.articles > ol.group > li > a.item:hover {
+  background-color: #f8f8f8;
+}
+#container > div.articles > ol.group > li > a.item > h3 {
+  line-height: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: #292929; font-size: 14px;
+}
+#container > div.articles > ol.group > li > a.item > time {
+  display: inline-block; margin-left: 8px; line-height: 20px;
+  color: #a6a6a6; font-size: 10px; letter-spacing: 0;
+}
+#container > div.articles > div.buttons {
+  padding: 8px;
+}
+#container > div.articles > div.buttons > a {
+  float: left; display: block; width: 49%; height: 36px; line-height: 34px; box-sizing: border-box;
+  font-size: 12px; font-weight: bold; text-align: center;
+}
+#container > div.articles > div.buttons > a.write {
+  margin-right: 1%; border: 1px solid transparent; color: #fff; background-color: #1dcdff;
+}
+#container > div.articles > div.buttons > a.more {
+  margin-left: 1%; border: 1px solid #d6d6d6; color: #a6a6a6;
+}
+
+#container > form.writecomment {
+  padding: 8px; background-color: #fff;
+}
+#container > form.writecomment > div.wrap {
+  position: relative; background-color: #f2f2f2;
+}
+#container > form.writecomment > div.wrap > input {
+  padding: 8px 40px 8px 8px; width: 100%; height: 40px; line-height: 24px; box-sizing: border-box;
+  color: #292929; font-size: 16px; background-color: transparent;
+}
+#container > form.writecomment > div.wrap > input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+#container > form.writecomment > div.wrap > span.submit {
+  display: block; position: absolute; right: 0; top: 0; width: 40px; height: 40px;
+  background-image: url('/images/writecomment.submit.png'); background-repeat: no-repeat; background-position: center center; background-size: 24px 24px;
+}
+#container > form.writecomment > div.wrap > span.submit {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background-image: url(../images/writecomment.submit.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 24px 24px;
+}
+#container > div.comments > h2 {
+  padding: 16px 0 8px 8px; color: #737373; font-size: 12px; font-weight: bold;
+}
+#container > div.comments > ol.group > li {
+  border-bottom: 1px solid #f2f2f2;
+}
+#container > div.comments > ol.group > li.empty {
+  padding: 24px 0; color: #a6a6a6; font-size: 14px; text-align: center; background-color: #fff;
+}
+#container > div.comments > ol.group > li.comment {
+  padding: 12px 16px; background-color: #fff;
+}
+#container > div.comments > ol.group > li.comment > p.text {
+  line-height: 20px; color: #292929; font-size: 14px; word-wrap: break-word;
+}
+#container > div.comments > ol.group > li.comment > p.text > a {
+  color: #737373; text-decoration: underline;
+}
+#container > div.comments > ol.group > li.comment > time {
+  float: left; line-height: 14px;
+  color: #a6a6a6; font-size: 10px; letter-spacing: 0;
+}
+#container > div.comments > ol.group > li.comment > h3 {
+  float: left; margin-left: 8px; line-height: 14px;
+  color: #ffa81f; font-size: 10px; font-weight: bold; letter-spacing: 0;
+}
+#container > div.comments > ol.group > li.comment > a.remove {
+  float: right; line-height: 14px;
+  color: #737373; font-size: 12px;
+}
+
+
+
+
+
+#filter > select {
+      width: 10%;
+      margin-left:"500px";
+      float: right;
+      display: block;
+      height: 36px;
+      line-height: 36px;
+      box-sizing: border-box;
+      border-right: 1px solid #d6d6d6;
+      background-color: #fff;
+}

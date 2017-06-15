@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.zestworld.taskDAO.TaskDataDAO">
+
+   <select id="GetWorkSpaceList" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
+   		select* from Workspace_User where userid=#{userid}
+   </select>
+   
+   <select id="GetWorkSpace" resultType="com.zestworld.Table_DTO.Workspace_DTO">
+   		SELECT* FROM Workspace where workspace_id=#{workspace_id}
+   </select>
+     <select id="GetWorkSpaceByname" resultType="com.zestworld.Table_DTO.Workspace_DTO">
+   		SELECT* FROM Workspace where workspace_name=#{workspace_name} and user_id=#{user_id}
+   </select>
+    <delete id="deleteWorkspace" >
+   		delete* FROM Workspace where workspace_id=#{workspace_id}
+   </delete>
+    <insert id="insertWorkSpace" >
+    	<!-- <selectKey order="BEFORE" keyProperty="workspace_id" resultType="String">
+			SELECT MAX(TO_NUMBER(workspace_id))+1 FROM workspace
+		</selectKey> -->
+		INSERT INTO Workspace(workspace_id, workspace_name, visit_id, description, user_id)
+	    VALUES( workspace_seq.nextval, #{workspace_name}, #{visit_id}, #{description}, #{user_id})
+   </insert>
+    <insert id="insertWorkSpaceUser" >
+		INSERT INTO Workspace_User(workspace_id, userid)
+	    VALUES( #{workspace_id}, #{userid})
+   </insert>
+   <insert id="insertProject" >
+		INSERT INTO project(project_id, workspace_id,p_title,explain,p_state, start_date,end_date,p_admin,open_f,
+		mark_f,essence_f,authoriy)
+	    VALUES( project_seq.nextval, #{workspace_id}, #{p_title}, #{explain}, #{p_state},#{start_date},#{end_date},
+	    #{p_admin},#{open_f},#{mark_f},#{essence_f},#{authoriy})
+   </insert>
+   <select id="GetProjectList" resultType="com.zestworld.Table_DTO.Project_DTO">
+   		select* from Project where workspace_id=#{workspace_id}
+   </select>
+   <select id="GetProject" resultType="com.zestworld.Table_DTO.Project_DTO">
+   		SELECT* FROM Project where project_id=#{project_id}
+   </select>
+
+</mapper>

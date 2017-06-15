@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zestworld.Join_DAO.JoinDAO">
+	<insert id="insert" parameterType="com.zestworld.Table_DTO.Users_DTO">
+		insert into users(userid, password)
+		values(#{userid}, #{password})
+	</insert>
+	<insert id="insertRoll" parameterType="com.zestworld.Table_DTO.Role_DTO">
+		insert into Role(userid, authority_name)
+		values(#{userid}, #{authority_name})
+	</insert>
+	<select id="GetSearchUser" resultType="com.zestworld.Table_DTO.Users_DTO">
+		select * from users where userid=#{userid}
+	</select>
+	
+	<!--
+	<select id="idCheck" resultType="int">
+		select count(*) from member where userid = #{userid}
+	</select>
+	
+	<select id="loginCheck" resultType="int">
+		select count(*) from member where userid = #{param1} and pwd = #{param2}
+	</select>
+	
+
+	
+	<update id="updateMember">
+		update member
+		set pwd = #{pwd}, name=#{name},email=#{email}
+		where userid = #{userid}
+	</update>
+	-->
+</mapper>
