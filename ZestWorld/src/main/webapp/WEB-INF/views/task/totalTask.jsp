@@ -2,18 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- <link rel="stylesheet" type="text/css" href="dist/css/ContestBoardView.css"> -->
+<link rel="stylesheet" type="text/css" href="dist/css/ContestBoardView.css">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
-<<<<<<< HEAD
-<!-- common app js -->
-<script src="./build/bootstrap/js/settings.js"></script>
-<script src="./build/bootstrap/js/app.js"></script>
-=======
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- -->
->>>>>>> branch 'master' of https://github.com/kosta151zestworld/finalProject.git
+
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
