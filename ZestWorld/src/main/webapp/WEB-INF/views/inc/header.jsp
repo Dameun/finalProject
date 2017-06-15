@@ -497,8 +497,8 @@
 <script src="vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 
 <!-- common app js -->
-<script src="js/settings.js"></script>
-<script src="js/app.js"></script>
+<script src="Js/settings.js"></script>
+<script src="Js/app.js"></script>
 
 <!-- page specific libs -->
 <script id="test" src="vendor/underscore/underscore.js"></script>
@@ -515,6 +515,6 @@
 <script src="vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
 
 <!-- page specific js -->
-<script src="js/index.js"></script>
+<script src="Js/index.js"></script>
 </body>
 </html>
