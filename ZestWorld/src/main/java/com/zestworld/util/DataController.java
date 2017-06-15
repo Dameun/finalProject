@@ -83,12 +83,21 @@ public class DataController {
 		projectList = (ArrayList<Project_DTO>)taskDao.GetProjectList(currentWorkspace.getWorkspace_id());
 	}
 	
+	// 현재 워크스페이스 위치
+	public Workspace_DTO getCurrentWorkspace() {
+		return currentWorkspace;
+	}
+	
 	//프로젝트 선택시 선택된 project data
 	public void SetCurrentProject (Project_DTO _currentProject)
 	{
 		this.currentProject = _currentProject;
 	}
-
+	
+	// 현재 프로젝트 위치
+	public Project_DTO getCurrentProject() {
+		return currentProject;
+	}
 	
 	//현재 선택된 워크스페이스에서 가지고 있는 프로젝트 리스트
 	public void SetUserWorkSpace(List<Workspace_DTO> _workspaceList )

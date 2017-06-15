@@ -3,7 +3,7 @@
  */
 function ajaxView(menuName)
 {
-	alert('ajaxView.js: '+menuName);
+
 	$.ajax({
 		type:"get",
 		url: menuName,

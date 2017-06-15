@@ -29,16 +29,12 @@ public class mainController {
    
    @RequestMapping("wSpace.htm")
    public String workSpace(){
-      
       return "task.workSpace";
-      
    }
    
    @RequestMapping("member.htm")
    public String member(){
-      
       return "memberAdministration.member";
-      
    }
    @RequestMapping("chat.htm")
    public String chat(){

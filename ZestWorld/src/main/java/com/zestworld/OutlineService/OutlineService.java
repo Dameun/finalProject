@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zestworld.OutlineDAO.IOutlineDAO;
+import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
+import com.zestworld.Table_DTO.Workspace_DTO;
 
 @Service
 public class OutlineService {
@@ -30,8 +33,29 @@ public class OutlineService {
 	}
 	public List<Task_DTO> taskTest(Task_DTO dto) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
-		System.out.println("Service "  + dto.getUserid());
 		List<Task_DTO> list=dao.taskTest(dto);
+		return list;
+	}
+	public List<Project_DTO> projectlist() throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<Project_DTO> list=dao.projectlist();
+		return list;
+	}
+	public List<Workspace_DTO> writerlist(String workspace_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<Workspace_DTO> assignmember=dao.writerlist(workspace_id);
+		return assignmember;
+	}
+	public int insertTask(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int inserttask=dao.insertTask(dto);
+		return inserttask;
+	}
+	
+	
+	public List<Category_DTO> categorylist(int project_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<Category_DTO> list= dao.categorylist(project_id);
 		return list;
 	}
 	

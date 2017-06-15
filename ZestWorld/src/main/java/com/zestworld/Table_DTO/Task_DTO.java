@@ -1,5 +1,7 @@
 package com.zestworld.Table_DTO;
 
+import java.util.Date;
+
 public class Task_DTO {
 	private int task_id;
 	private int category_id;
@@ -11,7 +13,14 @@ public class Task_DTO {
 	private String member;
 	private String follower;
 	private int point;
-	private int success_f;
+	private String success_f;
+	private String projectname;
+	
+	//************************수정
+	private String filterDay;
+	private String order;
+	private String endrolldate;
+	
 	
 	public int getTask_id() {
 		return task_id;
@@ -73,11 +82,36 @@ public class Task_DTO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public int getSuccess_f() {
+	public String getSuccess_f() {
 		return success_f;
 	}
-	public void setSuccess_f(int success_f) {
+	public void setSuccess_f(String success_f) {
 		this.success_f = success_f;
 	}
+	public String getFilterDay() {
+		return filterDay;
+	}
+	public void setFilterDay(String filterDay) {
+		this.filterDay = filterDay;
+	}
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
+	}
+	public String getProjectname() {
+		return projectname;
+	}
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
+	}
+	public String getEndrolldate() {
+		return endrolldate;
+	}
+	public void setEndrolldate(String endrolldate) {
+		this.endrolldate = endrolldate;
+	}
+	
 	
 }

@@ -8,7 +8,11 @@
  
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		select * from task where userid=#{userid}  <!-- default= 작성자가 나인것  -->
+		select * from task where enrolldate between #{filterDay} and sysdate   <!-- default= 작성자가 나인것  -->
+		
+		<if test="userid!=null and userid !=''">
+			and userid=#{userid}
+		</if>
 		
 		<if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
 			and member=#{member}
@@ -18,11 +22,49 @@
 			and follower=#{follower}
 		</if>
 		
-		<!-- <if test="project_id!=null and project_id != ''">  프로젝트별
-			and project_id=#{project_id}
-		</if> -->
+		<if test="success_f!=null and success_f != ''">  <!-- 성공여부  -->
+			and success_f=#{success_f}
+		</if>
+		
+		<!-- <choose>
+		    <when test="order !=null and order !=''">
+		      order by asc
+		    </when>
+		    <otherwise>
+		      order by desc
+   			</otherwise>
+  		</choose> -->
 		
 	</select>
+	
+	<select id="projectlist" resultType="com.zestworld.Table_DTO.Project_DTO">
+		
+		select * from project
+		
+	</select> 
+	
+	<select id="writerlist" parameterType="String" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
+		
+		select userid from workspace_user where workspace_id=#{workspace_id}
+		
+	</select> 
+	
+	<insert id="insertTask" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		insert into task(task_id,category_id,userid,title,enrolldate) values (task_seq.nextval,#{category_id},#{userid},#{title},sysdate)
+	</insert>
+
+<!-- 	프로젝트에 속한 category name -->
+	<select id ="categorylist" parameterType="int" resultType="com.zestworld.Table_DTO.Category_DTO">
+		select category_id,title from category where project_id =#{projectId}
+	</select>
+<!-- 		
+	task 테이블의 cate_id를 이용해서 c.title추출 (중복값 제거)
+	<select id="catetitlelist" parameterType="com.zestworld.Table_DTO.category_DTO">
+		select distinct c.title, c.cate from task t, category c where t.category_id=c.category_id
+	</select>
+
+ -->
+	
 </mapper>
 
 

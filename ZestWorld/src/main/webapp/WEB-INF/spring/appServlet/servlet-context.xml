@@ -24,8 +24,8 @@
 	<context:component-scan base-package="com.zestworld.Join_Service" />
 	<context:component-scan base-package="com.zestworld.Join_Controller" />
 	<context:component-scan base-package="com.zestworld.workspaceController"/>
-	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
+	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	
 	<beans:bean id="dataController" class="com.zestworld.util.DataController" factory-method="getInstance">
 	</beans:bean>

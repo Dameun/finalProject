@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Project_DTO;
@@ -28,7 +28,7 @@ public class workspaceController {
 	@Autowired
 	private JoinService service;
 	
-	//로그인시 
+	//濡쒓렇�씤�떆 
 	@RequestMapping("/workSpace.htm")
 	public String GetWorkSpace(Principal principal, Model model)
 	{	
@@ -57,7 +57,7 @@ public class workspaceController {
 	}
 	
 	
-	//워크스페이스 선택시
+	//�썙�겕�뒪�럹�씠�뒪 �꽑�깮�떆
 	@RequestMapping("/selectWorkspace.htm")
 	public String selectWorkspace(String selectWorkspaceID, Model model)
 	{
@@ -71,7 +71,7 @@ public class workspaceController {
 	}
 	
 	
-	//워크스페이스 새로만들기 완료 createWorkspace.htm?workspaceName 
+	//�썙�겕�뒪�럹�씠�뒪 �깉濡쒕쭔�뱾湲� �셿猷� createWorkspace.htm?workspaceName 
 	@RequestMapping("/createWorkspace.htm")
 	public String createWorkspace(String workspaceName,String workspaceDiscription,Model model)
 	{
@@ -82,8 +82,8 @@ public class workspaceController {
 		workspace.setUser_id(DataController.getInstance().GetUser().getUserid());
 		taskDao.insertWorkSpace(workspace);
 		
-		//다대다 관계
-		//유져와 워크스페이스 테이블(workspaceUser)에도 추가
+		//�떎���떎 愿�怨�
+		//�쑀�졇�� �썙�겕�뒪�럹�씠�뒪 �뀒�씠釉�(workspaceUser)�뿉�룄 異붽�
 		WorkspaceUser_DTO workspaceUser= new WorkspaceUser_DTO ();
 		workspace = taskDao.GetWorkSpaceByname(workspace);
 		workspaceUser.setWorkspace_id(workspace.getWorkspace_id());
@@ -97,7 +97,7 @@ public class workspaceController {
 		return "home/workSpace";
 	}
 	
-	//프로젝트 생성
+	//�봽濡쒖젥�듃 �깮�꽦
 	@RequestMapping("/CreateProjectProcess.htm")
 	public String createProject(String p_title,String explain, String etcStr, Model model)
 	{
@@ -108,14 +108,14 @@ public class workspaceController {
 		project.setP_title(p_title);
 		project.setExplain(explain);
 		project.setP_admin(DataController.getInstance().GetUser().getUserid());
-		//test깂
+		//test源�
 		project.setStart_date("2017-06-14");
 		project.setEnd_date("2017-07-06");
 		project.setAuthoriy("0");
 		project.setP_state("0");
 		project.setMark_f(0);
-		project.setOpen_f(Integer.parseInt(strArr[0]));	//공개여부
-		project.setEssence_f(Integer.parseInt(strArr[1])); //에센스프로젝트 유무
+		project.setOpen_f(Integer.parseInt(strArr[0]));	//怨듦컻�뿬遺�
+		project.setEssence_f(Integer.parseInt(strArr[1])); //�뿉�꽱�뒪�봽濡쒖젥�듃 �쑀臾�
 		taskDao.insertProject(project);
 		
 		DataController.getInstance().dataChangeProject();
@@ -123,5 +123,6 @@ public class workspaceController {
 		model.addAttribute("projectList", projectList);
 		return "home.main";
 	}
-	
+
+
 }

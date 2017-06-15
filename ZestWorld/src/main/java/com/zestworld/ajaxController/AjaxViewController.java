@@ -1,5 +1,8 @@
 package com.zestworld.ajaxController;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zestworld.OutlineService.OutlineService;
+import com.zestworld.Table_DTO.Project_DTO;
+import com.zestworld.Table_DTO.Workspace_DTO;
+import com.zestworld.taskDAO.TaskDataDAO;
 import com.zestworld.util.DataController;
 
 
@@ -17,6 +24,9 @@ public class AjaxViewController {
 	@Autowired
 	private SqlSession sqlsession;
  
+	@Autowired
+	private OutlineService service;
+	
 	public AjaxViewController()
 	{
 	}
@@ -28,6 +38,7 @@ public class AjaxViewController {
 		return DataController.getInstance().GetviewPath("home")+ "CreateProject.jsp";
 	}
 	
+	
 	@RequestMapping(value="/addWorkspace.ajax", method=RequestMethod.GET)
 	public String addWorkspace()
 	{
@@ -36,8 +47,19 @@ public class AjaxViewController {
 	
 	//mainContentView
 	@RequestMapping(value="/totalTask.ajax", method=RequestMethod.GET)
-	public String totalTask()
+	public String totalTask(Model model) throws ClassNotFoundException, SQLException
 	{
+		//List<Project_DTO> projectlist= service.projectlist();
+		List<Project_DTO> list= service.projectlist();
+		String workspace_id="1";
+		List<Workspace_DTO> assign= service.writerlist(workspace_id);
+		
+		//ModelAndView mav = new ModelAndView("totalTask.jsp");
+		model.addAttribute("projectlist", list); //자동 forward 
+		model.addAttribute("assign", assign); //자동 forward 
+		System.out.println("LIST: "+ list.size());
+/*
+		String workspaceid = DataController.getInstance().getCu*/
 		return DataController.getInstance().GetviewPath("totalTesk")+ "totalTask.jsp";
 	}
 	
@@ -101,4 +123,14 @@ public class AjaxViewController {
 		model.addAttribute("projectList", DataController.getInstance().GetProjectList());
 		return DataController.getInstance().GetviewPath("home")+"projectMain.jsp";
 	}	
+	
+	//프로젝트 선택시
+	@RequestMapping(value="/selectProject.ajax", method=RequestMethod.GET)
+	public String selectProject(String project_id)
+	{
+		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
+		Project_DTO currentProject = taskDao.GetProject(project_id);
+		DataController.getInstance().SetCurrentProject(currentProject);
+		return "";
+	}
 }

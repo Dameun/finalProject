@@ -24,6 +24,21 @@ function CreateWorkspace()
 		},
 	});	
 }
+
+function projectClick(project_id)
+{
+	$.ajax({
+		type:"get",
+		url:"selectProject.ajax",
+		data:{"project_id" : project_id},
+		success:function(data){
+			ajaxView('taskList.ajax');
+		},
+		error:function(){
+			alert('error');
+		},
+	});	
+}
 </script>
 <div class="container">
   <main id="content" class="widget-login-container" role="main">
@@ -45,7 +60,7 @@ function CreateWorkspace()
 		                    <div class="widget-body">
 		                        <p>${project.p_title}</p>
 		                        <p>${project.explain}</p>
-		                        <button type="button" onclick="location.href='selectWorkspace.htm?selectWorkspaceID=${workSpace.workspace_id}'"
+		                        <button type="button" onclick="projectClick(${project.project_id})"
 											class="btn btn-lg btn-block btn-primary" >Enter</button>
 		                    </div>
 		                </section>
