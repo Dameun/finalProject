@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zestworld.taskListDAO.taskListDao">
+
+	<select id="tasklist" resultType="com.zestworld.Table_DTO.Task_DTO">
+		select * from task
+	</select>
+
+
+	<select id="mytasklist" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		
+		select * from task where userid=#{userid}  <!-- default= 작성자가 나인것  -->
+		
+		<if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
+			and member=#{member}
+		</if>
+		
+		<if test="follower!=null and follower != ''">  <!-- 팔로워  -->
+			and follower=#{follower}
+		</if>
+		
+		<!-- <if test="project_id!=null and project_id != ''">  프로젝트별
+			and project_id=#{project_id}
+		</if> -->
+		
+	</select>
+
+	<insert id="insertTitle" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	insert into task(title) values(#{title})
+	</insert>
+	
+	<delete id="deleteTitle" parameterType="String">
+	<!-- delete from task where title=#{title}-->
+	delete from task where title=#{title}
+	</delete>
+	
+
+</mapper>

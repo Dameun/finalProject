@@ -42,7 +42,7 @@
                 </a>
                 <ul id="sidebar-dashboard" class="collapse in">
                     <li class="active"><a href="#" onclick="ajaxView('totalTask.ajax')">전체업무</a></li>
-                    <li><a href="#">개별업무</a></li>
+                    <li><a href="#" onclick="ajaxView('taskList.ajax')">개별업무</a></li>
                 </ul>
             </li>
             <li>

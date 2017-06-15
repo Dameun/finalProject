@@ -49,18 +49,6 @@ public class mainController {
       
    }
    
-   @RequestMapping("taskList.htm")
-   public String taskList(Model model){
-      ArrayList<Task_DTO> list = DataController.getInstance().GetTaskList();
-       model.addAttribute("list",list);
-       for( int i=0; i <list.size(); i ++ )
-       {
-          System.out.println(i+ " / "+list.get(i).getTitle());
-       }
-      return "task.taskList";
-      
-   }
-   
    @RequestMapping("file.htm")
    public String file(){
       
