@@ -84,6 +84,7 @@
 								<!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
 							</div>
 						</div>
+						</form>
 						<div class="row">
                                 <div class="col-md-6 col-md-push-6">
                                     <div class="clearfix">
@@ -98,105 +99,60 @@
                                     <a class="mr-n-lg" href="#myModal" data-toggle="modal"
 									data-target="#myModal">비밀번호를 잊으셨나요?</a>
 									  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+  <div class="modal fade" id="myModal" role="dialog" style="padding-left:30%; width:70%;" >
+        <div class="modla-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">비밀번호 찾기</h4>
-        </div>
-        <div class="modal-body">
+     <section class="widget widget-login animated fadeInUp">
+        <header>
+          
+          <h4 class="modal-title">임시 비밀번호 받기</h4>
+        </header>
+        <hr>
          <!-- 내용 -->
          	<c:url value="/sendpw.htm" var="loginURL"/>
-<form action="${loginURL}" name="pwsearch" method="post"  id="pwsearch" >
-         <tr>
-			<td>아이디</td>
-			<td><input type="text" name="userid"/></td>
-		</tr>
-		<tr>
-			<td>phone</td>
-			 <td><input type="text" name="phone" /></td> 
-		</tr>
+	   
+	   <form  class="login-form mt-lg" action="${loginURL}" name="pwsearch" method="post"  id="pwsearch" >
+         <div class="form-froup">
+			<input type="text" name="userid"class="form-control" placeholder="Email"/>
+		 </div>
+	     <br/>
+		 <div class="form-group">
+     	   <input type="text" name="phone"class="form-control" placeholder="Phone" />
+		 </div>
 		<!-- <tr align="center">
 			<td colspan="2">
 			<input type="button" value="비밀번호 찾기 " onclick="search()" /></td>
 			
 		</tr> -->
-         </form>
+     
+   
+        </form>
+          <div class="row" style="text-align:center;">
+        <div class="clearfix">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="search()">SEND</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="search()">전송</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
+     </div>
+</section>
     </div>
   </div>
   
+  
+  
+  
+  </div>
+  </div>
+
 </div>
-                                </div>
-                            </div>
-						
+</section>
+</div>
+</div>
+					</main>
 					
-					</form>
 				</div>
- </section>
 
 
-
-			</div>
-		</div>
-		</main>
+		
 </body>
-
-
-<%--  <c:url value="/login" var="loginURL"/>
-      <form name="f" action="${loginURL}" method="post">
-   <div class="login">
-      <div class="login-screen">
-         <div class="app-title">
-            <h1>Login</h1>
-         </div>
-
-         <div class="login-form">
-            <div class="control-group">
-            <input type="text" class="login-field" value="" placeholder="username" id="login-name" name="username">
-            <label class="login-field-icon fui-user" label for="uid"></label>
-            </div>
-
-            <div class="control-group">
-            <input type="password" class="login-field" value="" placeholder="password" id="login-pass" name="password">
-            <label class="login-field-icon fui-lock" label for="pwd"></label>
-            </div>
-            
-            
-                <div class="control-group">
-             <button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>
-               </div>
-       
-            <!-- <a class="login-link" href="#">Lost your password?</a>  -->
-            <div class="control-group">
-             <button type="button" onclick="location.href='join.htm' " class="btn btn-primary btn-block btn-flat">회원가입</button>
-               </div>
-         </div>
-            <!-- <a class="login-link" href="#">Lost your password?</a>  -->
-         </div>
-      </div>
-   </div>
-   </form>
-   
-   
-   
-      <c:if test="${param.error != null}">
-         <div>
-            로그인 실패<br>
-             <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
-                  이유 : <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
-              </c:if>
-         </div>      
-      </c:if>
-   </div>    --%>
-
 </html>
