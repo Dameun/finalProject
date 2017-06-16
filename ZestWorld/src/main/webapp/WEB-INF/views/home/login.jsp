@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>ZestWorld - Login</title>
-<link href="./build/bootstrap/css/application.min.css" rel="stylesheet">
+<link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
 <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
 <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
@@ -106,7 +106,11 @@
      <section class="widget widget-login animated fadeInUp">
         <header>
           
-          <h4 class="modal-title">임시 비밀번호 받기</h4>
+          <h4 class="modal-title">
+     <i class="fa fa-circle text-gray"></i>     
+          임시 비밀번호 받기
+          <i class="fa fa-circle text-warning"></i>
+          </h4>
         </header>
         <hr>
          <!-- 내용 -->
@@ -114,11 +118,15 @@
 	   
 	   <form  class="login-form mt-lg" action="${loginURL}" name="pwsearch" method="post"  id="pwsearch" >
          <div class="form-froup">
+         <label for="userid">
+        Email Address  </label>
 			<input type="text" name="userid"class="form-control" placeholder="Email"/>
 		 </div>
 	     <br/>
 		 <div class="form-group">
-     	   <input type="text" name="phone"class="form-control" placeholder="Phone" />
+		 <label for="phone">
+		 Phone Number</label>
+     	   <input type="text" name="phone"class="form-control" placeholder="'-'빼고입력해주세요" />
 		 </div>
 		<!-- <tr align="center">
 			<td colspan="2">

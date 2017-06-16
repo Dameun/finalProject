@@ -18,7 +18,7 @@
      <main id="content" class="content" role="main">
    
 	
-	<div id="binContent">
+
 		<tiles:insertAttribute name="content" />
 		
 	
@@ -26,6 +26,5 @@
             	
 	</main>
 
-   </div>
 </body>
 </html>

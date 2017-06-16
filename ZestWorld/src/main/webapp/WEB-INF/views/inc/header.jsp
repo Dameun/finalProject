@@ -14,7 +14,7 @@
   
   
   
-    <link href="./build/bootstrap/css/application.min.css" rel="stylesheet">
+    <link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- 민성 추가부분 (이부분에 안쓰면 modal 자동으로 닫기는 현상이 발생!!) -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- /민성 추가부분 (이부분에 안쓰면 modal 자동으로 닫기는 현상이 발생!!) -->
@@ -22,7 +22,7 @@
     <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
     <![endif]-->
-    <link rel="shortcut icon" href="./dist/img/favicon.png">
+    <link rel="shortcut icon" href="./resource/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,7 +34,7 @@
          https://code.google.com/p/chromium/issues/detail?id=332189
          */
     </script>
-    <script type="text/javascript" src="./Js/ajaxView.js"></script>
+    <script type="text/javascript" src="./resource/Js/ajaxView.js"></script>
   </head>
 
 
@@ -94,7 +94,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
-                            <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                            <img class="img-circle" src="./resource/img/people/a5.jpg" alt="...">
                         </span>
                         &nbsp;
                         Philip <strong>Smith</strong>&nbsp;
@@ -130,7 +130,7 @@
                             <div id="notifications-list" class="list-group thin-scroll">
                                 <div class="list-group-item">
                                 <span class="thumb-sm pull-left mr clearfix">
-                                    <img class="img-circle" src="demo/img/people/a3.jpg" alt="...">
+                                    <img class="img-circle" src="./resource/img/people/a3.jpg" alt="...">
                                 </span>
                                     <p class="no-margin overflow-hidden">
                                         1 new user just signed up! Check out
@@ -162,7 +162,7 @@
                                 </a>
                                 <div class="list-group-item">
                                 <span class="thumb-sm pull-left mr clearfix">
-                                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                                    <img class="img-circle" src="./resource/img/people/a5.jpg" alt="...">
                                 </span>
                                     <p class="no-margin overflow-hidden">
                                         User <a href="#">Jeff</a> registered
@@ -243,7 +243,7 @@
                         <div class="chat-notification-inner">
                             <h6 class="title">
                                 <span class="thumb-xs">
-                                    <img src="demo/img/people/a6.jpg" class="img-circle mr-xs pull-left">
+                                    <img src="./resource/img/people/a6.jpg" class="img-circle mr-xs pull-left">
                                 </span>
                                 Jess Smith
                             </h6>
@@ -257,40 +257,40 @@
 </nav>
 
 <!-- common libraries. required for every page-->
-<script src="./build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
-<script src="./build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
-<script src="./build/bootstrap/vendor/slimScroll/jquery.slimscroll.min.js"></script>
-<script src="./build/bootstrap/vendor/widgster/widgster.js"></script>
-<script src="./build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
-<script src="./build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
-<script src="./build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="./resource/build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
+<script src="./resource/build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+<script src="./resource/build/bootstrap/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="./resource/build/bootstrap/vendor/widgster/widgster.js"></script>
+<script src="./resource/build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+<script src="./resource/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="./resource/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 
 <!-- common app js -->
-<script src="./build/bootstrap/js/settings.js"></script>
-<script src="./build/bootstrap/js/app.js"></script>
+<script src="./resource/build/bootstrap/js/settings.js"></script>
+<script src="./resource/build/bootstrap/js/app.js"></script>
 
 
 <!-- page specific libs -->
-<script id="test" src="./build/bootstrap/vendor/underscore/underscore.js"></script>
-<script src="./build/bootstrap/vendor/jquery.sparkline/index.js"></script>
-<script src="./build/bootstrap/vendor/jquery.sparkline/index.js"></script>
-<script src="./build/bootstrap/vendor/d3/d3.min.js"></script>
-<script src="./webapp/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
-<script src="./build/bootstrap/vendor/raphael/raphael-min.js"></script>
-<script src="./build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
-<script src="./build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
-<script src="./build/bootstrap/vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
-<script src="./build/bootstrap/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
-<script src="./build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
+<script id="test" src="./resource/build/bootstrap/vendor/underscore/underscore.js"></script>
+<script src="./resource/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="./resource/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="./resource/build/bootstrap/vendor/d3/d3.min.js"></script>
+<script src="./resource/webapp/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
+<script src="./resource/build/bootstrap/vendor/raphael/raphael-min.js"></script>
+<script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
+<script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
+<script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+<script src="./resource/build/bootstrap/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
+<script src="./resource/build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
 
 <!-- page specific js -->
-<script src="./build/bootstrap/js/index.js"></script>
+<script src="./resource/build/bootstrap/js/index.js"></script>
 
 </html>

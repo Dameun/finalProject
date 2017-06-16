@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>ZESTWORLD - Login</title>
-    <link href="./build/bootstrap/css/application.min.css" rel="stylesheet">
+    <link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
     <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
@@ -27,8 +27,10 @@
          https://code.google.com/p/chromium/issues/detail?id=332189
          */
     </script>
+   
 </head>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 <script type="text/javascript">
 function CreateWorkspace()
 {

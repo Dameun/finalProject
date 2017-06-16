@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<script type="text/javascript" src="./Js/ajaxView.js"></script>
+<script type="text/javascript" src="./resource/Js/ajaxView.js"></script>
 
 
 <nav id="sidebar" class="sidebar" role="navigation">
@@ -16,7 +16,7 @@
         <div class="sidebar-status visible-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="thumb-sm avatar pull-right">
-                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                    <img class="img-circle" src="./resource/img/people/a5.jpg" alt="...">
                 </span>
                 <!-- .circle is a pretty cool way to add a bit of beauty to raw data.
                      should be used with bg-* and text-* classes for colors -->
@@ -255,7 +255,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-1">
                     <i class="fa fa-circle text-success pull-right"></i>
                     <span class="thumb-sm pull-left mr">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src="./resource/img/people/a2.jpg" alt="...">
                     </span>
                     <h5 class="message-sender">Chris Gray</h5>
                     <p class="message-preview">Hey! What's up? So many times since we</p>
@@ -263,7 +263,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-2">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="img/avatar.png" alt="...">
+                    <img class="img-circle" src="./resource/img/people/avatar.png" alt="...">
                 </span>
                     <h5 class="message-sender">Jamey Brownlow</h5>
                     <p class="message-preview">Good news coming tonight. Seems they agreed to proceed</p>
@@ -271,7 +271,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-3">
                     <i class="fa fa-circle text-danger pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a1.jpg" alt="...">
+                    <img class="img-circle" src=".resource/img/people/a1.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Livia Walsh</h5>
                     <p class="message-preview">Check out my latest email plz!</p>
@@ -279,7 +279,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-4">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="img/avatar.png" alt="...">
+                    <img class="img-circle" src=".resource/img/people/avatar.png" alt="...">
                 </span>
                     <h5 class="message-sender">Jaron Fitzroy</h5>
                     <p class="message-preview">What about summer break?</p>
@@ -287,7 +287,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-5">
                     <i class="fa fa-circle text-success pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a4.jpg" alt="...">
+                    <img class="img-circle" src=".resource/img/people/a4.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Mike Lewis</h5>
                     <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
@@ -298,7 +298,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-6">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a6.jpg" alt="...">
+                    <img class="img-circle" src=".resource/img/people/a6.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Freda Edison</h5>
                     <p class="message-preview">Hey what's up? Me and Monica going for a lunch somewhere. Wanna join?</p>
@@ -306,7 +306,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-7">
                     <i class="fa fa-circle text-success pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                    <img class="img-circle" src=".resource/img/people/a5.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Livia Walsh</h5>
                     <p class="message-preview">Check out my latest email plz!</p>
@@ -314,7 +314,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-8">
                     <i class="fa fa-circle text-warning pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="demo/img/people/a3.jpg" alt="...">
+                    <img class="img-circle" src=".resource/img/people/a3.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Jaron Fitzroy</h5>
                     <p class="message-preview">What about summer break?</p>
@@ -322,7 +322,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-9">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="img/avatar.png" alt="...">
+                    <img class="img-circle" src=".resource/img/people/avatar.png" alt="...">
                 </span>
                     <h5 class="message-sender">Mike Lewis</h5>
                     <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
@@ -339,7 +339,7 @@
             <ul class="message-list">
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src=".resource/img/people/a2.jpg" alt="...">
                     </span>
                     <div class="message-body">
                         Hey! What's up?
@@ -347,7 +347,7 @@
                 </li>
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src=".resource/img/people/a2.jpg" alt="...">
                     </span>
                     <div class="message-body">
                         Are you there?
@@ -355,7 +355,7 @@
                 </li>
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src=".resource/img/people/a2.jpg" alt="...">
                     </span>
                     <div class="message-body">
                         Let me know when you come back.
@@ -363,7 +363,7 @@
                 </li>
                 <li class="message from-me">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="img/avatar.png" alt="...">
+                        <img class="img-circle" src=".resource/img/people/avatar.png" alt="...">
                     </span>
                     <div class="message-body">
                         I am here!

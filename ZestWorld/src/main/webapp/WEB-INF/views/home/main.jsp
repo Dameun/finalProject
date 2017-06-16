@@ -12,3 +12,4 @@ $(function() {
 });	
 
 </script>
+	<div id="binContent"></div>
