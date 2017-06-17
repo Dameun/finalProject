@@ -40,8 +40,7 @@ function projectClick(project_id)
 	});	
 }
 </script>
-
-
+projectmain
 		 <div class="row">
 		 		<c:forEach items="${projectList}" var="project">
 		            <div class="col-md-6 widget-container">

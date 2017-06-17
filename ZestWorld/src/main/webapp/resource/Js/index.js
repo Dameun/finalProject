@@ -261,7 +261,9 @@ $(function(){
         initAnimations();
     }
 
+   
+    
     pjaxPageLoad();
     SingApp.onPageLoad(pjaxPageLoad);
-
+    
 });

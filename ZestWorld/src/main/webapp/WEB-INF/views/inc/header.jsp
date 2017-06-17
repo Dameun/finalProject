@@ -10,9 +10,7 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
-  
-  
+
   
     <link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- 민성 추가부분 (이부분에 안쓰면 modal 자동으로 닫기는 현상이 발생!!) -->
@@ -34,7 +32,7 @@
          https://code.google.com/p/chromium/issues/detail?id=332189
          */
     </script>
-    <script type="text/javascript" src="./resource/Js/ajaxView.js"></script>
+  
   </head>
 
 
@@ -281,7 +279,7 @@
 <script src="./resource/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
 <script src="./resource/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
 <script src="./resource/build/bootstrap/vendor/d3/d3.min.js"></script>
-<script src="./resource/webapp/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
+<script src="./resource/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
 <script src="./resource/build/bootstrap/vendor/raphael/raphael-min.js"></script>
 <script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
 <script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
@@ -291,6 +289,6 @@
 <script src="./resource/build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
 
 <!-- page specific js -->
-<script src="./resource/build/bootstrap/js/index.js"></script>
-
+<script type="text/javascript" src="./resource/Js/ajaxView.js"> </script> 
+<script src="./resource/build/bootstrap/js/index.js"></script> 
 </html>

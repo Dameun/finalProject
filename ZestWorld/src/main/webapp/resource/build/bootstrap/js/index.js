@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
 
     function initMap(){
         var $map = $('#map'),
@@ -186,13 +186,17 @@ $(function(){
 
     function initRickshaw(){
         "use strict";
-
+        var random = null;
         var seriesData = [ [], [] ];
-        var random = new Rickshaw.Fixtures.RandomData(30);
+        if( Rickshaw != null)
+    	{
+    		random= new Rickshaw.Fixtures.RandomData(30);
 
-        for (var i = 0; i < 30; i++) {
-            random.addData(seriesData);
-        }
+          for (var i = 0; i < 30; i++) {
+              random.addData(seriesData);
+          }
+    	}
+      
 
         var graph = new Rickshaw.Graph( {
             element: document.getElementById("rickshaw"),
@@ -233,12 +237,16 @@ $(function(){
             }
         } );
 
-        setInterval( function() {
-            random.removeData(seriesData);
-            random.addData(seriesData);
-            graph.update();
+        if( random != null )
+        	{
+        	  setInterval( function() {
+                  random.removeData(seriesData);
+                  random.addData(seriesData);
+                  graph.update();
 
-        }, 1000 );
+              }, 1000 );
+        	}
+      
     }
 
     function initAnimations(){
@@ -261,7 +269,9 @@ $(function(){
         initAnimations();
     }
 
+
+    
     pjaxPageLoad();
     SingApp.onPageLoad(pjaxPageLoad);
 
-});
+});*/

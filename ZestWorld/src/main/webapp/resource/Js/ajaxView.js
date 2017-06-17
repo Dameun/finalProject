@@ -1,21 +1,23 @@
 /**
  * 
  */
-function ajaxView(menuName)
-{
+//$(function() {
+	function ajaxView(menuName)
+	{
 
-	$.ajax({
-		type:"get",
-		url: menuName,
-		success:function(data)
-		{
-		
-			$('#binContent').empty();
-			$('#binContent').append( $('#binContent').html(data)); 		
-		},
-		
-		error:function(){
-			alert('error:' + menuName);
-		},
-	});	
-}
+		$.ajax({
+			type:"get",
+			url: menuName,
+			success:function(data)
+			{
+			
+				$('#binContent').empty();
+				$('#binContent').append( $('#binContent').html(data)); 		
+			},
+			
+			error:function(){
+				alert('error:' + menuName);
+			},
+		});	
+	}
+//})

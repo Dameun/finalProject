@@ -16,8 +16,12 @@ import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
 import com.zestworld.util.DataController;
 
-
-
+/*
+2017-06-14 yoonhee
+전체 화면 비동기 처리
+@RequestMapping(xxx.ajax)
+return xxx.jsp
+*/
 @Controller
 public class AjaxViewController {
 
