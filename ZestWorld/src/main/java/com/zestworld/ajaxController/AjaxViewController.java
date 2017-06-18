@@ -1,6 +1,7 @@
 package com.zestworld.ajaxController;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -136,5 +137,32 @@ public class AjaxViewController {
 		Project_DTO currentProject = taskDao.GetProject(project_id);
 		DataController.getInstance().SetCurrentProject(currentProject);
 		return "";
+	}
+	
+	
+	@RequestMapping(value="/CreateProjectProcess.ajax", method=RequestMethod.GET)
+	public String createProject(String p_title,String explain, String etcStr, Model model)
+	{
+		String[] strArr = etcStr.split(",");
+		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
+		Project_DTO project = new Project_DTO();
+		project.setWorkspace_id (DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
+		project.setP_title(p_title);
+		project.setExplain(explain);
+		project.setP_admin(DataController.getInstance().GetUser().getUserid());
+		//test源�
+		project.setStart_date("2017-06-14");
+		project.setEnd_date("2017-07-06");
+		project.setAuthoriy("0");
+		project.setP_state("0");
+		project.setMark_f(0);
+		project.setOpen_f(Integer.parseInt(strArr[0]));	//怨듦컻�뿬遺�
+		project.setEssence_f(Integer.parseInt(strArr[1])); //�뿉�꽱�뒪�봽濡쒖젥�듃 �쑀臾�
+		taskDao.insertProject(project);
+		
+		DataController.getInstance().dataChangeProject();
+		ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
+		model.addAttribute("projectList", projectList);
+		return DataController.getInstance().GetviewPath("home")+ "CreateProject.jsp";
 	}
 }

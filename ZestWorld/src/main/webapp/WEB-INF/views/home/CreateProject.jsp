@@ -19,8 +19,25 @@ function CreateBtn()
 	if( $("#e_check").is(':checked')) eProjectCheck = "1"; //에센스미사용 0,에센시사용 1
 	etcStr = publicProjectCheck+","+eProjectCheck;
 	alert('p_title'+p_title+'/explain'+explain+'/etcStr'+etcStr)
+	
+	$.ajax({
+		type:"get",
+		url:"CreateProjectProcess.ajax",
+		data:{	"p_title" : p_title,
+				"explain" : explain,
+				"etcStr"  : etcStr
+		},
+		
+		success:function(data){
+			ajaxView('projectMain.ajax');
+		},
+		error:function(){
+			alert('error');
+		},
+	});	
+/* 	
 	location.href="CreateProjectProcess.htm?p_title="+ p_title+"&explain="+ explain 
-			+ "&etcStr=" + etcStr;
+			+ "&etcStr=" + etcStr; */
 }
 </script>
 <div id="content">

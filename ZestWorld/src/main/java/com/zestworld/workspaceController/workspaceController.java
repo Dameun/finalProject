@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Project_DTO;
@@ -28,7 +28,7 @@ public class workspaceController {
 	@Autowired
 	private JoinService service;
 	
-	//濡쒓렇�씤�떆 
+
 	@RequestMapping("/workSpace.htm")
 	public String GetWorkSpace(Principal principal, Model model)
 	{	
@@ -55,9 +55,7 @@ public class workspaceController {
         model.addAttribute ("workspaceList", workspaceList);
 		return "home/workSpace";
 	}
-	
-	
-	//�썙�겕�뒪�럹�씠�뒪 �꽑�깮�떆
+
 	@RequestMapping("/selectWorkspace.htm")
 	public String selectWorkspace(String selectWorkspaceID, Model model)
 	{
@@ -98,31 +96,6 @@ public class workspaceController {
 	}
 	
 	//�봽濡쒖젥�듃 �깮�꽦
-	@RequestMapping("/CreateProjectProcess.htm")
-	public String createProject(String p_title,String explain, String etcStr, Model model)
-	{
-		String[] strArr = etcStr.split(",");
-		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		Project_DTO project = new Project_DTO();
-		project.setWorkspace_id (DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
-		project.setP_title(p_title);
-		project.setExplain(explain);
-		project.setP_admin(DataController.getInstance().GetUser().getUserid());
-		//test源�
-		project.setStart_date("2017-06-14");
-		project.setEnd_date("2017-07-06");
-		project.setAuthoriy("0");
-		project.setP_state("0");
-		project.setMark_f(0);
-		project.setOpen_f(Integer.parseInt(strArr[0]));	//怨듦컻�뿬遺�
-		project.setEssence_f(Integer.parseInt(strArr[1])); //�뿉�꽱�뒪�봽濡쒖젥�듃 �쑀臾�
-		taskDao.insertProject(project);
-		
-		DataController.getInstance().dataChangeProject();
-		ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
-		model.addAttribute("projectList", projectList);
-		return "home.main";
-	}
 
 
 }

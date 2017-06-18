@@ -8,22 +8,6 @@
 <!DOCTYPE html>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
-function CreateWorkspace()
-{
-	
-	console.log('CreateWorkspace');
-	$.ajax({
-		type:"get",
-		url:"addWorkspace.ajax",
-		success:function(data){
-			
-			$("#contentDiv").append( $('#contentDiv').html(data)); 		
-		},
-		error:function(){
-			alert('error');
-		},
-	});	
-}
 
 function projectClick(project_id)
 {
@@ -65,6 +49,13 @@ projectmain
 		                </section>
 		      	</div>
 		    </c:forEach>
+		    
+		     <div class="clearfix">
+                                <div class="btn-toolbar pull-right">
+                                    <button type="button" class="btn btn-default btn-sm" onclick="ajaxView('Createproject.ajax')" >+새로운 프로젝트</button>
+                                    <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
+                                </div>
+                     </div>  
 		</div>
 
 	<%-- <div class="container">
