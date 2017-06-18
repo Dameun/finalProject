@@ -22,6 +22,7 @@ var categoryId='';
 var categoryTitle='';
 
 $(document).ready(function(){
+	$('#detailModal').hide();
 	console.log("dsadasd:");
 	var forme='';
 	var writer='';
@@ -69,6 +70,23 @@ $(document).ready(function(){
 	$('#detailModal').hide();
 }
  */
+function changeSuccessF(taskid){
+	 /* alert(taskid); */
+	 $.ajax({
+			type:"get",
+			url:"updateFlag.htm?task_id="+taskid,
+			dataType:'html',
+			success:function(data){
+			
+				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+			},
+			error:function(){
+				alert('검색 에러! 관리자에게 문의하세요');
+			}
+		});
+	 
+	 
+ }
 function myfilter(){
 	var forme='';
 	var writer='';
@@ -96,20 +114,20 @@ function myfilter(){
 		 follower='';
 	 }
 	 
-	//상태 필터
+	/* //상태 필터
 	 if(document.getElementById("all").checked == true){
 		 console.log("all됨ㅌㅌㅌㅌㅌㅌㅌ");
 		 success="all";
 	 }else {
 		 all='';
-	 }
+	 } */
 	 
-	 if(document.getElementById("ing").checked == true){
+	/*  if(document.getElementById("ing").checked == true){
 		 console.log("ing check됨ㅌㅌㅌㅌㅌㅌㅌ");
 		 success="ing";
 	 }else {
 		 ing='';
-	 }
+	 } */
 	 
 	 if(document.getElementById("complete").checked == true){
 		 console.log("complete check됨ㅌㅌㅌㅌㅌㅌㅌ");
@@ -141,82 +159,46 @@ function myfilter(){
 		});
 }
 
-/* 
-google.charts.load('current', {'packages':['corechart']});
 
-google.charts.setOnLoadCallback(drawChart_donutAll); 
-google.charts.setOnLoadCallback(drawChart_comboAll); 
-
-
-function drawChart_donutAll() {
-
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', '업무상태');
-  data.addColumn('number', '업무개수');
-  data.addRows([
-    ['완료됨', 3],
-    ['마감일 지남', 1],
-    ['계획됨', 1],
-    ['마감일 없음', 1],
-    
-  ]);
-  
-  var options = {
-          title: '전체 업무',
-          pieHole: 0.9,
-          pieSliceTextStyle: {
-              color: 'black'
-            } , 
-      };
-        
-   var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-   chart.draw(data, options);
-        
-}
-
-function drawChart_comboAll() {
-    // Some raw data (not necessarily accurate)
-    var data = google.visualization.arrayToDataTable([
-     ['Month', '완료됨', '마감일 지남', '계획됨', '마감일 없음'],
-     ['오늘',  2,      3,         1,             0],
-     ['내일',  3,      2,        3,             1],
-     ['이번주',  4,      2,        3,             0],
-     ['이번달',  0,      2,        1,             4],
-     ['다음달',  3,      5,         2,             1]
-  ]);
-
-var options = {
-  title : ' ',
-  vAxis: {title: '업무개수'},
-  hAxis: {title: '마감일자'},
-  seriesType: 'bars',
-  series: {5: {type: 'line'}}
-  
-};
-
-var chart = new google.visualization.ComboChart(document.getElementById('combochart'));
-chart.draw(data, options);
-}
- */
-
-function submit2(){
-	var enddate = $("#datepicker").val();
-	title=$("#title").val();
- 	console.log(title); 
+function detailModalView(view){
+	 
 	 $.ajax({
 	       type : "get",
-	       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate,
+	       url : "detailModal.htm?task_id="+view,
 	       success : function(data) {
-	          console.log(data);               
+	    		$('#detailModal').modal('show');         
 	       },
 	       error : function() {
 	          alert('Error while request..');
 	       }
 	    });
-	    console.log("check");
-	    $('#detailModal').empty();
-}
-
+} 
+function submit2(){
+		var enddate = $("#datepicker").val();
+		title=$("#title").val();
+	 	console.log(title); 
+		 $.ajax({
+		       type : "get",
+		       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate,
+		      /*  dataType:'html', 
+		       dataType:'html',*/
+		      /*  dataType:'text', */
+		       success : function(data) {
+		    	 /* alert(data);
+		    	 if( data == 'success')
+	    		{
+	    		 	ajaxView('totalTask.ajax');
+	    		 } */
+		    	 $("#ajaxlist").empty();
+		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		    });
+		    console.log("check");
+		    $('#detailModal').empty();
+	}
 function projectchange(){
 
 	projectId=$("#project").val();
@@ -309,8 +291,8 @@ function categorychange(){
 
 
 
-<div class="row">
-	<div class="col-sm-2">
+<div class="row" >
+	<div class="col-sm-2" style="background-color: #ffffff; height: 900px">
 
 	<br>
 		기간<br> 
@@ -321,11 +303,11 @@ function categorychange(){
 		</select>
 
 		<hr>
-		<br>
+<!-- 		<br>
 		<input type="radio" name="task" value="mytask">내업무
 		<br>
 		<input type="radio" name="task" value="alltask" checked="checked">전체업무
-		<hr>
+		<hr> -->
 		<br>
 		빠른필터<br>
 		<input type="checkbox" id="forme" name="filter" value="for" onclick="myfilter();">나에게 배정된 업무<br>
@@ -345,21 +327,38 @@ function categorychange(){
 		</c:forEach>
 		<hr>
 		상태<br>
+		<!-- 
 		<input type="radio" id="all" name="success_f" onclick="myfilter();" value="" checked>전체<br>
-		<input type="radio" id="ing"  name="success_f" onclick="myfilter();" value="" >진행중인 업무<br>
-		<input type="radio" id="complete" name="success_f" onclick="myfilter();" value="" >마감 업무<br>
+		
+		
+		<input type="radio" id="ing"  name="success_f" onclick="myfilter();" value="" checked >진행중인 업무<br>-->
+		<input type="checkbox" id="complete" name="success_f" onclick="myfilter();" value="" >마감 업무<br>
 
 		
 		</div>
 	<div class="col-sm-10" style="height: 500px">
-	<div class="row" style=" height: 20px">
-	</div>
+
 	
 	
 	<div id="filter" style=" width: 880px">
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-         data-target="#add-modal">+ 새업무</button>
-         
+	<div class="row" style="margin-left:80px">
+		<div class="col-sm-11">
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+	         data-target="#add-modal">+ 새업무</button>
+	         
+	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
+	   		<span class="glyphicon glyphicon-stats"></span> 
+	         	차트보기
+		</button>
+		</div>
+		<div class="col-sm-1" style="margin-left:810px">
+			<select id="select_order" onchange="myfilter">
+	            <option value="">최신순</option>
+	            <option value="end">마감순</option>
+	            
+	        </select>
+	    </div>
+	</div>
          <!-- modal -->
          <form id="add_taskTitle" name="add_taskTitle" method="post">
          <div class="modal fade" id="add-modal" style="display: none;">
@@ -419,17 +418,10 @@ function categorychange(){
       <!-- /modal  -->
 	<!--<a class="glyphicon glyphicon-search"></a> -->
 		
-		<button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
-  	     <span class="glyphicon glyphicon-stats"></span> 
-  	           차트보기
-  	  	</button>	
+			
 	
 	
-		<select id="select_order" onchange="myfilter">
-            <option value="">최신순</option>
-            <option value="end">마감순</option>
-            
-         </select>
+		
          
          
 	  	  	 
@@ -472,7 +464,7 @@ function categorychange(){
       </div>
 		<div id="container" data-activity-id="320">
 	
-			<div class="row" style="background-color: #D9E5FF; height: 20px"></div>
+			<div class="row"></div>
 			<div id="ajaxlist">
 			</div>
 		</div>

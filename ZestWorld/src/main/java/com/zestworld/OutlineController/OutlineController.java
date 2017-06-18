@@ -53,15 +53,9 @@ public class OutlineController {
 	    
 	    dto.setFilterDay(sDate);
 	    
-	    System.out.println("sDate : " +sDate);
+	  
 		String userid="";
-		System.out.println("forme: " + forme);
-
-		System.out.println("follower: " + follower);
-
-		System.out.println("writer: " + writer);
-		System.out.println("writermember: " + writermember);
-		System.out.println("workspace 위치: " + DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
+	
 		//String userid= DataController.getInstance().GetUser().getUserid();
 		
 		//�옉�꽦�옄�븘�꽣
@@ -71,18 +65,24 @@ public class OutlineController {
 		}else{
 			//userid=writermember;
 			dto.setUserid(writermember);
-			System.out.println("writerNotNulll");
 		}
 		
 		//�긽�깭�븘�꽣
-		if(success.equals("ing")){
+		/*if(success.equals("ing")){
 			dto.setSuccess_f("0");
 		}else if(success.equals("complete")){
 			dto.setSuccess_f("1");
 		}else{
 			dto.setSuccess_f("");
 			System.out.println("Success_fffffffffffffffffffffff:"+dto.getSuccess_f());
+		}*/
+		System.out.println(success);
+		if(success.equals("complete")){
+			dto.setSuccess_f("1");
+		}else{
+			dto.setSuccess_f("0");
 		}
+		
 		/*
 		//�젙�젹
 		if(order.equals("end")){
@@ -91,8 +91,6 @@ public class OutlineController {
 			dto.setOrder("asc");
 		}*/
 		
-		System.out.println("getUserid : " +dto.getUserid());
-		System.out.println("WriterMember : " + userid);
 		dto.setMember(forme);
 		dto.setFollower(follower);
 		
@@ -118,7 +116,7 @@ public class OutlineController {
 	
 	@RequestMapping(value="taskInsert.htm", method=RequestMethod.GET)
 	public String taskInsert(String title,int categoryId, String enddate,Model model) throws ClassNotFoundException, SQLException{
-		System.out.println("들어가니");
+		System.out.println("들어가니2111111");
 		Task_DTO dto=new Task_DTO();
 		String userid="";
 		
@@ -137,16 +135,35 @@ public class OutlineController {
 	
 		
 		int result= service.insertTask(dto);
-		return "home.main";
+		
+		List<Task_DTO> list= service.tasklist();
+		
+		model.addAttribute("list", list); //�옄�룞 forward 
+		//String str = "success";
+		return "/task/totalTaskList";
 	}
 	
 	@RequestMapping(value="detailModal.htm", method=RequestMethod.GET)
-	public void detailModal(String taskid) throws ClassNotFoundException, SQLException{
+	public String detailTask(String task_id, Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("detailmodal*****: " + task_id);
+		Task_DTO result= service.detailTask(task_id);
 		
+		model.addAttribute("detail", result);
+ 
+		return "/task/detailModal";
 		
-		/*return "home.main";*/
 	}
-
+	
+	@RequestMapping(value="updateFlag.htm", method=RequestMethod.GET)
+	public String updateFlag(String task_id, Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("detailmodal*****: " + task_id);
+		service.updateFlag(task_id);
+		List<Task_DTO> list=service.tasklist();
+		model.addAttribute("list", list);
+ 
+		return "/task/totalTaskList";
+		
+	}
 }
 
 

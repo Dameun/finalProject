@@ -59,4 +59,17 @@ public class OutlineService {
 		return list;
 	}
 	
+	public Task_DTO detailTask(String task_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		Task_DTO list= dao.detailTask(task_id);
+		return list;
+	}
+	
+	public int updateFlag(String task_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int list= dao.updateFlag(task_id);
+		return list;
+	}
+	
+	
 }

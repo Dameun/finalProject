@@ -20,5 +20,7 @@ public interface IOutlineDAO {
 	
 	public List<Category_DTO> categorylist(int project_id) throws ClassNotFoundException, SQLException;
 /*	public List<Category_DTO> catetitlelist(int project_id) throws ClassNotFoundException, SQLException;*/
+	public Task_DTO detailTask(String userid) throws ClassNotFoundException, SQLException;
+	public int updateFlag(String task_id) throws ClassNotFoundException, SQLException;
 	
 }

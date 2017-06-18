@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zestworld.OutlineDAO.IOutlineDAO">
 	<select id="tasklist" resultType="com.zestworld.Table_DTO.Task_DTO">
-		select * from task
+		select * from task where success_f='0'
 	</select>
 	
  
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		select * from task where enrolldate between #{filterDay} and sysdate   <!-- default= 작성자가 나인것  -->
+		select * from task where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}<!-- default= 작성자가 나인것  -->
 		
 		<if test="userid!=null and userid !=''">
 			and userid=#{userid}
@@ -22,9 +22,9 @@
 			and follower=#{follower}
 		</if>
 		
-		<if test="success_f!=null and success_f != ''">  <!-- 성공여부  -->
+		<!-- <if test="success_f!=null and success_f != ''">  성공여부 
 			and success_f=#{success_f}
-		</if>
+		</if> -->
 		
 		<!-- <choose>
 		    <when test="order !=null and order !=''">
@@ -50,7 +50,7 @@
 	</select> 
 	
 	<insert id="insertTask" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		insert into task(task_id,category_id,userid,title,end_date,enrolldate) values (task_seq.nextval,#{category_id},#{userid},#{title},#{end_date},sysdate)
+		insert into task(task_id,category_id,userid,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{userid},#{title},#{end_date},'0',sysdate)
 	</insert>
 
 <!-- 	프로젝트에 속한 category name -->
@@ -64,6 +64,15 @@
 	</select>
 
  -->
+	
+	<select id ="detailTask" parameterType="String" resultType="com.zestworld.Table_DTO.Task_DTO">
+		select * from task where task_id =#{task_id}
+	</select>
+	
+	<!-- 업무상태 flag update -->
+	<update id ="updateFlag" parameterType="String" >
+		update task set success_f=1 where task_id=#{task_id}
+	</update>
 	
 </mapper>
 

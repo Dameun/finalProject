@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 	<div class="modal fade" id = "detailModal" role="dialog">
@@ -62,7 +64,8 @@
                                 <input type="email" id="email" name="email" class="form-control"
                                        data-parsley-trigger="change"
                                        data-parsley-validation-threshold="1"
-                                       required="required">
+                                       required="required" 
+                                       value="${detail.title}">
                         <span class="help-block">
                             This one is triggered even when 1 character has been input
                         </span>
@@ -85,7 +88,7 @@
                             <div class="col-sm-9">
                                 <input type="text" id="number" name="number" class="form-control"
                                        data-parsley-type="number"
-                                       required="required">
+                                       required="required" value="${detail.end_date}">
                             </div>
                         </div>
                         <div class="form-group row">
