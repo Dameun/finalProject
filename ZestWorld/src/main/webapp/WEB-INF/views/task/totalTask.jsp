@@ -2,19 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link rel="stylesheet" type="text/css" href="dist/css/ContestBoardView.css">
+<link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css">
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+<!--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<script type="text/javascript" src="./resource/Js/chartAll.js"></script>
+<!-- <script type="text/javascript" src="Js/chartAll.js"></script> -->
 
 <script type="text/javascript">
 var categoryId='';
@@ -50,7 +51,7 @@ $(document).ready(function(){
 	    $('.modal-backdrop').hide();
 
 	 }); 
-	 
+	 $(this).removeClass('hasDatepicker').datepicker();
 	 $( "#datepicker" ).datepicker();
 	
 	  
@@ -62,7 +63,9 @@ $(document).ready(function(){
 	 console.log("enddateeeee"+enddate);
    	}
 }); */
-
+function dddd(){
+	$('#detailModal').modal();
+}
 function myfilter(){
 	var forme='';
 	var writer='';
@@ -194,12 +197,12 @@ chart.draw(data, options);
  */
 
 function submit2(){
-	/* var enddate = $("#datepicker").value(); */
+	var enddate = $("#datepicker").val();
 	title=$("#title").val();
  	console.log(title); 
 	 $.ajax({
 	       type : "get",
-	       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId,
+	       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate,
 	       success : function(data) {
 	          console.log(data);               
 	       },
@@ -427,7 +430,7 @@ function categorychange(){
          
 	  	  	 
 	  	 <!-- 차트보기 (모달) --> 	 
-	  	 <div class="modal fade" id="myModal" role="dialog">
+	  	 <div class="modal fade" id="myModal" >
 	     	<div class="modal-dialog modal-lg">
 	     	 <div class="modal-content">
 	      
@@ -462,27 +465,149 @@ function categorychange(){
 	    </div>
 	  </div>
 	         
-         </div>
+      </div>
 		<div id="container" data-activity-id="320">
 	
 			<div class="row" style="background-color: #D9E5FF; height: 20px"></div>
 			<div id="ajaxlist">
-				<%-- 
-				<c:forEach items="${list}" var="n">
-					<div class="articlesteam" >
-				   		<!-- <h2>팀원 모집</h2> -->
-						<ol class="group">
-					    	<li class="comment"><p class="text"><input type="checkbox" value="dd">&nbsp ${n.title}</p>
-					        	<time>taskworldproject > ${n.member}</time>
-					          		<a class="remove">마감일 없음</a>
-					            	<hr>
-					        </li>
-					    </ol>
-				    </div>
-				</c:forEach> --%>
 			</div>
 		</div>
 	</div>
+	
+	<div class="col-lg-8 col-lg-offset-1" id = "detailModal" role="dialog">
+    <section class="widget">
+        <header>
+            <h5>
+                Dead simple validation
+                <small>No JS needed to tune-up</small>
+            </h5>
+            <div class="widget-controls">
+                <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+        </header>
+        <div class="widget-body">
+            <form id="validation-form" class="form-horizontal form-label-left" method="post"
+                  data-parsley-priority-enabled="false"
+                  novalidate="novalidate">
+                <fieldset>
+                    <legend>
+                        By default validation is started only after at least 3 characters have been input.
+                    </legend>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="basic">Simple required</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="basic" name="basic" class="form-control"
+                                       required="required">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="basic-change">
+                                Min-length On Change
+                        <span class="help-block">
+                            At least 10
+                        </span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="basic-change" name="basic-change" class="form-control"
+                                       data-parsley-trigger="change"
+                                       data-parsley-minlength="10"
+                                       required="required">
+                            </div>
+                        </div>
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        <span class="label label-warning  text-gray-dark mr-xs">
+                            HTML5
+                        </span>
+                        input types supported
+                    </legend>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="email">
+                                E-mail
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="email" id="email" name="email" class="form-control"
+                                       data-parsley-trigger="change"
+                                       data-parsley-validation-threshold="1"
+                                       required="required">
+                        <span class="help-block">
+                            This one is triggered even when 1 character has been input
+                        </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="number">
+                                Number
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="number" name="number" class="form-control"
+                                       data-parsley-type="number"
+                                       required="required">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="range">
+                                Range
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text"  class="form-control"
+                                       id="range" name="range"
+                                       data-parsley-range="[10, 100]"
+                                       data-parsley-trigger="change"
+                                       data-parsley-validation-threshold="1"
+                                       required="required">
+                            </div>
+                        </div>
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        More validation
+                    </legend>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="password">
+                                Password helpers
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="password" id="password" name="password" class="form-control mb-sm"
+                                       data-parsley-trigger="change"
+                                       data-parsley-minlength="6"
+                                       required="required">
+                                <input type="password" id="password-r" name="password-r" class="form-control"
+                                       data-parsley-trigger="change"
+                                       data-parsley-minlength="6"
+                                       data-parsley-equalto="#password"
+                                       required="required">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="website">
+                                Website
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="website" name="website" class="form-control"
+                                       data-parsley-trigger="change"
+                                       data-parsley-type="url"
+                                       required="required">
+                            </div>
+                        </div>
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger btn-rounded pull-xs-right">Validate &amp; Submit</button>
+                    <button type="button" class="btn btn-secondary btn-rounded">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
 </div>
 
 
+<%-- <jsp:include page="../task/detailModal.jsp"></jsp:include> --%>
+
+
+
+
+ 

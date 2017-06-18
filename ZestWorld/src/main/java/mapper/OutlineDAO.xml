@@ -50,7 +50,7 @@
 	</select> 
 	
 	<insert id="insertTask" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		insert into task(task_id,category_id,userid,title,enrolldate) values (task_seq.nextval,#{category_id},#{userid},#{title},sysdate)
+		insert into task(task_id,category_id,userid,title,end_date,enrolldate) values (task_seq.nextval,#{category_id},#{userid},#{title},#{end_date},sysdate)
 	</insert>
 
 <!-- 	프로젝트에 속한 category name -->

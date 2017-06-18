@@ -38,15 +38,15 @@ public class OutlineController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		Calendar cal = Calendar.getInstance(new SimpleTimeZone(0x1ee6280, "KST"));
 		
-		//기간검색
+		//湲곌컙寃��깋
 		if(datefilter.equals("30")){
-			cal.add(Calendar.MONTH ,-1); // 한달전 날짜 가져오기
+			cal.add(Calendar.MONTH ,-1); // �븳�떖�쟾 �궇吏� 媛��졇�삤湲�
 		}else if(datefilter.equals("60")){
-			cal.add(Calendar.MONTH ,-2); // 두달전 날짜 가져오기
+			cal.add(Calendar.MONTH ,-2); // �몢�떖�쟾 �궇吏� 媛��졇�삤湲�
 		}else{
-			cal.add(Calendar.YEAR ,-1); // 일년전 날짜 가져오기
+			cal.add(Calendar.YEAR ,-1); // �씪�뀈�쟾 �궇吏� 媛��졇�삤湲�
 		}
-	    //cal.add(Calendar.MONTH ,-1); // 한달전 날짜 가져오기
+	    //cal.add(Calendar.MONTH ,-1); // �븳�떖�쟾 �궇吏� 媛��졇�삤湲�
 	    java.util.Date monthago = cal.getTime();
 	    
 	    String sDate = sdf.format(monthago);
@@ -61,10 +61,10 @@ public class OutlineController {
 
 		System.out.println("writer: " + writer);
 		System.out.println("writermember: " + writermember);
-		
+		System.out.println("workspace 위치: " + DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
 		//String userid= DataController.getInstance().GetUser().getUserid();
 		
-		//작성자필터
+		//�옉�꽦�옄�븘�꽣
 		if(writermember==""){
 			userid=DataController.getInstance().GetUser().getUserid();
 			dto.setUserid("");
@@ -74,7 +74,7 @@ public class OutlineController {
 			System.out.println("writerNotNulll");
 		}
 		
-		//상태필터
+		//�긽�깭�븘�꽣
 		if(success.equals("ing")){
 			dto.setSuccess_f("0");
 		}else if(success.equals("complete")){
@@ -84,7 +84,7 @@ public class OutlineController {
 			System.out.println("Success_fffffffffffffffffffffff:"+dto.getSuccess_f());
 		}
 		/*
-		//정렬
+		//�젙�젹
 		if(order.equals("end")){
 			dto.setOrder("desc");
 		}else{
@@ -98,7 +98,7 @@ public class OutlineController {
 		
 		List<Task_DTO> list= service.taskTest(dto);
 		
-		model.addAttribute("list", list); //자동 forward 
+		model.addAttribute("list", list); //�옄�룞 forward 
 	
 		System.out.println("LIST: "+ list.size());
 	
@@ -111,13 +111,14 @@ public class OutlineController {
 		System.out.println("categoryFilterList.htm1");
 		List<Category_DTO> category = service.categorylist(projectId);
 		System.out.println("categoryFilterList.htm2");
-		model.addAttribute("category", category); //자동 forward 
+		model.addAttribute("category", category); //�옄�룞 forward 
 		
 		return "/task/categotyFilterList";
 	}
 	
 	@RequestMapping(value="taskInsert.htm", method=RequestMethod.GET)
-	public String taskInsert(String title,int categoryId, Model model) throws ClassNotFoundException, SQLException{
+	public String taskInsert(String title,int categoryId, String enddate,Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("들어가니");
 		Task_DTO dto=new Task_DTO();
 		String userid="";
 		
@@ -125,17 +126,25 @@ public class OutlineController {
 		dto.setCategory_id(categoryId);
 		userid=DataController.getInstance().GetUser().getUserid();
 		dto.setUserid(userid);
+		dto.setEnd_date(enddate);
 		
 	/*	if(enddate!=null){
 			dto.setEnd_date(enddate);
 		}*/
 		System.out.println("title : "+dto.getTitle());
 		System.out.println("category: "+ dto.getCategory_id());
-		//System.out.println("End_date: "+ enddate);
+		System.out.println("End_date: "+ enddate);
 	
 		
 		int result= service.insertTask(dto);
-		return "/task/totalTaskList";
+		return "home.main";
+	}
+	
+	@RequestMapping(value="detailModal.htm", method=RequestMethod.GET)
+	public void detailModal(String taskid) throws ClassNotFoundException, SQLException{
+		
+		
+		/*return "home.main";*/
 	}
 
 }
