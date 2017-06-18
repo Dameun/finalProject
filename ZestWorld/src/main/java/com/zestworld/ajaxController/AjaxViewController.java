@@ -165,4 +165,5 @@ public class AjaxViewController {
 		model.addAttribute("projectList", projectList);
 		return DataController.getInstance().GetviewPath("home")+ "CreateProject.jsp";
 	}
+	
 }

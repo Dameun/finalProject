@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<div>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%
+   request.setCharacterEncoding("UTF-8");
+%>
+
            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
@@ -9,9 +13,9 @@
                             <img class="img-circle" src="./resource/img/people/a5.jpg" alt="...">
                         </span>
                         &nbsp;
-                        Philip <strong>Smith</strong>&nbsp;
+                        User <strong>User</strong>&nbsp;
                         <span class="circle bg-warning fw-bold">
-                            13
+                           ${unCount}
                         </span>
                         <b class="caret"></b></a>
                     <!-- ready to use notifications dropdown.  inspired by smartadmin template.
@@ -163,7 +167,4 @@
                         </div>
                     </div>
                 </li>
-                 </ul>
-
-
-</div>
+            </ul> 

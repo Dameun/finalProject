@@ -15,6 +15,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.zestworld.util.DataController;
+
 public class WebSocketHandler extends TextWebSocketHandler {
 
 	private Map<Object, WebSocketSession> users = new ConcurrentHashMap();
@@ -23,70 +25,52 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(
 			WebSocketSession session) throws Exception {
-		
-	      log("접속 성공" + session.getId() + "웹소켓 세션 아이디");
-	      String userid = (String) session.getAttributes().get("userId");
-
-	      System.out.println("userID"+userid);
-	      
+	      String userid = (String) session.getAttributes().get("userId");      
 	      users.put(userid, session);
 	      ids.put(session.getId(), userid);
-		
-
-	
-		
 	}
 
 	@Override
 	public void afterConnectionClosed(
 			WebSocketSession session, CloseStatus status) throws Exception {
 		log((String) session.getAttributes().get("userId"));
-	
 		users.remove("parammsg");
 	}
 
 	@Override
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
-		 String[] selectedId ={};
-		 String[] selectedCount={};
+/*		  String alarmType = "";
+		  String taskTitle = "";*/
+		  String[] alarmIdArr={};
 
-		 String msg = message.getPayload();
-		 if(msg.contains(",")){
-
-			  String[] id_count_type = msg.split(",");
-			  selectedId=id_count_type[0].split("/");
-			  selectedCount=id_count_type[1].split("/");
-
-		        for (WebSocketSession s : users.values()) {          
-		           for(int i =0; i < selectedId.length; i++){
-		        	   System.out.println("--------선택받은사람-----------");
-		        	   System.out.println("아이디>"+selectedId[i]+"<");
+		  //alarmType+'/'+ taskTitle +'/'+selectId
+		  String msg = message.getPayload();
+		  String[] id_count_type = msg.split("/");
+/*		  alarmType = id_count_type[0];
+		  taskTitle = id_count_type[1];*/
+		  alarmIdArr = id_count_type[2].split(",");
+		  int connertUser = 0;
+	       for(int i =0; i < alarmIdArr.length; i++){
+	        	   for (WebSocketSession s : users.values()) 
+	        	   { 
+		        	  //접속해있는 유져일경우 
+		        	   if( ids.get(s.getId()).equals(alarmIdArr[i]) )
+		        	   {
+		                 s.sendMessage(new TextMessage(msg) );
+		                 System.out.println("***************************");
+		                 System.out.println(s.getId()+"에게"+msg+"를 보냅니다.");
+		                 connertUser++;
+		        	   }
 		        	   
-		        	   System.out.println("---------------------");
-		              if( ids.get(s.getId()).equals(selectedId[i]) ){
-		                 System.out.println(selectedId[i]);
-		                 System.out.println(selectedId[i]+"에게 메세지 전송!");
-		                 s.sendMessage(new TextMessage("알림 발생") );
-		              }
-		           }
-		        }
-			  
-		  }else{
-		        
-		        for (WebSocketSession s : users.values()) {          
-			       
-			        	   System.out.println("--------선택받은사람-----------");
-			        	   System.out.println("아이디>"+msg+"<");
-			        	   System.out.println("---------------------");
-			              if( ids.get(s.getId()).equals(msg) ){
-			                 System.out.println(msg+"에게 메세지 전송!");
-			                 s.sendMessage(new TextMessage("알림 발생") );			              
-			           }
-	       
-			        }
-		  }
-
+	        	   }
+	        	 if( connertUser== 0 )
+	   	         {
+	   	        	DataController.getInstance().SetAlarm(msg);
+	   	         }
+	        	 connertUser = 0;
+	        }
+	        
 	}
 
 	@Override

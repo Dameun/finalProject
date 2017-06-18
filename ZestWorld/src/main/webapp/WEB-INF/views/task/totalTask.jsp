@@ -189,6 +189,12 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
+	    		 
+	    		 //2017-06-19 yoonhee
+	    		 /*첫번째 인자 알람 타입(업무 추가시 0 ,업무 완료시 1),업무이름,메세지 받을 사람=매정자(여러명일경우 ,로 구분),팔로워(업무글쓴이)한다. 	*/
+		          /*현재는 dam으로 로그인해서 현재배정한 업무와 배정자에 dam과 zest를 넣고 팔로워는 자기자신으로 한다.
+		          	추후 새업무에서 추가할 예정*/
+		          send('0',title,'zest@kosta.com', 'dam@naver.com');
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },

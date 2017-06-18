@@ -29,7 +29,7 @@
 	<context:component-scan base-package="com.zestworld.Join_Service" />
 	<context:component-scan base-package="com.zestworld.Join_Controller" />
 	<context:component-scan base-package="com.zestworld.workspaceController"/>
-	<context:component-scan base-package="com.zestworld.alarmController"/>
+
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.websocket" />

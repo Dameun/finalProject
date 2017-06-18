@@ -27,7 +27,7 @@ function onMessage(evt) {
 		  
 		  type:"post",
 		  dataType: "html",
-		  url:"newAlarm.htm",
+		  url:"newAlarm.ajax",
 		  data:{"newAlarm": evt.data},
 		  success:function(data){
 			  console.log("성공");
@@ -43,22 +43,14 @@ function onClose(evt) {
 	appendMessage("연결을 끊었습니다.");
 }
 
-function send(selectId) {
+/*첫번째 인자 알람 타입,업무이름,메세지 받을 사람(여러명일경우 ,로 구분)한다. 
+	업무 추가시 0 ,업무 완료시 1*/
+function send(alarmType, taskTitle, selectId , writerId) {
 
-	console.log("보낼 메세지:"+selectId);
-	/*$.ajax({
-		  type:"post",
-		  dataType: "html",
-		  url:"updateAlarm.htm",
-		  data:{"selectId": selectId},
-		  success:function(data){
-		  
-			  
-		 console.log("알림DB업데이트 성공");
-		 console.log(data);
-		  }
-	  });	*/
-	wsocket.send(selectId);
+	var alarmMsg = alarmType+'/'+ taskTitle +'/'+selectId + '/' + writerId;
+	console.log("메세지 받을 사람들:"+selectId);
+	
+	wsocket.send(alarmMsg);
 	
 }
 
@@ -69,6 +61,22 @@ function appendMessage(msg) {
 
 $(function() {
 	connect();
+	
+	//알람
+	$.ajax({
+		type:"get",
+		url: "alarmList.ajax",
+		success:function(data)
+		{
+			alert('alarm');
+			$('#alarm').empty();
+			$('#alarm').append( $('#alarm').html(data)); 		
+		},
+		
+		error:function(){
+			alert('error:' + "alarmList.htm");
+		},
+	});	
 });
 
 //$(function() {

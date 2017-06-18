@@ -1,5 +1,6 @@
 package com.zestworld.util;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.zestworld.AlarmService.AlarmService;
+import com.zestworld.Alarm_DAO.AlarmDAO;
+import com.zestworld.Table_DTO.Alarm_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
@@ -148,6 +152,64 @@ public class DataController {
 		return instance;
 	}
 	
+	public void SetAlarm(String msg)
+	{
+		AlarmDAO alarmDao = sqlsession.getMapper(AlarmDAO.class);
+		
+		
+		  String[] alarmIdArr={};
+		  String[] msgArr = msg.split("/");
+		  String alarmType 	= msgArr[0];
+		  String taskTitle 	= msgArr[1];
+		  alarmIdArr 		= msgArr[2].split(",");
+		  String writer 	= msgArr[3];
+		  
+		  
+		  String DbMessage = alarmStrMake(msg);
+		  //않읽은 db로 저장하고  알람 카운트 올려주기 
+		  Alarm_DTO alarm = new Alarm_DTO();
+		  alarm.setAlarm_type(alarmType);
+		  alarm.setCheck_f("0");
+		  alarm.setImg("img");
+		  alarm.setSend(writer);
+		  alarm.setAccept(DataController.getInstance().GetUser().getUserid());
+		  alarm.setTask_id(alarmStrMake(msg));
+		  try {
+				alarmDao.insert(alarm);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	//알람 stirng 만들기 
+		private String alarmStrMake(String newAlarm)
+		{
+			  String[] msgArr = newAlarm.split("/");
+			  String alarmType 	= msgArr[0];
+			  String taskTitle 	= msgArr[1];
+			  String writer 	= msgArr[3];
+			  String userId		= DataController.getInstance().GetUser().getUserid();
+			  String returnMsg = "";
+			  //0 업무배정받음
+			  //1 업무완료알림
+			  if( alarmType.equals("0"))
+			  {
+				  if( writer.equals(userId) )
+					  returnMsg = "새로운 업무 "+ taskTitle+ "가 만들어졌습니다.";
+				  else
+					  returnMsg = writer+"님이" + userId + "님께" + taskTitle+ "배정했습니다.";
+			  }else
+			  {
+				  if( writer.equals(userId) )
+					  returnMsg = "업무 "+ taskTitle+ "를 완료하였습니다.";
+				  else
+					  returnMsg = writer+"님이" +"업무를 완료하였습니다.";
+			  }
+			  
+			  return returnMsg;
+		}
+	
 	public String GetviewPath(String pathType)
 	{
 		String path = "";
@@ -159,6 +221,7 @@ public class DataController {
 		if( pathType.equals( "file")) path = "/WEB-INF/views/file/";
 		if( pathType.equals( "analysis")) path = "/WEB-INF/views/analysis/";
 		if( pathType.equals( "template")) path = "/WEB-INF/views/template/";
+		if( pathType.equals( "alarm")) path = "/WEB-INF/views/alarm/";
 		return path;
 	}
 	
