@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 
 
-<div class="col-lg-8 col-lg-offset-1" id = "detailModal" role="dialog">
+	<div class="modal fade" id = "detailModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+	     	 <div class="modal-content">
     <section class="widget">
         <header>
             <h5>
@@ -19,7 +21,7 @@
             <form id="validation-form" class="form-horizontal form-label-left" method="post"
                   data-parsley-priority-enabled="false"
                   novalidate="novalidate">
-                <fieldset>
+<!--                 <fieldset>
                     <legend>
                         By default validation is started only after at least 3 characters have been input.
                     </legend>
@@ -44,7 +46,7 @@
                                        required="required">
                             </div>
                         </div>
-                </fieldset>
+                </fieldset> -->
                 <fieldset>
                     <legend>
                         <span class="label label-warning  text-gray-dark mr-xs">
@@ -54,7 +56,7 @@
                     </legend>
                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="email">
-                                E-mail
+                               		 위치
                             </label>
                             <div class="col-sm-9">
                                 <input type="email" id="email" name="email" class="form-control"
@@ -68,7 +70,17 @@
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="number">
-                                Number
+                                	시작일
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="number" name="number" class="form-control"
+                                       data-parsley-type="number"
+                                       required="required">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="number">
+                                	마감일
                             </label>
                             <div class="col-sm-9">
                                 <input type="text" id="number" name="number" class="form-control"
@@ -78,7 +90,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="range">
-                                Range
+                                	배정된 멤버
                             </label>
                             <div class="col-sm-9">
                                 <input type="text"  class="form-control"
@@ -89,20 +101,25 @@
                                        required="required">
                             </div>
                         </div>
-                </fieldset>
-                <fieldset>
-                    <legend>
-                        More validation
-                    </legend>
+                        
                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="password">
-                                Password helpers
+                               		 팔로워
                             </label>
                             <div class="col-sm-9">
                                 <input type="password" id="password" name="password" class="form-control mb-sm"
                                        data-parsley-trigger="change"
                                        data-parsley-minlength="6"
                                        required="required">
+                            </div>
+                        </div>
+                </fieldset>
+               <!--  <fieldset>
+                    <legend>
+                        More validation
+                    </legend>
+                        <div class="form-group row">
+         
                                 <input type="password" id="password-r" name="password-r" class="form-control"
                                        data-parsley-trigger="change"
                                        data-parsley-minlength="6"
@@ -121,12 +138,14 @@
                                        required="required">
                             </div>
                         </div>
-                </fieldset>
+                </fieldset> -->
                 <div class="form-actions">
                     <button type="submit" class="btn btn-danger btn-rounded pull-xs-right">Validate &amp; Submit</button>
-                    <button type="button" class="btn btn-secondary btn-rounded">Cancel</button>
+                    <button type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>
     </section>
+</div>
+</div>
 </div>

@@ -12,7 +12,7 @@
 			<div class="articlesteam" >
 						   		<!-- <h2>팀원 모집</h2> -->
 				<ol class="group">
-						<li class="comment" data-toggle="modal" data-target="#detailModal" >
+						<li class="comment" data-toggle="modal" data-target="#detailModal" onclick="location.href='링크 주소'">
 						<p class="text">
 						<input type="checkbox" value="dd">&nbsp ${n.title}</p>
 							    <time>taskworldproject > ${n.userid}</time>
