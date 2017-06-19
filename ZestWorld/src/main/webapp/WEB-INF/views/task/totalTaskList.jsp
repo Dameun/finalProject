@@ -14,11 +14,12 @@
 						   		<!-- <h2>팀원 모집</h2> -->
 				<ol class="group">
 						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id});""location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
-						<li class="comment" data-toggle="modal" data-target="#detailModal">
+						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
+						<li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id});">
 						<p class="text">
 						&nbsp ${n.title}</p>
 						<!-- <input type="checkbox" value="dd" >&nbsp ${n.title}</p> -->
-						<div onclick="location.href='detailModal.htm?task_id='+${n.task_id}">
+						<div>
 							    <time>taskworldproject > ${n.userid}</time>
 							    <a class="remove" >마감일 없음</a>
 							    <hr>
