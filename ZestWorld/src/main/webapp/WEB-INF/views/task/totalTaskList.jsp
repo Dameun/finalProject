@@ -20,7 +20,7 @@
 						&nbsp ${n.title}</p>
 						<!-- <input type="checkbox" value="dd" >&nbsp ${n.title}</p> -->
 						<div>
-							    <time>taskworldproject > ${n.userid}</time>
+							    <time>taskworldproject > ${n.user_id}</time>
 							    <a class="remove" >마감일 없음</a>
 							    <hr>
 						</div>

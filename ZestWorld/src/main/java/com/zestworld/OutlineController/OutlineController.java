@@ -131,16 +131,21 @@ public class OutlineController {
 		dto.setUser_id(userid);
 		dto.setEnd_date(enddate);
 		
+		int workspaceId=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		dto.setWorkspace_id(workspaceId);
+		
 	/*	if(enddate!=null){
 			dto.setEnd_date(enddate);
 		}*/
 		System.out.println("title : "+dto.getTitle());
 		System.out.println("category: "+ dto.getCategory_id());
 		System.out.println("End_date: "+ enddate);
-	
+		System.out.println();
+		
+		
 		
 		int result= service.insertTask(dto);
-		
+		System.out.println("insert 성공 ");
 		List<Task_DTO> list= service.tasklist();
 		
 		model.addAttribute("list", list); //�옄�룞 forward 
