@@ -143,28 +143,18 @@
                         <i class="fa fa-cog fa-lg"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
+                        <li><a href="#"onclick="ajaxView('joinEdit.ajax')"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Calendar</a></li>
-                        <li><a href="#">Inbox &nbsp;&nbsp;<span class="badge bg-danger animated bounceIn">9</span></a></li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out"></i> &nbsp; Log Out</a></li>
+                        
+                       
+                        <li><a href="index.htm"><i class="fa fa-sign-out"></i> &nbsp; Log Out</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="chat-sidebar">
+                    <a href="#">
                         <i class="fa fa-globe fa-lg"></i>
                     <i class="chat-notification-sing animated bounceIn"></i></a>
-                    <div id="chat-notification" class="chat-notification animated fadeOut hide">
-                        <div class="chat-notification-inner">
-                            <h6 class="title">
-                                <span class="thumb-xs">
-                                    <img src="./resource/img/people/a6.jpg" class="img-circle mr-xs pull-left">
-                                </span>
-                                Jess Smith
-                            </h6>
-                            <p class="text">Hey! What's up?</p>
-                        </div>
-                    </div>
+                   
                 </li>
             </ul> 
+<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
