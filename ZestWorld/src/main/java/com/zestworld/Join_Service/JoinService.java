@@ -30,16 +30,16 @@ public class JoinService {
 		return result;
 	}
 	
-	public int idChecsk(String userid){
+	public int idChecsk(String user_id){
 		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
-		int result = dao.idCheck(userid);
+		int result = dao.idCheck(user_id);
 		return result;
 	}
 	
-	public Users_DTO GetSearchUser(String userid)
+	public Users_DTO GetSearchUser(String user_id)
 	{
 		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
-		Users_DTO users= dao.GetSearchUser(userid);
+		Users_DTO users= dao.GetSearchUser(user_id);
 		return users;
 	}
 	

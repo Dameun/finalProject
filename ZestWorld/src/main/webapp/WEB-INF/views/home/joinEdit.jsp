@@ -2,12 +2,16 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%
+   request.setCharacterEncoding("UTF-8");
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>ZestWorld</title>
-<!-- <link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
-as of IE9 cannot parse css files with more that 4K classes separating in two files
+<link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
+<!--  as of IE9 cannot parse css files with more that 4K classes separating in two files
 [if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
     <![endif]
@@ -18,9 +22,9 @@ as of IE9 cannot parse css files with more that 4K classes separating in two fil
 <meta name="author" content="">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
-<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
    /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
@@ -38,16 +42,22 @@ as of IE9 cannot parse css files with more that 4K classes separating in two fil
 </style>
 
 <script type="text/javascript">
-function Edit()
-{
 
-	alert($("#exampleInputEmail1").val()+  $("#myImg").attr("src")+$("#pswd").val()+$("#name").val()+$("#phone").val());
+
+/* function Edit()
+{
+	var imgSrc = $("#myImg").attr("src")
+	
+	
+	console.log(imgSrc); // Outputs: "Hello World!"
+	
+	alert($("#exampleInputEmail1").val()+ btoa(imgSrc)+$("#pswd").val()+$("#name").val()+$("#phone").val());
 	
 	$.ajax({
 		type:"post",
 		url:"updateUser.htm",
-		data: { "userid"   : $("#exampleInputEmail1").val(),
-			    "file"     : $("#myImg").attr("src"),
+		data: { "user_id"   : $("#exampleInputEmail1").val(),
+			    "file"     : imgSrc,
 			    "password" : $("#pswd").val(),
 			    "name"     : $("#name").val(),
 			    "phone"    : $("#phone").val()
@@ -68,8 +78,8 @@ function Edit()
 		}
 		
 	});
-}
-
+}  
+ */
 </script>
 </head>
 
@@ -86,7 +96,7 @@ function Edit()
             <section class="widget widget-login animated fadeInUp"> 
             <div class="widget-body">
               
-               <c:url value="/updateUser.htm" var="loginURL" />
+             <c:url value="/updateUser.htm" var="loginURL" /> 
                <form action="${loginURL}" method="post" id="userEdit"enctype="multipart/form-data">
               <div class="form-group" style="text-align:center;">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -105,8 +115,8 @@ function Edit()
                  </div>
                   <!-- 이메일 -->
                   <div class="form-group">
-                     <input type="text" name="userid" class="form-control"
-                        id="exampleInputEmail1" placeholder="email" value="${member.userid}" readonly>
+                     <input type="text" name="user_id" class="form-control"
+                        id="exampleInputEmail1" placeholder="email" value="${member.user_id}" readonly>
                   </div>
                   <!-- 비번 -->
                   <div class="form-group">
@@ -129,7 +139,7 @@ function Edit()
                      <!-- 회원정보 수정  -->
                      <button type="reset" class="btn btn-default btn-file"
                        >취소</button>
-                     <button type="button" onclick="Edit()" id="myEdit"class="btn btn-default btn-file">수정</button>
+                     <button type="submit"  id="myEdit"class="btn btn-default btn-file">수정</button>
                      <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
                   </div>
                   
@@ -152,9 +162,9 @@ function Edit()
 <script src="./resource/build/bootstrap/vendor/moment/min/moment.min.js"></script>
 <script src="./resource/build/bootstrap/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script src="./resource/build/bootstrap/vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-<!-- <script src="./resource/build/bootstrap/vendor/jasny-bootstrap/js/inputmask.js"></script>-->
+<script src="./resource/build/bootstrap/vendor/jasny-bootstrap/js/inputmask.js"></script>
 <script src="./resource/build/bootstrap/vendor/jasny-bootstrap/js/fileinput.js"></script>
-
+<script src="./resource/build/bootstrap/vendor/holderjs/holder.js"></script>
 <script src="./resource/build/bootstrap/vendor/dropzone/dist/min/dropzone.min.js"></script>
 <script src="./resource/build/bootstrap/vendor/markdown/lib/markdown.js"></script>
 <script src="./resource/build/bootstrap/vendor/bootstrap-markdown/js/bootstrap-markdown.js"></script>
