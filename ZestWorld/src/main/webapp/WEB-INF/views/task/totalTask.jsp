@@ -161,26 +161,14 @@ function myfilter(){
 
 
 function detailModalView(view){
-/* 	$('#detailModal').modal('show');
-} */
-	 
- /* 	 $.ajax({
-	       type : "get",
-	       url : "detailModal.htm?task_id="+view,
-	       success : function(data) {
-	    		$('#detailModal').modal('show');         
-	       },
-	       error : function() {
-	          alert('Error while request..');
-	       }
-	    }); */
-	    
  	$.ajax({
 	       type : "get",
 	       url : "detailModal.htm?task_id="+view,
 	       success : function(data) {
-	    		$('#email').val(data.detail.title);
-	    		console.log("data:" + data.detail.title);
+	    		$('#detailStart').val(data.detail.start_date);
+	    		$('#detailEnd').val(data.detail.end_date);
+	    		$('#member').val(data.detail.member);
+	    		$('#follower').val(data.detail.follower);
 	       },
 	       error : function() {
 	          alert('Error while request..');
@@ -203,6 +191,7 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
+	    		 
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },
@@ -224,7 +213,31 @@ function projectchange(){
 		       type : "get",
 		       url : "categoryFilterList.htm?projectId="+projectId,
 		       success : function(data) {
-		    	   $("#categoryList").append($('#categoryList').html(data)); 	            
+		    	   $("#categoryList").append($('#categoryList').html(data)); 
+		    	 
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		    });
+	}else{
+		console.log("ProjectID: 1");
+	}
+}
+
+function projectchange2(){
+
+	projectId=$("#project2").val();
+	console.log("dsadasdasdsadasdas"+ projectId);
+	/* categoryTitle=$("#title").val(); */
+	if(projectId!=""){
+		console.log("ProjectID: 0");
+	 	 $.ajax({
+		       type : "get",
+		       url : "categoryFilterList.htm?projectId="+projectId,
+		       success : function(data) {
+		    	   console.log(data);
+		    	   $("#categoryListModal").append($('#categoryListModal').html(data)); 
 		       },
 		       error : function() {
 		          alert('Error while request..');

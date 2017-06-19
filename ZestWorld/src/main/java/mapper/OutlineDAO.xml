@@ -10,7 +10,7 @@
 		
 		select * from task where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}<!-- default= 작성자가 나인것  -->
 		
-		<if test="userid!=null and userid !=''">
+		<if test="user_id!=null and user_id !=''">
 			and user_id=#{user_id}
 		</if>
 		
@@ -55,7 +55,7 @@
 	</select> 
 	
 	<insert id="insertTask" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		insert into task(task_id,category_id,user_id,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{user_id},#{title},#{end_date},'0',sysdate)
+		insert into task(task_id,category_id,workspace_id,user_id,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{workspace_id},#{user_id},#{title},#{end_date},'0',sysdate)
 	</insert>
 
 <!-- 	프로젝트에 속한 category name -->

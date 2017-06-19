@@ -16,7 +16,7 @@
             <div class="widget-controls">
                 <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
                 <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
             </div>
         </header>
         <div class="widget-body">
@@ -61,13 +61,41 @@
                                		 위치
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" id="email" name="email" class="form-control"
+                            
+                            <select id="project2" onchange="projectchange2();">
+								<option value="" selected="selected">  </option>
+								<c:forEach items="${projectlist}" var="n">
+								 	<option value="${n.project_id}" selected="selected">${n.p_title}</option>		
+								</c:forEach>
+    		        		</select>
+    		        		
+    		        		<div id="categoryListModal">
+    		        		
+    		        		
+    		        		
+    		        		</div>
+                         <!--    <div class="clearfix">
+					            <div class="btn-toolbar">
+					                <div class="btn-group">
+					                    <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-secondary">
+					                        Popular <span class="caret"></span>
+					                    </a>
+					                    <ul class="dropdown-menu">
+					                        <li><a class="dropdown-item" href="#">All</a></li>
+					                        <li><a class="dropdown-item" href="#">Popular</a></li>
+					                        <li><a class="dropdown-item" href="#">Interesting</a></li>
+					                        <li><a class="dropdown-item" href="#">Latest</a></li>
+					                    </ul>
+					                </div>
+					            </div>
+				        	</div> -->
+                                <!-- <input type="text" id="email" name="email" class="form-control"
                                        data-parsley-trigger="change"
                                        data-parsley-validation-threshold="1"
                                        required="required" >
-                        <span class="help-block">
-                            This one is triggered even when 1 character has been input
-                        </span>
+		                        <span class="help-block">
+		                            This one is triggered even when 1 character has been input
+		                        </span> -->
                             </div>
                         </div>
                         <div class="form-group row">
@@ -75,9 +103,9 @@
                                 	시작일
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" id="number" name="number" class="form-control"
+                                <input type="text" id="detailStart" name="detailStart" class="form-control"
                                        data-parsley-type="number"
-                                       required="required">
+                                       required="required" value="${n.START_DATE}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -85,7 +113,7 @@
                                 	마감일
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" id="number" name="number" class="form-control"
+                                <input type="text" id="detailEnd" name="detailEnd" class="form-control"
                                        data-parsley-type="number"
                                        required="required" value="${detail.end_date}">
                             </div>
@@ -96,7 +124,7 @@
                             </label>
                             <div class="col-sm-9">
                                 <input type="text"  class="form-control"
-                                       id="range" name="range"
+                                       id="member" name="member"
                                        data-parsley-range="[10, 100]"
                                        data-parsley-trigger="change"
                                        data-parsley-validation-threshold="1"
@@ -109,7 +137,7 @@
                                		 팔로워
                             </label>
                             <div class="col-sm-9">
-                                <input type="password" id="password" name="password" class="form-control mb-sm"
+                                <input type="text" id="follower" name="follower" class="form-control mb-sm"
                                        data-parsley-trigger="change"
                                        data-parsley-minlength="6"
                                        required="required">
@@ -142,7 +170,7 @@
                         </div>
                 </fieldset> -->
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-danger btn-rounded pull-xs-right">Validate &amp; Submit</button>
+                    <button type="button" class="btn btn-danger btn-rounded pull-xs-right" >Validate &amp; Submit</button>
                     <button type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
