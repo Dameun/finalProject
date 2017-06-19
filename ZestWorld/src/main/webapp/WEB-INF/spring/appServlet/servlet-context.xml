@@ -33,6 +33,11 @@
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.websocket" />
+	<context:component-scan base-package="com.zestworld.taskListController"/>
+	<context:component-scan base-package="com.zestworld.taskListService"/>
+	
+	<beans:bean class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
+	
 	
 	<beans:bean id="dataController" class="com.zestworld.util.DataController" factory-method="getInstance">
 	</beans:bean>

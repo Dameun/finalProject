@@ -16,6 +16,8 @@ function projectClick(project_id)
 		url:"selectProject.ajax",
 		data:{"project_id" : project_id},
 		success:function(data){
+			
+			
 			ajaxView('taskList.ajax');
 		},
 		error:function(){
@@ -58,32 +60,3 @@ projectmain
                      </div>  
 		</div>
 
-	<%-- <div class="container">
-		<div class="col-sm-12">
-			<div id="contentDiv" name= "contentDiv">
-				<c:forEach items="${projectList}" var="project">
-					<div class="bs-calltoaction bs-calltoaction-primary">
-						<div class="row">
-							<div class="col-md-9 cta-contents">
-
-								<h1 class="cta-title">${project.p_title}</h1>
-	
-								<div class="cta-desc">
-									<p>${project.explain}</p>
-								</div>
-							</div>
-							
-							<div class="col-md-3 cta-button">
-								<button type="button" onclick="location.href='selectWorkspace.htm?selectWorkspaceID=${workSpace.workspace_id}'"
-									class="btn btn-lg btn-block btn-primary" >Enter</button>
-							</div>
-	 						
-						</div>
-					</div>
-				</c:forEach>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="ajaxView('Createproject.ajax')">
-					<span aria-hidden="true">+새로운 프로젝트</span>
-				</button>
-			</div>
-		</div>
-	</div> --%>

@@ -5,14 +5,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.zestworld.taskListDAO.taskListDao">
 
-	<select id="tasklist" resultType="com.zestworld.Table_DTO.Task_DTO">
-		select * from task
+	<select id="tasklist"  resultType="com.zestworld.Table_DTO.Category_DTO" parameterType="com.zestworld.Table_DTO.Category_DTO">
+		select * from category where project_id=#{project_id} order by category_id 
 	</select>
 
+	<select id="tasklist2" resultType="com.zestworld.Table_DTO.Task_DTO">
+		
+	select task.title, task.category_id, category.category_id from task join category on task.category_id = category.category_id order by task_id
+
+	
+	</select>
 
 	<select id="mytasklist" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		select * from task where user_id=#{user_id}  <!-- default= 작성자가 나인것  -->
+		select * from task where userid=#{userid}  <!-- default= 작성자가 나인것  -->
 		
 		<if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
 			and member=#{member}
@@ -28,14 +34,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 
-	<insert id="insertTitle" parameterType="com.zestworld.Table_DTO.Task_DTO">
-	insert into task(title) values(#{title})
+	<select id="getUser_Id" resultType="String">
+		select userid from workspace_user
+	</select>
+
+	<insert id="titleInsert" parameterType="com.zestworld.Table_DTO.Category_DTO">
+	insert into category(workspace_id, project_id,category_id,title) values(#{workspace_id},#{project_id},category_seq.nextval, #{title})
 	</insert>
 	
-	<delete id="deleteTitle" parameterType="String">
+	<insert id="tasktitleInsert" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	insert into task(task_id,category_id,workspace_id,user_id,title) values(task_seq.nextval,#{category_id},#{workspace_id},#{user_id},#{title})
+	</insert>
+
+
+	<delete id="tasktitleDelete" parameterType="int">
 	<!-- delete from task where title=#{title}-->
-	delete from task where title=#{title}
+	delete from task where category_id=#{category_id}
 	</delete>
+
+
+	
+	<delete id="catetitleDelete" parameterType="com.zestworld.Table_DTO.Category_DTO">
+	<!-- delete from task where title=#{title}-->
+
+	delete from category where title=#{title}
+	</delete>
+	
+	
+	<select id="getProject_Id" parameterType="com.zestworld.Table_DTO.Project_DTO" resultType="int">
+
+	select project_id from project where workspace_id=#{workspace_id}
+	</select>
+	
+	<select id="getCategory_Id" parameterType="com.zestworld.Table_DTO.Category_DTO" resultType="int">
+	select category_id from category where title=#{title}
+	</select>
 	
 
 </mapper>

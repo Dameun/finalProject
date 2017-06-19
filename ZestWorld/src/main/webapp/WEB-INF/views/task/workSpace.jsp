@@ -4,7 +4,7 @@
 <h3>워크스페이지스 부분</h3>
 <br>
 <div class="btn-group">
-                      <button type="button" class="btn btn-default" onclick="ajaxView('taskList.ajax')">업무리스트</button>
+                      <button type="button" class="btn btn-default" onclick="location.href='taskList.htm'">업무리스트</button>
                       <button type="button" class="btn btn-default" onclick="ajaxView('analysis.ajax')">분석</button> 
                       <button type="button" class="btn btn-default" onclick="ajaxView('file.ajax')">파일</button>
                                         

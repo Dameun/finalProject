@@ -9,7 +9,7 @@ System.out.println(title);
 
 <section class="task-section" style="margin-left: 45px">
 <div class="tasklist">
-	<div class="membername" style="padding-top: 15px;padding-left:10px;color: #fff;"><%=title %></div>
+	<div class="membername" style="padding-top: 15px;padding-left:10px;color: #fff;">${title}</div>
 	<div class="task_add" id="task_add"
 		style="padding-top: 15px; padding-left: 20px">
 		<span class="glyphicon glyphicon-plus" style="color: #fff;"></span>

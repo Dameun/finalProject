@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.taskListDAO.taskListDao;
 import com.zestworld.taskListService.taskListService;
@@ -41,39 +42,105 @@ public class taskListController {
 		return jsonview;
 		
 	} 
+
+	@RequestMapping("titleInsert.htm")
+	public String titleInsert(String title,Model model) throws ClassNotFoundException, SQLException{
+		
+		Category_DTO cateDto = new Category_DTO();
+		cateDto.setTitle(title);
+		//int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+
+		System.out.println("타이틀 : " + title);
+		
+		service.titleInsert(cateDto);
+		
+		/*int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		System.out.println("선택한 project_id : "+ project_id);	
+		cateDto.setProject_id(project_id);
+		*/
+		
+		List<Category_DTO> list = service.tasklist(cateDto);
+		List<Task_DTO> list2 = service.tasklist2();
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
+		return "/task/taskLists";
+		
+	}
+	@RequestMapping("tasktitleInsert.htm")
+	public String tasktitleInsert(String title, String cateTitle,Model model) throws ClassNotFoundException, SQLException{
+		
+		System.out.println("tasktitleInsert.htm 접근성공");
+		taskListDao dao = sqlsession.getMapper(taskListDao.class);
+		
+		Category_DTO cateDto = new Category_DTO();
+		Task_DTO task = new Task_DTO();
+		
+		cateDto.setTitle(cateTitle);
+		task.setTitle(title);
+		
+		System.out.println("카테고리 타이틀 : " + cateTitle);
+		System.out.println("타이틀 : " + title);
 	
-	@RequestMapping(value="membername.htm", method=RequestMethod.POST)
-	public String membername(String title) throws ClassNotFoundException, SQLException{
+		//String userid = dao.getUser_Id();
+		int category_id = dao.getCategory_Id(cateDto);
+	
+		String userid = DataController.getInstance().GetUser().getUser_id();
+		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		System.out.println("유저아이디 : " + userid);
+		System.out.println("카테고리 아이디: " + category_id);
+		System.out.println("워크스페이스 아이디: " + workspace_id);
+	
+		task.setCategory_id(category_id);
+		task.setUser_id(userid);
+		task.setWorkspace_id(workspace_id);
 		
-		Task_DTO dto = new Task_DTO();
-		dto.setTitle(title);
 		
-		service.insertTitle();
+		service.tasktitleInsert(task);
 		
-		return "redirect:taskList.htm";
+		
+		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		System.out.println("선택한 project_id : "+ project_id);	
+		cateDto.setProject_id(project_id);
+		List<Category_DTO> list = service.tasklist(cateDto);
+		List<Task_DTO> list2 = service.tasklist2();
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
+		return "/task/taskLists";
 		
 	}
 	
-	
-	@RequestMapping("taskList.htm")
+	@RequestMapping(value="taskList.htm", method=RequestMethod.GET)
 	   public String taskList(Model model) throws ClassNotFoundException, SQLException{
-		
-		List<Task_DTO> list = service.tasklist(); 
-		model.addAttribute("list",list);
-	      return "task.taskList";
+		System.out.println("컨트롤러 taskList.htm 접근성공");
+	
+		/*List<Category_DTO> list = service.tasklist(); 
+		model.addAttribute("list",list);*/
+		return "task.taskList";
 	      
 	   }
 	
 	@RequestMapping("taskLists.htm")
 	public String taskLists(Model model) throws ClassNotFoundException, SQLException{
 		
+		System.out.println("컨트롤러 taskLists.htm 접근성공");
+		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		System.out.println("선택한 project_id : "+ project_id);	
+		Category_DTO cateDto = new Category_DTO();
+		cateDto.setProject_id(project_id);
 		
-		Task_DTO dto = new Task_DTO();
-		
-		List<Task_DTO> list = service.tasklist();
-		
+		List<Category_DTO> list = service.tasklist(cateDto);
+		List<Task_DTO> list2 = service.tasklist2();
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
 		return "/task/taskLists";
+	
 	}
 	
 	
@@ -82,10 +149,28 @@ public class taskListController {
 		
 		System.out.println("제목 : " + title);
 		taskListDao dao = sqlsession.getMapper(taskListDao.class);
-		dao.deleteTitle(title);
+		
+		Category_DTO cateDto = new Category_DTO();
 
-		List<Task_DTO> list = service.tasklist();
+		cateDto.setTitle(title);
+		
+	
+		int category_id = dao.getCategory_Id(cateDto);
+		
+		System.out.println("카테고리 ID : "+ category_id);
+		dao.tasktitleDelete(category_id);
+		dao.catetitleDelete(cateDto);
+
+		
+		
+		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		System.out.println("선택한 project_id : "+ project_id);	
+		cateDto.setProject_id(project_id);
+		
+		List<Category_DTO> list = service.tasklist(cateDto);
+		List<Task_DTO> list2 = service.tasklist2();
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
 		
 		return "/task/taskLists";
 	}

@@ -1,12 +1,20 @@
 @CHARSET "UTF-8";
 
+.content-wrap{
+	width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+	
+}
+
+
 .tasklist{
 	
 	display:inline-block;
 	margin-right:1px;
 	
 	width:350px;
-	height:47px;
+	height:40px;
 	background-color: #1f5c87;
 }
 
@@ -43,7 +51,8 @@
 	
 	width:350px;
 	height:30px;
-	background-color:#EAEAEA;
+	/* background-color:#EAEAEA; */
+	background-color:#fff;
 	margin-top: 1.4%;
 	padding-top: 5px;
 	padding-left:10px;

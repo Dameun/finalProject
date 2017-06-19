@@ -4,30 +4,27 @@
      <!--민성 추가부분  -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 	
-    <link href="dist/css/taskList.css" rel="stylesheet" type="text/css"/>
-	<!--/민성추가부분  -->
-    
+    <link href="resource/dist/css/taskList.css" rel="stylesheet" type="text/css"/>
+		<!--/민성추가부분  -->
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 <script type="text/javascript">
 	 
 	
 	$(function(){
 
-	
-
 		
+		
+		//리스트 비동기로 뿌리는 ajax부분
 		$.ajax({
 			type:"get",
 			url:"taskLists.htm",
 			dataType:'html',
 			success:function(data){
+				console.log("리스트뿌리기 성공?");
 			$("#View").append(data); 		
 			},
 			error:function(){
@@ -35,17 +32,22 @@
 			}
 		});
 		
-		
+		//category insert ajax부분
 		
 		$("#add_taskTitle").on("submit", function(e) {
 
 			$.ajax({
 				type : "post",
-				url : "membername.htm",
+				url : "titleInsert.htm",
 				cache : false,
 				data : 'title=' + $("#title").val(),
 				success : function(data) {
-					console.log(data);					
+					console.log("insert 성공^^");	
+					$("#add-modal").hide();
+					$('.modal-backdrop').remove();
+					$("#View").empty();
+					$("#View").append(data); 
+					
 				},
 				error : function() {
 					alert('Error while request..');
@@ -53,15 +55,7 @@
 			});
 			e.preventDefault();
 		});
-
-		$("#addbtn").on("click", function() {
-
-			$("#add_taskTitle").submit();
-			
-			$("#add-modal").hide();
-			$('.modal-backdrop').hide();
-
-		});
+		
 		$(".close").click(function() {
 			$('.modal-backdrop').hide();
 		});
@@ -72,46 +66,20 @@
 			 	$(this).parent(".tasklist").find("#panel").toggle();
 					
 			});
-			 
 		
-		
-	//혹시 모르는 백업용 주석코드(나중에 정리꼭하겠습니다..)	
-		
-	/* 
-		$(document).on("click","#task_add1",function(){
-			$(".task-section1").find("#panel").toggle();
-		});
-	
-		$(document).on("click","#task_add2",function(){
-			$(".task-section2").find("#panel").toggle();
-	});
-						
-	*/	
-	
-	
-	/*  $("#task_add").click(function() {
-			$("#panel").toggle();
-		}); 
-	*/
-		
-		 
-		//만들기
-		$(document).on("click","#create_taskcontent",function(){
-			
-			$('.tasklist').append("<div class='task-content'>"
-									+"<div class='task-content-check'>"
-									+"<input type='checkbox'></div>"
-									+$('#task-content').val()+"</div>");			  
-		}); 
+		//취소 눌렀을 때 토글 닫히게	 
+			$(document).on("click","#cancleBtn",function(){
+				$(this).parent().parent("#panel").toggle();
+
+			})
 		  
-		  
-	  //삭제
+	  //카테고리 삭제
 		  $(document).on("click","#task_menu",function(){
 			 
 			  $.ajax({
 					type:"get",
 					url:"deleteTaskList.htm",
-					data : "title=" + $(this).parent(".tasklist").find("#membername").text(),
+					data : "title=" + $(this).parent(".tasklist").find(".membername").text(),
 					success:function(data){
 						$("#View").empty();
 						$("#View").append(data); 		
@@ -124,6 +92,30 @@
 		  }); 
 		  
 	});
+	
+	//업무 title 추가
+	function createBtn(number)
+	{
+			
+		var title = $("#task-content_"+number).val();
+		var cateTitle = $("#membername_"+number).text();
+		$.ajax({
+			type : "post",
+			url : "tasktitleInsert.htm",
+			cache : false,
+			data : 'title='+title+'&cateTitle='+cateTitle,
+			
+			success : function(data) {
+				console.log("taskinsert 성공^^");				
+				$("#View").empty();
+				$("#View").append(data); 	
+			},
+			error : function() {
+				alert('실패');
+			}
+		});
+
+	}
 
 </script>
 
@@ -190,7 +182,7 @@
 						<div class="modal-footer">
 
 							<!--   <button type="button" class="btn btn-primary">Save changes</button> -->
-							<button type="button" class="btn btn-info btn-circle btn-lg"
+							<button type="submit" class="btn btn-info btn-circle btn-lg"
 								id="addbtn">
 								<i class="fa fa-check"></i>
 							</button>
@@ -226,79 +218,3 @@
 <div id="View">
 
 </div>
-
-<!-- 
-
-<section class="task-section" style="margin-left: 45px">
-	<div class="tasklist">
-		<div class="membername" style="padding-top: 15px;padding-left:10px;color: #fff;">김민성</div>
-			<div class="task_add" id="task_add"
-				style="padding-top: 15px; padding-left: 20px">
-		<span class="glyphicon glyphicon-plus" style="color: #fff;"></span>
-	</div>
-     
-	<div class="task_menu" style="padding-top: 15px;" align="center">
-		<span class="glyphicon glyphicon-option-vertical" style="color: #fff;"></span>
-	</div>
-
-	<div id="panel">
-	
-	
-		<textarea class="form-control" placeholder="새 업무 만들기" style="margin: 10px -4px 0px -3px; height: 60px; width: 331px; border:0; resize: vertical"></textarea>
-		
-	    <div class="form-btn" style="background-color:#fff;width:331px;height: 40px;margin-left:-3px;">
-				<span><i class="fa fa-fw fa-user-plus" style="font-size:20px;margin-top:15px;margin-left:5px"></i></span>
-				<span><i class="fa fa-fw fa-calendar" style="font-size:20px"></i></span>
-		</div>
-		<div class="form-submit" align="right" style="background-color:#fff;width:331px;height: 50px;margin-left: -3px;">
-		<button type="button" class="btn bg-olive margin" style="margin-right:-5px">취소</button>
-		<button type="button" class="btn bg-olive margin">만들기</button>
-		</div>
-	</div>
-	
-</div>
-</section>
- -->
-<!-- <section class="task-section" style="margin-left: 45px">
-	<div class="tasklist">
-	<div class="membername" style="padding-top: 15px;padding-left:10px;color: #fff;">김민성</div>
-	<div class="task_add" id="task_add"
-		style="padding-top: 15px; padding-left: 20px">
-		<span class="glyphicon glyphicon-plus" style="color: #fff;"></span>
-	</div>
-     
-	<div class="task_menu" style="padding-top: 15px;" align="center">
-		<span class="glyphicon glyphicon-option-vertical" style="color: #fff;"></span>
-	</div>
-
-	<div id="panel">
-	
-	
-		<textarea class="form-control" placeholder="새 업무 만들기" style="margin: 10px -4px 0px -3px; height: 60px; width: 331px; border:0; resize: vertical"></textarea>
-		
-	    <div class="form-btn" style="background-color:#fff;width:331px;height: 40px;margin-left:-3px;">
-				<span><i class="fa fa-fw fa-user-plus" style="font-size:20px;margin-top:15px;margin-left:5px"></i></span>
-				<span><i class="fa fa-fw fa-calendar" style="font-size:20px"></i></span>
-		</div>
-		
-		<div class="form-submit" align="right" style="background-color:#fff;width:331px;height: 50px;margin-left: -3px;">
-		<button type="button" class="btn bg-olive margin" style="margin-right:-5px">취소</button>
-		<button type="button" class="btn bg-olive margin">만들기</button>
-		</div>
-	</div>
-	<div class="task-content">
-		<div class="task-content-check">
-			<input type="checkbox">
-		</div>
- 	일라일라일라
-	</div>
-		<div class="task-content">
-		<div class="task-content-check">
-			<input type="checkbox">
-		</div>
- 	일라일라일라
-	</div>
-	
-</div>
-</section>
- -->
