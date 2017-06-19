@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getProject_Id" parameterType="com.zestworld.Table_DTO.Project_DTO" resultType="int">
 
-	select project_id from project where workspace_id=#{workspace_id}
+	select project_id from project where p_title=#{p_title}
 	</select>
 	
 	<select id="getCategory_Id" parameterType="com.zestworld.Table_DTO.Category_DTO" resultType="int">

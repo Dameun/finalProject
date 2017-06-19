@@ -1,13 +1,15 @@
 @CHARSET "UTF-8";
 
 .content-wrap{
-	width: 100%;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  width: 100%;
+  overflow-x: auto;
+
 	
 }
 
-
+ #View{
+	width:100%
+} 
 .tasklist{
 	
 	display:inline-block;
