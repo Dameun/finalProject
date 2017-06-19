@@ -10,7 +10,7 @@
     <section class="widget">
         <header>
             <h5>
-                Dead simple validation
+                <span class="fw-semi-bold">업무 제목</span>
                 <small>No JS needed to tune-up</small>
             </h5>
             <div class="widget-controls">
@@ -61,11 +61,10 @@
                                		 위치
                             </label>
                             <div class="col-sm-9">
-                                <input type="email" id="email" name="email" class="form-control"
+                                <input type="text" id="email" name="email" class="form-control"
                                        data-parsley-trigger="change"
                                        data-parsley-validation-threshold="1"
-                                       required="required" 
-                                       value="${detail.title}">
+                                       required="required" >
                         <span class="help-block">
                             This one is triggered even when 1 character has been input
                         </span>

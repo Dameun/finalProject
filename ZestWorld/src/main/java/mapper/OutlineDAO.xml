@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zestworld.OutlineDAO.IOutlineDAO">
 	<select id="tasklist" resultType="com.zestworld.Table_DTO.Task_DTO">
-		select * from task where success_f='0'
+		select * from task where success_f='0' order by enrolldate desc
 	</select>
 	
  
@@ -25,13 +25,18 @@
 		<!-- <if test="success_f!=null and success_f != ''">  성공여부 
 			and success_f=#{success_f}
 		</if> -->
-		
+		<if test="order.equals('desc')">
+		      order by enrolldate asc
+		    </if>
+		<if test="order.equals('asc')">
+		      order by enrolldate desc
+   	    </if>
 		<!-- <choose>
 		    <when test="order !=null and order !=''">
-		      order by asc
+		      order by enrolldate asc
 		    </when>
 		    <otherwise>
-		      order by desc
+		      order by enrolldate desc
    			</otherwise>
   		</choose> -->
 		

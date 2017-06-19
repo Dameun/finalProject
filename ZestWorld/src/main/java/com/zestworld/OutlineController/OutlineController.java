@@ -6,13 +6,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.SimpleTimeZone;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.Table_DTO.Category_DTO;
@@ -25,6 +24,9 @@ public class OutlineController {
 	@Autowired
 	private OutlineService service;
 	
+	@Autowired(required=false)
+	private View jsonview; //빈객체의 주소값이 들어와있어야한다.
+	
 	@RequestMapping("totalTask.htm")
 	public String tasklist(String forme,String writer,String follower,Model model) throws ClassNotFoundException, SQLException{
 		
@@ -34,7 +36,7 @@ public class OutlineController {
 	@RequestMapping("taskTotalList.htm")
 	public String taskTotalList(String writer,String forme,String follower,String writermember,String success,String datefilter, String order,Model model) throws ClassNotFoundException, SQLException{
 		Task_DTO dto=new Task_DTO();
-		
+		System.out.println(order);
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		Calendar cal = Calendar.getInstance(new SimpleTimeZone(0x1ee6280, "KST"));
 		
@@ -83,13 +85,16 @@ public class OutlineController {
 			dto.setSuccess_f("0");
 		}
 		
-		/*
-		//�젙�젹
+		
 		if(order.equals("end")){
+			System.out.println("order end");
+			
+			
 			dto.setOrder("desc");
 		}else{
+			System.out.println("order etc");
 			dto.setOrder("asc");
-		}*/
+		}
 		
 		dto.setMember(forme);
 		dto.setFollower(follower);
@@ -143,7 +148,7 @@ public class OutlineController {
 		return "/task/totalTaskList";
 	}
 	
-	@RequestMapping(value="detailModal.htm", method=RequestMethod.GET)
+	/*@RequestMapping(value="detailModal.htm", method=RequestMethod.GET)
 	public String detailTask(String task_id, Model model) throws ClassNotFoundException, SQLException{
 		System.out.println("detailmodal*****: " + task_id);
 		Task_DTO result= service.detailTask(task_id);
@@ -151,6 +156,17 @@ public class OutlineController {
 		model.addAttribute("detail", result);
  
 		return "/task/detailModal";
+		
+	}*/
+	
+	@RequestMapping(value="detailModal.htm", method=RequestMethod.GET)
+	public View detailTask(String task_id, Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("detailmodal*****: " + task_id);
+		Task_DTO result= service.detailTask(task_id);
+		
+		model.addAttribute("detail", result);
+ 
+		return jsonview;
 		
 	}
 	
