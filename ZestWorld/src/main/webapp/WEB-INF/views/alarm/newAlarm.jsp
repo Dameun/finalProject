@@ -5,7 +5,6 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-
            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">

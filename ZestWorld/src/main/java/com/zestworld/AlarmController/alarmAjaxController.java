@@ -72,7 +72,7 @@ public class alarmAjaxController {
 		  alarm.setAlarm_type(alarmType);
 		  alarm.setCheck_f("0");
 		  alarm.setImg("img");
-		  alarm.setSendUser(writer);
+		  alarm.setUser_id(writer);
 		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());
 		  alarm.setAlarmTitle(alarmStrMake(newAlarm));
 		  service.insert(alarm);

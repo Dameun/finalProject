@@ -4,8 +4,7 @@ public class Project_user_DTO {
 
 	private int project_id;
 	private String user_id;
-	private int workspace_id;
-	
+
 	public int getProject_id() {
 		return project_id;
 	}
@@ -18,10 +17,5 @@ public class Project_user_DTO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getWorkspace_id() {
-		return workspace_id;
-	}
-	public void setWorkspace_id(int workspace_id) {
-		this.workspace_id = workspace_id;
-	}
+
 }

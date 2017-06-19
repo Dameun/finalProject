@@ -3,17 +3,9 @@ package com.zestworld.Table_DTO;
 public class Category_DTO {
 	private int category_id;
 	private int project_id;
-	private int workspace_id;
 	private String title;
 	
-	
-	public int getWorkspace_id() {
-		return workspace_id;
-	}
-	public void setWorkspace_id(int workspace_id) {
-		this.workspace_id = workspace_id;
-	}
-	
+
 	public int getCategory_id() {
 		return category_id;
 	}

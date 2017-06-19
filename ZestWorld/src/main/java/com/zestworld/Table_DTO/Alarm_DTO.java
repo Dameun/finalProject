@@ -5,7 +5,7 @@ public class Alarm_DTO {
 	private String alarmTitle;
 	private String check_f;
 	private String alarm_type;
-	private String sendUser;	//蹂대궦�궗�엺
+	private String user_id;	//蹂대궦�궗�엺
 	private String acceptUsers;	//諛쏅뒗�궗�엺
 	private String img;
 	
@@ -23,11 +23,12 @@ public class Alarm_DTO {
 	public void setAlarmTitle(String alarmTitle) {
 		this.alarmTitle = alarmTitle;
 	}
-	public String getSendUser() {
-		return sendUser;
+
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setSendUser(String sendUser) {
-		this.sendUser = sendUser;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getAcceptUsers() {
 		return acceptUsers;

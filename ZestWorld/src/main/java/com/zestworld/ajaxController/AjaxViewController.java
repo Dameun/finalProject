@@ -156,7 +156,7 @@ public class AjaxViewController {
 		Project_user_DTO projectUsers = new Project_user_DTO();
 		projectUsers.setProject_id(projectNew.getProject_id());
 		projectUsers.setUser_id(user_id);
-		projectUsers.setWorkspace_id(DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
+		//projectUsers.setWorkspace_id(DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
 		taskDao.InsertProjectUsers(projectUsers);
 
 		DataController.getInstance().dataChangeProject();

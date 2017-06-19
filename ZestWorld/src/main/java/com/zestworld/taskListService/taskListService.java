@@ -44,7 +44,6 @@ public class taskListService {
 		System.out.println("프로젝트ID :" + project_id);
 		System.out.println("워크스페이스ID: " + workspace_id);
 		dto.setProject_id(project_id);
-		dto.setWorkspace_id(workspace_id);
 		dao.titleInsert(dto);
 		
 	}
