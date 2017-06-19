@@ -1,5 +1,7 @@
 package com.zestworld.Join_Controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Random;
@@ -7,6 +9,7 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -147,26 +150,42 @@ public class JoinController {
      }
      
      
-     //회원정보 수정
-     @RequestMapping(value="update.htm" , method=RequestMethod.GET)
- 	public String update() throws ClassNotFoundException, SQLException{
-
- 		return "redirect:/index.htm";
- 	}
      
-	@RequestMapping(value = "update.htm", method = RequestMethod.POST)
-	public String update(Users_DTO member) throws ClassNotFoundException, SQLException {
-
-		Users_DTO updateMember = new Users_DTO();
-		updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
-		updateMember.setUser_id(member.getUser_id());
-		updateMember.setPhone(member.getPhone());
-
-		int result = service.pwEdit(updateMember);
-
-		return "redirect:/index.htm";
-	}
      
+     @RequestMapping(value = "/updateUser.htm", method = RequestMethod.POST)
+     public String update(@RequestParam Map<String, Object> paramMap,Users_DTO member,HttpServletRequest request, ModelAndView mav) throws ClassNotFoundException, SQLException, IOException {
+  	   String viewpage = "";
+         String filename = member.getFile().getOriginalFilename();
+         System.out.println(filename);
+         String path = request.getServletContext().getRealPath("upload");
+
+         String fpath = path+"\\"+filename;
+         FileOutputStream fs = new FileOutputStream(fpath);
+         fs.write(member.getFile().getBytes());
+         fs.close();
+   
+  	   
+  	   String password=(String) paramMap.get("password");
+         String phone=(String) paramMap.get("phone");
+         System.out.println(password);
+         System.out.println(phone);
+         Users_DTO updateMember = new Users_DTO();
+         updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
+         updateMember.setUser_id(member.getUser_id());
+         updateMember.setPhone(member.getPhone());
+         updateMember.setImg(filename);
+         System.out.println("1111");
+         int result = service.updateUser(updateMember);
+  	    if(result !=0){
+  	    	
+  			return "";
+  		}else{
+  			return "";
+  		}
+
+       
+     }
+
 }
 
 

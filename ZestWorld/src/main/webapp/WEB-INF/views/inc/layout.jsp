@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Index</title>
+	<title>ZestWorld</title>
+	 <script type="text/javascript" src="./resource/Js/ajaxView.js"></script>
 	<link href="index.css" type="text/css" rel="stylesheet">
 </head>
-<body class=" nav-collapsed chat-sidebar-container pace-done">
+<body class="nav-collapsed chat-sidebar-container pace-done">
 
             	<tiles:insertAttribute name="header" />
             	<tiles:insertAttribute name="aside" />
@@ -21,10 +22,10 @@
 
 		<tiles:insertAttribute name="content" />
 		
+   	
+	</main>
 	
 </div>
-            	
-	</main>
-
+         
 </body>
 </html>
