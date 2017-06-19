@@ -27,7 +27,7 @@ public class AlarmService {
 	public List<Alarm_DTO> GetList() throws ClassNotFoundException, SQLException{
 		int result = 0;
 		AlarmDAO dao = sqlsession.getMapper(AlarmDAO.class);
-		String accept = DataController.getInstance().GetUser().getUserid();
+		String accept = DataController.getInstance().GetUser().getUser_id();
 		List<Alarm_DTO> list = dao.getAlarmList(accept);
 		return list;
 	}

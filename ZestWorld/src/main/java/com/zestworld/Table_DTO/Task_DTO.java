@@ -2,10 +2,12 @@ package com.zestworld.Table_DTO;
 
 import java.util.Date;
 
-public class Task_DTO {
+public class Task_DTO 
+{
 	private int task_id;
 	private int category_id;
-	private String userid;
+	private int workspace_id;
+	private String user_id;
 	private String title;
 	private String explain;
 	private String start_date;
@@ -16,11 +18,24 @@ public class Task_DTO {
 	private String success_f;
 	private String projectname;
 	
-	//************************수정
+	//************************�닔�젙
 	private String filterDay;
 	private String order;
 	private String endrolldate;
 	
+	
+	public int getWorkspace_id() {
+		return workspace_id;
+	}
+	public void setWorkspace_id(int workspace_id) {
+		this.workspace_id = workspace_id;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	
 	public int getTask_id() {
 		return task_id;
@@ -31,21 +46,19 @@ public class Task_DTO {
 	public int getCategory_id() {
 		return category_id;
 	}
+	
 	public void setCategory_id(int category_id) {
 		this.category_id = category_id;
 	}
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
+
 	public String getTitle() {
 		return title;
 	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	public String getExplain() {
 		return explain;
 	}

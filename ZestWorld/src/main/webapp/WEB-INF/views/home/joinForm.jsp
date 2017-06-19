@@ -129,7 +129,7 @@
 					<form action="${loginURL}" method="post">
 						<!-- 이메일 -->
 						<div class="form-group">
-							<input type="text" name="userid" class="form-control"
+							<input type="text" name="user_id" class="form-control"
 								id="exampleInputEmail1" placeholder="email">
 						</div>
 						<!-- 비번 -->

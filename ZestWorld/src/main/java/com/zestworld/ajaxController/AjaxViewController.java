@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.Table_DTO.Project_DTO;
+import com.zestworld.Table_DTO.Project_user_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
 import com.zestworld.util.DataController;
@@ -143,22 +144,31 @@ public class AjaxViewController {
 	@RequestMapping(value="/CreateProjectProcess.ajax", method=RequestMethod.GET)
 	public String createProject(String p_title,String explain, String etcStr, Model model)
 	{
+		String user_id = DataController.getInstance().GetUser().getUser_id();
 		String[] strArr = etcStr.split(",");
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Project_DTO project = new Project_DTO();
 		project.setWorkspace_id (DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
+	
 		project.setP_title(p_title);
 		project.setExplain(explain);
-		project.setP_admin(DataController.getInstance().GetUser().getUserid());
+		project.setP_admin(DataController.getInstance().GetUser().getUser_id());
 		//test源�
 		project.setStart_date("2017-06-14");
 		project.setEnd_date("2017-07-06");
-		project.setAuthoriy("0");
+		project.setAUTHORITY("0");
 		project.setP_state("0");
 		project.setMark_f(0);
 		project.setOpen_f(Integer.parseInt(strArr[0]));	//怨듦컻�뿬遺�
 		project.setEssence_f(Integer.parseInt(strArr[1])); //�뿉�꽱�뒪�봽濡쒖젥�듃 �쑀臾�
 		taskDao.insertProject(project);
+		
+		Project_DTO projectNew = taskDao.GetProjectByname(project);
+		Project_user_DTO projectUsers = new Project_user_DTO();
+		projectUsers.setProject_id(projectNew.getProject_id());
+		projectUsers.setUser_id(user_id);
+		projectUsers.setWorkspace_id(DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
+		taskDao.InsertProjectUsers(projectUsers);
 		
 		DataController.getInstance().dataChangeProject();
 		ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 

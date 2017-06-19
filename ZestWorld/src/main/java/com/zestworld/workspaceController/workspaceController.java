@@ -46,7 +46,7 @@ public class workspaceController {
         
         for( int i=0; i<workspaceUserList.size(); i ++)
         {
-        	String workSpaceId = workspaceUserList.get(i).getWorkspace_id();
+        	int workSpaceId = workspaceUserList.get(i).getWorkspace_id();
         	workspace= taskDao.GetWorkSpace(workSpaceId);
         	workspaceList.add(workspace);
         }
@@ -60,7 +60,7 @@ public class workspaceController {
 	public String selectWorkspace(String selectWorkspaceID, Model model)
 	{
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		Workspace_DTO workspace= taskDao.GetWorkSpace(selectWorkspaceID);
+		Workspace_DTO workspace= taskDao.GetWorkSpace(Integer.parseInt(selectWorkspaceID));
 		DataController.getInstance().SetCurrentWorkspace(workspace);
 		//ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
 		//model.addAttribute("selectWorkspace", workspace);
@@ -77,7 +77,7 @@ public class workspaceController {
 		Workspace_DTO workspace = new Workspace_DTO ();
 		workspace.setWorkspace_name(workspaceName);
 		workspace.setDescription(workspaceDiscription);
-		workspace.setUser_id(DataController.getInstance().GetUser().getUserid());
+		workspace.setUser_id(DataController.getInstance().GetUser().getUser_id());
 		taskDao.insertWorkSpace(workspace);
 		
 		//�떎���떎 愿�怨�
@@ -85,7 +85,7 @@ public class workspaceController {
 		WorkspaceUser_DTO workspaceUser= new WorkspaceUser_DTO ();
 		workspace = taskDao.GetWorkSpaceByname(workspace);
 		workspaceUser.setWorkspace_id(workspace.getWorkspace_id());
-		workspaceUser.setUserid(DataController.getInstance().GetUser().getUserid());
+		workspaceUser.setUser_id(DataController.getInstance().GetUser().getUser_id());
 		
 		taskDao.insertWorkSpaceUser(workspaceUser);
 		DataController.getInstance().dataChange();

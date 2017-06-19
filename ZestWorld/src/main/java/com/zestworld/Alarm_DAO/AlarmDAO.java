@@ -9,7 +9,7 @@ import com.zestworld.Table_DTO.Alarm_DTO;
 public interface AlarmDAO {
 	
 	//알람리스트 가져오기
-	public List<Alarm_DTO> getAlarmList(String accept) throws ClassNotFoundException, SQLException;
+	public List<Alarm_DTO> getAlarmList(String acceptUsers) throws ClassNotFoundException, SQLException;
 		
 	//알람 가져오기
 	public Alarm_DTO getAlarm(String alarm_id) throws ClassNotFoundException, SQLException;

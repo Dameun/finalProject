@@ -63,13 +63,13 @@ public class JoinController {
 		
 		if (result > 0) {
 			Role_DTO role = new Role_DTO();
-			role.setUserid (member.getUserid());
+			role.setUser_id (member.getUser_id());
 			role.setAuthority_name("ROLE_USER");
 			result = service.insertRoll(role);
 			
-			if(member.getUserid().equals("admin")){
+			if(member.getUser_id().equals("admin")){
 				role = new Role_DTO();
-				role.setUserid (member.getUserid());
+				role.setUser_id (member.getUser_id());
 				role.setAuthority_name("ROLE_ADMIN");
 				result = service.insertRoll(role);	
 			}
@@ -103,7 +103,7 @@ public class JoinController {
 	
 	        Users_DTO updateMember = new Users_DTO();
 	        updateMember.setPassword(this.bCryptPasswordEncoder.encode(Str));
-	        updateMember.setUserid(member.getUserid());
+	        updateMember.setUser_id(member.getUser_id());
 	        updateMember.setPhone(member.getPhone());
 
 			int result = service.pwEdit(updateMember);
@@ -159,7 +159,7 @@ public class JoinController {
 
 		Users_DTO updateMember = new Users_DTO();
 		updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
-		updateMember.setUserid(member.getUserid());
+		updateMember.setUser_id(member.getUser_id());
 		updateMember.setPhone(member.getPhone());
 
 		int result = service.pwEdit(updateMember);

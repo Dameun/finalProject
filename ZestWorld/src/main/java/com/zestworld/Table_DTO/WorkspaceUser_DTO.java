@@ -2,22 +2,22 @@ package com.zestworld.Table_DTO;
 
 public class WorkspaceUser_DTO 
 {
-	private String workspace_id;
-	private String userid;
+	private int workspace_id;
+	private String user_id;
 	
-	public String getWorkspace_id() {
+	public int getWorkspace_id() {
 		return workspace_id;
 	}
 	
-	public void setWorkspace_id(String workspace_id) {
+	public void setWorkspace_id(int workspace_id) {
 		this.workspace_id = workspace_id;
 	}
 	
-	public String getUserid() {
-		return userid;
+	public String getUser_id() {
+		return user_id;
 	}
 	
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 }

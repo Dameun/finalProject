@@ -11,7 +11,7 @@
 		select * from task where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}<!-- default= 작성자가 나인것  -->
 		
 		<if test="userid!=null and userid !=''">
-			and userid=#{userid}
+			and user_id=#{user_id}
 		</if>
 		
 		<if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
@@ -45,12 +45,12 @@
 	
 	<select id="writerlist" parameterType="String" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
 		
-		select userid from workspace_user where workspace_id=#{workspace_id}
+		select user_id from workspace_user where workspace_id=#{workspace_id}
 		
 	</select> 
 	
 	<insert id="insertTask" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		insert into task(task_id,category_id,userid,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{userid},#{title},#{end_date},'0',sysdate)
+		insert into task(task_id,category_id,user_id,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{user_id},#{title},#{end_date},'0',sysdate)
 	</insert>
 
 <!-- 	프로젝트에 속한 category name -->

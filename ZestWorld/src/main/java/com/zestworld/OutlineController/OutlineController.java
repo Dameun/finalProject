@@ -60,11 +60,11 @@ public class OutlineController {
 		
 		//�옉�꽦�옄�븘�꽣
 		if(writermember==""){
-			userid=DataController.getInstance().GetUser().getUserid();
-			dto.setUserid("");
+			userid=DataController.getInstance().GetUser().getUser_id();
+			dto.setUser_id("");
 		}else{
 			//userid=writermember;
-			dto.setUserid(writermember);
+			dto.setUser_id(writermember);
 		}
 		
 		//�긽�깭�븘�꽣
@@ -122,8 +122,8 @@ public class OutlineController {
 		
 		dto.setTitle(title);
 		dto.setCategory_id(categoryId);
-		userid=DataController.getInstance().GetUser().getUserid();
-		dto.setUserid(userid);
+		userid=DataController.getInstance().GetUser().getUser_id();
+		dto.setUser_id(userid);
 		dto.setEnd_date(enddate);
 		
 	/*	if(enddate!=null){

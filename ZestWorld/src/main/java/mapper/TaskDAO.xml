@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.zestworld.taskDAO.TaskDataDAO">
 
    <select id="GetWorkSpaceList" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
-   		select* from Workspace_User where userid=#{userid}
+   		select* from Workspace_User where user_id=#{user_id}
    </select>
    
    <select id="GetWorkSpace" resultType="com.zestworld.Table_DTO.Workspace_DTO">
@@ -27,14 +27,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    VALUES( workspace_seq.nextval, #{workspace_name}, #{visit_id}, #{description}, #{user_id})
    </insert>
     <insert id="insertWorkSpaceUser" >
-		INSERT INTO Workspace_User(workspace_id, userid)
-	    VALUES( #{workspace_id}, #{userid})
+		INSERT INTO Workspace_User(workspace_id, user_id)
+	    VALUES( #{workspace_id}, #{user_id})
+   </insert>
+    <insert id="InsertProjectUsers" >
+		INSERT INTO project_user(workspace_id, user_id, project_id)
+	    VALUES( #{workspace_id}, #{user_id}, #{project_id})
    </insert>
    <insert id="insertProject" >
 		INSERT INTO project(project_id, workspace_id,p_title,explain,p_state, start_date,end_date,p_admin,open_f,
-		mark_f,essence_f,authoriy)
+		mark_f,essence_f,AUTHORITY)
 	    VALUES( project_seq.nextval, #{workspace_id}, #{p_title}, #{explain}, #{p_state},#{start_date},#{end_date},
-	    #{p_admin},#{open_f},#{mark_f},#{essence_f},#{authoriy})
+	    #{p_admin},#{open_f},#{mark_f},#{essence_f},#{AUTHORITY})
    </insert>
    <select id="GetProjectList" resultType="com.zestworld.Table_DTO.Project_DTO">
    		select* from Project where workspace_id=#{workspace_id}
@@ -42,5 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="GetProject" resultType="com.zestworld.Table_DTO.Project_DTO">
    		SELECT* FROM Project where project_id=#{project_id}
    </select>
-
+   <select id="GetProjectByname" resultType="com.zestworld.Table_DTO.Project_DTO">
+   		SELECT* FROM Project where p_title=#{p_title} and p_admin=#{p_admin}
+   </select>
 </mapper>

@@ -2,7 +2,7 @@ package com.zestworld.Table_DTO;
 
 public class Workspace_DTO {
 
-	private String workspace_id = "";
+	private int workspace_id;
 	private String workspace_name= "";
 	private String visit_id= "";
 	private String description= "";
@@ -14,10 +14,10 @@ public class Workspace_DTO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public String getWorkspace_id() {
+	public int getWorkspace_id() {
 		return workspace_id;
 	}
-	public void setWorkspace_id(String workspace_id) {
+	public void setWorkspace_id(int workspace_id) {
 		this.workspace_id = workspace_id;
 	}
 	public String getWorkspace_name() {

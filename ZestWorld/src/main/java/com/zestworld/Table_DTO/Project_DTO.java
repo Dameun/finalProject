@@ -1,30 +1,35 @@
 package com.zestworld.Table_DTO;
 
 public class Project_DTO {
-	private String project_id;
-	private String workspace_id;
+	private int project_id;
+	private int workspace_id;
 	private String p_title;
 	private String explain;
 	private String p_state;
 	private String start_date;
 	private String end_date;
 	private String p_admin;
-	private String member;
 	private int open_f;
 	private int mark_f;
 	private int essence_f;
-	private String authoriy;
+	private String AUTHORITY;
 	
-	public String getProject_id() {
+	public String getAUTHORITY() {
+		return AUTHORITY;
+	}
+	public void setAUTHORITY(String aUTHORITY) {
+		AUTHORITY = aUTHORITY;
+	}
+	public int getProject_id() {
 		return project_id;
 	}
-	public void setProject_id(String project_id) {
+	public void setProject_id(int project_id) {
 		this.project_id = project_id;
 	}
-	public String getWorkspace_id() {
+	public int getWorkspace_id() {
 		return workspace_id;
 	}
-	public void setWorkspace_id(String workspace_id) {
+	public void setWorkspace_id(int workspace_id) {
 		this.workspace_id = workspace_id;
 	}
 	public String getP_title() {
@@ -63,12 +68,7 @@ public class Project_DTO {
 	public void setP_admin(String p_admin) {
 		this.p_admin = p_admin;
 	}
-	public String getMember() {
-		return member;
-	}
-	public void setMember(String member) {
-		this.member = member;
-	}
+
 	public int getOpen_f() {
 		return open_f;
 	}
@@ -87,15 +87,6 @@ public class Project_DTO {
 	public void setEssence_f(int essence_f) {
 		this.essence_f = essence_f;
 	}
-	public String getAuthoriy() {
-		return authoriy;
-	}
-	public void setAuthoriy(String authoriy) {
-		this.authoriy = authoriy;
-	}
 
-	
-	
-	
-	
+
 }

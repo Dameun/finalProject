@@ -72,9 +72,9 @@ public class alarmAjaxController {
 		  alarm.setAlarm_type(alarmType);
 		  alarm.setCheck_f("0");
 		  alarm.setImg("img");
-		  alarm.setSend(writer);
-		  alarm.setAccept(DataController.getInstance().GetUser().getUserid());
-		  alarm.setTask_id(alarmStrMake(newAlarm));
+		  alarm.setSendUser(writer);
+		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());
+		  alarm.setAlarmTitle(alarmStrMake(newAlarm));
 		  service.insert(alarm);
 		  List<Alarm_DTO> list = service.GetList();
 		  
@@ -97,7 +97,7 @@ public class alarmAjaxController {
 		  String alarmType 	= msgArr[0];
 		  String taskTitle 	= msgArr[1];
 		  String writer 	= msgArr[3];
-		  String userId		= DataController.getInstance().GetUser().getUserid();
+		  String userId		= DataController.getInstance().GetUser().getUser_id();
 		  String returnMsg = "";
 		  //0 업무배정받음
 		  //1 업무완료알림

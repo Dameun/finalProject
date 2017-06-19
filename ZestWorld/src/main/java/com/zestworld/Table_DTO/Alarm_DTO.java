@@ -2,11 +2,11 @@ package com.zestworld.Table_DTO;
 
 public class Alarm_DTO {
 	private String alarm_id;
-	private String task_id;
+	private String alarmTitle;
 	private String check_f;
 	private String alarm_type;
-	private String send;	//보낸사람
-	private String accept;	//받는사람
+	private String sendUser;	//蹂대궦�궗�엺
+	private String acceptUsers;	//諛쏅뒗�궗�엺
 	private String img;
 	
 	
@@ -16,11 +16,24 @@ public class Alarm_DTO {
 	public void setAlarm_id(String alarm_id) {
 		this.alarm_id = alarm_id;
 	}
-	public String getTask_id() {
-		return task_id;
+	
+	public String getAlarmTitle() {
+		return alarmTitle;
 	}
-	public void setTask_id(String task_id) {
-		this.task_id = task_id;
+	public void setAlarmTitle(String alarmTitle) {
+		this.alarmTitle = alarmTitle;
+	}
+	public String getSendUser() {
+		return sendUser;
+	}
+	public void setSendUser(String sendUser) {
+		this.sendUser = sendUser;
+	}
+	public String getAcceptUsers() {
+		return acceptUsers;
+	}
+	public void setAcceptUsers(String acceptUsers) {
+		this.acceptUsers = acceptUsers;
 	}
 	public String getCheck_f() {
 		return check_f;
@@ -34,18 +47,7 @@ public class Alarm_DTO {
 	public void setAlarm_type(String alarm_type) {
 		this.alarm_type = alarm_type;
 	}
-	public String getSend() {
-		return send;
-	}
-	public void setSend(String send) {
-		this.send = send;
-	}
-	public String getAccept() {
-		return accept;
-	}
-	public void setAccept(String accept) {
-		this.accept = accept;
-	}
+
 	public String getImg() {
 		return img;
 	}

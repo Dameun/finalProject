@@ -35,10 +35,10 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
         //로그인한 사람 아이디 뽑기
 		//Join_DTO dto = (Join_DTO) req.getSession().getAttribute("info");
 		
-        attributes.put("userId", DataController.getInstance().GetUser().getUserid());
+        attributes.put("userId", DataController.getInstance().GetUser().getUser_id());
   
       
-        System.out.println("인터셉터 id:"+ DataController.getInstance().GetUser().getUserid());
+        System.out.println("인터셉터 id:"+ DataController.getInstance().GetUser().getUser_id());
 
  
         return super.beforeHandshake(request, response, wsHandler, attributes);

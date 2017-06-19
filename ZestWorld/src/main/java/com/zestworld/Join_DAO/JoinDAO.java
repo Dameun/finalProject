@@ -9,7 +9,7 @@ import com.zestworld.Table_DTO.Users_DTO;
 public interface JoinDAO {
 	
 	//회원정보 얻기
-	public Users_DTO getMember(String userid) throws ClassNotFoundException, SQLException;
+	public Users_DTO getMember(String user_id) throws ClassNotFoundException, SQLException;
 	
 	//회원가입
 	public int insert(Users_DTO member) throws ClassNotFoundException, SQLException;
@@ -18,13 +18,13 @@ public interface JoinDAO {
 	public int insertRoll(Role_DTO role) throws ClassNotFoundException, SQLException;
 	
 	//idcheck
-	public int idCheck(String userid);
+	public int idCheck(String user_id);
 	
 	//회원수정
 	public int updateUser(Users_DTO member);
 	
 	
-	public Users_DTO GetSearchUser(String userid);
+	public Users_DTO GetSearchUser(String user_id);
 	
 	
 	//비번 찾기

@@ -52,13 +52,13 @@ public class DataController {
 	public void dataChange()
 	{
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		List<WorkspaceUser_DTO> workspaceUserList = taskDao.GetWorkSpaceList(user.getUserid());
+		List<WorkspaceUser_DTO> workspaceUserList = taskDao.GetWorkSpaceList(user.getUser_id());
 	    List<Workspace_DTO>workspaceList = new ArrayList<Workspace_DTO>();
 	    Workspace_DTO workspace;
 	    
 	    for( int i=0; i<workspaceUserList.size(); i ++)
 	    {
-	    	String workSpaceId = workspaceUserList.get(i).getWorkspace_id();
+	    	int workSpaceId = workspaceUserList.get(i).getWorkspace_id();
 	    	workspace= taskDao.GetWorkSpace(workSpaceId);
 	    	workspaceList.add(workspace);
 	    }
@@ -171,9 +171,9 @@ public class DataController {
 		  alarm.setAlarm_type(alarmType);
 		  alarm.setCheck_f("0");
 		  alarm.setImg("img");
-		  alarm.setSend(writer);
-		  alarm.setAccept(DataController.getInstance().GetUser().getUserid());
-		  alarm.setTask_id(alarmStrMake(msg));
+		  alarm.setSendUser(writer);
+		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());
+		  alarm.setAlarmTitle(alarmStrMake(msg));
 		  try {
 				alarmDao.insert(alarm);
 			} catch (Exception e) {
@@ -189,7 +189,7 @@ public class DataController {
 			  String alarmType 	= msgArr[0];
 			  String taskTitle 	= msgArr[1];
 			  String writer 	= msgArr[3];
-			  String userId		= DataController.getInstance().GetUser().getUserid();
+			  String userId		= DataController.getInstance().GetUser().getUser_id();
 			  String returnMsg = "";
 			  //0 업무배정받음
 			  //1 업무완료알림
