@@ -19,7 +19,6 @@
             authorities-by-username-query="select trim(m.user_id) as user_id, r.authority_name as role_name from users m join role r on m.user_id = r.user_id where m.user_id=?"
             users-by-username-query="select trim(user_id) as user_id, trim(password) as password, 1 enabled from users where user_id=?"
             data-source-ref="driverManagerDataSource" />
-            
          <security:password-encoder ref="bCryptPasswordEncoder" />
       </security:authentication-provider>
    </security:authentication-manager>

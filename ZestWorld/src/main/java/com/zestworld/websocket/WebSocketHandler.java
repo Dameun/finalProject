@@ -40,8 +40,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
-/*		  String alarmType = "";
-		  String taskTitle = "";*/
+		  String alarmType = "";
+		  String taskTitle = "";
 		  String[] alarmIdArr={};
 
 		  //alarmType+'/'+ taskTitle +'/'+selectId

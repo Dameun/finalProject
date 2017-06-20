@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="mytasklist" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		select * from task where userid=#{userid}  <!-- default= 작성자가 나인것  -->
+		select * from task where user_id=#{user_id}  <!-- default= 작성자가 나인것  -->
 		
 		<if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
 			and member=#{member}
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getUser_Id" resultType="String">
-		select userid from workspace_user
+		select user_id from workspace_user
 	</select>
 
 	<insert id="titleInsert" parameterType="com.zestworld.Table_DTO.Category_DTO">

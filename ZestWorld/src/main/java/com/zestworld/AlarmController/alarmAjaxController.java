@@ -70,7 +70,7 @@ public class alarmAjaxController {
 		  //않읽은 db로 저장하고  알람 카운트 올려주기 
 		  Alarm_DTO alarm = new Alarm_DTO();
 		  alarm.setAlarm_type(alarmType);
-		  alarm.setCheck_f("0");
+		  alarm.setCheck_f("N");
 		  alarm.setImg("img");
 		  alarm.setUser_id(writer);
 		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());
