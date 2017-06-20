@@ -14,6 +14,7 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 	<!-- ajax쓸 때 return 주소 설정하는 객체 -->
+	<context:component-scan base-package="com.zestworld.userStateService"/>
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	<context:component-scan base-package="com.zestworld.ajaxController" />

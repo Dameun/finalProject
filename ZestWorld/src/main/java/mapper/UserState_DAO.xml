@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zestworld.userStateDAO.IUserStateDAO">
+	<insert id="InsertUserState" parameterType="com.zestworld.Table_DTO.UserState_DTO">
+		INSERT INTO userState(user_id, workspace_id, state)
+	    VALUES( #{user_id}, #{workspace_id}, #{state})
+	</insert>
+	<select id="GetuserStateList" resultType="com.zestworld.Table_DTO.UserState_DTO">
+		select* from userState where workspace_id=#{workspace_id} 
+	</select>
+		<select id="GetuserState" resultType="com.zestworld.Table_DTO.UserState_DTO">
+		select * from userState where WORKSPACE_ID=#{param2} and USER_ID=#{param1}
+	</select>
+	<update id="UpdateUserState" parameterType="com.zestworld.Table_DTO.UserState_DTO">
+       update userState set state=#{state}  where workspace_id=#{workspace_id} and user_id=#{user_id}
+   </update>
+</mapper>

@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
+import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
+import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
 
 /*
@@ -33,6 +35,9 @@ public class AjaxViewController {
 
 	@Autowired
 	private OutlineService service;
+	
+	@Autowired
+	private UserStateService userstatesService;
 
 	public AjaxViewController() {
 	}
@@ -164,5 +169,24 @@ public class AjaxViewController {
 		model.addAttribute("projectList", projectList);
 		return DataController.getInstance().GetviewPath("home") + "CreateProject.jsp";
 	}
+
+	
+	@RequestMapping(value = "/userState.ajax", method = RequestMethod.GET)
+	public String userStateUpdate(String state) {
+		
+		String Str = "";
+		if( state.equals("01")) Str = "업무중";
+		if( state.equals("02")) Str = "외출중";
+		if( state.equals("03")) Str = "회의중";
+		if( state.equals("04")) Str = "식사중";
+		
+		UserState_DTO userState = new UserState_DTO();
+		userState.setUser_id(DataController.getInstance().GetUser().getUser_id());
+		userState.setState(Str);
+		userState.setWorkspace_id(DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
+		userstatesService.UpdateUserState(userState);
+		return DataController.getInstance().GetviewPath("home") + "sccess.jsp";
+	}
+	
 
 }

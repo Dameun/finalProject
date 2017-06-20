@@ -28,6 +28,7 @@
 	<context:component-scan base-package="com.zestworld.main" />
 	<context:component-scan base-package="com.zestworld.Join_Service" />
 	<context:component-scan base-package="com.zestworld.Join_Controller" />
+	<context:component-scan base-package="com.zestworld.userStateService"/>
 	<context:component-scan base-package="com.zestworld.workspaceController"/>
 
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
@@ -35,6 +36,7 @@
 	<context:component-scan base-package="com.zestworld.websocket" />
 	<context:component-scan base-package="com.zestworld.taskListController"/>
 	<context:component-scan base-package="com.zestworld.taskListService"/>
+	
 	
 	<beans:bean class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
 	

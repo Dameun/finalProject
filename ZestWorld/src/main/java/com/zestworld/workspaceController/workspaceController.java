@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Project_DTO;
+import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.WorkspaceUser_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
+import com.zestworld.userStateDAO.IUserStateDAO;
+import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
 import org.springframework.ui.Model;
 
@@ -28,7 +31,9 @@ public class workspaceController {
 	@Autowired
 	private JoinService service;
 	
-
+	@Autowired
+	private UserStateService userstateService;
+	
 	@RequestMapping("/workSpace.htm")
 	public String GetWorkSpace(Principal principal, Model model)
 	{	
@@ -62,6 +67,12 @@ public class workspaceController {
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Workspace_DTO workspace= taskDao.GetWorkSpace(Integer.parseInt(selectWorkspaceID));
 		DataController.getInstance().SetCurrentWorkspace(workspace);
+		
+		//data값 확인
+	/*	UserState_DTO SearchuserState= new UserState_DTO();
+		List<UserState_DTO> list= userstateService.GetuserStateList( workspace.getWorkspace_id());
+		System.out.println(SearchuserState.getState());*/
+		
 		//ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
 		//model.addAttribute("selectWorkspace", workspace);
 		//model.addAttribute("projectList", projectList);
@@ -92,10 +103,20 @@ public class workspaceController {
 		List<Workspace_DTO>workspaceList = new ArrayList<Workspace_DTO>();
 		workspaceList = DataController.getInstance().GetWorkspaceList();
 		model.addAttribute ("workspaceList", workspaceList);
+		UserStateCreate(workspace.getWorkspace_id(),DataController.getInstance().GetUser().getUser_id() );
 		return "home/workSpace";
 	}
 	
-	//�봽濡쒖젥�듃 �깮�꽦
+	//워크스페이스 생성시 상태테이블도 같이 생성 
+	private void UserStateCreate(int workspace_id, String user_id)
+	{
+		UserState_DTO userState = new UserState_DTO();
+		userState.setState("업무중");
+		userState.setUser_id(user_id);
+		userState.setWorkspace_id(workspace_id);
+		userstateService.InsertUserState(userState);
+	}
+
 
 
 }

@@ -10,21 +10,18 @@
  * */
 	function userState(userStateStr)
 	{
-
-		console.log('selectState:'+ selectState);
-		/*$.ajax({
+		$.ajax({
 			type:"get",
-			url: menuName,
+			url: "userState.ajax",
+			data : "state="+userStateStr,
 			success:function(data)
 			{
-			
-				$('#binContent').empty();
-				$('#binContent').append( $('#binContent').html(data)); 		
+				conselo.log("sccess");
 			},
 			
 			error:function(){
 				alert('error:' + menuName);
 			},
-		});	*/
+		});	
 	}
 
