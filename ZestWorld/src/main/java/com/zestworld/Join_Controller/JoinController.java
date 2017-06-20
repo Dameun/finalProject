@@ -1,11 +1,14 @@
 package com.zestworld.Join_Controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -16,15 +19,19 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Role_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.emailDTO.Email_DTO;
+import com.zestworld.util.DataController;
 
 @Controller
 public class JoinController {
@@ -149,13 +156,25 @@ public class JoinController {
          }
      }
      
-     
-     
-     
+/* @RequestMapping("joinEdit.htm")
+ 	public String GetUser(Model model) throws ClassNotFoundException, SQLException {
+
+ 		Users_DTO users = DataController.getInstance().GetUser();
+ 		model.addAttribute("member", users);
+
+ 		return "home/joinEdit";
+ 	}*/
      @RequestMapping(value = "/updateUser.htm", method = RequestMethod.POST)
-     public String update(@RequestParam Map<String, Object> paramMap,Users_DTO member,HttpServletRequest request, ModelAndView mav) throws ClassNotFoundException, SQLException, IOException {
+     public ModelAndView update(@RequestParam Map<String, Object> paramMap,Users_DTO member,HttpServletRequest request, ModelAndView mav,Model model) throws ClassNotFoundException, SQLException, IOException {
   	   String viewpage = "";
-         String filename = member.getFile().getOriginalFilename();
+       String filename = member.getFile().getOriginalFilename();
+  	 /* String filename = (String) paramMap.get("file");
+        String base64Image = filename.split(",")[1];
+         byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
+         
+
+         BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageBytes));
+       */
          System.out.println(filename);
          String path = request.getServletContext().getRealPath("upload");
 
@@ -165,26 +184,33 @@ public class JoinController {
          fs.close();
    
   	   
-  	   String password=(String) paramMap.get("password");
+  	     String password=(String) paramMap.get("password");
          String phone=(String) paramMap.get("phone");
          System.out.println(password);
          System.out.println(phone);
          Users_DTO updateMember = new Users_DTO();
-         updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
-         updateMember.setUser_id(member.getUser_id());
-         updateMember.setPhone(member.getPhone());
          updateMember.setImg(filename);
+         updateMember.setUser_id(member.getUser_id());
+         updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
+        
+         updateMember.setPhone(member.getPhone());
+         
          System.out.println("1111");
          int result = service.updateUser(updateMember);
   	    if(result !=0){
-  	    	
-  			return "";
+  	    	 
+  	    	mav= new ModelAndView("redirect:home.");//성공시
+	         return mav;
+	            
   		}else{
-  			return "";
+  			mav= new ModelAndView("redirect:home.main");//성공시
+	         return mav;
   		}
+	
 
        
      }
+
 
 }
 

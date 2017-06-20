@@ -82,7 +82,8 @@
       var element = this.$element
 
       reader.onload = function(re) {
-        var $img = $('<img>')
+        var $img = $('<img id="myImg">')
+        
         $img[0].src = re.target.result
         files[0].result = re.target.result
         
@@ -95,6 +96,7 @@
         element.addClass('fileinput-exists').removeClass('fileinput-new')
 
         element.trigger('change.bs.fileinput', files)
+     
       }
 
       reader.readAsDataURL(file)
