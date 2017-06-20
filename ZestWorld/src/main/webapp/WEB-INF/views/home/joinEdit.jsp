@@ -43,21 +43,20 @@
 
 <script type="text/javascript">
 
-
-/* function Edit()
+/*  function Edit()
 {
 	var imgSrc = $("#myImg").attr("src")
 	
 	
 	console.log(imgSrc); // Outputs: "Hello World!"
 	
-	alert($("#exampleInputEmail1").val()+ btoa(imgSrc)+$("#pswd").val()+$("#name").val()+$("#phone").val());
+	alert($("#exampleInputEmail1").val()+ atob(imgSrc)+$("#pswd").val()+$("#name").val()+$("#phone").val());
 	
 	$.ajax({
 		type:"post",
 		url:"updateUser.htm",
 		data: { "user_id"   : $("#exampleInputEmail1").val(),
-			    "file"     : imgSrc,
+			    "file"     : atob(imgSrc),
 			    "password" : $("#pswd").val(),
 			    "name"     : $("#name").val(),
 			    "phone"    : $("#phone").val()
@@ -78,8 +77,8 @@
 		}
 		
 	});
-}  
- */
+}   */
+ 
 </script>
 </head>
 
@@ -97,7 +96,7 @@
             <div class="widget-body">
               
              <c:url value="/updateUser.htm" var="loginURL" /> 
-               <form action="${loginURL}" method="post" id="userEdit"enctype="multipart/form-data">
+               <form action="${loginURL}"method="post" id="userEdit"enctype="multipart/form-data">
               <div class="form-group" style="text-align:center;">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div id="fileinput"class="fileinput-new thumbnail" style="width: 200px; height: 150px;">

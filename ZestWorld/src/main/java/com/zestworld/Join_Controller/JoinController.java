@@ -156,16 +156,16 @@ public class JoinController {
          }
      }
      
-     @RequestMapping("joinEdit.htm")
+/* @RequestMapping("joinEdit.htm")
  	public String GetUser(Model model) throws ClassNotFoundException, SQLException {
 
  		Users_DTO users = DataController.getInstance().GetUser();
  		model.addAttribute("member", users);
 
  		return "home/joinEdit";
- 	}
+ 	}*/
      @RequestMapping(value = "/updateUser.htm", method = RequestMethod.POST)
-     public ModelAndView update(@RequestParam Map<String, Object> paramMap,Users_DTO member,HttpServletRequest request, ModelAndView mav) throws ClassNotFoundException, SQLException, IOException {
+     public ModelAndView update(@RequestParam Map<String, Object> paramMap,Users_DTO member,HttpServletRequest request, ModelAndView mav,Model model) throws ClassNotFoundException, SQLException, IOException {
   	   String viewpage = "";
        String filename = member.getFile().getOriginalFilename();
   	 /* String filename = (String) paramMap.get("file");
@@ -198,13 +198,15 @@ public class JoinController {
          System.out.println("1111");
          int result = service.updateUser(updateMember);
   	    if(result !=0){
-  	    	
-  	    	mav=new ModelAndView("redirect:/joinEdit.htm");//실패시
-            return mav;
+  	    	 
+  	    	mav= new ModelAndView("redirect:home.");//성공시
+	         return mav;
+	            
   		}else{
-  			mav=new ModelAndView("redirect:/joinEdit.htm");//실패시
-            return mav;
+  			mav= new ModelAndView("redirect:home.main");//성공시
+	         return mav;
   		}
+	
 
        
      }
