@@ -6,6 +6,9 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
+
+<script type="text/javascript" src="./resource/Js/userState.js"> </script> 
+
            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
@@ -29,18 +32,18 @@
                                     <strong>User STATE :D</strong>
                                 </div>
                                 <div class="btn-group btn-group-sm btn-group-justified" id="notifications-toggle" data-toggle="buttons">
-                                    <label class="btn btn-default active">
+                                    <label class="btn btn-default active" onclick="userState('01');">
                                         <!-- ajax-load plugin in action. setting data-ajax-load & data-ajax-target is the
                                              only requirement for async reloading -->
-                                        <input type="radio" checked="" data-ajax-trigger="change" data-ajax-load="demo/ajax/notifications.html" data-ajax-target="#notifications-list"> 업무
+                                        <input type="radio" checked = ""  data-ajax-trigger="change" data-ajax-load="demo/ajax/notifications.html" data-ajax-target="#notifications-list"> 업무
                                     </label>
-                                    <label class="btn btn-default">
+                                    <label class="btn btn-default" onclick="userState('02');">
                                         <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/messages.html" data-ajax-target="#notifications-list"> 외출
                                     </label>
-                                    <label class="btn btn-default">
+                                    <label class="btn btn-default" onclick="userState('03');">
                                         <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/progress.html" data-ajax-target="#notifications-list"> 회의
                                     </label>
-                                     <label class="btn btn-default">
+                                     <label class="btn btn-default" onclick="userState('04');" >
                                         <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/progress.html" data-ajax-target="#notifications-list"> 식사
                                     </label>
                                 </div>
