@@ -49,11 +49,11 @@
                     <!-- shown on xs & sm screen. collapses and expands navigation -->
                     <a class="visible-sm visible-xs" id="nav-collapse-toggle" href="#" title="" data-placement="bottom" data-original-title="Show/hide sidebar">
                         <span class="rounded rounded-lg bg-gray text-white visible-xs"><i class="fa fa-bars fa-lg"></i></span>
-                        <i class="fa fa-bars fa-lg hidden-xs"></i>
+                        <i class="fa fa-bars fa-lg hidden-xs" style="padding-top:5px;"></i>
                     </a>
                 </li>
-                <li class="ml-sm mr-n-xs hidden-xs"><a href="#"><i class="fa fa-refresh fa-lg"></i></a></li>
-                <li class="ml-n-xs hidden-xs"><a href="#"><i class="fa fa-times fa-lg"></i></a></li>
+              <li class="ml-sm mr-n-xs hidden-xs"><a href="#"><i class="fa fa-refresh fa-lg"  style="padding-top:5px;"></i></a></li>
+                <li class="ml-n-xs hidden-xs"><a href="#"><i class="fa fa-times fa-lg"  style="padding-top:2px;"></i></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right visible-xs">
                 <li>
@@ -63,22 +63,13 @@
                     </a>
                 </li>
             </ul>
-            <!-- xs & sm screen logo -->
-            <a class="navbar-brand visible-xs" href="index.html">
-                <i class="fa fa-circle text-gray mr-n-sm"></i>
-                <i class="fa fa-circle text-warning"></i>
-                &nbsp;
-                sing
-                &nbsp;
-                <i class="fa fa-circle text-warning mr-n-sm"></i>
-                <i class="fa fa-circle text-gray"></i>
-            </a>
+         
         </div>
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
             <!-- search form! link it to your search server -->
-            <form class="navbar-form navbar-left" role="search">
+         <!--    <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <div class="input-group input-group-no-border">
                     <span class="input-group-addon">
@@ -88,7 +79,7 @@
                     </div>
                 </div>
             </form>
-          
+           -->
             <div id="alarm">
   
             </div>

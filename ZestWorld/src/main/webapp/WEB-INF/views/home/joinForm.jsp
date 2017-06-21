@@ -119,12 +119,12 @@
 						class="fa fa-circle text-warning"></i>
 				</h5>
 				<section class="widget widget-login animated fadeInUp"> <header>
-				<h3>Welcome to the ZestWorld</h3>
+				<h3>Welcome to ZestWorld</h3>
 				</header>
 				<div class="widget-body">
 					<c:url value="" var="loginURL" />
 					<%-- <form name="f" action="${loginURL}" method="post" class="login-form mt-lg"> --%>
-					<form action="${loginURL}" method="post">
+					<form action="${loginURL}" method="post" class="login-form mt-lg">
 						<!-- 이메일 -->
 						<div class="form-group">
 							<input type="text" name="user_id" class="form-control"
@@ -143,20 +143,21 @@
 						<!-- 폰번호 -->
 						<div class="form-group">
 							<input name="phone" class="form-control" id="pswd" type="text"
-								placeholder="핸드폰'-'빼고입력해주세요">
+								placeholder="Phone'-'빼고입력해주세요">
 						</div>
 						<div class="clearfix">
 							<!-- 사진 업로드 -->
-							<input type="file" id="input_file" /> <br /> <img
-								id="img_preview" style="display: none;" />
+							<!-- <input type="file" id="input_file" /> <br /> <img
+								id="img_preview" style="display: none;" /> -->
 
 
 							<!-- 회원가입  -->
-							<button type="button" class="btn btn-default btn-sm"
-								onclick="location.href='index.htm' ">로그인페이지 이동</button>
-							<button type="submit" class="btn btn-default btn-sm">가입</button>
+							<button type="button" class="btn btn-secondary btn-sm"
+								onclick="location.href='index.htm' ">Cancel</button>
+							<button type="submit" class="btn btn-inverse btn-sm">Sign up</button>
 							<!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
 						</div>
+						</form>
 				</div>
 				<div class="row">
 					<div class="col-sm-6 col-sm-push-6">
@@ -164,9 +165,10 @@
 
 					</div>
 
-					</form>
 
 				</div>
+
+				</section>
 			</div>
 
 			</section>
