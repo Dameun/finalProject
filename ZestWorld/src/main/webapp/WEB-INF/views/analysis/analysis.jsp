@@ -180,12 +180,12 @@
       
       function drawChart_bar() {
     	  
-    	  var result = new Array();
+    	  var categoryTitle = new Array();
     	  var str;
-    	  <c:forEach items="${getTaskAllFlow_comp}" var ="category">
+    	  <c:forEach items="${getTaskAllFlow_comp}" var ="categoryTitle">
     	  		var json = new Object();
-    	  		json =  "${category.title}";
-	    	  	result.push(json);
+    	  		json =  "${categoryTitle.title}";
+    	  		categoryTitle.push(json);
     	  </c:forEach>
     	  //alert( ${getTaskAllFlow_comp_task} );
     	  
@@ -219,11 +219,11 @@
 	  	  </c:forEach>	  	  
     	  
     	  
-   	   var dataArray = [['업무'          ,   '완료됨'           ,   '마감일 지남'      ,   '계획됨'   ,   '마감일 없음'           ,   ]];
+   	   var dataArray = [['업무'          ,   '완료됨'           ,   '진행중'      ,   '마감일 지남'   ,   '마감일 없음'           ,   ]];
 
-       for (var n =0; n < result.length; n++)
+       for (var n =0; n < categoryTitle.length; n++)
        {
-         	 dataArray.push ([result[n]  ,   compCount[n]    , endLateCount[n] ,   endNoCount[n]       ,   ingCount[n]    ,     ])
+         	 dataArray.push ([categoryTitle[n] , compCount[n] , ingCount[n] , endLateCount[n] , endNoCount[n] , ])
         }
 
        var data = new google.visualization.arrayToDataTable(dataArray); 
