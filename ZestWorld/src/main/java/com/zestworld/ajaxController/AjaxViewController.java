@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zestworld.AnalysisService.AnalysisService;
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
+import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
@@ -100,11 +102,143 @@ public class AjaxViewController {
 	public String file() {
 		return DataController.getInstance().GetviewPath("file") + "file.jsp";
 	}
+	
+	
 
-	@RequestMapping(value = "/analysis.ajax", method = RequestMethod.GET)
-	public String analysis() {
-		return DataController.getInstance().GetviewPath("analysis") + "analysis.jsp";
+	@Autowired
+	private AnalysisService analysisService;
+	//나에게 배정된 도넛차트_01
+	int getTaskMe_comp;
+	int getTaskMe_enddateLate;
+	int getTaskMe_enddateNo;
+	int getTaskMe_ing;
+	//나에게 배정된 도넛차트_02
+	int getTaskI_comp;
+	int getTaskI_enddateLate;
+	int getTaskI_enddateNo;
+	int getTaskI_ing;
+	//나에게 배정된 도넛차트_03
+	int getTaskFollow_comp;
+	int getTaskFollow_enddateLate;
+	int getTaskFollow_enddateNo;
+	int getTaskFollow_ing;
+	//바차트
+	List<Task_DTO> getTaskAllFlow_comp = new ArrayList<Task_DTO>();
+	List<Task_DTO> getTaskAllFlow_comp_count ;
+	List<Task_DTO> getTaskAllFlow_enddateLate_count= new ArrayList<Task_DTO>();
+	List<Task_DTO> getTaskAllFlow_enddateNo_count= new ArrayList<Task_DTO>();
+	List<Task_DTO> getTaskAllFlow_ing_count= new ArrayList<Task_DTO>();
+	 
+	@RequestMapping(value="/analysis.ajax", method=RequestMethod.GET)
+	public String analysis(Model model) throws ClassNotFoundException, SQLException
+	{	
+		
+		String user_id = DataController.getInstance().GetUser().getUser_id(); 
+		System.out.println("!! @@ userid @@ !!"+user_id);
+		Task_DTO dto = new Task_DTO();
+		Users_DTO dto2 = new Users_DTO();
+		
+		dto.setUser_id(user_id);
+		donutChart_01(user_id);
+		donutChart_02(user_id);
+		donutChart_03(user_id);
+		barChart();
+		
+		/*List<Users_DTO> getMemberListMe = analysisService.getMemberListMe(dto);
+		System.out.println("getMemberListMe : " + getMemberListMe);*/
+		/*String getTitle = analysisService.getTitle(dto2.getTitle());
+		
+		model.addAttribute("getTitle" , getTitle);*/
+		/*String getTaskAllFlow_taskName = analysisService.getTaskAllFlow_taskName(dto);
+		System.out.println("getTaskAllFlow_taskName :" + getTaskAllFlow_taskName);*/
+		
+
+		model.addAttribute("getTaskMe_comp", getTaskMe_comp);
+		model.addAttribute("getTaskMe_enddateLate", getTaskMe_enddateLate);
+		model.addAttribute("getTaskMe_enddateNo", getTaskMe_enddateNo);
+		model.addAttribute("getTaskMe_ing", getTaskMe_ing);
+		
+		model.addAttribute("getTaskI_comp", getTaskI_comp);
+		model.addAttribute("getTaskI_enddateLate", getTaskI_enddateLate);
+		model.addAttribute("getTaskI_enddateNo", getTaskI_enddateNo);
+		model.addAttribute("getTaskI_ing", getTaskI_ing);
+		
+		model.addAttribute("getTaskFollow_comp", getTaskFollow_comp);
+		model.addAttribute("getTaskFollow_enddateLate", getTaskFollow_enddateLate);
+		model.addAttribute("getTaskFollow_enddateNo", getTaskFollow_enddateNo);
+		model.addAttribute("getTaskFollow_ing", getTaskFollow_ing);
+		
+		model.addAttribute("getTaskAllFlow_comp", getTaskAllFlow_comp );
+		model.addAttribute("getTaskAllFlow_comp_count", getTaskAllFlow_comp_count);
+		
+		model.addAttribute("getTaskAllFlow_enddateLate_count", getTaskAllFlow_enddateLate_count);
+		model.addAttribute("getTaskAllFlow_enddateNo_count", getTaskAllFlow_enddateNo_count);
+		model.addAttribute("getTaskAllFlow_ing_count", getTaskAllFlow_ing_count);
+		/*model.addAttribute("getMemberListMe", getMemberListMe);*/
+		
+		/*ArrayList<String> list = new ArrayList<String>();
+		list.add("5");
+		list.add("2");*/
+		/*int[] catagoryArr = {1,1};
+		int[] task_Complete = {2,3};
+		int[] task_unComplete = {1,3};
+		int[] task_noneDate = {5,3};*/
+		/*model.addAttribute("catagoryArr", list);
+		model.addAttribute("task_Complete", list);
+		model.addAttribute("task_unComplete", list);
+		model.addAttribute("task_noneDate", list);*/
+
+		/*model.addAttribute("getTaskAllFlow_taskName", getTaskAllFlow_taskName);*/
+		
+		return DataController.getInstance().GetviewPath("analysis")+"analysis.jsp";
+	}	
+	
+	private void donutChart_01(String user_id) throws ClassNotFoundException, SQLException
+	{
+		Task_DTO dto = new Task_DTO();
+		dto.setUser_id(user_id);
+ 
+		getTaskMe_comp = analysisService.getTaskMe_comp(dto);
+	    getTaskMe_enddateLate = analysisService.getTaskMe_enddateLate(dto);
+		getTaskMe_enddateNo = analysisService.getTaskMe_enddateNo(dto);
+		getTaskMe_ing = analysisService.getTaskMe_ing(dto);
 	}
+	
+	private void donutChart_02(String user_id) throws ClassNotFoundException, SQLException
+	{
+		Task_DTO dto = new Task_DTO();
+		dto.setUser_id(user_id);
+	
+		 getTaskI_comp = analysisService.getTaskI_comp(dto);
+		 getTaskI_enddateLate = analysisService.getTaskI_enddateLate(dto);
+		 getTaskI_enddateNo = analysisService.getTaskI_enddateNo(dto);
+		 getTaskI_ing = analysisService.getTaskI_ing(dto);
+	}
+	
+	
+	private void donutChart_03(String user_id) throws ClassNotFoundException, SQLException
+	{
+		 Task_DTO dto = new Task_DTO();
+		 dto.setUser_id(user_id);
+	
+		 getTaskFollow_comp = analysisService.getTaskFollow_comp(dto);
+		 getTaskFollow_enddateLate = analysisService.getTaskFollow_enddateLate(dto);
+		 getTaskFollow_enddateNo = analysisService.getTaskFollow_enddateNo(dto);
+		 getTaskFollow_ing = analysisService.getTaskFollow_ing(dto);
+	}
+
+	
+	private void barChart()throws ClassNotFoundException, SQLException
+	{
+		getTaskAllFlow_comp = analysisService.getTaskAllFlow_comp();
+		getTaskAllFlow_comp_count = analysisService.getTaskAllFlow_comp_count();
+		
+		getTaskAllFlow_enddateLate_count = analysisService.getTaskAllFlow_enddateLate_count();
+		getTaskAllFlow_enddateNo_count = analysisService.getTaskAllFlow_enddateNo_count();
+		getTaskAllFlow_ing_count = analysisService.getTaskAllFlow_ing_count();
+	}
+	
+	
 
 	@RequestMapping(value = "/template.ajax", method = RequestMethod.GET)
 	public String template() {
