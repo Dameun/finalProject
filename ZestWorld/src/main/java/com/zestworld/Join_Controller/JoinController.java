@@ -184,6 +184,7 @@ public class JoinController {
 		System.out.println(phone);
 		Users_DTO updateMember = new Users_DTO();
 		updateMember.setUser_id(member.getUser_id());
+		updateMember.setName(member.getName());
 		updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
 		updateMember.setImg(filename);
 		updateMember.setPhone(member.getPhone());
