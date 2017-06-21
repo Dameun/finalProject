@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zestworld.AnalysisDAO.AnalysisDAO">
+
+	<!-- 전체 업무 - 전체 업무 -->
+	<select id="getTaskAll" resultType="int">
+		select count(*) from task 
+	</select>
+	
+	<!-- 전체 업무 - 완료된 업무 -->
+	<select id="getTaskAll_comp" resultType="int">
+		select count(*) from task where success_f = 1
+	</select>
+	
+	<!-- 전체 업무 - 마감일지난 업무 -->
+	<select id="getTaskAll_enddateLate" resultType="int">
+		select count(*) from task where end_date <![CDATA[< sysdate]]>
+	</select>
+	
+	<!-- 전체 업무 - 마감일없는 업무 -->
+	<select id="getTaskAll_enddateNo" resultType="int">
+		select count(*) from task where end_date is null
+	</select>
+	 
+	 <!-- 전체 업무 - 진행중인 업무 -->
+	<select id="getTaskAll_ing" resultType="int">
+		select count(*) from task where start_date <![CDATA[<= sysdate]]>
+	</select>
+	
+	
+	
+	<!-- 나에게 배정된 업무 - 완료된 업무 -->
+	<select id="getTaskMe_comp" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where success_f = 1 and member = #{user_id}
+	</select>
+	
+	 <!-- 나에게 배정된 업무 - 마감일지난 업무 -->
+	<select id="getTaskMe_enddateLate" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where end_date <![CDATA[< sysdate]]> and member = #{user_id}
+	</select>
+	
+	<!-- 나에게 배정된 업무 - 마감일없는 업무 -->
+	<select id="getTaskMe_enddateNo" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where end_date is null and member = #{user_id}
+	</select>
+	
+	<!-- 나에게 배정된 업무 - 진행중인 업무 -->
+	<select id="getTaskMe_ing" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where start_date <![CDATA[<= sysdate]]> and member = #{user_id}
+	</select>
+	
+	
+	
+	<!-- 내가 작성한 업무 - 완료된 업무 -->
+	<select id="getTaskI_comp" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where success_f = 1 and user_id = #{user_id}
+	</select>
+	
+	<!-- 내가 작성한 업무 - 마감일지난 업무 -->
+	<select id="getTaskI_enddateLate" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where end_date <![CDATA[< sysdate]]> and user_id = #{user_id}
+	</select>
+	
+	<!-- 내가 작성한 업무 - 마감일없는 업무 -->
+	<select id="getTaskI_enddateNo" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where end_date is null and user_id = #{user_id}
+	</select>
+	 
+	<!-- 내가 작성한 업무 - 진행중인 업무 -->
+	<select id="getTaskI_ing" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where start_date <![CDATA[<= sysdate]]> and user_id = #{user_id}
+	</select>
+	
+	
+	
+	<!-- 내가 팔로우 업무 - 완료된 업무 -->
+	<select id="getTaskFollow_comp" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where success_f = 1 and follower = #{user_id}
+	</select>
+	
+	<!-- 내가 팔로우 업무 - 마감일지난 업무 -->
+	<select id="getTaskFollow_enddateLate" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where end_date <![CDATA[< sysdate]]> and follower = #{user_id}
+	</select>
+	
+	<!-- 내가 팔로우 업무 - 마감일없는 업무 -->
+	<select id="getTaskFollow_enddateNo" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where end_date is null and follower = #{user_id}
+	</select>
+	 
+	<!-- 내가 팔로우 업무 - 진행중인 업무 -->
+	<select id="getTaskFollow_ing" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select count(*) from task where start_date <![CDATA[<= sysdate]]> and follower = #{user_id}
+	</select>
+	
+	
+	
+	
+	
+	<!-- 전체 업무 흐름 - 카테고리 아이디 -->
+	<select id="getTitle" resultType="com.zestworld.Table_DTO.Category_DTO" >
+		select title from category  
+	</select>
+	
+	
+	
+	
+	<!-- 전체 업무 흐름 - 업무명 -->
+	<!-- <select id="getTaskAllFlow_taskName" resultType="com.zestworld.Table_DTO.Task_DTO" >
+		
+		select title from task where success_f = 1
+		
+	</select>  -->
+	
+	
+	<!-- 전체 업무 흐름 - 완료된 업무 -->
+	<select id="getTaskAllFlow_comp" resultType="com.zestworld.Table_DTO.Task_DTO" >
+		select c.title , count( success_f )
+		from category c inner join task t
+		on c. category_id = t.category_id
+		where t.success_f = 1 
+		group by c.title
+		
+		
+		
+	</select>
+	
+	<select id="getTaskAllFlow_comp_count" resultType="int" >
+		select count( success_f )
+		from category c inner join task t
+		on c. category_id = t.category_id
+		where t.success_f = 1 
+		group by c.title
+	
+	</select>
+	
+	<!-- 전체 업무 흐름 - 마감일지난 업무 -->
+	<select id="getTaskAllFlow_enddateLate_count" resultType="int">
+		select count( end_date )
+		from category c inner join task t
+		on c. category_id = t.category_id
+		where t.end_date <![CDATA[< sysdate]]>
+		group by c.title
+		
+	</select>
+	
+	<!-- 전체 업무 흐름 - 마감일없는 업무 -->
+	<select id="getTaskAllFlow_enddateNo_count" resultType="int">
+		select count( end_date )
+		from category c inner join task t
+		on c. category_id = t.category_id
+		where t.end_date is null
+		group by c.title
+		
+	</select>
+	 
+	 <!-- 전체 업무 흐름 - 진행중인 업무 -->
+	<select id="getTaskAllFlow_ing_count" resultType="int">
+		select count( start_date )
+		from category c inner join task t
+		on c. category_id = t.category_id
+		where t.start_date <![CDATA[<= sysdate]]>
+		group by c.title
+		
+	</select>
+	
+	
+	<select id="getMemberListMe" resultType="com.zestworld.Table_DTO.Users_DTO">
+		select distinct u.name
+		from task t inner join users u
+		on t.user_id = u.user_id
+		where t.user_id = #{user_id}
+		
+	</select>
+	
+	     
+</mapper>
+
+

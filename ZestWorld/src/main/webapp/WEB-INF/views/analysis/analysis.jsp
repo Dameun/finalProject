@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,11 +9,15 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    
     <script type="text/javascript">
 
       google.charts.load('current', {'packages':['corechart', 'table']});
@@ -23,15 +28,19 @@
       google.charts.setOnLoadCallback(drawChart_follow);
       google.charts.setOnLoadCallback(drawChart_bar);
       google.charts.setOnLoadCallback(drawChart_Curve);
-
+	  
+      
       
       $( function() {
+    	  
+    	  
+    	  
     	    var dateFormat = "mm/dd/yy",
     	      from = $( "#from" )
     	        .datepicker({
     	          defaultDate: "+1w",
     	          changeMonth: true,
-    	          numberOfMonths: 3
+    	          numberOfMonths: 1
     	        })
     	        .on( "change", function() {
     	          to.datepicker( "option", "minDate", getDate( this ) );
@@ -39,7 +48,7 @@
     	      to = $( "#to" ).datepicker({
     	        defaultDate: "+1w",
     	        changeMonth: true,
-    	        numberOfMonths: 3
+    	        numberOfMonths: 1
     	      })
     	      .on( "change", function() {
     	        from.datepicker( "option", "maxDate", getDate( this ) );
@@ -66,13 +75,14 @@
           data.addColumn('number', '남은 업무');
           data.addColumn('boolean', '완료 유무');
           data.addRows([
+        	  
             ['장윤희' ,{v: 10, f: '10'}, {v: 8, f: '8'}, {v: 2, f: '2'}, true],
             ['최담은' ,{v: 5, f: '5'}, {v: 3, f: '3'}, {v: 2, f: '2'}, false],
             ['양건휘' ,{v: 3, f: '3'}, {v: 1, f: '1'}, {v: 2, f: '2'}, true],
             ['김민성' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
             ['백준선' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
             ['이은경' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
-            ['황이준' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true]
+            ['${getMemberListMe}' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true]
             
           ]);
 
@@ -82,6 +92,8 @@
         }
        
       
+    
+      
       
       function drawChart_me() {
 
@@ -89,10 +101,10 @@
         data.addColumn('string', '업무상태');
         data.addColumn('number', '업무개수');
         data.addRows([
-          ['완료됨', 3],
-          ['마감일 지남', 1],
-          ['계획됨', 1],
-          ['마감일 없음', 1],
+        	['완료됨', ${getTaskMe_comp}],  
+            ['마감일 지남', ${getTaskMe_enddateLate}],
+            ['계획됨', ${getTaskMe_ing}],
+            ['마감일 없음', ${getTaskMe_enddateNo}], 
           
         ]);
         
@@ -111,15 +123,16 @@
       
       
       function drawChart_i() {
-
+		  
+ 
           var data = new google.visualization.DataTable();
           data.addColumn('string', '업무상태');
           data.addColumn('number', '업무개수');
           data.addRows([
-            ['완료됨', 5],
-            ['마감일 지남', 0],
-            ['계획됨', 2],
-            ['마감일 없음', 3],
+        	  ['완료됨',  ${getTaskI_comp}],
+              ['마감일 지남', ${getTaskI_enddateLate}],
+              ['계획됨', ${getTaskI_ing}],
+              ['마감일 없음', ${getTaskI_enddateNo}],
             
           ]);
           
@@ -143,10 +156,10 @@
           data.addColumn('string', '업무상태');
           data.addColumn('number', '업무개수');
           data.addRows([
-            ['완료됨', 1],
-            ['마감일 지남', 2],
-            ['계획됨', 4],
-            ['마감일 없음', 2],
+        	  ['완료됨', ${getTaskFollow_comp}],
+              ['마감일 지남', ${getTaskFollow_enddateLate}],
+              ['계획됨', ${getTaskFollow_ing}],
+              ['마감일 없음', ${getTaskFollow_enddateNo}],
             
           ]);
           
@@ -164,19 +177,70 @@
   	  }
       
       
+      
       function drawChart_bar() {
     	  
-     
-      var data = google.visualization.arrayToDataTable([
-          ['Genre', '완료됨', '마감일 지남', '계획됨',
-           '마감일 없음', { role: 'annotation' } ],
-          ['spring', 5, 2, 0, 1,  ''],
-          ['안드로이드', 1, 1, 2, 3,  ''],
-          ['QR', 2, 1, 4, 1,  ''],
-          ['요구사항', 3, 5, 1, 1, '']
-        ]);
+    	  var result = new Array();
+    	  var str;
+    	  <c:forEach items="${getTaskAllFlow_comp}" var ="category">
+    	  		var json = new Object();
+    	  		json =  "${category.title}";
+	    	  	result.push(json);
+    	  </c:forEach>
+    	  //alert( ${getTaskAllFlow_comp_task} );
+    	  
+    	  var compCount = new Array();
+    	  <c:forEach items="${getTaskAllFlow_comp_count}" var ="compCount">
+    	  		var json = new Object();
+	  			json =  ${compCount};
+	  			compCount.push(json);
+	  	  </c:forEach>    	  
+    	  
+    	  
+    	  var endLateCount = new Array();
+    	  <c:forEach items="${getTaskAllFlow_enddateLate_count}" var ="endLateCount">
+    	  		var json = new Object();
+	  			json =  ${endLateCount};
+  	  			endLateCount.push(json);
+	  	  </c:forEach>
+	  	  
+    	  var endNoCount = new Array();
+    	  <c:forEach items="${getTaskAllFlow_enddateNo_count}" var ="endNoCount">
+    	  		var json = new Object();
+	  			json =  ${endNoCount};
+	  			endNoCount.push(json);
+	  	  </c:forEach>
+	  	  
+    	  var ingCount = new Array();
+    	  <c:forEach items="${getTaskAllFlow_ing_count}" var ="ingCount">
+    	  		var json = new Object();
+	  			json =  ${ingCount};
+	  			ingCount.push(json);
+	  	  </c:forEach>	  	  
+    	  
+    	  
+   	   var dataArray = [['업무'          ,   '완료됨'           ,   '마감일 지남'      ,   '계획됨'   ,   '마감일 없음'           ,   ]];
+
+       for (var n =0; n < result.length; n++)
+       {
+         	 dataArray.push ([result[n]  ,   compCount[n]    , endLateCount[n] ,   endNoCount[n]       ,   ingCount[n]    ,     ])
+        }
+
+       var data = new google.visualization.arrayToDataTable(dataArray); 
+
+      
+      /*var data = google.visualization.arrayToDataTable(dataArray);/*([
+          ['Genre', '완료됨', '마감일 지남', '계획됨', '마감일 없음', { role: 'annotation' } ],
+          
+          ['스프링' , 2 , 3, 4, 5, ''],
+          
         
-        var options = {
+		]);*/
+        
+      
+      
+      
+         var options = {
         		
         		title: '전체 업무리스트 개요' ,
                 isStacked: 'percent',
@@ -189,8 +253,8 @@
               };
         
         var chart = new google.visualization.BarChart(document.getElementById("barchart"));
-        chart.draw(data, options);
-      
+        chart.draw(data, options); 
+    	
       }
       
               
@@ -215,6 +279,8 @@
 
             chart.draw(data, options);
           }
+        
+
         
 </script>
 </head>
@@ -249,9 +315,18 @@
 			<input type="text" id="to" name="to">
 			&nbsp&nbsp&nbsp&nbsp
 			<button type="button" class="btn btn-primary btn-sm">추가</button>
+			
+			<%-- <c:forEach items="${getTaskAllFlow_comp}"  var="n">
+				${n.categorytitle}
+			</c:forEach> --%>
+        	
+			<%-- for(List i = ${getTaskAllFlow_comp} ){
+    	  ${i.categorytitle}
+      		} --%>
 		</tr>
 	</table>
-	
+					
+        	
 	<br>
 	<!-- 테이블 차트 -->
 	<div id="table_div" style="width: 1350px; height: 200px;"></div>
@@ -265,7 +340,14 @@
       </tr>
     </table>
     <br>
-    
+    <%-- <c:forEach items="${getTaskAllFlow_comp}"  var="n">
+				${n.categorytitle} 
+	</c:forEach>
+	
+	<c:forEach items="${getMemberListMe}"  var="n">
+				${n} 
+	</c:forEach> --%>
+
     <table class="columns">
     	<tr>
     		<div id="barchart" style="width: 1300px; height: 100px;"></div>
