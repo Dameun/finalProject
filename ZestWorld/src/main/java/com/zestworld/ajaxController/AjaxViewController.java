@@ -134,7 +134,7 @@ public class AjaxViewController {
 	{	
 		
 		String user_id = DataController.getInstance().GetUser().getUser_id(); 
-		System.out.println("!! @@ userid @@ !!"+user_id);
+		System.out.println("!! @@ user_id @@ !!"+ user_id);
 		Task_DTO dto = new Task_DTO();
 		Users_DTO dto2 = new Users_DTO();
 		
