@@ -1,16 +1,16 @@
 package com.zestworld.Table_DTO;
 
 public class CheckList_DTO {
-	private int check__id;
+	private int check_id;
 	private int task_id;
 	private String contents;
 	private int success_f;
 	
-	public int getCheck__id() {
-		return check__id;
+	public int getCheck_id() {
+		return check_id;
 	}
-	public void setCheck__id(int check__id) {
-		this.check__id = check__id;
+	public void setCheck_id(int check_id) {
+		this.check_id = check_id;
 	}
 	public int getTask_id() {
 		return task_id;

@@ -1,21 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css">
 
 	<div class="modal fade" id = "detailModal" role="dialog">
 	<div class="modal-dialog modal-lg">
 	     	 <div class="modal-content">
     <section class="widget">
         <header>
-            <h5>
-                <span class="fw-semi-bold">업무 제목</span>
-                <small>No JS needed to tune-up</small>
-            </h5>
+            <h4>
+            	<input type="checkbox" id="modal_successF" class="modal_successF" onclick="modalChangeSuccessF();" data-dismiss="modal">
+                <span class="fw-semi-bold" id="span1">
+                	<!--  <input type="text" id="modalTask" name="modalTask" class="form-control" style="board=0"> -->  
+                </span> 
+                <small><span id="Modalenrolldate"></span></small>
+            </h4>
             <div class="widget-controls">
-                <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+            	<span class="label label-danger fw-normal" id="modal_delete" data-dismiss="modal" onclick="modalDeleteTask();">delete</span>
+            	&nbsp;&nbsp;&nbsp;&nbsp;
                 <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
             </div>
         </header>
@@ -23,38 +27,13 @@
             <form id="validation-form" class="form-horizontal form-label-left" method="post"
                   data-parsley-priority-enabled="false"
                   novalidate="novalidate">
-<!--                 <fieldset>
-                    <legend>
-                        By default validation is started only after at least 3 characters have been input.
-                    </legend>
-                        <div class="form-group row">
-                            <label class="control-label col-sm-3" for="basic">Simple required</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="basic" name="basic" class="form-control"
-                                       required="required">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-sm-3" for="basic-change">
-                                Min-length On Change
-                        <span class="help-block">
-                            At least 10
-                        </span>
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" id="basic-change" name="basic-change" class="form-control"
-                                       data-parsley-trigger="change"
-                                       data-parsley-minlength="10"
-                                       required="required">
-                            </div>
-                        </div>
-                </fieldset> -->
+
                 <fieldset>
                     <legend>
-                        <span class="label label-warning  text-gray-dark mr-xs">
+                        <!-- <span class="label label-warning  text-gray-dark mr-xs">
                             HTML5
-                        </span>
-                        input types supported
+                        </span> -->
+                       
                     </legend>
                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="email">
@@ -99,13 +78,22 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                        	<label class="control-label col-sm-3" for="number">
+                                	상세 설명
+                            </label>
+                        	<div class="col-sm-9">
+                        		<textarea rows="3" class="autogrow form-control transition-height" id="modalDetailExplain"
+                             	                     placeholder="Try to add few new lines.."></textarea>
+                        	</div>
+                        </div>
+                        <div class="form-group row">
                             <label class="control-label col-sm-3" for="number">
                                 	시작일
                             </label>
                             <div class="col-sm-9">
                                 <input type="text" id="detailStart" name="detailStart" class="form-control"
                                        data-parsley-type="number"
-                                       required="required" value="${n.START_DATE}">
+                                       required="required">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -115,7 +103,7 @@
                             <div class="col-sm-9">
                                 <input type="text" id="detailEnd" name="detailEnd" class="form-control"
                                        data-parsley-type="number"
-                                       required="required" value="${detail.end_date}">
+                                       required="required">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -137,41 +125,92 @@
                                		 팔로워
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" id="follower" name="follower" class="form-control mb-sm"
+                                <input type="text" id="follower22" name="follower22" class="form-control mb-sm"
                                        data-parsley-trigger="change"
                                        data-parsley-minlength="6"
                                        required="required">
                             </div>
                         </div>
-                </fieldset>
-               <!--  <fieldset>
-                    <legend>
-                        More validation
-                    </legend>
-                        <div class="form-group row">
-         
-                                <input type="password" id="password-r" name="password-r" class="form-control"
-                                       data-parsley-trigger="change"
-                                       data-parsley-minlength="6"
-                                       data-parsley-equalto="#password"
-                                       required="required">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-sm-3" for="website">
-                                Website
+                        
+                        
+                               <hr>        
+                                       
+                                       
+                                       
+                       <div class="form-group row">
+                            <label class="control-label col-sm-3" for="password">
+                               		 체크리스트
                             </label>
-                            <div class="col-sm-9">
-                                <input type="text" id="website" name="website" class="form-control"
+                            <div class="col-sm-8">
+                                <input type="text" id="CheckContents" name="CheckContents" class="form-control mb-sm" style="width:635px"
                                        data-parsley-trigger="change"
-                                       data-parsley-type="url"
+                                       data-parsley-minlength="6"
                                        required="required">
+                                       
                             </div>
+                            <div class="col-sm-1">
+                            	<button type="button" class="btn btn-warning" onclick="checkreg();"><i class="fa fa-plus" style="margin-left:5px"></i></button>
+                            </div>
+                        </div>  
+                        
+                       <!--  <div id="writecomment" onsubmit="return false;">
+							<input type="hidden" name="test" />
+							<div class="wrap">
+								<input id="comment_input" autocomplete="off" type="text"
+									placeholder="댓글을 입력해주세요."
+									onkeydown="javascript: if(event.keyCode == 13) fnReplyWrite();">
+								<span class="submit" onclick="fnReplyWrite();"></span>
+							</div>
+						</div>
+                         -->
+                        <div id="checkListAjax">
+                        
                         </div>
-                </fieldset> -->
+                   
+                                       
+
+                                           
+                        
+                        <%-- <div class="comments">
+							<h2>댓글목록</h2>
+							<ol class="group">
+								<!--  for문 -->
+								<c:forEach var="reply" items="<%=replyResult%>">
+									<c:set var="contents" value="${reply.getContents()}" />
+									<c:set var="enrollDate" value="${reply.getEnrollDate()}" />
+									<c:set var="groupCn" value="${reply.getGroupCN()}" />
+									<c:set var="memCode" value="${reply.getMemCode()}" />
+				
+									<li class="comment"><p class="text">${contents}</p> <time>${enrollDate}</time>
+										<a class="remove" onclick="fnReplyDelete(${groupCn},${memCode});">삭제</a>
+										<hr></li>
+								</c:forEach>
+							</ol>
+						</div> --%>
+<!-- 						<div id="detailModalCheck">
+							<form class="writecomment" onsubmit="return false;">
+							<div class="writecomment">
+								<input type="hidden" name="test" />
+								<div class="wrap">
+									<input id="comment_input" autocomplete="off" type="text"
+										placeholder="댓글을 입력해주세요."
+										onkeydown="javascript: if(event.keyCode == 13) fnReplyWrite();">
+									<span class="submit" onclick="fnReplyWrite();"></span>
+								</div>
+							</form>   
+	                        </div>
+                        </div> -->
+                </fieldset>
+
                 <div class="form-actions">
-                    <button type="button" class="btn btn-danger btn-rounded pull-xs-right" >Validate &amp; Submit</button>
-                    <button type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
+                	<div class="row">
+                		<div class="col-sm-10">
+                    		<button style="margin-left:20px" type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
+                    	</div>
+                    	<div class="col-sm-2">
+                    		<button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button>
+                		</div>
+                	</div>
                 </div>
             </form>
         </div>

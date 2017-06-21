@@ -15,6 +15,7 @@ import org.springframework.web.servlet.View;
 
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.util.DataController;
 
@@ -35,6 +36,10 @@ public class OutlineController {
 	
 	@RequestMapping("taskTotalList.htm")
 	public String taskTotalList(String writer,String forme,String follower,String writermember,String success,String datefilter, String order,Model model) throws ClassNotFoundException, SQLException{
+		
+		List<Task_DTO> basic= service.basictasklist();
+		 
+		System.out.println("Basic: "+ basic.size());
 		Task_DTO dto=new Task_DTO();
 		System.out.println(order);
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
@@ -101,8 +106,12 @@ public class OutlineController {
 		
 		List<Task_DTO> list= service.taskTest(dto);
 		
-		model.addAttribute("list", list); //�옄�룞 forward 
-	
+		
+		if(basic.size()==0){
+			model.addAttribute("list", basic); //�옄�룞 forward 
+		}else{
+			model.addAttribute("list", list); //�옄�룞 forward 
+		}
 		System.out.println("LIST: "+ list.size());
 	
 		System.out.println("success_flag="+dto.getSuccess_f());
@@ -168,10 +177,22 @@ public class OutlineController {
 	public View detailTask(String task_id, Model model) throws ClassNotFoundException, SQLException{
 		System.out.println("detailmodal*****: " + task_id);
 		Task_DTO result= service.detailTask(task_id);
-		
+		System.out.println("enrolldate:"+result.getEndrolldate());
 		model.addAttribute("detail", result);
+		
+		
  
 		return jsonview;
+		
+	}
+	
+	@RequestMapping(value="detailModalCheckList.htm", method=RequestMethod.GET)
+	public String detailModalCheckList(int task_id, Model model) throws ClassNotFoundException, SQLException{
+
+		List<CheckList_DTO> chklist= service.checkListView(task_id);
+		model.addAttribute("chklist", chklist);
+		
+		return "/task/checkList";
 		
 	}
 	
@@ -185,6 +206,57 @@ public class OutlineController {
 		return "/task/totalTaskList";
 		
 	}
+	
+	@RequestMapping(value="detailUpdate.htm", method=RequestMethod.GET)
+	public String detailUpdate(int task_id,String start,String end,String member, String explain,Model model) throws ClassNotFoundException, SQLException{
+
+		Task_DTO dto= new Task_DTO();
+		dto.setTask_id(task_id);
+		dto.setStart_date(start);
+		dto.setEnd_date(end);
+		dto.setMember(member);
+		dto.setExplain(explain);
+		
+		int result=service.detailUpdate(dto);
+
+		System.out.println("detailUpdate진입:   "+start);
+		List<Task_DTO> list=service.tasklist();
+		model.addAttribute("list", list);
+ 
+		return "/task/totalTaskList";
+		
+	}
+	@RequestMapping(value="detailDelete.htm", method=RequestMethod.GET)
+	public String detailDelete(int task_id,Model model) throws ClassNotFoundException, SQLException{
+
+		
+		int result=service.detailDelete(task_id);
+
+		List<Task_DTO> list=service.tasklist();
+		model.addAttribute("list", list);
+ 
+		return "/task/totalTaskList";
+		
+	}
+	
+	@RequestMapping(value="checkListReg.htm", method=RequestMethod.GET)
+	public String checkListReg(int task_id,String contents,Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("checjList : " +task_id);
+		System.out.println("checjList : " +contents);
+		CheckList_DTO dto= new CheckList_DTO();
+		dto.setContents(contents);
+		dto.setTask_id(task_id);
+		int result=service.checkListReg(dto);
+
+		List<CheckList_DTO> chklist=service.checkListView(task_id);
+		model.addAttribute("chklist", chklist);
+ 
+		return "/task/checkList";
+		
+	}
+	
+	
+	
 }
 
 

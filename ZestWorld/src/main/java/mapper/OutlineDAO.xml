@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zestworld.OutlineDAO.IOutlineDAO">
+
+	<select id="basictasklist" resultType="com.zestworld.Table_DTO.Task_DTO">
+		select * from task
+	</select>
+	
 	<select id="tasklist" resultType="com.zestworld.Table_DTO.Task_DTO">
 		select * from task where success_f='0' order by enrolldate desc
 	</select>
-	
  
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
@@ -79,6 +83,25 @@
 		update task set success_f=1 where task_id=#{task_id}
 	</update>
 	
+	<!-- 상세보기 수정 -->
+	<update id ="detailUpdate" parameterType="com.zestworld.Table_DTO.Task_DTO" >
+		update task set start_date=#{start_date},end_date=#{end_date}, member=#{member}, explain=#{explain} where task_id=#{task_id}
+	</update>
+	
+	<!-- 업무 삭제 -->
+	<update id ="detailDelete" >
+		delete from task where task_id=#{task_id}
+	</update>
+	
+	<!-- checkList 추가 -->
+	<insert id ="checkListReg" parameterType="com.zestworld.Table_DTO.CheckList_DTO" >
+		insert into checkList(check_id,task_id,contents,success_f) values (checklist_seq.nextval,#{task_id},#{contents},0)
+	</insert>
+	
+	<!-- checkList 추가 -->
+	<select id ="checkListView" parameterType="int" resultType="com.zestworld.Table_DTO.CheckList_DTO" >
+		select * from checkList where task_id=#{task_id}
+	</select>
 </mapper>
 
 

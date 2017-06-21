@@ -20,6 +20,12 @@
 <script type="text/javascript">
 var categoryId='';
 var categoryTitle='';
+var detailUpdateID='';
+
+var detailStart='';
+var detailEnd='';
+var member='';
+var detailExplain='';
 
 $(document).ready(function(){
 	$('#detailModal').hide();
@@ -58,18 +64,10 @@ $(document).ready(function(){
 	  
 	 
 }); 
-
-/* $("#datepicker").datepicker({ onSelect: function(dateText){
-	 enddate=dateText;
-	 console.log("enddateeeee"+enddate);
-   	}
-}); */
-
-/* function detailModalCancle(){
+function modalChangeSuccessF(){
+	changeSuccessF(detailUpdateID);
 	
-	$('#detailModal').hide();
 }
- */
 function changeSuccessF(taskid){
 	 /* alert(taskid); */
 	 $.ajax({
@@ -165,10 +163,37 @@ function detailModalView(view){
 	       type : "get",
 	       url : "detailModal.htm?task_id="+view,
 	       success : function(data) {
+	    	  console.log("detailmodal success: "+data.detail.user_id);
+	    	   var datailTitle=data.detail.title;
+	    	   var datailEnrolldate=data.detail.endrolldate;
+	    	   console.log(data.detail.endrolldate);
+	    	   detailUpdateID=data.detail.task_id;
+	    	   detailStart=data.detail.start_date;
+	    	   detailEnd=data.detail.end_date;
+	    	   member=data.detail.member;
+	    	   detailExplain=data.detail.explain;
+	    		   
+	    	   document.getElementById('span1').innerHTML=datailTitle;
+	     	   document.getElementById('Modalenrolldate').innerHTML=datailEnrolldate;
+	    	    
+	    	   
 	    		$('#detailStart').val(data.detail.start_date);
 	    		$('#detailEnd').val(data.detail.end_date);
 	    		$('#member').val(data.detail.member);
-	    		$('#follower').val(data.detail.follower);
+	    		$('#follower22').val(data.detail.user_id);
+	    		$('#modalTask').val(data.detail.datailTitle);
+	    		$('#modalDetailExplain').val(data.detail.explain);
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	    });
+ 	
+ 	$.ajax({
+	       type : "get",
+	       url : "detailModalCheckList.htm?task_id="+view,
+	       success : function(data) {
+	    		$("#checkListAjax").append($('#checkListAjax').html(data)); 
 	       },
 	       error : function() {
 	          alert('Error while request..');
@@ -254,6 +279,55 @@ function categorychange(){
 	console.log(categoryId);
 }
 
+function detailUpdate(){
+	var startdate=$('#detailStart').val();
+	var enddate=$('#detailEnd').val();
+	var member=$('#member').val();
+	var follower=$('#follower22').val();
+	var explain=$('#modalDetailExplain').val();
+	
+	$.ajax({
+	       type : "get",
+	       url : "detailUpdate.htm?task_id="+detailUpdateID+"&start="+startdate+"&end="+enddate+"&member="+member+"&follower="+follower+"&explain="+explain,
+	       success : function(data) {
+	    	   console.log('성공');
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	}); 
+}
+
+function modalDeleteTask(){
+	
+	$.ajax({
+	       type : "get",
+	       url : "detailDelete.htm?task_id="+detailUpdateID,
+	       success : function(data) {
+	    		$("#ajaxlist").append($('#ajaxlist').html(data)); 
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	}); 
+	
+}
+
+function checkreg(){
+	var contents=$('#CheckContents').val();
+	console.log("cheecj: " + contents);
+	$.ajax({
+	       type : "get",
+	       url : "checkListReg.htm?task_id="+detailUpdateID+"&contents="+contents,
+	       success : function(data) { 
+	    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	}); 
+	
+}
 
 
 </script>
@@ -499,5 +573,9 @@ function categorychange(){
 	
 	
 	<jsp:include page="../task/detailModal.jsp"></jsp:include>
+
+
+
+
 
 </div>
