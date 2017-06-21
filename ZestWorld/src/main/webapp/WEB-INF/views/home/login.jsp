@@ -132,9 +132,9 @@
 									</form>
 									<div class="row" style="text-align: center;">
 										<div class="clearfix">
-											<button type="button" class="btn btn-default"
+											<button type="button" class="btn btn-inverse btn-sm"
 												data-dismiss="modal" onclick="search()">SEND</button>
-											<button type="button" class="btn btn-default"
+											<button type="button" class="btn btn-secondary btn-sm"
 												data-dismiss="modal">CANCEL</button>
 										</div>
 									</div>

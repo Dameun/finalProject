@@ -91,7 +91,7 @@ function CreateWorkspace()
 		            </c:forEach>
 		            <div class="clearfix">
                                 <div class="btn-toolbar pull-right">
-                                    <button type="button" class="btn btn-default btn-sm" onclick="CreateWorkspace()" >+새로운 워크스페이스</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="CreateWorkspace()" >+ Create Workspace</button>
                                     <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
                                 </div>
                      </div>  

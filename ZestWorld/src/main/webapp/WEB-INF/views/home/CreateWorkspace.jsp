@@ -22,49 +22,39 @@ function BackBtn()
 
 </script>
 <div>
-	<div class="container">
+	<div class="content-wrap">
 		<main id="content" class="widget-login-container" role="main">
 		<div class="col-md-8">
 			<section class="widget">
-				<header>
-					<h5>
-						Form <span class="fw-semi-bold">Options</span>
-					</h5>
-
-				</header>
+				
 				<div class="widget-body">
+				 <h4>
+				<i class="fa fa-circle text-gray"></i> Create Workspace <i
+						class="fa fa-circle text-warning"></i>
+						</h4>
 					<form role="form">
 						<fieldset>
-							<legend>++ADD Workspace</legend>
+						<legend></legend>
 							<p>
-								Set input heights using classes like
-								<code>.input-lg</code>
-								and
-								<code>.input-sm</code>
-								. Also works with
-								<code>type="search"</code>
-								inputs and selects. For input groups use
-								<code>.input-group-lg</code>
-								&amp;
-								<code>.input-group-sm</code>
+								워크스페이스는 회사, 부서, 팀, 혹은 개인이 될 수 있습니다.
 								.
 							</p>
 							<br>
 							<div class="form-group">
 								<input type="text" class="form-control"
-									placeholder="workspacename" id="workspacename"
+									placeholder="Workspace Name" id="workspacename"
 									name="workspacename">
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control"
-									placeholder="workspaceDiscription" id="workspaceDiscription"
+									placeholder="Discription" id="workspaceDiscription"
 									name="workspaceDiscription">
 							</div>
 							<div class="form-group">
-								<button type="button" class="btn btn-default"
-									onclick="CreateBtn()">만들기</button>
-								<button type="button" class="btn btn-default"
-									onclick="BackBtn()">뒤로</button>
+							<button type="button" class="btn btn-secondary btn-sm"onclick="BackBtn()">Cancel</button>
+								<button type="button" class="btn btn-inverse btn-sm"
+									onclick="CreateBtn()">Create</button>
+								
 							</div>
 						</fieldset>
 					</form>
