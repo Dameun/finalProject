@@ -68,7 +68,6 @@ $(function() {
 		url: "alarmList.ajax",
 		success:function(data)
 		{
-			alert('alarm');
 			$('#alarm').empty();
 			$('#alarm').append( $('#alarm').html(data)); 		
 		},

@@ -159,7 +159,7 @@ public class DataController {
 		
 		  String[] alarmIdArr={};
 		  String[] msgArr = msg.split("/");
-		  String alarmType 	= msgArr[0];
+		  int alarmType 	=  Integer.parseInt(msgArr[0]);
 		  String taskTitle 	= msgArr[1];
 		  alarmIdArr 		= msgArr[2].split(",");
 		  String writer 	= msgArr[3];
@@ -169,7 +169,7 @@ public class DataController {
 		  //않읽은 db로 저장하고  알람 카운트 올려주기 
 		  Alarm_DTO alarm = new Alarm_DTO();
 		  alarm.setAlarm_type(alarmType);
-		  alarm.setCheck_f("0");
+		  alarm.setCheck_f(0);
 		  alarm.setImg("img");
 		  alarm.setUser_id(writer);
 		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());

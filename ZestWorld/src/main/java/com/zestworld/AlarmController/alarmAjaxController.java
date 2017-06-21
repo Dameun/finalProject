@@ -44,10 +44,29 @@ public class alarmAjaxController {
 		  for( int i =0; i <list.size(); i ++)
 		  { 
 			  alarm_dto = list.get(i);
-			  if( alarm_dto.getCheck_f().equals("0")) ReadCheck++;
+			  if( alarm_dto.getCheck_f() == 0) ReadCheck++;
 		  }
 		  model.addAttribute ("alarmList",list);
 		  model.addAttribute ("unCount",ReadCheck);
+		  
+	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
+	}
+	
+	//드롭박스 클릭시 안읽은 알람들 -> 읽은 알람으로 db수정 
+	@RequestMapping(value="updateAlarm.ajax", method = RequestMethod.GET)
+    public String updateAlarm(Model model)throws ClassNotFoundException, SQLException
+	{
+		  List<Alarm_DTO> list = service.GetList();
+		  Alarm_DTO alarm = new Alarm_DTO();
+		  for( int i=0; i< list.size(); i ++)
+		  {
+			  alarm = list.get(i);
+			  alarm.setCheck_f(1);
+			  service.updateAlarm(alarm);
+		  }
+		  
+		  model.addAttribute ("alarmList",list);
+		  model.addAttribute ("unCount",0);
 		  
 	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
 	}
@@ -61,7 +80,7 @@ public class alarmAjaxController {
 		
 		  String[] alarmIdArr={};
 		  String[] msgArr = newAlarm.split("/");
-		  String alarmType 	= msgArr[0];
+		  int alarmType 	= Integer.parseInt(msgArr[0]);
 		  String taskTitle 	= msgArr[1];
 		  alarmIdArr 		= msgArr[2].split(",");
 		  String writer 	= msgArr[3];
@@ -70,7 +89,7 @@ public class alarmAjaxController {
 		  //않읽은 db로 저장하고  알람 카운트 올려주기 
 		  Alarm_DTO alarm = new Alarm_DTO();
 		  alarm.setAlarm_type(alarmType);
-		  alarm.setCheck_f("N");
+		  alarm.setCheck_f(0);
 		  alarm.setImg("img");
 		  alarm.setUser_id(writer);
 		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());
@@ -83,7 +102,7 @@ public class alarmAjaxController {
 		  for( int i =0; i <list.size(); i ++)
 		  { 
 			  alarm_dto = list.get(i);
-			  if( alarm_dto.getCheck_f().equals("0")) ReadCheck++;
+			  if( alarm_dto.getCheck_f()==0) ReadCheck++;
 		  }
 		  model.addAttribute  ("alarmList",list);
 		  model.addAttribute  ("unCount",ReadCheck);

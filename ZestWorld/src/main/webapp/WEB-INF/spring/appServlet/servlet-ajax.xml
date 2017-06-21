@@ -17,6 +17,7 @@
 	<context:component-scan base-package="com.zestworld.userStateService"/>
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
+	<context:component-scan base-package="com.zestworld.userStateService"/>
 	<context:component-scan base-package="com.zestworld.ajaxController" />
 	<context:component-scan base-package="com.zestworld.AlarmService"/>
 	<context:component-scan base-package="com.zestworld.AlarmController"/>
