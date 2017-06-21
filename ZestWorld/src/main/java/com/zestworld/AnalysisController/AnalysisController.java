@@ -14,7 +14,6 @@ import com.zestworld.util.DataController;
 
 
 @Controller
-
 public class AnalysisController {
 	
 	@Autowired
