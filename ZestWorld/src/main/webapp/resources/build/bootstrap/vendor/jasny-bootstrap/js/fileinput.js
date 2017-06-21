@@ -82,7 +82,7 @@
       var element = this.$element
 
       reader.onload = function(re) {
-        var $img = $('<img id="myImg">')
+        var $img = $('<img name="myImg">')
         
         $img[0].src = re.target.result
         files[0].result = re.target.result

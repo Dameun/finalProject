@@ -7,7 +7,7 @@
    request.setCharacterEncoding("UTF-8");
 %>
 
-<script type="text/javascript" src="./resource/Js/userState.js"> </script> 
+<script type="text/javascript" src="resources/Js/userState.js"> </script> 
 
            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -99,4 +99,4 @@
                    
                 </li>
             </ul> 
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>

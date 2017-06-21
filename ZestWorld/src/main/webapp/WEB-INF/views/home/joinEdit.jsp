@@ -10,7 +10,7 @@
 <html>
 <head>
 <title>ZestWorld</title>
-<link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
+<link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
 <!--  as of IE9 cannot parse css files with more that 4K classes separating in two files
 [if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
@@ -202,28 +202,28 @@
       </main>
    </div>
    <!-- page specific libs -->
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/jquery-autosize/jquery.autosize.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap3-wysihtml5/lib/js/wysihtml5-0.3.0.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap3-wysihtml5/src/bootstrap3-wysihtml5.js"></script>
-<script src="./resource/build/bootstrap/vendor/select2/select2.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/switchery/dist/switchery.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/moment/min/moment.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/jasny-bootstrap/js/inputmask.js"></script>
-<script src="./resource/build/bootstrap/vendor/jasny-bootstrap/js/fileinput.js"></script>
-<script src="./resource/build/bootstrap/vendor/holderjs/holder.js"></script>
-<script src="./resource/build/bootstrap/vendor/dropzone/dist/min/dropzone.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/markdown/lib/markdown.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-markdown/js/bootstrap-markdown.js"></script>
-<script src="./resource/build/bootstrap/vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/jquery/dist/jquery.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery-autosize/jquery.autosize.min.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap3-wysihtml5/lib/js/wysihtml5-0.3.0.min.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap3-wysihtml5/src/bootstrap3-wysihtml5.js"></script>
+<script src="resources/build/bootstrap/vendor/select2/select2.min.js"></script>
+<script src="resources/build/bootstrap/vendor/switchery/dist/switchery.min.js"></script>
+<script src="resources/build/bootstrap/vendor/moment/min/moment.min.js"></script>
+<script src="resources/build/bootstrap/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="resources/build/bootstrap/vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jasny-bootstrap/js/inputmask.js"></script>
+<script src="resources/build/bootstrap/vendor/jasny-bootstrap/js/fileinput.js"></script>
+<script src="resources/build/bootstrap/vendor/holderjs/holder.js"></script>
+<script src="resources/build/bootstrap/vendor/dropzone/dist/min/dropzone.min.js"></script>
+<script src="resources/build/bootstrap/vendor/markdown/lib/markdown.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+<script src="resources/build/bootstrap/vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery/dist/jquery.js"></script>
 
 <!-- page specific js -->
-<script src="./resource/build/bootstrap/js/form-elements.js"></script>
+<script src="resources/build/bootstrap/js/form-elements.js"></script>
 
 
 </html>

@@ -5,8 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Sing - Login</title>
-<link href="./build/bootstrap/css/application.min.css" rel="stylesheet">
+<title>ZestWorld - SignUp</title>
+<link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
 <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
 <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
@@ -114,16 +114,14 @@
 		<div class="row">
 			<div
 				class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
-				<h4 class="widget-login-logo animated fadeInUp">
-					<i class="fa fa-circle text-gray"></i> 회원가입 <i
+				<h5 class="widget-login-logo animated fadeInUp">
+					<i class="fa fa-circle text-gray"></i> Sign Up <i
 						class="fa fa-circle text-warning"></i>
-				</h4>
+				</h5>
 				<section class="widget widget-login animated fadeInUp"> <header>
-				<h3>welcome to the zestworld</h3>
+				<h3>Welcome to the ZestWorld</h3>
 				</header>
 				<div class="widget-body">
-					<p class="widget-login-info">정보를 넣어주세요</p>
-					<p class="widget-login-info">------------------</p>
 					<c:url value="" var="loginURL" />
 					<%-- <form name="f" action="${loginURL}" method="post" class="login-form mt-lg"> --%>
 					<form action="${loginURL}" method="post">

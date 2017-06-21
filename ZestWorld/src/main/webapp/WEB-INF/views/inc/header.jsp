@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,12 +8,11 @@
  <title>Sing - Dashboard</title>
  
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
   
-    <link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
+    <link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- 민성 추가부분 (이부분에 안쓰면 modal 자동으로 닫기는 현상이 발생!!) -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- /민성 추가부분 (이부분에 안쓰면 modal 자동으로 닫기는 현상이 발생!!) -->
@@ -35,7 +35,7 @@
   
   </head>
 
-
+<c:set var="member" value="${member}"/>
 <nav class="page-controls navbar navbar-default">
     <div class="container-fluid">
         <!-- .navbar-header contains links seen on xs & sm screens -->
@@ -97,40 +97,40 @@
 </nav>
 
 <!-- common libraries. required for every page-->
-<script src="./resource/build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
-<script src="./resource/build/bootstrap/vendor/slimScroll/jquery.slimscroll.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/widgster/widgster.js"></script>
-<script src="./resource/build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
-<script src="./resource/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
-<script src="./resource/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+<script src="resources/build/bootstrap/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="resources/build/bootstrap/vendor/widgster/widgster.js"></script>
+<script src="resources/build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+<script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 
 <!-- common app js -->
-<script src="./resource/build/bootstrap/js/settings.js"></script>
-<script src="./resource/build/bootstrap/js/app.js"></script>
+<script src="resources/build/bootstrap/js/settings.js"></script>
+<script src="resources/build/bootstrap/js/app.js"></script>
 
 
 <!-- page specific libs -->
-<script id="test" src="./resource/build/bootstrap/vendor/underscore/underscore.js"></script>
-<script src="./resource/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
-<script src="./resource/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
-<script src="./resource/build/bootstrap/vendor/d3/d3.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/raphael/raphael-min.js"></script>
-<script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
-<script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
-<script src="./resource/build/bootstrap/vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
-<script src="./resource/build/bootstrap/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
-<script src="./resource/build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
+<script id="test" src="resources/build/bootstrap/vendor/underscore/underscore.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="resources/build/bootstrap/vendor/d3/d3.min.js"></script>
+<script src="resources/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
+<script src="resources/build/bootstrap/vendor/raphael/raphael-min.js"></script>
+<script src="resources/build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
+<script src="resources/build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
+<script src="resources/build/bootstrap/vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
 
 <!-- page specific js -->
-<script type="text/javascript" src="./resource/Js/ajaxView.js"> </script> 
-<script src="./resource/build/bootstrap/js/index.js"></script> 
+<script type="text/javascript" src="resources/Js/ajaxView.js"> </script> 
+<script src="resources/build/bootstrap/js/index.js"></script> 
 </html>

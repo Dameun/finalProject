@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>ZESTWORLD - Login</title>
-    <link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
+    <link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
     <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">

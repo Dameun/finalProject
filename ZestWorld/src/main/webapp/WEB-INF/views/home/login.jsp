@@ -6,7 +6,8 @@
 <html>
 <head>
 <title>ZestWorld - Login</title>
-<link href="./resource/build/bootstrap/css/application.min.css" rel="stylesheet">
+<link href="resources/build/bootstrap/css/application.min.css"
+	rel="stylesheet">
 <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
 <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
@@ -48,7 +49,7 @@
 		<main id="content" class="widget-login-container" role="main">
 		<div class="row">
 			<div
-            class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+				class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
 
 				<h5 class="widget-login-logo animated fadeInUp">
 
@@ -59,7 +60,8 @@
 				<h3>Login to ZestWorld</h3>
 				</header>
 				<div class="widget-body">
-					
+					<p class="widget-login-info">다들고생했습니다</p>
+					<p class="widget-login-info">이쁘게봐주세요</p>
 					<c:url value="/login" var="loginURL" />
 					<form name="f" action="${loginURL}" method="post"
 						class="login-form mt-lg">
@@ -83,83 +85,69 @@
 								<!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
 							</div>
 						</div>
-						</form>
-						<div class="row">
-                                <div class="col-md-6 col-md-push-6">
-                                    <div class="clearfix">
-                                        <div class="abc-checkbox widget-login-info pull-xs-right ml-n-lg">
-                                           <!--  <input type="checkbox" id="checkbox1" value="1">
+					</form>
+					<div class="row">
+						<div class="col-md-6 col-md-push-6">
+							<div class="clearfix">
+								<div
+									class="abc-checkbox widget-login-info pull-xs-right ml-n-lg">
+									<!--  <input type="checkbox" id="checkbox1" value="1">
                                             <label for="checkbox1">Keep me signed in </label> -->
-                                        </div>
-                                    </div>
-                                </div>
+								</div>
+							</div>
+						</div>
 
-                                <div class="col-md-6 col-md-pull-6">
-                                    <a class="mr-n-lg" href="#myModal" data-toggle="modal"
-									data-target="#myModal">비밀번호를 잊으셨나요?</a>
-									  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog" style="padding-left:30%; width:70%;" >
-        <div class="modla-dialog">
-    
-      <!-- Modal content-->
-     <section class="widget widget-login animated fadeInUp">
-        <header>
-          
-          <h4 class="modal-title">
-     <i class="fa fa-circle text-gray"></i>     
-          임시 비밀번호 받기
-          <i class="fa fa-circle text-warning"></i>
-          </h4>
-        </header>
-        <hr>
-         <!-- 내용 -->
-         	<c:url value="/sendpw.htm" var="loginURL"/>
-	   
-	   <form  class="login-form mt-lg" action="${loginURL}" name="pwsearch" method="post"  id="pwsearch" >
-         <div class="form-froup">
-         <label for="userid">
-        Email Address  </label>
-			<input type="text" name="userid"class="form-control" placeholder="Email"/>
-		 </div>
-	     <br/>
-		 <div class="form-group">
-		 <label for="phone">
-		 Phone Number</label>
-     	   <input type="text" name="phone"class="form-control" placeholder="'-'빼고입력해주세요" />
-		 </div>
-		<!-- <tr align="center">
-			<td colspan="2">
-			<input type="button" value="비밀번호 찾기 " onclick="search()" /></td>
-			
-		</tr> -->
-     
-   
-        </form>
-          <div class="row" style="text-align:center;">
-        <div class="clearfix">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="search()">SEND</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
-        </div>
-     </div>
-</section>
-    </div>
-  </div>
-  
-  
-  
-  
-  </div>
-  </div>
+						<div class="col-md-6 col-md-pull-6">
+							<a class="mr-n-lg" href="#myModal" data-toggle="modal"
+								data-target="#myModal">비밀번호를 잊으셨나요?</a>
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" role="dialog"
+								style="padding-left: 30%; width: 70%;">
+								<div class="modal-dialog">
 
-</div>
-</section>
-</div>
-</div>
-					</main>
-					
+									<!-- Modal content-->
+									<section class="widget widget-login animated fadeInUp">
+									<header>
+
+									<h4 class="modal-title">
+										<i class="fa fa-circle text-gray"></i> 임시 비밀번호 받기 <i
+											class="fa fa-circle text-warning"></i>
+									</h4>
+									</header>
+									<hr>
+									<!-- 내용 --> <c:url value="/sendpw.htm" var="loginURL" />
+
+									<form class="login-form mt-lg" action="${loginURL}"
+										name="pwsearch" method="post" id="pwsearch">
+										<div class="form-froup">
+											<label for="userid"> Email Address </label> <input
+												type="text" name="userid" class="form-control"
+												placeholder="Email" />
+										</div>
+										<br />
+										<div class="form-group">
+											<label for="phone"> Phone Number</label> <input type="text"
+												name="phone" class="form-control" placeholder="'-'빼고입력해주세요" />
+										</div>
+									</form>
+									<div class="row" style="text-align: center;">
+										<div class="clearfix">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal" onclick="search()">SEND</button>
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">CANCEL</button>
+										</div>
+									</div>
+									</section>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-
-
-		
+				</section>
+			</div>
+		</div>
+		</main>
+	</div>
 </body>
 </html>
