@@ -117,7 +117,7 @@ public class AjaxViewController {
 		return DataController.getInstance().GetviewPath("home") + "projectMain.jsp";
 	}
 
-	// 회원정보 수정
+/*	// 회원정보 수정
 	@RequestMapping(value = "/joinEdit.ajax", method = RequestMethod.GET)
 	public String GetUser(Model model) throws ClassNotFoundException, SQLException {
 
@@ -126,7 +126,7 @@ public class AjaxViewController {
 
 		return DataController.getInstance().GetviewPath("home") + "joinEdit.jsp";
 	}
-
+*/
 	// 프로젝트 선택시
 	@RequestMapping(value = "/selectProject.ajax", method = RequestMethod.GET)
 	public String selectProject(String project_id) {

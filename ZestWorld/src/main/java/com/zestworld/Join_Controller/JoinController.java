@@ -154,23 +154,20 @@ public class JoinController {
 		}
 	}
 
-	/*
-	 * @RequestMapping("joinEdit.htm") public String GetUser(Model model) throws
-	 * ClassNotFoundException, SQLException {
-	 * 
-	 * Users_DTO users = DataController.getInstance().GetUser();
-	 * model.addAttribute("member", users);
-	 * 
-	 * return "home/joinEdit"; }
-	 */
+	// 회원정보 수정
+	@RequestMapping(value = "/joinEdit.htm", method = RequestMethod.GET)
+	public String GetUser(Model model) throws ClassNotFoundException, SQLException {
+
+		Users_DTO users = DataController.getInstance().GetUser();
+		model.addAttribute("member", users);
+
+		return "home.joinEdit";
+	}
+
 	@RequestMapping(value = "/updateUser.htm", method = RequestMethod.POST)
-	public String update(@RequestParam Map<String, Object> paramMap, Users_DTO member, HttpServletRequest request,
+	public ModelAndView update(@RequestParam Map<String, Object> paramMap, Users_DTO member, HttpServletRequest request,
 			ModelAndView mav, Model model) throws ClassNotFoundException, SQLException, IOException {
-		//String filename = member.getFile().getOriginalFilename();
-		String fakepath = (String) paramMap.get("img");
-		System.out.println(fakepath);
-		String filename = fakepath.substring(12);
-	
+		String filename = member.getFile().getOriginalFilename();
 		
 		String path = request.getServletContext().getRealPath("upload");
 
@@ -178,7 +175,7 @@ public class JoinController {
 		System.out.println(fpath);
 		System.out.println(filename);
 		FileOutputStream fs = new FileOutputStream(fpath);
-		fs.write(filename.getBytes());
+		fs.write(member.getFile().getBytes());
 		fs.close();
 
 		String password = (String) paramMap.get("password");
@@ -186,10 +183,9 @@ public class JoinController {
 		System.out.println(password);
 		System.out.println(phone);
 		Users_DTO updateMember = new Users_DTO();
-//		updateMember.setImg(filename);
 		updateMember.setUser_id(member.getUser_id());
 		updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
-
+		updateMember.setImg(filename);
 		updateMember.setPhone(member.getPhone());
 
 		System.out.println("1111");
@@ -199,12 +195,14 @@ public class JoinController {
 			/*Users_DTO users = DataController.getInstance().GetUser();
 			 model.addAttribute("member", users);*/
 			// mav= new ModelAndView("");//성공시
-			return "";
+		mav = new ModelAndView("redirect:joinEdit.htm");// 실패시
+		return mav;
 
 		} else {
 			// 성공시
 			// return mav;
-			return "";
+			mav = new ModelAndView("redirect:joinEdit.htm");// 실패시
+			return mav;
 		}
 
 	}

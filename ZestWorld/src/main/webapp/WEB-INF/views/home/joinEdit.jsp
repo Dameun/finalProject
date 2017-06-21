@@ -23,9 +23,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+ -->
 <script>
    /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
     chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
@@ -94,21 +94,23 @@
 	//console.log(ret)
 	document.getElementById("myImg").src = ret;   */ 
 
+	/* 
 	function Edit(){
-	/* 	var paramData=$("#userEdit").serialize(); */
-	
+	 	var paramData=$("#userEdit").serialize(); 
+	var path = $('input[name=file]').val();
+	var  filename = path.substr(12);
 	$.ajax({
 		type:"post",
 		url:"updateUser.htm",
 		data:  {
 			    "user_id"   : $('input[name=user_id]').val(),
 		
-			    "img"  :   $('input[name=file]').val(),
+			    "img"  :   filename,
 			    "password" : $('input[name=password]').val(),
 			    "name"     :  $('input[name=name]').val(),
 			    "phone"    :  $('input[name=phone]').val() 
 		},
- 		dataType:"json",
+ 	
 		success:function(data){
 			//data값이 성공일때 
 			//수정되었씁니다 팝업창후 
@@ -124,7 +126,7 @@
 		
 	});
 	}
-/* $('#myEdit').click("submit",function(){
+$('#myEdit').click("submit",function(){
 	   
 	            ajaxView('joinEdit.ajax');
 	
@@ -133,6 +135,8 @@
   */
 </script>
 </head>
+<body class="nav-collapsed chat-sidebar-container pace-done">
+
 
 <c:set var="member" value="${member}"/>
    <div class="container" style="margin-top:-100px;">
@@ -157,7 +161,8 @@
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                                             <div>
-                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span><input type="file" name="file"></span>
+                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" name="file"></span>
                                                 <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                             </div>
                                         </div>
@@ -190,7 +195,7 @@
                      <!-- 회원정보 수정  -->
                      <button type="reset" class="btn btn-default btn-file"
                        >취소</button>
-                     <button type="button" onclick='Edit()'  id="myEdit"class="btn btn-default btn-file">수정</button>
+                     <button type="submit"  id="myEdit"class="btn btn-default btn-file">수정</button>
                      <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
                   </div>
                   
@@ -201,6 +206,43 @@
       </div>
       </main>
    </div>
+   <!-- common libraries. required for every page-->
+<script src="resources/build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+<script src="resources/build/bootstrap/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="resources/build/bootstrap/vendor/widgster/widgster.js"></script>
+<script src="resources/build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+<script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+
+<!-- common app js -->
+<script src="resources/build/bootstrap/js/settings.js"></script>
+<script src="resources/build/bootstrap/js/app.js"></script>
+
+
+<!-- page specific libs -->
+<script id="test" src="resources/build/bootstrap/vendor/underscore/underscore.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery.sparkline/index.js"></script>
+<script src="resources/build/bootstrap/vendor/d3/d3.min.js"></script>
+<script src="resources/build/bootstrap/vendor/rickshaw/rickshaw.min.js"></script>
+<script src="resources/build/bootstrap/vendor/raphael/raphael-min.js"></script>
+<script src="resources/build/bootstrap/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
+<script src="resources/build/bootstrap/vendor/jQuery-Mapael/js/maps/usa_states.js"></script>
+<script src="resources/build/bootstrap/vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
+
+<!-- page specific js -->
+<script type="text/javascript" src="resources/Js/ajaxView.js"> </script> 
+<script src="resources/build/bootstrap/js/index.js"></script> 
    <!-- page specific libs -->
 <script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
 <script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
@@ -225,5 +267,5 @@
 <!-- page specific js -->
 <script src="resources/build/bootstrap/js/form-elements.js"></script>
 
-
+</body>
 </html>
