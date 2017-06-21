@@ -73,9 +73,9 @@ public class workspaceController {
 		List<UserState_DTO> list= userstateService.GetuserStateList( workspace.getWorkspace_id());
 		System.out.println(SearchuserState.getState());*/
 		
-		//ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
-		//model.addAttribute("selectWorkspace", workspace);
-		//model.addAttribute("projectList", projectList);
+		ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
+		model.addAttribute("selectWorkspace", workspace);
+		model.addAttribute("projectList", projectList);
 		return "home.main";
 	}
 	

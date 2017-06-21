@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
 
     function initMap(){
         var $map = $('#map'),
@@ -264,4 +264,4 @@ $(function(){
     pjaxPageLoad();
     SingApp.onPageLoad(pjaxPageLoad);
 
-});
+});*/

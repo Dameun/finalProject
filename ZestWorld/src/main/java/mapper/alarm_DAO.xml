@@ -11,4 +11,7 @@
 	<select id="getAlarm" resultType="com.zestworld.Table_DTO.Alarm_DTO">
 		select * from alarm where alarm_id=#{alarm_id}
 	</select>
+	<update id="UpdateAlarm" parameterType="com.zestworld.Table_DTO.Alarm_DTO">
+       update alarm set check_f=#{check_f}  where alarm_id=#{alarm_id}
+     </update>
 </mapper>

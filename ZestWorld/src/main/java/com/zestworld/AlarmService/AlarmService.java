@@ -31,4 +31,11 @@ public class AlarmService {
 		List<Alarm_DTO> list = dao.getAlarmList(accept);
 		return list;
 	}
+	
+	public int updateAlarm(Alarm_DTO alarm) throws ClassNotFoundException, SQLException{
+		int result = 0;
+		AlarmDAO dao = sqlsession.getMapper(AlarmDAO.class);
+		result = dao.UpdateAlarm(alarm);
+		return result;
+	}
 }

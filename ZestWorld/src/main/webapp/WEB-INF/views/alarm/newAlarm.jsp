@@ -6,11 +6,25 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-
+<script type="text/javascript" >
+function dropdownClick()
+{
+	$.ajax({
+		type:"get",
+		url:"updateAlarm.ajax",
+		success:function(data){
+			console.log('success');
+		},
+		error:function(){
+			alert('error');
+		},
+	});	
+}
+</script>
 <script type="text/javascript" src="resources/Js/userState.js"> </script> 
 
            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                 <li class="dropdown" onclick="dropdownClick()">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
                             <img class="img-circle" src="./resource/img/people/a5.jpg" alt="...">
