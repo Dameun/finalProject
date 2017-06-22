@@ -60,8 +60,8 @@
 				<h3>Login to ZestWorld</h3>
 				</header>
 				<div class="widget-body">
-					<p class="widget-login-info">다들고생했습니다</p>
-					<p class="widget-login-info">이쁘게봐주세요</p>
+					<p class="widget-login-info">email을 입력하세요 :)</p>
+
 					<c:url value="/login" var="loginURL" />
 					<form name="f" action="${loginURL}" method="post"
 						class="login-form mt-lg">

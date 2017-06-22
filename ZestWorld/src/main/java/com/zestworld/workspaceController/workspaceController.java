@@ -98,6 +98,7 @@ public class workspaceController {
 		workspaceUser.setWorkspace_id(workspace.getWorkspace_id());
 		workspaceUser.setUser_id(DataController.getInstance().GetUser().getUser_id());
 		
+		
 		taskDao.insertWorkSpaceUser(workspaceUser);
 		DataController.getInstance().dataChange();
 		List<Workspace_DTO>workspaceList = new ArrayList<Workspace_DTO>();

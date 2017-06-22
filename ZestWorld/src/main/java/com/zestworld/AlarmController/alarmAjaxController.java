@@ -1,6 +1,7 @@
 package com.zestworld.AlarmController;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,8 @@ public class alarmAjaxController {
     public String alarmList(Model model)
             throws ClassNotFoundException, SQLException{
 		
-		  List<Alarm_DTO> list = service.GetList();
+		  List<Alarm_DTO> list = new ArrayList<Alarm_DTO>();
+		  list = service.GetList();
 		  Alarm_DTO alarm_dto;
 		  int ReadCheck = 0;
 		  for( int i =0; i <list.size(); i ++)
@@ -48,7 +50,6 @@ public class alarmAjaxController {
 		  }
 		  model.addAttribute ("alarmList",list);
 		  model.addAttribute ("unCount",ReadCheck);
-		  
 	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
 	}
 	
