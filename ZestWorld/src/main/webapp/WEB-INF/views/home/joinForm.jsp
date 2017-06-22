@@ -104,6 +104,43 @@
 
 		$('#input_file').setPreview(opt);
 	});
+	
+	
+	//벨리데이션
+	 $('#registerForm').validate({
+            rules: {
+                txtID:{required:true, minlength:3, remote:"Validate"},
+                txtPassword: "required",
+                txtPasswordConfirm: {required:true, equalTo:'#txtPassword'},               
+                txtName: {required:true},
+                txtEmail: {required:true, email:true},
+                txtAge: {required:true, range:[1,100]} // 1~100범위
+            },
+            messages: {
+                txtID: {
+                     required:"아이디를 입력하시오.",
+                     minlength: jQuery.format("아이디는 {0}자 이상 입력해주세요!"),
+                     remote : jQuery.format("입력하신 {0}는 이미존재하는 아이디입니다. ")
+                },
+                txtPassword:"암호를 입력하시오.",
+                txtPasswordConfirm: {
+                    required: "암호확인를 입력하시오.",
+                    equalTo:"암호를 다시 확인하세요" },
+                txtName: {required:"이름을 입력하시오."},
+                txtEmail: {
+                    required:"이메일을 입력하시오.",
+                    email:"올바른 이메일을 입력하시오."},
+                txtAge: {range: "나이는 1~100"}
+            },
+            submitHandler: function (frm){
+                frm.submit();   //유효성 검사를 통과시 전송
+            },
+            success: function(e){
+                //
+            }
+           
+        });
+      }); //end ready()
 </script>
 
 </head>
@@ -124,10 +161,10 @@
 				<div class="widget-body">
 					<c:url value="" var="loginURL" />
 					<%-- <form name="f" action="${loginURL}" method="post" class="login-form mt-lg"> --%>
-					<form action="${loginURL}" method="post" class="login-form mt-lg">
+					<form action="${loginURL}" method="post" class="login-form mt-lg" id="registerForm">
 						<!-- 이메일 -->
 						<div class="form-group">
-							<input type="text" name="user_id" class="form-control"
+							<input type="text" name="userid" class="form-control"
 								id="exampleInputEmail1" placeholder="email">
 						</div>
 						<!-- 비번 -->
