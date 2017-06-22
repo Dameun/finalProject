@@ -22,14 +22,17 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private Map<Object, WebSocketSession> users = new ConcurrentHashMap();
 	private Map<String, String> ids = new ConcurrentHashMap();
 
+	// 웹소켓 서버에 클라이언트가 접속하면 호출되는 메소드
 	@Override
 	public void afterConnectionEstablished(
 			WebSocketSession session) throws Exception {
 	      String userid = (String) session.getAttributes().get("userId");      
 	      users.put(userid, session);
 	      ids.put(session.getId(), userid);
+	      System.out.println("WebSocketHandler.afterConnectionEstablished() userid: "+ userid);
 	}
 
+	//클라이언트가 접속을 종료하면 호출되는 메소드
 	@Override
 	public void afterConnectionClosed(
 			WebSocketSession session, CloseStatus status) throws Exception {
@@ -37,6 +40,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		users.remove("parammsg");
 	}
 
+	//웹 소켓 서버측에 텍스트 메세지가 접수되면 호출되는 메소드
 	@Override
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
@@ -73,6 +77,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	        
 	}
 
+	// 메시지 전송시나 접속해제시 오류가 발생할 때 호출되는 메소드
 	@Override
 	public void handleTransportError(
 			WebSocketSession session, Throwable exception) throws Exception {
@@ -82,5 +87,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private void log(String logmsg) {
 		System.out.println(new Date() + " : " + logmsg);
 	}
+	
 
 }

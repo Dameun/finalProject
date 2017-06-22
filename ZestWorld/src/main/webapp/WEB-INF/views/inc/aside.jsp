@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
-
 <nav id="sidebar" class="sidebar" role="navigation">
     <!-- need this .js class to initiate slimscroll -->
     <div class="slimScrollDiv">
@@ -73,6 +70,14 @@
                     <sup class="text-warning fw-semi-bold">
                         new
                     </sup>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="ajaxView('template.ajax')">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-stats"></i>
+                    </span>
+                    Template
                 </a>
             </li>
         </ul>

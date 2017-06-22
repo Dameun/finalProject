@@ -172,7 +172,7 @@ public class DataController {
 		  alarm.setCheck_f(0);
 		  alarm.setImg("img");
 		  alarm.setUser_id(writer);
-		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());
+		  alarm.setAcceptUsers(alarmIdArr[0]); // 1명일
 		  alarm.setAlarmTitle(alarmStrMake(msg));
 		  try {
 				alarmDao.insert(alarm);
@@ -188,20 +188,22 @@ public class DataController {
 			  String[] msgArr = newAlarm.split("/");
 			  String alarmType 	= msgArr[0];
 			  String taskTitle 	= msgArr[1];
+			  String[] alarmIdArr	={};
+			  alarmIdArr 		= msgArr[2].split(",");
 			  String writer 	= msgArr[3];
-			  String userId		= DataController.getInstance().GetUser().getUser_id();
+			 // String userId		= DataController.getInstance().GetUser().getUser_id();
 			  String returnMsg = "";
 			  //0 업무배정받음
 			  //1 업무완료알림
 			  if( alarmType.equals("0"))
 			  {
-				  if( writer.equals(userId) )
+				  if( writer.equals(alarmIdArr[0]) )
 					  returnMsg = "새로운 업무 "+ taskTitle+ "가 만들어졌습니다.";
 				  else
-					  returnMsg = writer+"님이" + userId + "님께" + taskTitle+ "배정했습니다.";
+					  returnMsg = writer+"님이" + alarmIdArr[0] + "님께" + taskTitle+ "배정했습니다.";
 			  }else
 			  {
-				  if( writer.equals(userId) )
+				  if( writer.equals(alarmIdArr[0]) )
 					  returnMsg = "업무 "+ taskTitle+ "를 완료하였습니다.";
 				  else
 					  returnMsg = writer+"님이" +"업무를 완료하였습니다.";

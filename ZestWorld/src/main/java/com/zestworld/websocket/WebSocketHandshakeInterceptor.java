@@ -36,7 +36,7 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
 		//Join_DTO dto = (Join_DTO) req.getSession().getAttribute("info");
 		
         attributes.put("userId", DataController.getInstance().GetUser().getUser_id());
-        System.out.println("인터셉터 id:"+ DataController.getInstance().GetUser().getUser_id());
+        System.out.println("로그인 아이디 id:"+ DataController.getInstance().GetUser().getUser_id());
 
  
         return super.beforeHandshake(request, response, wsHandler, attributes);
