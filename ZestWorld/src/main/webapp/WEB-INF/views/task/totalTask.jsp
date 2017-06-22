@@ -66,12 +66,34 @@ $(document).ready(function(){
 	  
 	 
 }); 
-function modalChangeSuccessF(){
-	changeSuccessF(detailUpdateID);
+function modalChangeSuccessF(taskid){
+	$.ajax({
+		type:"get",
+		url:"updateFlag.htm?task_id="+taskid,
+		dataType:'html',
+		success:function(data){
+		
+			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+		},
+		error:function(){
+			alert('검색 에러! 관리자에게 문의하세요');
+		}
+	});
 	
 }
-function modalChangeSuccessF_zero(){
-	changeSuccessF(detailUpdateID);
+function modalChangeSuccessF_zero(taskid){
+	$.ajax({
+		type:"get",
+		url:"updateFlagZero.htm?task_id="+taskid,
+		dataType:'html',
+		success:function(data){
+			$("input:checkbox[id='complete']").attr("checked", false);
+			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+		},
+		error:function(){
+			alert('검색 에러! 관리자에게 문의하세요');
+		}
+	});
 	
 }
 function changeSuccessF(taskid){
@@ -393,6 +415,7 @@ function checkreg(){
 }
 
 function updateChkFlag(chk){
+	console.log("updateChkFlag : "+ detailUpdateID);
 	$.ajax({
 	       type : "get",
 	       url : "updateChkFlag.htm?task_id="+detailUpdateID+"&check_id="+chk,
@@ -406,6 +429,7 @@ function updateChkFlag(chk){
 	
 }
 function updateChkFlag_zero(chk){
+	console.log("updateChkFlag_zero : "+ detailUpdateID);
 	$.ajax({
 	       type : "get",
 	       url : "updateChkFlagZero.htm?task_id="+detailUpdateID+"&check_id="+chk,
@@ -602,7 +626,7 @@ function checkListDelete(chk){
                   <div class="modal-footer">
 
                      <button type="button" class="btn btn-info btn-circle btn-lg"
-                        id="addbtn" onclick="submit2();">
+                        id="addbtn" onclick="submit2();"   data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
                      <button type="button" class="btn btn-warning btn-circle btn-lg"

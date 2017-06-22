@@ -12,13 +12,25 @@
         <header>
             <h4>
             	<input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
-            		<c:if test="${n.success_f eq 1}">
-			             checked= "checked"
+            		<%-- <c:if test="${n.success_f eq 0}">
+			             
 			             onclick="modalChangeSuccessF();"
 			        </c:if> 
-			        <c:if test="${n.success_f eq 0}">
+			        <c:if test="${n.success_f eq 1}">
+			        	checked= "checked"
 			             onclick="modalChangeSuccessF_zero();"
+			        </c:if> --%>
+			        
+			        
+			        <c:if test="${n.success_f eq 1}">
+			             checked= "checked"
+			             onclick="modalChangeSuccessF_zero(${n.task_id});"
+			        </c:if> 
+			        <c:if test="${n.success_f eq 0}">
+			            onclick="modalChangeSuccessF(${n.task_id});"
 			        </c:if>
+			        
+			        
             	>
             	
                 <span class="fw-semi-bold" id="span1">

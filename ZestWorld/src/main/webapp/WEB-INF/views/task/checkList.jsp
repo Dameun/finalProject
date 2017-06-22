@@ -52,14 +52,23 @@
                             <div class="row">
                             <div class="col-sm-1">
                                <span class="thumb-sm pull-xs-left mr">
-                                   <input type="checkbox" id="${n.check_id}" onclick="updateChkFlag(${n.check_id});"  
+                                  <%--  <input type="checkbox" id="${n.check_id}" onclick="updateChkFlag(${n.check_id});"  
 	                                   <c:if test="${n.success_f eq 1}">
 	                                   	checked= "checked"
+	                                   </c:if>--%>
+	                                    
+	                                    
+	                               <input type="checkbox" id="${n.check_id}"  
+	                                   <c:if test="${n.success_f eq 1}">
+		                                   checked= "checked"
+		                                   onclick="updateChkFlag_zero(${n.check_id});"
+	                                   </c:if>
+	                                   <c:if test="${n.success_f eq 0}">
+	                                   		onclick="updateChkFlag(${n.check_id});"
 	                                   </c:if>
 	                                   
 	                                   
-	                                   
-	                        <%--            <c:if test="${n.success_f eq 1}">
+	                   <%--                 <c:if test="${n.success_f eq 1}">
 			             checked= "checked"
 			             onclick="changeSuccessF_zero(${n.task_id});"
 			        </c:if> 

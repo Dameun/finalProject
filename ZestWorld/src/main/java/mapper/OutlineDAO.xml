@@ -12,9 +12,9 @@
  
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		 select * from task t where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
+		 select * from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
 		 
-		 <!-- select t.title,t.user_id,t.end_date, p.p_title ,t.project_id, t.task_id, t.success_f from task t , project p where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f} -->
+		<!-- select t.title,t.user_id,t.end_date, p.p_title ,t.project_id, t.task_id, t.success_f from task t , project p where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f} -->
 		<if test="user_id!=null and user_id !=''">
 			and user_id=#{user_id}
 		</if>
