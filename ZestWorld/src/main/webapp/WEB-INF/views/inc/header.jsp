@@ -141,11 +141,24 @@
                     <i class="chat-notification-sing animated bounceIn"></i></a>
                    
                 </li>
+                <li>
+     				<a href="javascript:popupOpen();" >
+            			<i class="fa fa-reddit fa-lg">
+            			</i>
+            		</a>
+            	</li>
             </ul> 
         </div>
     </div>
 </nav>
 
+<script>
+			function popupOpen() {
+				var popUrl = "http://localhost:3000"; //팝업창에 출력될 페이지 URL
+				var popOption = "width=380, height=400, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+				window.open(popUrl, "", popOption);
+			}
+		</script>
 <!-- common libraries. required for every page-->
 <script src="resources/build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
 <script src="resources/build/bootstrap/vendor/jquery-pjax/jquery.pjax.js"></script>
