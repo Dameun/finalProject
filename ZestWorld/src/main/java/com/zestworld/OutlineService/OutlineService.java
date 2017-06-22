@@ -11,7 +11,9 @@ import com.zestworld.OutlineDAO.IOutlineDAO;
 import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
+import com.zestworld.Table_DTO.TaskAssignMember_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
+import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 
 @Service
@@ -47,7 +49,7 @@ public class OutlineService {
 		List<Project_DTO> list=dao.projectlist();
 		return list;
 	}
-	public List<Workspace_DTO> writerlist(String workspace_id) throws ClassNotFoundException, SQLException{
+	public List<Workspace_DTO> writerlist(int workspace_id) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
 		List<Workspace_DTO> assignmember=dao.writerlist(workspace_id);
 		return assignmember;
@@ -77,6 +79,12 @@ public class OutlineService {
 		return list;
 	}
 	
+	public int updateFlagZero(String task_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int list= dao.updateFlagZero(task_id);
+		return list;
+	}
+	
 	public int detailUpdate(Task_DTO dto) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
 		int list= dao.detailUpdate(dto);
@@ -98,6 +106,36 @@ public class OutlineService {
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
 		List<CheckList_DTO> result= dao.checkListView(task_id);
 		return result;
+	}
+	
+	public int updateChkFlag(int check_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int result= dao.updateChkFlag(check_id);
+		return result;
+	}
+	
+	public int updateChkFlagZero(int check_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int result= dao.updateChkFlagZero(check_id);
+		return result;
+	}
+	
+	public List<Users_DTO> assignMemberList(int project_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<Users_DTO> user= dao.assignMemberList(project_id);
+		return user;
+	}
+	
+	public int assignMemberReg(TaskAssignMember_DTO dto) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int assginmemberReg= dao.assignMemberReg(dto);
+		return assginmemberReg;
+	}
+	
+	public int checkListDelete(int check_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int assginmemberReg= dao.checkListDelete(check_id);
+		return assginmemberReg;
 	}
 	
 }

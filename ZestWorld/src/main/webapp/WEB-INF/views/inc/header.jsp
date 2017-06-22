@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+	<link href="resources/dist/css/ContestBoardView.css">
   
     <link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- 민성 추가부분 (이부분에 안쓰면 modal 자동으로 닫기는 현상이 발생!!) -->

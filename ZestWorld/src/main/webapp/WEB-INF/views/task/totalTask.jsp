@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css">
+<link rel="stylesheet" type="text/css" href="resources/dist/css/ContestBoardView.css">
 
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css"> -->
@@ -37,10 +37,12 @@ $(document).ready(function(){
 	var writermember='';
 	var datefilter='';
 	var order='';
-	
+	var p='';
+	/* 
+	url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p, */
 	$.ajax({
 		type:"get",
-		url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order,
+		url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p,
 		/* dataType:'html', */
 		success:function(data){
 			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
@@ -68,6 +70,10 @@ function modalChangeSuccessF(){
 	changeSuccessF(detailUpdateID);
 	
 }
+function modalChangeSuccessF_zero(){
+	changeSuccessF(detailUpdateID);
+	
+}
 function changeSuccessF(taskid){
 	 /* alert(taskid); */
 	 $.ajax({
@@ -85,6 +91,23 @@ function changeSuccessF(taskid){
 	 
 	 
  }
+function changeSuccessF_zero(taskid){
+	 alert(taskid);
+	 $.ajax({
+			type:"get",
+			url:"updateFlagZero.htm?task_id="+taskid,
+			dataType:'html',
+			success:function(data){
+				$("input:checkbox[id='complete']").attr("checked", false);
+				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+			},
+			error:function(){
+				alert('검색 에러! 관리자에게 문의하세요');
+			}
+		});
+	 
+	 
+}
 function myfilter(){
 	var forme='';
 	var writer='';
@@ -93,6 +116,7 @@ function myfilter(){
 	var success='';
 	var datefilter='';
 	var order='';
+	var project='';
 	
 	 //나에게 배정된, 내가 작성한, 내가 팔로워하는..  필터
 	 if(document.getElementById("forme").checked == true){
@@ -112,21 +136,6 @@ function myfilter(){
 		 follower='';
 	 }
 	 
-	/* //상태 필터
-	 if(document.getElementById("all").checked == true){
-		 console.log("all됨ㅌㅌㅌㅌㅌㅌㅌ");
-		 success="all";
-	 }else {
-		 all='';
-	 } */
-	 
-	/*  if(document.getElementById("ing").checked == true){
-		 console.log("ing check됨ㅌㅌㅌㅌㅌㅌㅌ");
-		 success="ing";
-	 }else {
-		 ing='';
-	 } */
-	 
 	 if(document.getElementById("complete").checked == true){
 		 console.log("complete check됨ㅌㅌㅌㅌㅌㅌㅌ");
 		 success="complete";
@@ -137,6 +146,9 @@ function myfilter(){
 	 //작성자 필터
 	 writermember=$(":input:radio[name=writermember]:checked").val();
 	 
+	 project=$(":input:radio[name=projectlist]:checked").val();
+	 
+	 
 	 //기간 필터
 	 datefilter=$("#dayfilter").val(); 
 	 console.log("datefilter: " + datefilter);
@@ -145,7 +157,7 @@ function myfilter(){
 	 
 		$.ajax({
 			type:"get",
-			url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order,
+			url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project="+project,
 			dataType:'html',
 			success:function(data){
 			
@@ -158,10 +170,12 @@ function myfilter(){
 }
 
 
-function detailModalView(view){
- 	$.ajax({
+function detailModalView(view,project_id){
+ 	var str='';
+	
+	$.ajax({
 	       type : "get",
-	       url : "detailModal.htm?task_id="+view,
+	       url : "detailModal.htm?task_id="+view+"&project_id="+project_id,
 	       success : function(data) {
 	    	  console.log("detailmodal success: "+data.detail.user_id);
 	    	   var datailTitle=data.detail.title;
@@ -183,12 +197,42 @@ function detailModalView(view){
 	    		$('#follower22').val(data.detail.user_id);
 	    		$('#modalTask').val(data.detail.datailTitle);
 	    		$('#modalDetailExplain').val(data.detail.explain);
+	    		
+	    		console.log("assignment: " + assignmember.user_id);
+	    		
+	    		/* $.each(data.assignmember,function(index,value){
+					console.log(index + "/" + value);
+					str+="<input type='checkbox' id='"+data.assignmember.user_id+"'>"+assignmember.user_id + "<br>";
+					$("#assignMemberCheck").append($('#assignMemberCheck').html(str));
+					
+					
+				}); */
 	       },
 	       error : function() {
 	          alert('Error while request..');
 	       }
 	    });
  	
+	$.ajax({
+	       type : "get",
+	       url : "detailModalAssign.htm?task_id="+view+"&project_id="+project_id,
+	       success : function(data2) {
+	    		console.log("assignment: " + data2.user_id);
+	    		
+	    		$.each(data2.assignmember,function(index,value){
+					console.log(index + "/" + value);
+					str+="<input type='checkbox' value='"+value.user_id+"' name='membercheck' >"+value.user_id + "<br>";
+					/* "+value.user_id+" */
+					
+				});
+	    		var htm="<form name='memberChk'>"+str+"</form>";
+	    		$("#assignMemberCheck").append($('#assignMemberCheck').html(htm));
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	    });
+	
  	$.ajax({
 	       type : "get",
 	       url : "detailModalCheckList.htm?task_id="+view,
@@ -201,15 +245,29 @@ function detailModalView(view){
 	    });
 } 
 function submit2(){
+		/* var j=0;
+		var memberCheck= Array();
+		console.log("length: "+ memberChk.membercheck.length);
+		
+		for(i=0; i < membercheck.length; i++) {
+			if(membercheck[i].checked == true){
+				memberCheck[j]=membercheck[i];
+				j++;
+			}
+		} */
+		
+		
+	    /* 
+	    var allData = {"checkArray": checkboxValues }; */
+	    
 		var enddate = $("#datepicker").val();
 		title=$("#title").val();
+		var project_id= $('#project').val();
 	 	console.log(title); 
 		 $.ajax({
 		       type : "get",
-		       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate,
-		      /*  dataType:'html', 
-		       dataType:'html',*/
-		      /*  dataType:'text', */
+		       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate+"&project_id="+project_id,
+		    
 		       success : function(data) {
 		    	 /* alert(data);
 		    	 if( data == 'success')
@@ -280,6 +338,11 @@ function categorychange(){
 }
 
 function detailUpdate(){
+	var checkboxValues = [];
+    $("input[name='membercheck']:checked").each(function(i) {
+        checkboxValues.push($(this).val());
+    });
+    console.log("checkboxValues : "+ checkboxValues[0]);
 	var startdate=$('#detailStart').val();
 	var enddate=$('#detailEnd').val();
 	var member=$('#member').val();
@@ -288,7 +351,7 @@ function detailUpdate(){
 	
 	$.ajax({
 	       type : "get",
-	       url : "detailUpdate.htm?task_id="+detailUpdateID+"&start="+startdate+"&end="+enddate+"&member="+member+"&follower="+follower+"&explain="+explain,
+	       url : "detailUpdate.htm?task_id="+detailUpdateID+"&start="+startdate+"&end="+enddate+"&follower="+follower+"&explain="+explain+"&chkmember="+checkboxValues,
 	       success : function(data) {
 	    	   console.log('성공');
 	       },
@@ -329,6 +392,44 @@ function checkreg(){
 	
 }
 
+function updateChkFlag(chk){
+	$.ajax({
+	       type : "get",
+	       url : "updateChkFlag.htm?task_id="+detailUpdateID+"&check_id="+chk,
+	       success : function(data) { 
+	    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	}); 
+	
+}
+function updateChkFlag_zero(chk){
+	$.ajax({
+	       type : "get",
+	       url : "updateChkFlagZero.htm?task_id="+detailUpdateID+"&check_id="+chk,
+	       success : function(data) { 
+	    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	}); 
+	
+}
+function checkListDelete(chk){
+	$.ajax({
+	       type : "get",
+	       url : "checkListDelete.htm?task_id="+detailUpdateID+"&check_id="+chk,
+	       success : function(data) { 
+	    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	});
+}
 
 </script>
 
@@ -416,15 +517,16 @@ function checkreg(){
 		<input type="checkbox" id="follower" name="filter" value="follower" onclick="myfilter();">내가 팔로우하는 업무<br>
 		<hr>
 		프로젝트<br>
+			<input type="radio" name="projectlist" value="" checked>전체<br>
 		<c:forEach items="${projectlist}" var="n">
-			<input type="checkbox" name="project" value="${n.p_title}" >${n.p_title}<br>
+			<input type="radio" name="projectlist" value="${n.project_id}" >${n.p_title}<br>
 		</c:forEach>
 		
 		<hr>
 		작성자<br>
 		<input type="radio" id="writermember2" name="writermember" onclick="myfilter();" value="" checked>전체<br>
 		<c:forEach items="${assign}" var="n" >
-			<input  type="radio" id="writermember" name="writermember" onclick="myfilter();" value="${n.userid}">${n.userid}<br>
+			<input  type="radio" id="writermember" name="writermember" onclick="myfilter();" value="${n.user_id}">${n.user_id}<br>
 		</c:forEach>
 		<hr>
 		상태<br>

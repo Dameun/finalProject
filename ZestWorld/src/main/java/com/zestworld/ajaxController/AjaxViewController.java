@@ -59,7 +59,8 @@ public class AjaxViewController {
 	public String totalTask(Model model) throws ClassNotFoundException, SQLException {
 		// List<Project_DTO> projectlist= service.projectlist();
 		List<Project_DTO> list = service.projectlist();
-		String workspace_id = "1";
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		System.out.println("AJAC: "+ workspace_id);
 		List<Workspace_DTO> assign = service.writerlist(workspace_id);
 
 		// ModelAndView mav = new ModelAndView("totalTask.jsp");
@@ -71,6 +72,7 @@ public class AjaxViewController {
 		 */
 		return DataController.getInstance().GetviewPath("totalTesk") + "totalTask.jsp";
 	}
+
 
 	// mainContentView
 	@RequestMapping(value = "/taskList.ajax", method = RequestMethod.GET)

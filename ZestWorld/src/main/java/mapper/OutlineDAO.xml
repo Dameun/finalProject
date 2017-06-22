@@ -12,8 +12,9 @@
  
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		select * from task where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}<!-- default= 작성자가 나인것  -->
-		
+		 select * from task t where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
+		 
+		 <!-- select t.title,t.user_id,t.end_date, p.p_title ,t.project_id, t.task_id, t.success_f from task t , project p where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f} -->
 		<if test="user_id!=null and user_id !=''">
 			and user_id=#{user_id}
 		</if>
@@ -25,7 +26,11 @@
 		<if test="follower!=null and follower != ''">  <!-- 팔로워  -->
 			and follower=#{follower}
 		</if>
-		
+		<!-- 
+		<if test="project_id!=null and project_id != ''">  팔로워 
+			and project_id=#{project_id}
+		</if>
+		 -->
 		<!-- <if test="success_f!=null and success_f != ''">  성공여부 
 			and success_f=#{success_f}
 		</if> -->
@@ -52,7 +57,7 @@
 		
 	</select> 
 	
-	<select id="writerlist" parameterType="String" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
+	<select id="writerlist" parameterType="int" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
 		
 		select user_id from workspace_user where workspace_id=#{workspace_id}
 		
@@ -83,9 +88,13 @@
 		update task set success_f=1 where task_id=#{task_id}
 	</update>
 	
+	<update id ="updateFlagZero" parameterType="String" >
+		update task set success_f=0 where task_id=#{task_id}
+	</update>
+	
 	<!-- 상세보기 수정 -->
 	<update id ="detailUpdate" parameterType="com.zestworld.Table_DTO.Task_DTO" >
-		update task set start_date=#{start_date},end_date=#{end_date}, member=#{member}, explain=#{explain} where task_id=#{task_id}
+		update task set start_date=#{start_date},end_date=#{end_date},  explain=#{explain} where task_id=#{task_id}
 	</update>
 	
 	<!-- 업무 삭제 -->
@@ -98,10 +107,33 @@
 		insert into checkList(check_id,task_id,contents,success_f) values (checklist_seq.nextval,#{task_id},#{contents},0)
 	</insert>
 	
-	<!-- checkList 추가 -->
+	<!-- checkList 리스트 -->
 	<select id ="checkListView" parameterType="int" resultType="com.zestworld.Table_DTO.CheckList_DTO" >
 		select * from checkList where task_id=#{task_id}
 	</select>
+	
+	<!-- checkList success_flag update-->
+	<update id ="updateChkFlag" parameterType="int" >
+		update checklist set success_f=1 where check_id=#{check_id}
+	</update>
+	
+	<update id ="updateChkFlagZero" parameterType="int" >
+		update checklist set success_f=0 where check_id=#{check_id}
+	</update>
+	
+	<select id="assignMemberList" resultType="com.zestworld.Table_DTO.Users_DTO">
+		select user_id from project p, project_user u where p.project_id=u.project_id and p.project_id=#{project_id}
+	</select>
+	
+	<insert id ="assignMemberReg" parameterType="com.zestworld.Table_DTO.TaskAssignMember_DTO" >
+		insert into taskAssignMember(task_id,user_id) values (#{task_id},#{user_id})
+	</insert>
+	
+	<!-- 체크리스트 삭제 -->
+	<delete id ="checkListDelete" >
+		delete from checklist where check_id=#{check_id}
+	</delete>
+	
 </mapper>
 
 

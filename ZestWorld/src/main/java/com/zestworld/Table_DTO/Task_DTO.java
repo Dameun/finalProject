@@ -30,7 +30,15 @@ public class Task_DTO
 	private String order;
 	private String endrolldate;
 	
+	private String p_title;
 	
+	
+	public String getP_title() {
+		return p_title;
+	}
+	public void setP_title(String p_title) {
+		this.p_title = p_title;
+	}
 	public int getWorkspace_id() {
 		return workspace_id;
 	}

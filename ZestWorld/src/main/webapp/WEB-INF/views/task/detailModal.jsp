@@ -11,7 +11,16 @@
     <section class="widget">
         <header>
             <h4>
-            	<input type="checkbox" id="modal_successF" class="modal_successF" onclick="modalChangeSuccessF();" data-dismiss="modal">
+            	<input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
+            		<c:if test="${n.success_f eq 1}">
+			             checked= "checked"
+			             onclick="modalChangeSuccessF();"
+			        </c:if> 
+			        <c:if test="${n.success_f eq 0}">
+			             onclick="modalChangeSuccessF_zero();"
+			        </c:if>
+            	>
+            	
                 <span class="fw-semi-bold" id="span1">
                 	<!--  <input type="text" id="modalTask" name="modalTask" class="form-control" style="board=0"> -->  
                 </span> 
@@ -48,11 +57,14 @@
 								</c:forEach>
     		        		</select>
     		        		
+    		        		
     		        		<div id="categoryListModal">
     		        		
     		        		
     		        		
     		        		</div>
+    		        		
+    		        		
                          <!--    <div class="clearfix">
 					            <div class="btn-toolbar">
 					                <div class="btn-group">
@@ -111,12 +123,22 @@
                                 	배정된 멤버
                             </label>
                             <div class="col-sm-9">
-                                <input type="text"  class="form-control"
+                            <div id="assignMemberCheck">
+                            
+                            </div>
+                                <!-- <input type="text"  class="form-control"
                                        id="member" name="member"
                                        data-parsley-range="[10, 100]"
                                        data-parsley-trigger="change"
                                        data-parsley-validation-threshold="1"
-                                       required="required">
+                                       required="required"> -->
+                              <!--         
+                              		<input type="checkbox">
+                              		멤버리스트 들어갈 부분
+                              
+                              
+                              
+                               -->         
                             </div>
                         </div>
                         
@@ -151,6 +173,7 @@
                             <div class="col-sm-1">
                             	<button type="button" class="btn btn-warning" onclick="checkreg();"><i class="fa fa-plus" style="margin-left:5px"></i></button>
                             </div>
+                            
                         </div>  
                         
                        <!--  <div id="writecomment" onsubmit="return false;">

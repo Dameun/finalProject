@@ -52,16 +52,42 @@
                             <div class="row">
                             <div class="col-sm-1">
                                <span class="thumb-sm pull-xs-left mr">
-                                   <input type="checkbox" id="${n.task_id}">
+                                   <input type="checkbox" id="${n.check_id}" onclick="updateChkFlag(${n.check_id});"  
+	                                   <c:if test="${n.success_f eq 1}">
+	                                   	checked= "checked"
+	                                   </c:if>
+	                                   
+	                                   
+	                                   
+	                        <%--            <c:if test="${n.success_f eq 1}">
+			             checked= "checked"
+			             onclick="changeSuccessF_zero(${n.task_id});"
+			        </c:if> 
+			        <c:if test="${n.success_f eq 0}">
+			            onclick="changeSuccessF(${n.task_id});"
+			        </c:if> --%>
+                                   >
+                                       
                                  </span> 
                             </div>
-                               <!-- <i class="fa fa-circle pull-xs-right text-danger mt-sm"></i> -->
+                               <!-- <i class="fa fa-circle pull-xs-right text-danger mt-sm"></i>  -->
                             <div class="col-sm-8">    
                                 <h5 class="no-margin">${n.contents}</h5>
                                 
                             </div>
                             <div class="col-sm-3">
-                                <small class="text-muted">about 2 mins ago</small>
+	                            <div class="row">
+	                            	<div class="col-sm-3"></div>
+	                            	
+	                            	<div class="col-sm-7">
+	                                	<small class="text-muted">등록날짜...?</small>
+	                            	</div>
+	                            	
+	                            	<div class="col-sm-2">
+	                            		<span class="glyphicon glyphicon-trash" onclick="checkListDelete(${n.check_id});"></span>
+	                                	<!-- <small class="text-muted">qwe</small> -->
+	                            	</div>
+	                            </div>
                             </div>
                             </div>
                             </a>
