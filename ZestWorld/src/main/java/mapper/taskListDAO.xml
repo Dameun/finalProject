@@ -10,15 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="tasklist2" resultType="com.zestworld.Table_DTO.Task_DTO">
-		
-	select task.title, task.category_id, category.category_id from task join category on task.category_id = category.category_id order by task_id
-
-	
+	select task.task_id, task.title, task.category_id, category.category_id, task.success_f from task join category on task.category_id = category.category_id order by task_id
 	</select>
 
 	<select id="mytasklist" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		select * from task where user_id=#{user_id}  <!-- default= 작성자가 나인것  -->
+		select * from task where userid=#{userid}  <!-- default= 작성자가 나인것  -->
 		
 		<if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
 			and member=#{member}
@@ -35,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getUser_Id" resultType="String">
-		select user_id from workspace_user
+		select userid from workspace_user
 	</select>
 
 	<insert id="titleInsert" parameterType="com.zestworld.Table_DTO.Category_DTO">
@@ -43,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="tasktitleInsert" parameterType="com.zestworld.Table_DTO.Task_DTO">
-	insert into task(task_id,category_id,workspace_id,project_id,user_id,title) values(task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{title})
+	insert into task(task_id,category_id,workspace_id,project_id,user_id,title,success_f,enrolldate) values(task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{title},0,sysdate)
 	</insert>
 
 
@@ -60,6 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	delete from category where title=#{title}
 	</delete>
 	
+	<delete id="chkListDelete">
+		delete from checklist where check_id=#{check_id}
+	</delete>
 	
 	<select id="getProject_Id" parameterType="com.zestworld.Table_DTO.Project_DTO" resultType="int">
 
@@ -69,6 +69,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCategory_Id" parameterType="com.zestworld.Table_DTO.Category_DTO" resultType="int">
 	select category_id from category where title=#{title}
 	</select>
+	
+	<update id="taskTitle_Check" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	update task set success_f=1 where task_id=#{task_id}
+	</update>
+
+	<update id="categoryUpdate" parameterType="com.zestworld.Table_DTO.Category_DTO">
+	update category set title=#{title} where category_id=#{category_id}
+	</update>
+
 	
 
 </mapper>

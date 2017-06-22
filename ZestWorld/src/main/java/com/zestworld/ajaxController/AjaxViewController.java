@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zestworld.AnalysisService.AnalysisService;
 import com.zestworld.OutlineService.OutlineService;
+import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
@@ -20,6 +21,7 @@ import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
+import com.zestworld.taskListService.taskListService;
 import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
 
@@ -41,6 +43,7 @@ public class AjaxViewController {
 	@Autowired
 	private UserStateService userstatesService;
 
+	
 	public AjaxViewController() {
 	}
 
@@ -76,7 +79,12 @@ public class AjaxViewController {
 
 	// mainContentView
 	@RequestMapping(value = "/taskList.ajax", method = RequestMethod.GET)
-	public String totalList() {
+	public String totalList(Model model) throws ClassNotFoundException, SQLException {
+		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		Category_DTO cateDto = new Category_DTO();
+		cateDto.setProject_id(project_id);
+		List<Category_DTO> list = service.tasklist(cateDto); 
+		model.addAttribute("list",list);
 		return DataController.getInstance().GetviewPath("totalTesk") + "taskList.jsp";
 	}
 

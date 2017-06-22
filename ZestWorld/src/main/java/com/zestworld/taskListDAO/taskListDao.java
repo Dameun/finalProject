@@ -36,6 +36,21 @@ public interface taskListDao {
 
 	//카테고리 ID
 	public int getCategory_Id(Category_DTO dto); 
+	
 	//USER ID
 	public String getUser_Id();	
+	
+	//업무 title 성공여부 체크
+	public int taskTitle_Check(Task_DTO dto) throws ClassNotFoundException, SQLException;
+	
+	//Category title 수정
+	public void categoryUpdate(Category_DTO dto) throws ClassNotFoundException, SQLException;
+	
+	//상세업무 모달
+	public Task_DTO detailtaskView(String user_id) throws ClassNotFoundException, SQLException;
+	
+	//체크리스트 삭제
+	public int chkListDelete(int check_id) throws ClassNotFoundException, SQLException;
+		
+		
 }

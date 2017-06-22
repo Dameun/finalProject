@@ -1,22 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-     <!--민성 추가부분  -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="resource/dist/css/taskList.css" rel="stylesheet" type="text/css"/>
-		<!--/민성추가부분  -->
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<!--민성 추가부분  -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="resources/dist/css/taskList.css">
+<!--/민성추가부분  -->
+
+<!--민성 dropdown 사용하기위해 필요한 부분 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--민성 dropdown 사용하기위해 필요한 부분 -->
+
+
+<!-- datepicker -->
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+
 <script type="text/javascript">
 	 
-	
+
 	$(function(){
 
 		
+	/* 		
+ $("#datepicker").datepicker({
+		      showOn: "button",
+		      buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+		      buttonImageOnly: true,
+		      buttonText: "Select date"
+		    });
+		 */
 		
 		//리스트 비동기로 뿌리는 ajax부분
 		$.ajax({
@@ -55,6 +70,32 @@
 			});
 			e.preventDefault();
 		});
+				
+		//카테고리 title 수정
+		$("#cateUpdate").on("submit", function(e) {
+			
+			$.ajax({
+				type : "post",
+				url : "cateUpdate.htm",
+				cache : false,
+				data : 'category_id='+$("#categoryTitle option:selected").val()+'&changeTitle='+$("#changeTitle").val(),
+				success : function(data){	
+					$("#cateTitle_Update").hide();
+					$('.modal-backdrop').remove();
+					$("#View").empty();
+					$("#View").append(data); 
+					
+				},
+				error : function() {
+					alert('Error while request..');
+				}
+			});
+			e.preventDefault();
+		});
+		
+		
+		
+		
 		
 		$(".close").click(function() {
 			$('.modal-backdrop').hide();
@@ -90,8 +131,33 @@
 				});
 				
 		  }); 
-		  
+	
+		//task title 완료체크
+		
+		$(document).on("click",".chkSuccess",function(){
+			
+			if($(this).is(":checked")){
+			
+				$.ajax({
+					type:"get",
+					url:"tasktitleCheck.htm",
+					data: "task_id="+$(this).val(),
+					success:function(data){
+						
+						$("#View").empty();
+						$("#View").append(data); 
+					},
+						error:function(){
+							alert('Error while request..');
+						}
+				});
+			
+			}
+		});
+		
+		
 	});
+	
 	
 	//업무 title 추가
 	function createBtn(number)
@@ -117,10 +183,194 @@
 
 	}
 
+	function detailModalView(number){
+	 	$.ajax({
+		       type : "get",
+		       url : "detailtaskModal.htm?task_id="+number,
+		       success : function(data) {
+		    	   var datailTitle=data.detail.title;
+		    	   var datailEnrolldate=data.detail.endrolldate;
+		    	   console.log(data.detail.endrolldate);
+		    	   detailUpdateID=data.detail.task_id;
+		    	   detailStart=data.detail.start_date;
+		    	   detailEnd=data.detail.end_date;
+		    	   member=data.detail.member;
+		    	   detailExplain=data.detail.explain;
+		    		   
+		    	   document.getElementById('span1').innerHTML=datailTitle;
+		     	   document.getElementById('Modalenrolldate').innerHTML=datailEnrolldate;
+		    	    
+		    	   
+		    		$('#detailStart').val(data.detail.start_date);
+		    		$('#detailEnd').val(data.detail.end_date);
+		    		$('#member').val(data.detail.member);
+		    		$('#follower22').val(data.detail.user_id);
+		    		$('#modalTask').val(data.detail.datailTitle);
+		    		$('#modalDetailExplain').val(data.detail.explain);
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		    });
+	 	
+	 	$.ajax({
+		       type : "get",
+		       url : "detailtaskModalCheckList.htm?task_id="+number,
+		       success : function(data) {
+		    		$("#checkListAjax").append($('#checkListAjax').html(data)); 
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		    });
+	 	
+	 	
+	}
+	
+	function detailUpdate(){
+		var startdate=$('#detailStart').val();
+		var enddate=$('#detailEnd').val();
+		var member=$('#member').val();
+		var follower=$('#follower22').val();
+		var explain=$('#modalDetailExplain').val();
+		
+		$.ajax({
+		       type : "get",
+		       url : "detailtaskUpdate.htm?task_id="+detailUpdateID+"&start="+startdate+"&end="+enddate+"&member="+member+"&follower="+follower+"&explain="+explain,
+		       success : function(data) {
+		    	    $("#detailModal").hide();
+					$('.modal-backdrop').remove();
+					$("#View").empty();
+					$("#View").append(data); 
+					
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		}); 
+	}
+	
+	function checkreg(){
+		var contents=$('#CheckContents').val();
+		$.ajax({
+		       type : "get",
+		       url : "checklistReg.htm?task_id="+detailUpdateID+"&contents="+contents,
+		       success : function(data) { 
+		    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		}); 
+		
+	}
+	
+	function updateChklistFlag(chk){
+		$.ajax({
+		       type : "get",
+		       url : "updateChkFlag.htm?task_id="+detailUpdateID+"&check_id="+chk,
+		       success : function(data) { 
+		    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		}); 
+		
+	}
+	
+	function modalDeleteTask(){
+		
+		$.ajax({
+		       type : "get",
+		       url : "detailtaskDelete.htm?task_id="+detailUpdateID,
+		       success : function(data) {
+		    		$("#detailModal").hide();
+					$('.modal-backdrop').remove();
+					$("#View").empty();
+					$("#View").append(data); 
+					
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		}); 
+		
+	}
+	
+	
+	function checkListDelete(chk){
+		$.ajax({
+		       type : "get",
+		       url : "chkListDelete.htm?task_id="+detailUpdateID+"&check_id="+chk,
+		       success : function(data) { 
+		    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		});
+	}
+	
+	
+	/* 
+	function modalChangeSuccessF(){
+		changeSuccessF(detailUpdateID);
+		
+	}
+	function modalChangeSuccessF_zero(){
+		changeSuccessF(detailUpdateID);
+		
+	}
+	
+	
+	function changeSuccessF(taskid){
+		
+		 $.ajax({
+				type:"get",
+				url:"updateSuccess.htm?task_id="+taskid,
+				dataType:'html',
+				success:function(data){
+					    $("#detailModal").hide();
+						$('.modal-backdrop').remove();
+						$("#View").empty();
+						$("#View").append(data); 	
+				},
+				error:function(){
+					alert(' 에러! 관리자에게 문의하세요');
+				}
+			});
+		 
+		 
+	 }
+	function changeSuccessF_zero(taskid){
+		 alert(taskid);
+		 $.ajax({
+				type:"get",
+				url:"updateSuccessZero.htm?task_id="+taskid,
+				dataType:'html',
+				success:function(data){
+					    $("input:checkbox[id='complete']").attr("checked", false);
+					    $("#detailModal").hide();
+						$('.modal-backdrop').remove();
+						$("#View").empty();
+						$("#View").append(data); 		
+				},
+				error:function(){
+					alert('검색 에러! 관리자에게 문의하세요');
+				}
+			});
+		 
+		 
+	} 
+	
+	*/
+	
+	
+	
 </script>
 
-<br>
-<br>
+
 <div class="row">
 	<div class="col-md-5"></div>
 	<div class="col-md-2">
@@ -137,30 +387,233 @@
 	<div class="col-md-1" align="right">
 		<button class="btn btn-default dropdown-toggle" type="button"
 			id="menu1" data-toggle="dropdown">
-			전체 <span class="caret"></span>
+			정보 수정<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+			<li role="presentation" ><a role="menuitem" tabindex="-1"
+				href="#cateTitle_Update" data-toggle="modal">카테고리제목   수정</a></li>
 			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">전체</a></li>
+				href="#">업무제목   수정</a></li>
 			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">나에게 배정된 업무</a></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">내가 작성한 업무</a></li>
+				href="#">필요시 추후 추가 예정</a></li>
 			<li role="presentation" class="divider"></li>
 			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">팔로우 중</a></li>
+				href="#">필요시 추후 추가 예정</a></li>
 		</ul>
-
 	</div>
-	<div class="col-md-2">
+</div>
+      
+	<!--카테고리 title 수정 모달  -->
+	  <form id="cateUpdate" name="cateUpdate" method="post">
+	  <div class="modal fade" id="cateTitle_Update">
+         <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title text-align-center fw-bold mt" id="myModalLabel18">카테고리 제목 수정</h4>
+                         <p class="text-align-center fs-mini text-muted mt-sm">
+                                           	원하시는 제목으로 수정이 가능합니다. 오타를 주의해주세요 ^_^
+                                        </p>
+                                    </div>
+                                    <div class="modal-body bg-gray-lighter">
+                                    
+                                        <div class="row">
+                                                &nbsp;<i class="fa fa-circle text-danger"></i> &nbsp; 수정할 카테고리 제목 선택
+                                        		<div class="col-md-12">
+                                                    <div class="form-group">
+                                                   
+                                                   
+                                           			
+                                           			<select id="categoryTitle">
+                                           			<option selected>선택하기</option>
+														<c:forEach items="${list}" var="n">
+						 								<option value="${n.category_id}">${n.title}</option>		
+														</c:forEach>
+    		        								</select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="row">
+                                                &nbsp;<i class="fa fa-circle text-warning"></i>&nbsp; 카테고리 제목 수정
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control input-no-border"
+                                                        id="changeTitle" placeholder="변경할 제목을 적어주세요">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                      
+                                    </div>
+                                    <div class="modal-footer">
+                                         <button type="submit" class="btn btn-success" id="cateUpdate">Save changes</button>
+                                        <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+                
+	
+	
+	
+	<!-- detail task modal  -->
+	
+	<div class="modal fade" id = "detailModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+	     	 <div class="modal-content">
+    <section class="widget">
+        <header>
+            <h4>
+            	<%-- 
+            	<input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
+            		<c:if test="${n.success_f eq 1}">
+			             checked= "checked"
+			             onclick="modalChangeSuccessF();"
+			        </c:if> 
+			        <c:if test="${n.success_f eq 0}">
+			             onclick="modalChangeSuccessF_zero();"
+			        </c:if>
+            	>
+            	 --%>
+                <span class="fw-semi-bold" id="span1">
+               
+                </span> 
+                <small><span id="Modalenrolldate"></span></small>
+            </h4>
+            <div class="widget-controls">
+            	<span class="label label-danger fw-normal" id="modal_delete" style="cursor:pointer" data-dismiss="modal" onclick="modalDeleteTask();">delete</span>
+            	&nbsp;&nbsp;&nbsp;&nbsp;
+                <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
+            </div>
+        </header>
+        <div class="widget-body">
+            <form id="validation-form" class="form-horizontal form-label-left" method="post"
+                  data-parsley-priority-enabled="false"
+                  novalidate="novalidate">
 
-		<div class="input-group">
-		
-		<span class="input-group-addon">
-		<span class="glyphicon glyphicon-search"></span>
-		</span>
-			<input type="text" class="form-control" placeholder="업무 검색하기">
-		</div>
+                <fieldset>
+                    <legend>
+                        <!-- <span class="label label-warning  text-gray-dark mr-xs">
+                            HTML5
+                        </span> -->
+                       
+                    </legend>
+                      
+                        <div class="form-group row">
+                        	<label class="control-label col-sm-3" for="number">
+                                	상세 설명
+                            </label>
+                        	<div class="col-sm-9">
+                        		<textarea rows="3" class="autogrow form-control transition-height" id="modalDetailExplain"
+                             	                     placeholder="Try to add few new lines.."></textarea>
+                        	</div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="number">
+                                	시작일
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="detailStart" name="detailStart" class="form-control"
+                                       data-parsley-type="number"
+                                       required="required">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="number">
+                                	마감일
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="detailEnd" name="detailEnd" class="form-control"
+                                       data-parsley-type="number"
+                                       required="required">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="range">
+                                	배정된 멤버
+                            </label>
+                            <div class="col-sm-9">
+                                <!-- <input type="text"  class="form-control"
+                                       id="member" name="member"
+                                       data-parsley-range="[10, 100]"
+                                       data-parsley-trigger="change"
+                                       data-parsley-validation-threshold="1"
+                                       required="required"> -->
+                              <!--          <input type="checkbox">
+                              
+                              
+                              	멤버리스트 들어갈 부분
+                              
+                              
+                              
+                               -->         
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="password">
+                               		 팔로워
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="follower22" name="follower22" class="form-control mb-sm"
+                                       data-parsley-trigger="change"
+                                       data-parsley-minlength="6"
+                                       required="required">
+                            </div>
+                        </div>
+                        
+                        
+                               <hr>        
+                                       
+                                       
+                                       
+                       <div class="form-group row">
+                            <label class="control-label col-sm-3" for="password">
+                               		 체크리스트
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="CheckContents" name="CheckContents" class="form-control mb-sm" style="width:635px"
+                                       data-parsley-trigger="change"
+                                       data-parsley-minlength="6"
+                                       required="required">
+                                       
+                            </div>
+                            <div class="col-sm-1">
+                            	<button type="button" class="btn btn-warning" onclick="checkreg();"><i class="fa fa-plus" 
+                            	style="margin-left: 5px;margin-top: 5px;margin-right: 2px;"></i></button>
+                            </div>
+                        </div>  
+                    
+                        <div id="checkListAjax">
+                        
+                        </div>
+                   
+                </fieldset>
+
+                <div class="form-actions">
+                	<div class="row">
+                		<div class="col-sm-10">
+                    		<button style="margin-left:20px" type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
+                    	</div>
+                    	<div class="col-sm-2">
+                    		<button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button>
+                		</div>
+                	</div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+</div>
+</div>
+	
+	<!--/detail task modal  -->
+	
+	
+	
+	<div class="col-md-2">
 
 		<!-- modal -->
 		<form id="add_taskTitle" name="add_taskTitle" method="post">
@@ -182,8 +635,7 @@
 						<div class="modal-footer">
 
 							<!--   <button type="button" class="btn btn-primary">Save changes</button> -->
-							<button type="submit" class="btn btn-info btn-circle btn-lg"
-								id="addbtn">
+							<button type="submit" class="btn btn-info btn-circle btn-lg">
 								<i class="fa fa-check"></i>
 							</button>
 							<button type="button" class="btn btn-warning btn-circle btn-lg"
@@ -213,7 +665,8 @@
 
 <br>
 <br>
-
+ 
+<!-- <p>Date: <input type="text" id="datepicker"></p>-->
 
 <div id="View">
 

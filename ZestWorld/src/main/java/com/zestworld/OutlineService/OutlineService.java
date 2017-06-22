@@ -15,6 +15,7 @@ import com.zestworld.Table_DTO.TaskAssignMember_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
+import com.zestworld.taskListDAO.taskListDao;
 
 @Service
 public class OutlineService {
@@ -137,5 +138,13 @@ public class OutlineService {
 		int assginmemberReg= dao.checkListDelete(check_id);
 		return assginmemberReg;
 	}
+	
+	//민성부분(프로젝트 -> 업무리스트 페이지 이동할때 필요한 서비스부분)
+	public List<Category_DTO> tasklist(Category_DTO dto) throws ClassNotFoundException, SQLException{
+		taskListDao dao = sqlsession.getMapper(taskListDao.class);
+		List<Category_DTO> list=dao.tasklist(dto);
+		return list;
+	}
+	
 	
 }
