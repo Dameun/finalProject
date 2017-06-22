@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -206,8 +207,10 @@ public class JoinController {
 
 	//멤버 초대 로그인창
 		@RequestMapping(value="/invitation.htm", method=RequestMethod.GET)	
-		 public String memberInvitation () throws Exception {
-		        return "home/loginOk";
+		 public String memberInvitation (String workspace_id,HttpSession session) throws Exception {
+			
+			session.setAttribute("workspace_id",workspace_id);
+		    return "home/loginOk";
 		}
 		
 		
@@ -215,9 +218,11 @@ public class JoinController {
 		@RequestMapping(value = "/invitation.htm", method = RequestMethod.POST)
 		public String invitation(@RequestParam Map<String, Object> paramMap,Workspace_DTO member,HttpServletRequest request,Model model) throws Exception {
 
-			// mail 코드랑, 어떻게 보낼지 생각해보자 spring 이메일초대
-			String path = "";
-			String path2 ="http://localhost:8090/main/invitation.htm";
+			int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		      
+	         // mail 코드랑, 어떻게 보낼지 생각해보자 spring 이메일초대
+	         String path = "";
+	         String path2 ="http://localhost:8090/main/invitation.htm?workspace_id="+workspace_id;
 			//일단 로그인 페이지로 보내줌 로그인페이지에서 값을 받고 처리하자 
 			
 			//StringBuffer realpath = request.getRequestURL();
@@ -225,22 +230,6 @@ public class JoinController {
 			
 			String id=(String) paramMap.get("userid"); //보내는 사람 아이디는 필요하니깐
 			
-			//여기만 처리 잘하면 될듯한데 여기만 넘기자
-			/*Workspace_DTO workSpace= new Workspace_DTO();
-			workSpace.setWorkspace_id(workSpace.getWorkspace_id());
-			workSpace.setVisit_id(workSpace.getVisit_id());
-			workSpace.setUser_id(workSpace.getUser_id());*/
-			
-			//List<Workspace_DTO> list= service.invitation(wo);
-			//여기서 어떻게 뿌려줄까...
-			
-	/*		Users_DTO updateMember = new Users_DTO();
-		    updateMember.setUserid(member.getUserid());
-	*/	    
-		    //어차피 mapper 태워서 누구한테 보냈다는 쿼리 작성해야함
-			//디비가 필요 없을려나 경로만 보내주니깐
-			//List<Workspace_DTO> result = service.invitation(member); //아이디를 찍어서 보내주기만하는 쿼리짜면될듯
-			//로그인페이지에서 호출 생각!!
 		    if (path2 != null) {
 				
 				Email_DTO email = new Email_DTO();
