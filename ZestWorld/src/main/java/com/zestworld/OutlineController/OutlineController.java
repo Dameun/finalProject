@@ -46,7 +46,8 @@ public class OutlineController {
 		System.out.println(order);
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		Calendar cal = Calendar.getInstance(new SimpleTimeZone(0x1ee6280, "KST"));
-		
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		dto.setWorkspace_id(workspace_id);
 		//湲곌컙寃��깋
 		if(datefilter.equals("30")){
 			cal.add(Calendar.MONTH ,-1); // �븳�떖�쟾 �궇吏� 媛��졇�삤湲�

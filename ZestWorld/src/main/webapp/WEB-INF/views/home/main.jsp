@@ -8,7 +8,9 @@
 <script type="text/javascript">
 $(function() {
 		alert('projectMain');
-		ajaxView('projectMain.ajax')
+		ajaxView('projectMain.ajax');
+		connect();
+		AlarmCountView();
 });	
 
 </script>

@@ -13,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.zestworld.AlarmService.AlarmService;
 import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Alarm_DTO;
@@ -29,14 +32,32 @@ public class alarmAjaxController {
 	@Autowired
 	private AlarmService service;
 	
+	@Autowired(required=false)
+	private View jsonview; //빈객체의 주소값이 들어와있어야한다.
+	
 	public alarmAjaxController()
 	{
-		System.out.println("alarmController.alarmController()");
 	}
 	
 	//알람 리스트
 	@RequestMapping(value="alarmList.ajax", method = RequestMethod.GET)
     public String alarmList(Model model)
+            throws ClassNotFoundException, SQLException{
+		
+		  List<Alarm_DTO> list = new ArrayList<Alarm_DTO>();
+		  list = service.GetList();
+		  Alarm_DTO alarm_dto;
+		  for( int i =0; i <list.size(); i ++)
+		  { 
+			  alarm_dto = list.get(i);	
+		  }
+		  model.addAttribute ("alarmList",list);
+	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
+	}
+	
+	//알람 카운트 수 변경
+	@RequestMapping(value="alarmCount.ajax", method = RequestMethod.GET)
+    public @ResponseBody String  alarmCount(Model model)
             throws ClassNotFoundException, SQLException{
 		
 		  List<Alarm_DTO> list = new ArrayList<Alarm_DTO>();
@@ -48,14 +69,16 @@ public class alarmAjaxController {
 			  alarm_dto = list.get(i);
 			  if( alarm_dto.getCheck_f() == 0) ReadCheck++;
 		  }
-		  model.addAttribute ("alarmList",list);
-		  model.addAttribute ("unCount",ReadCheck);
-	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
+		
+		  String unCountStr = String.valueOf(ReadCheck);
+		  model.addAttribute("unCountStr", unCountStr);
+	      return unCountStr;
 	}
+		
 	
 	//드롭박스 클릭시 안읽은 알람들 -> 읽은 알람으로 db수정 
 	@RequestMapping(value="updateAlarm.ajax", method = RequestMethod.GET)
-    public String updateAlarm(Model model)throws ClassNotFoundException, SQLException
+    public @ResponseBody String updateAlarm(Model model)throws ClassNotFoundException, SQLException
 	{
 		  List<Alarm_DTO> list = service.GetList();
 		  Alarm_DTO alarm = new Alarm_DTO();
@@ -66,15 +89,16 @@ public class alarmAjaxController {
 			  service.updateAlarm(alarm);
 		  }
 		  
-		  model.addAttribute ("alarmList",list);
-		  model.addAttribute ("unCount",0);
-		  
-	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
+		 // model.addAttribute ("alarmList",list);
+	      //return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
+		  String success = "success";
+		  model.addAttribute("success", success);
+	      return success;
 	}
 	
 	//새 알람시 DB저장 default 안읽은 타입
 	@RequestMapping(value="newAlarm.ajax", method = RequestMethod.POST)
-    public String newAlarm(@RequestParam(value="newAlarm") String newAlarm,Model model)
+    public @ResponseBody String newAlarm(@RequestParam(value="newAlarm") String newAlarm,Model model)
             throws ClassNotFoundException, SQLException{
 		 
 		  //alarmType+'/'+ taskTitle +'/'+selectId = newAlarm
@@ -105,9 +129,11 @@ public class alarmAjaxController {
 			  alarm_dto = list.get(i);
 			  if( alarm_dto.getCheck_f()==0) ReadCheck++;
 		  }
-		  model.addAttribute  ("alarmList",list);
-		  model.addAttribute  ("unCount",ReadCheck);
-	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
+		  
+		  String success = "success";
+		  model.addAttribute("success", success);
+	      return success;
+	      //return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
 	}
 	
 	//알람 stirng 만들기 
@@ -137,6 +163,4 @@ public class alarmAjaxController {
 		  
 		  return returnMsg;
 	}
-	
-
 }

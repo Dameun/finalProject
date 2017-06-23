@@ -4,11 +4,13 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Project_DTO;
@@ -17,10 +19,8 @@ import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.WorkspaceUser_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
-import com.zestworld.userStateDAO.IUserStateDAO;
 import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
-import org.springframework.ui.Model;
 
 @Controller
 public class workspaceController {
@@ -35,15 +35,33 @@ public class workspaceController {
 	private UserStateService userstateService;
 	
 	@RequestMapping("/workSpace.htm")
-	public String GetWorkSpace(Principal principal, Model model)
+	public String GetWorkSpace(Principal principal,HttpSession session, Model model)
 	{	
+		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
+		String workspaceid=" ";
 		String usernameid = principal.getName();
-		
 		Users_DTO user = service.GetSearchUser(usernameid);
 		DataController.getInstance().SetUserSavedata(user);
 		
-		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-	
+		if( session.getAttribute("workspace_id") != null){
+			workspaceid = (String)session.getAttribute("workspace_id");
+			System.out.println("Visit : ");
+			int strWorkspaceId=Integer.parseInt(workspaceid);
+			
+			WorkspaceUser_DTO workspaceUser= new WorkspaceUser_DTO ();
+			workspaceUser.setWorkspace_id(strWorkspaceId);
+			workspaceUser.setUser_id(usernameid);
+			
+			//String visitUser=DataController.getInstance().GetUser().getUser_id();
+			
+			List<WorkspaceUser_DTO> listSize= taskDao.GetWorkSpaceMemberChk(workspaceUser);
+			
+			if(listSize.size()==0){
+				taskDao.insertWorkSpaceUser(workspaceUser);
+			}	
+		}
+		workspaceid = "";
+		
 
         List<WorkspaceUser_DTO> workspaceUserList = taskDao.GetWorkSpaceList(usernameid);
         List<Workspace_DTO>workspaceList = new ArrayList<Workspace_DTO>();

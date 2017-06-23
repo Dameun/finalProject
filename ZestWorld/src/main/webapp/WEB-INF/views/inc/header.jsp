@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; ch arset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>ZestWorld</title>
  
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link href="resources/dist/css/ContestBoardView.css">
-  
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- 민성 추가부분 (이부분에 안쓰면 modal 자동으로 닫기는 현상이 발생!!) -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -20,7 +17,7 @@
     <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
     <![endif]-->
-    <link rel="shortcut icon" href="./resource/img/favicon.png">
+   <!--  <link rel="shortcut icon" href="./resource/img/favicon.png"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -35,7 +32,7 @@
   
   </head>
 
-<c:set var="member" value="${member}"/>
+
 <nav class="page-controls navbar navbar-default">
     <div class="container-fluid">
         <!-- .navbar-header contains links seen on xs & sm screens -->
@@ -68,29 +65,33 @@
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
-            <!-- search form! link it to your search server -->
-         <!--    <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <div class="input-group input-group-no-border">
-                    <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                        <input class="form-control" type="text" placeholder="Search Dashboard">
-                    </div>
-                </div>
-            </form>
-           -->
+		      <li class="nav-item nav-item-cta">
+							<sec:authorize access="!hasRole('ROLE_USER')">
+								<a class="btn btn-cta btn-cta-secondary" href="login.htm">로그인</a>
+							</sec:authorize>
+							<sec:authorize access="hasAnyRole('ROLE_ADMIN, ROLE_USER')">
+							<sec:authentication property="name" var="loginUser" />
+							<a class="btn btn-cta btn-cta-secondary" href="${pageContext.request.contextPath}/logout">${loginUser}님 로그아웃</a>
+							</sec:authorize>
+				</li>
+							<sec:authorize access="hasAnyRole('ROLE_ADMIN, ROLE_USER')">
+							</sec:authorize>
+							<sec:authorize access="!hasRole('ROLE_USER')">
+							<li class="nav-item nav-item-cta last">
+								<a class="btn btn-cta btn-cta-secondary" href="join.htm">회원가입</a>
+							</li>
+							</sec:authorize>
             <ul class="nav navbar-nav navbar-right">
-                 <li class="dropdown" onclick="dropdownClick(this)">
+                 <li class="dropdown" onclick="AlarmReadCheck()">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown"
                    >
                         <span class="thumb-sm avatar pull-left">
-                            <img class="img-circle" src="./resource/img/people/a5.jpg" alt="...">
+                           <!--  <img class="img-circle" src="./resource/img/people/a5.jpg" alt="..."> -->
                         </span>
                         &nbsp;
                         User <strong>User</strong>&nbsp;
-                        <span class="circle bg-warning fw-bold">
-                          	13
+                        <span class="circle bg-warning fw-bold" id="alarmCount" name = "alarmCount">
+                          	0
                         </span>
                         <b class="caret"></b></a>
                     <!-- ready to use notifications dropdown.  inspired by smartadmin template.
@@ -102,6 +103,11 @@
                             <header class="panel-heading">
                                 <div class="text-align-center mb-sm">
                                     <strong>User STATE :D</strong>
+                                    <strong>
+	                                    <script type="text/javascript">
+	                                    	
+	                                    </script>
+                                    </strong>
                                 </div>
                                 <div class="btn-group btn-group-sm btn-group-justified" id="notifications-toggle" data-toggle="buttons">
                                     <label class="btn btn-default active" onclick="userState('01');">
@@ -122,6 +128,7 @@
                             </header>
                             <!-- notification list with .thin-scroll which styles scrollbar for webkit -->
                             <div id="alarm">
+                              
       						</div>
                             <footer class="panel-footer text-sm">
                                 <!-- ajax-load button. loads demo/ajax/notifications.php to #notifications-list
@@ -153,11 +160,7 @@
 </nav>
 
 <script>
-			function popupOpen() {
-				var popUrl = "http://localhost:3000"; //팝업창에 출력될 페이지 URL
-				var popOption = "width=380, height=400, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-				window.open(popUrl, "", popOption);
-			}
+		
 		</script>
 <!-- common libraries. required for every page-->
 <script src="resources/build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
@@ -196,4 +199,93 @@
 <!-- page specific js -->
 <script type="text/javascript" src="resources/Js/ajaxView.js"> </script> 
 <script src="resources/build/bootstrap/js/index.js"></script> 
+
+<script type="text/javascript">
+//ajaxView에서 connect 성공하면 호출, 알람시 호출
+
+function AlarmCountView() 
+{
+	console.log("알람 <카운트 표시>");
+	$.ajax({
+		type:"get",
+		url: "alarmCount.ajax",
+		success:function(data)
+		{
+			console.log('alarmCountdata'+data);
+			document.getElementById('alarmCount').innerHTML = data;
+			AlarmUpdate();
+		},
+		
+		error:function(){
+			alert('error:' + "alarmCount.ajax");
+		},
+	});	
+	
+}
+
+
+function AlarmUpdate()
+{		
+	console.log("알람 <DB>");
+	$.ajax({
+		type:"get",
+		url: "alarmList.ajax",
+		success:function(data)
+		{
+			$('#alarm').empty();
+			$('#alarm').html(data); 		
+		},
+		error:function(){
+			alert('error:' + "alarmCount.ajax");
+		},
+	});		
+}
+
+//알람 메세지 들어옴
+function AlarmInsert(evt)
+{
+	console.log("알람 <insert>");
+
+	$.ajax({
+		  type:"post",
+		  dataType: "html",
+		  url:"newAlarm.ajax",
+		  data:{"newAlarm": evt.data},
+		  success:function(data){
+			  AlarmCountView(); // header의 알람 숫자표시 수정
+			  // $('#alarm').empty(); 
+			  //$('#alarm').html(data);
+		  }
+	});	
+
+}
+
+
+//읽음으로 db변경 및 숫자표시 0으로 변경 
+function AlarmReadCheck()
+{
+	$.ajax({
+			type:"get",
+			url:"updateAlarm.ajax",
+			success:function(data){ 
+				console.log('sucess');
+			},
+			error:function(){
+				alert('error');
+			},
+	});	
+	//AlarmCountView();
+	document.getElementById('alarmCount').innerHTML = '0';
+}
+
+
+//2017-06-21 은경
+function popupOpen() 
+{
+	var popUrl = "http://192.168.0.152:3000"; //팝업창에 출력될 페이지 URL
+	var popOption = "width=380, height=400, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+	window.open(popUrl, "", popOption);
+}
+//});
+</script>
 </html>

@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 <script type="text/javascript">
 
 function projectClick(project_id)
@@ -16,8 +16,6 @@ function projectClick(project_id)
 		url:"selectProject.ajax",
 		data:{"project_id" : project_id},
 		success:function(data){
-			
-			
 			ajaxView('taskList.ajax');
 		},
 		error:function(){

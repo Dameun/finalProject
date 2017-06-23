@@ -1,10 +1,12 @@
 package com.zestworld.Join_DAO;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import com.zestworld.Table_DTO.Role_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
+import com.zestworld.Table_DTO.Workspace_DTO;
 
 public interface JoinDAO {
 	
@@ -35,7 +37,8 @@ public interface JoinDAO {
 	public int pwEdit(Users_DTO member) throws ClassNotFoundException, SQLException; 
 	
 	
-	
+	//맴버초대 이메일
+	public List<Workspace_DTO> invitation (Workspace_DTO wo)  throws Exception;
 	
 	
 	

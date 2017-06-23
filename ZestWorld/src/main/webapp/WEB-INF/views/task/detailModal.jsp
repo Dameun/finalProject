@@ -3,7 +3,7 @@
 
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css">
+<!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css"> -->
 
 	<div class="modal fade" id = "detailModal" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -12,13 +12,25 @@
         <header>
             <h4>
             	<input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
-            		<c:if test="${n.success_f eq 1}">
-			             checked= "checked"
+            		<%-- <c:if test="${n.success_f eq 0}">
+			             
 			             onclick="modalChangeSuccessF();"
 			        </c:if> 
-			        <c:if test="${n.success_f eq 0}">
+			        <c:if test="${n.success_f eq 1}">
+			        	checked= "checked"
 			             onclick="modalChangeSuccessF_zero();"
+			        </c:if> --%>
+			        
+			        
+			        <c:if test="${n.success_f eq 1}">
+			             checked= "checked"
+			             onclick="modalChangeSuccessF_zero(${n.task_id});"
+			        </c:if> 
+			        <c:if test="${n.success_f eq 0}">
+			            onclick="modalChangeSuccessF(${n.task_id});"
 			        </c:if>
+			        
+			        
             	>
             	
                 <span class="fw-semi-bold" id="span1">

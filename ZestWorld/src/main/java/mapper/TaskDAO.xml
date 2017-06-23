@@ -49,4 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="GetProjectByname" resultType="com.zestworld.Table_DTO.Project_DTO">
    		SELECT* FROM Project where p_title=#{p_title} and p_admin=#{p_admin}
    </select>
+   
+   <select id="GetWorkSpaceMemberChk" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
+   		select* from Workspace_User where user_id=#{user_id} and workspace_id=#{workspace_id}
+   </select>
 </mapper>

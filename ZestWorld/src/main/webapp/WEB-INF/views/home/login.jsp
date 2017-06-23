@@ -30,17 +30,34 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script
 	src="http://www.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js" ></script>
 <script type="text/javascript">
-	function search() {
-		if ((pwsearch.userid.value != null) && (pwsearch.phone.value != null)) {
-			pwsearch.submit();
-		} else if (pwsearch.userid.value == null) {
-			alert("아이디를 입력하세요.")
-		} else if (pwsearch.phone.value == null) {
-			alert("휴대폰 번호를 입력하세요.")
-		}
+function search() {
+	pwsearch.submit();
+} 
 
-	}
+//벨리데이션
+$(document).ready(function () {          
+    $('#registerForm').validate({
+        rules: {
+        	password: "required",
+            username: {required:true, email:true}
+        },
+        messages: {
+            password:"암호를 입력하시오.",
+            username: {
+                required:"이메일을 입력하시오.",
+                email:"올바른 이메일을 입력하시오."}
+            
+        },
+        submitHandler: function (frm){
+            frm.submit();   //유효성 검사를 통과시 전송
+        },
+        success: function(e){
+        }
+       
+    });
+  });
 </script>
 </head>
 <body class="login-page">
@@ -62,7 +79,7 @@
 				<div class="widget-body">
 					<c:url value="/login" var="loginURL" />
 					<form name="f" action="${loginURL}" method="post"
-						class="login-form mt-lg">
+						class="login-form mt-lg" id="registerForm">
 						<div class="form-group">
 							<input type="text" name="username" class="form-control"
 								id="exampleInputEmail1" placeholder="email">
