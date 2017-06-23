@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="./resource/dist/css/groupBoardView.css">
+<!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/groupBoardView.css"> -->
 
 <%-- <c:forEach items="${chklist}" var="n">
 <div class="form-group row">

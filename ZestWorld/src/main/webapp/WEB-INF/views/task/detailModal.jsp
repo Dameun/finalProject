@@ -3,7 +3,7 @@
 
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css">
+<!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css"> -->
 
 	<div class="modal fade" id = "detailModal" role="dialog">
 	<div class="modal-dialog modal-lg">

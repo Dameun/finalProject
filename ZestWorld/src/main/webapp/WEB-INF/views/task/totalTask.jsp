@@ -2,21 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link rel="stylesheet" type="text/css" href="resources/dist/css/ContestBoardView.css">
-
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css"> -->
-
-<!--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!-- <script type="text/javascript" src="Js/chartAll.js"></script> -->
-
+<link href="resources/dist/css/ContestBoardView.css">
 <script type="text/javascript">
 var categoryId='';
 var categoryTitle='';
@@ -28,7 +15,7 @@ var member='';
 var detailExplain='';
 
 $(document).ready(function(){
-	$('#detailModal').hide();
+	//$('#detailModal').hide();
 	console.log("dsadasd:");
 	var forme='';
 	var writer='';
@@ -52,14 +39,14 @@ $(document).ready(function(){
 		}
 	});
 	
-	 $("#addbtn").on("click", function() {
+	/* $("#addbtn").on("click", function() {
 
 	   // $("#add_taskTitle").submit();
 
 	    $("#add-modal").hide();
 	    $('.modal-backdrop').hide();
 
-	 }); 
+	 }); */
 	 $(this).removeClass('hasDatepicker').datepicker();
 	 $( "#datepicker" ).datepicker();
 	
@@ -296,7 +283,7 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
-	    		 send( '0', title,'zest@kosta.com', 'dam@naver.com');
+	    		 send( '0', title,'yh@kosta.com', 'user@naver.com');
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },
@@ -304,8 +291,7 @@ function submit2(){
 		          alert('Error while request..');
 		       }
 		    });
-		    console.log("check");
-		    $('#detailModal').empty();
+			
 	}
 function projectchange(){
 
@@ -626,7 +612,7 @@ function checkListDelete(chk){
                   <div class="modal-footer">
 
                      <button type="button" class="btn btn-info btn-circle btn-lg"
-                        id="addbtn" onclick="submit2();"   data-dismiss="modal">
+                        id="addbtn" onclick="submit2();" data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
                      <button type="button" class="btn btn-warning btn-circle btn-lg"

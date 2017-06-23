@@ -6,8 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ZestWorld</title>
-	 <script type="text/javascript" src="./resource/Js/ajaxView.js"></script>
-	<link href="index.css" type="text/css" rel="stylesheet">
+	<!--  <script type="text/javascript" src="./resource/Js/ajaxView.js"></script> -->
+	<!-- <link href="index.css" type="text/css" rel="stylesheet"> -->
 </head>
 <body class="nav-collapsed chat-sidebar-container pace-done">
 

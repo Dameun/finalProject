@@ -22,19 +22,21 @@ function onOpen(evt) {
 
 function onMessage(evt) {
 
-	console.log("evt.data"+evt.data);
+	console.log("ajax.view >> evt.data"+evt.data);
+	//AlarmInsert(evt);
+	console.log("알람 AlarmInsert")
+
 	$.ajax({
-		  
 		  type:"post",
 		  dataType: "html",
 		  url:"newAlarm.ajax",
 		  data:{"newAlarm": evt.data},
 		  success:function(data){
-			  $('#alarm').empty(); 
-			  $('#alarm').html(data);
+			  AlarmCountView(); // header의 알람 숫자표시 수정
+			  // $('#alarm').empty(); 
+			  //$('#alarm').html(data);
 		  }
-	  });	
-	
+	});	
 
 }
 function onClose(evt) {
@@ -57,24 +59,9 @@ function appendMessage(msg) {
 
 }
 
-$(function() {
+/*$(function() {
 	connect();
-	
-	//알람
-	$.ajax({
-		type:"get",
-		url: "alarmList.ajax",
-		success:function(data)
-		{
-			$('#alarm').empty();
-			$('#alarm').append( $('#alarm').html(data)); 		
-		},
-		
-		error:function(){
-			alert('error:' + "alarmList.htm");
-		},
-	});	
-});
+});*/
 
 //$(function() {
 	function ajaxView(menuName)
