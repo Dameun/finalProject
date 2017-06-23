@@ -46,11 +46,11 @@
                     <!-- shown on xs & sm screen. collapses and expands navigation -->
                     <a class="visible-sm visible-xs" id="nav-collapse-toggle" href="#" title="" data-placement="bottom" data-original-title="Show/hide sidebar">
                         <span class="rounded rounded-lg bg-gray text-white visible-xs"><i class="fa fa-bars fa-lg"></i></span>
-                        <i class="fa fa-bars fa-lg hidden-xs" style="padding-top:5px;"></i>
+                        <i class="fa fa-bars fa-lg hidden-xs" ></i>
                     </a>
                 </li>
-              <li class="ml-sm mr-n-xs hidden-xs"><a href="#"><i class="fa fa-refresh fa-lg"  style="padding-top:5px;"></i></a></li>
-                <li class="ml-n-xs hidden-xs"><a href="#"><i class="fa fa-times fa-lg"  style="padding-top:2px;"></i></a></li>
+           <!--    <li class="ml-sm mr-n-xs hidden-xs"><a href="#"><i class="fa fa-refresh fa-lg"  style="padding-top:5px;"></i></a></li>
+                <li class="ml-n-xs hidden-xs"><a href="#"><i class="fa fa-times fa-lg"  style="padding-top:2px;"></i></a></li> -->
             </ul>
             <ul class="nav navbar-nav navbar-right visible-xs">
                 <li>
@@ -65,15 +65,15 @@
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
-		      <li class="nav-item nav-item-cta">
+		      <li class="nav-item nav-item-cta"style="list-style-type: none;">
 							<sec:authorize access="!hasRole('ROLE_USER')">
 								<a class="btn btn-cta btn-cta-secondary" href="login.htm">로그인</a>
 							</sec:authorize>
 							<sec:authorize access="hasAnyRole('ROLE_ADMIN, ROLE_USER')">
 							<sec:authentication property="name" var="loginUser" />
-							<a class="btn btn-cta btn-cta-secondary" href="${pageContext.request.contextPath}/logout">${loginUser}님 로그아웃</a>
+							<a style="padding-top:10px;" class="btn btn-cta btn-cta-secondary" href="${pageContext.request.contextPath}/logout">${loginUser}님 로그아웃</a>
 							</sec:authorize>
-				</li>
+								</li>
 							<sec:authorize access="hasAnyRole('ROLE_ADMIN, ROLE_USER')">
 							</sec:authorize>
 							<sec:authorize access="!hasRole('ROLE_USER')">
@@ -142,13 +142,13 @@
                     </div>
                 </li>
           
-                <li>
+                <li  style="padding-top:5px;">
                     <a href="#">
                         <i class="fa fa-globe fa-lg"></i>
                     <i class="chat-notification-sing animated bounceIn"></i></a>
                    
                 </li>
-                <li>
+                <li style="padding-top:5px;">
      				<a href="javascript:popupOpen();" >
             			<i class="fa fa-reddit fa-lg">
             			</i>
