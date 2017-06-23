@@ -65,7 +65,7 @@
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
-		      <li class="nav-item nav-item-cta"style="list-style-type: none;">
+		     		 <li class="nav-item nav-item-cta"style="list-style-type: none;">
 							<sec:authorize access="!hasRole('ROLE_USER')">
 								<a class="btn btn-cta btn-cta-secondary" href="login.htm">로그인</a>
 							</sec:authorize>
@@ -82,7 +82,7 @@
 							</li>
 							</sec:authorize>
             <ul class="nav navbar-nav navbar-right">
-                 <li class="dropdown" onclick="AlarmReadCheck()">
+                 <li class="dropdown" id="dropdownid" onclick="AlarmReadCheck()" >
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown"
                    >
                         <span class="thumb-sm avatar pull-left">
@@ -99,7 +99,7 @@
                          notifications, messages, progress. leave or add what's important for you.
                          uses Sing's ajax-load plugin for async content loading. See #load-notifications-btn -->
                     <div class="dropdown-menu animated fadeInUp" id="notifications-dropdown-menu">
-                        <section class="panel notifications">
+                        <section class="panel notifications" >
                             <header class="panel-heading">
                                 <div class="text-align-center mb-sm">
                                     <strong>User STATE :D</strong>
@@ -262,21 +262,57 @@ function AlarmInsert(evt)
 
 
 //읽음으로 db변경 및 숫자표시 0으로 변경 
-function AlarmReadCheck()
+function AlarmReadCheck(target)
 {
+	if( document.getElementById('alarmCount').innerHTML== '0' )
+	{
+		AlarmUpdate();
+	}
+	
+	//$("#dropdownid").attr("aria-expanded","true");
 	$.ajax({
 			type:"get",
 			url:"updateAlarm.ajax",
 			success:function(data){ 
-				console.log('sucess');
+				document.getElementById('alarmCount').innerHTML = '0';
+				document.getElementById("dropdownid").setAttribute('class', 'dropdown open');
+				
 			},
 			error:function(){
 				alert('error');
 			},
 	});	
 	//AlarmCountView();
-	document.getElementById('alarmCount').innerHTML = '0';
+	
 }
+
+/*
+* 선택시 유져 상태 저장 
+* 챗봇 데이터 저장시 이용
+* parameter : userStateStr
+* 01 : 업무
+* 02 : 외출
+* 03 : 회의
+* 04 : 식사
+* 
+* */
+function userState(userStateStr)
+	{
+		$.ajax({
+			type:"get",
+			url: "userState.ajax",
+			data : "state="+userStateStr,
+			success:function(data)
+			{
+				conselo.log("sccess");
+			},
+			
+			error:function(){
+				alert('error:' + menuName);
+			},
+		});	
+	}
+
 
 
 //2017-06-21 은경
