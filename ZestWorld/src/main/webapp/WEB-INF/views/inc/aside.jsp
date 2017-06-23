@@ -47,7 +47,7 @@
                     <span class="icon">
                         <i class="fa fa-envelope"></i>
                     </span>
-                   	프로잭트
+                   	프로젝트
                     <span class="label label-danger">
                         9
                     </span>
