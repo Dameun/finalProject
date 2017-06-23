@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>ZESTWORLD - Login</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
     <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
     <!--[if IE 9]>
@@ -27,6 +28,7 @@
          https://code.google.com/p/chromium/issues/detail?id=332189
          */
     </script>
+   
 </head>
 
 <script type="text/javascript">
