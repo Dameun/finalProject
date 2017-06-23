@@ -45,7 +45,7 @@ public class workspaceController {
 		
 		if( session.getAttribute("workspace_id") != null){
 			workspaceid = (String)session.getAttribute("workspace_id");
-			System.out.println("Visit : ");
+			
 			int strWorkspaceId=Integer.parseInt(workspaceid);
 			
 			WorkspaceUser_DTO workspaceUser= new WorkspaceUser_DTO ();

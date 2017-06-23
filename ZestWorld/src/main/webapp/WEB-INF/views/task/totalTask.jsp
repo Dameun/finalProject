@@ -15,7 +15,6 @@ var member='';
 var detailExplain='';
 
 $(document).ready(function(){
-	//$('#detailModal').hide();
 	console.log("dsadasd:");
 	var forme='';
 	var writer='';
@@ -39,14 +38,14 @@ $(document).ready(function(){
 		}
 	});
 	
-	/* $("#addbtn").on("click", function() {
+	 $("#addbtn").on("click", function() {
 
 	   // $("#add_taskTitle").submit();
 
 	    $("#add-modal").hide();
 	    $('.modal-backdrop').hide();
 
-	 }); */
+	 }); 
 	 $(this).removeClass('hasDatepicker').datepicker();
 	 $( "#datepicker" ).datepicker();
 	
@@ -254,20 +253,6 @@ function detailModalView(view,project_id){
 	    });
 } 
 function submit2(){
-		/* var j=0;
-		var memberCheck= Array();
-		console.log("length: "+ memberChk.membercheck.length);
-		
-		for(i=0; i < membercheck.length; i++) {
-			if(membercheck[i].checked == true){
-				memberCheck[j]=membercheck[i];
-				j++;
-			}
-		} */
-		
-		
-	    /* 
-	    var allData = {"checkArray": checkboxValues }; */
 	    
 		var enddate = $("#datepicker").val();
 		title=$("#title").val();
@@ -283,7 +268,7 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
-	    		 send( '0', title,'yh@kosta.com', 'user@naver.com');
+	    		 send( '0', title,'zest@kosta.com', 'dam@naver.com');
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },
@@ -291,7 +276,7 @@ function submit2(){
 		          alert('Error while request..');
 		       }
 		    });
-			
+		    console.log("check");
 	}
 function projectchange(){
 
@@ -612,7 +597,7 @@ function checkListDelete(chk){
                   <div class="modal-footer">
 
                      <button type="button" class="btn btn-info btn-circle btn-lg"
-                        id="addbtn" onclick="submit2();" data-dismiss="modal">
+                        id="addbtn" onclick="submit2();"   data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
                      <button type="button" class="btn btn-warning btn-circle btn-lg"

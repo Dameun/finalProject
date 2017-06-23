@@ -1,5 +1,8 @@
 package com.zestworld.Table_DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Project_DTO {
 	private int project_id;
 	private int workspace_id;
@@ -13,6 +16,7 @@ public class Project_DTO {
 	private int mark_f;
 	private int essence_f;
 	private String AUTHORITY;
+	public List<Project_user_DTO> projectMember = new ArrayList();
 	
 	public String getAUTHORITY() {
 		return AUTHORITY;
@@ -86,6 +90,12 @@ public class Project_DTO {
 	}
 	public void setEssence_f(int essence_f) {
 		this.essence_f = essence_f;
+	}
+	public List<Project_user_DTO> getProjectMember() {
+		return projectMember;
+	}
+	public void setProjectMember(List<Project_user_DTO> projectMember) {
+		this.projectMember = projectMember;
 	}
 
 

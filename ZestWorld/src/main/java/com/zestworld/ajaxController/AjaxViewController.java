@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zestworld.AnalysisService.AnalysisService;
 import com.zestworld.OutlineService.OutlineService;
+import com.zestworld.ProjectDAO.IProjectDAO;
 import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
@@ -257,7 +258,21 @@ public class AjaxViewController {
 
 	@RequestMapping(value = "/projectMain.ajax", method = RequestMethod.GET)
 	public String projectMain(Model model) {
-		model.addAttribute("projectList", DataController.getInstance().GetProjectList());
+		List<Project_DTO> projectList = DataController.getInstance().GetProjectList();
+		
+		
+		int projectid =0;
+		IProjectDAO projectDao = sqlsession.getMapper(IProjectDAO.class);
+		
+		for( int i =0; i <projectList.size(); i++)
+		{
+			System.out.println("projectList : "+i+"    " +projectList.get(i).getProject_id());
+			projectid = projectList.get(i).getProject_id();
+			projectList.get(i).setProjectMember(projectDao.projectMemberList(projectid));
+			/*projectList.get(i).projectMember = projectDao.projectMemberList(projectid);*/
+		}
+
+		model.addAttribute("projectList", projectList);
 		return DataController.getInstance().GetviewPath("home") + "projectMain.jsp";
 	}
 

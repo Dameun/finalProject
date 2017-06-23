@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css"> -->
 
-	<div class="modal fade" id = "detailModal" role="dialog">
+		<div class="modal fade" id = "detailModal" role="dialog">
 	<div class="modal-dialog modal-lg">
 	     	 <div class="modal-content">
     <section class="widget">
@@ -138,6 +138,19 @@
                             <div id="assignMemberCheck">
                             
                             </div>
+                            
+                            <div class="select2-container select2-container-multi select2 form-control" id="s2id_multiple-select" data-toggle="modal" data-target="#assignMember" onclick="projectAssignMemberList(3,2);">
+		                    	<ul class="select2-choices"> 
+			                    	<c:forEach items="${project.projectMember}" var="member">
+			                    			<li class="select2-search-choice"><div>${member.user_id}</div>
+			                    				<a href="#" class="select2-search-choice-close" tabindex="-1" onclick="assignMemberDelete(${member.user_id});"></a>
+			                    			</li>
+			                    	</c:forEach>	
+ 								</ul>
+ 							</div>
+                            
+                            
+                            
                                 <!-- <input type="text"  class="form-control"
                                        id="member" name="member"
                                        data-parsley-range="[10, 100]"
