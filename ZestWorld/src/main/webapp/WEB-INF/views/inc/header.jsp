@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <title>Sing - Dashboard</title>
+ <title>ZestWorld</title>
  
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <link href="resources/build/bootstrap/css/application.min.css" rel="stylesheet">
