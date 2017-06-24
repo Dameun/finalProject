@@ -36,7 +36,6 @@
 	<context:component-scan base-package="com.zestworld.ProjectServiceP"/>
 	<context:component-scan base-package="com.zestworld.ProjectController"/>
 	
-	
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.websocket" />

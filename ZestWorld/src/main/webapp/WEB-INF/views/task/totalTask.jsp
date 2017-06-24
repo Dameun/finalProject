@@ -13,7 +13,9 @@ var detailStart='';
 var detailEnd='';
 var member='';
 var detailExplain='';
+var clickTask='';
 
+var detailpid='';
 $(document).ready(function(){
 	console.log("dsadasd:");
 	var forme='';
@@ -174,7 +176,9 @@ function myfilter(){
 
 function detailModalView(view,project_id){
  	var str='';
-	
+ 	detailpid=project_id;
+ 
+	clickTask= view;
 	$.ajax({
 	       type : "get",
 	       url : "detailModal.htm?task_id="+view+"&project_id="+project_id,
@@ -274,7 +278,7 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
-	    		 send( '0', title,'yh215@kosta.com', 'dbsl215@naver.com');
+	    		 send( '0', title,'dbsl215@naver.com', 'yh215@naver.com');
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },
@@ -433,30 +437,55 @@ function checkListDelete(chk){
 }
 
 
-function taskMemberListChk(project_id,task_id){
+function taskMemberListChk(){
 	console.log("taskMemberListChk");
-	
+	console.log(detailpid);
+	var strlist='';
 	$.ajax({
 	    type : "get",
-	    url : "taskMemberListChk.htm?project_id="+project_id+"&task_id="+task_id,
+	    url : "taskMemberListChk1.htm?project_id="+detailpid,
+	    		
 	    success : function(data) {
 	 		console.log("data:    " + data);
 	 		
-	 		$.each(data.member,function(index,value){
+	 		$.each(data.assignmember,function(index,value){
 					console.log(index + "/" + value.user_id);
-					str+="<input type='checkbox' value='"+value.user_id+"' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
 					/* "+value.user_id+" */
 					
 			});
-	 		var htm="<form name='memberChk'>"+str+"</form>";
-	 		console.log("str   :" +str);
-	 		$("#wMemberList").append($('#wMemberList').html(str));
+	 		var htm="<form name='memberChk'>"+strlist+"</form>";
+	 		$("#wMemberList").append($('#wMemberList').html(htm));
 	    },
 	    error : function() {
 	       alert('Error while request..');
 	    }
 	 });
 }
+
+
+
+function taskAssign(taskId){
+	var checkboxValues = [];
+    $("input[name='taskMemberChk']:checked").each(function(i) {
+        checkboxValues.push($(this).val());
+    });
+    console.log('들어오니');
+    $.ajax({
+	       type : "get",
+	       url : "taskAssign.htm?checkboxValues="+checkboxValues+"&taskid="+clickTask,
+	       success : function(data) {
+	    	   if(data.success.equals("success")){
+	    	   		console.log('성공');
+	    	   		location.reload();
+	    	   }
+	       },
+	       error : function() {
+	          alert('Error while request..');
+	       }
+	}); 
+}
+
 </script>
 
 
