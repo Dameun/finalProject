@@ -28,7 +28,7 @@ $(document).ready(function(){
 	url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p, */
 	$.ajax({
 		type:"get",
-		url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p,
+		url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p,
 		/* dataType:'html', */
 		success:function(data){
 			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
@@ -37,7 +37,6 @@ $(document).ready(function(){
 			alert('검색 에러! 관리자에게 문의하세요');
 		}
 	});
-	
 	 $("#addbtn").on("click", function() {
 
 	   // $("#add_taskTitle").submit();
@@ -128,18 +127,13 @@ function myfilter(){
 	
 	 //나에게 배정된, 내가 작성한, 내가 팔로워하는..  필터
 	 if(document.getElementById("forme").checked == true){
-		 forme="member2";
+		 forme="assign";
 	 }else{
 		 forme="";
 		 console.log("forme check해제");
 	 }
-	 if(document.getElementById("writer").checked == true){
-			writer="";
-	 }else{
-			writer='';
-	 }
 	 if(document.getElementById("follower").checked == true){
-		 follower="follower2";
+		 follower="check";
 	 }else {
 		 follower='';
 	 }
@@ -165,7 +159,7 @@ function myfilter(){
 	 
 		$.ajax({
 			type:"get",
-			url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project="+project,
+			url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project="+project,
 			dataType:'html',
 			success:function(data){
 			
@@ -202,7 +196,7 @@ function detailModalView(view,project_id){
 	    		$('#detailStart').val(data.detail.start_date);
 	    		$('#detailEnd').val(data.detail.end_date);
 	    		$('#member').val(data.detail.member);
-	    		$('#follower22').val(data.detail.user_id);
+	    		$('#follower22').val(data.detail.follower);
 	    		$('#modalTask').val(data.detail.datailTitle);
 	    		$('#modalDetailExplain').val(data.detail.explain);
 	    		
@@ -221,7 +215,7 @@ function detailModalView(view,project_id){
 	       }
 	    });
  	
-	$.ajax({
+	/* $.ajax({
 	       type : "get",
 	       url : "detailModalAssign.htm?task_id="+view+"&project_id="+project_id,
 	       success : function(data2) {
@@ -230,7 +224,7 @@ function detailModalView(view,project_id){
 	    		$.each(data2.assignmember,function(index,value){
 					console.log(index + "/" + value);
 					str+="<input type='checkbox' value='"+value.user_id+"' name='membercheck' >"+value.user_id + "<br>";
-					/* "+value.user_id+" */
+					
 					
 				});
 	    		var htm="<form name='memberChk'>"+str+"</form>";
@@ -239,7 +233,19 @@ function detailModalView(view,project_id){
 	       error : function() {
 	          alert('Error while request..');
 	       }
-	    });
+	    }); */
+	    
+	    $.ajax({
+		       type : "get",
+		       url : "detailModalAssign.htm?task_id="+view+"&project_id="+project_id,
+		       success : function(data2) {
+		    		
+		    		$("#assignMemberCheck").append($('#assignMemberCheck').html(data2));
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		    });
 	
  	$.ajax({
 	       type : "get",
@@ -268,7 +274,7 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
-	    		 send( '0', title,'yh215@naver.com', 'yh215@naver.com');
+	    		 send( '0', title,'zest@kosta.com', 'dam@naver.com');
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },
@@ -508,8 +514,7 @@ function checkListDelete(chk){
 		<br>
 		빠른필터<br>
 		<input type="checkbox" id="forme" name="filter" value="for" onclick="myfilter();">나에게 배정된 업무<br>
-		<input type="checkbox" id="writer" name="filter" value="writer" onclick="myfilter();">내가 작성한 업무<br>
-		<input type="checkbox" id="follower" name="filter" value="follower" onclick="myfilter();">내가 팔로우하는 업무<br>
+		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
 		<hr>
 		프로젝트<br>
 			<input type="radio" name="projectlist" value="" checked>전체<br>
@@ -539,7 +544,7 @@ function checkListDelete(chk){
 	
 	
 	<div id="filter" style=" width: 880px">
-	<div class="row" style="margin-left:80px">
+	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
 		<button type="button" class="btn btn-primary" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
@@ -549,7 +554,7 @@ function checkListDelete(chk){
 	         	차트보기
 		</button>
 		</div>
-		<div class="col-sm-1" style="margin-left:810px">
+		<div class="col-sm-1">
 			<select id="select_order" onchange="myfilter();">
 	            <option value="">최신순</option>
 	            <option value="end">마감순</option>
@@ -660,6 +665,7 @@ function checkListDelete(chk){
 	  </div>
 	         
       </div>
+      <br><br>
 		<div id="container" data-activity-id="320">
 	
 			<div class="row"></div>
