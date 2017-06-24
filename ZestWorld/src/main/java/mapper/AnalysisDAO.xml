@@ -115,11 +115,11 @@
 	</select>  -->
 	
 	
-	<!-- 전체 업무 흐름 - 완료된 업무 -->
+	<!-- 전체 업무 흐름 - 카테고리 이름 -->
 	<select id="getTaskAllFlow_comp" resultType="com.zestworld.Table_DTO.Task_DTO" >
 		select c.title , count( success_f )
 		from category c inner join task t
-		on c. category_id = t.category_id
+		on c. project_id = t.project_id
 		where t.success_f = 1 
 		group by c.title
 		
