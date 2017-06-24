@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zestworld.TemplateDAO.TemplateDAO">
+
+	<!-- 전체 게시물 수 -->
+	<select id="getCount" resultType="int">
+		select count(*) from task 
+	</select>
+	
+	<!-- 게시물 삽입  -->
+	<insert id="insert" parameterType="com.zestworld.Table_DTO.Template_DTO">
+		insert into template (template_id , title , filesrc , user_id)
+		values (template_seq.nexval , #{title} , #{filesrc} , #{user_id} )
+	</insert>
+	
+	<update id="update" parameterType="com.zestworld.Table_DTO.Template_DTO">
+		update template set (title , filesrc ) values ( #{title} , #{filesrc} )
+		where user_id = #{user_id}  
+	</update>
+	
+	<!-- 전체 게시물  -->
+	<!-- <select id="getNotices" resultType="String">
+		select 
+	</select> -->
+	
+	<!-- 게시물 삭제 -->
+	<!-- <select id="delete" resultType="String">
+		select 
+	</select> -->
+	
+</mapper>
