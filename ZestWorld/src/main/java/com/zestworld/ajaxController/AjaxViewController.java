@@ -181,7 +181,6 @@ public class AjaxViewController {
 		
 		model.addAttribute("getTaskAllFlow_comp", getTaskAllFlow_comp );
 		model.addAttribute("getTaskAllFlow_comp_count", getTaskAllFlow_comp_count);
-		
 		model.addAttribute("getTaskAllFlow_enddateLate_count", getTaskAllFlow_enddateLate_count);
 		model.addAttribute("getTaskAllFlow_enddateNo_count", getTaskAllFlow_enddateNo_count);
 		model.addAttribute("getTaskAllFlow_ing_count", getTaskAllFlow_ing_count);
