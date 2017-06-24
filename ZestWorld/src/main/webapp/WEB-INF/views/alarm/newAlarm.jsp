@@ -6,7 +6,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<!-- <script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script> -->
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
 <body>
 	<div id="notifications-list" class="list-group thin-scroll"> 
 	    <c:forEach items="${alarmList}" var="alarm">
