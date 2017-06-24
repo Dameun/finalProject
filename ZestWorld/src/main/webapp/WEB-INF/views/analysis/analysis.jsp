@@ -103,7 +103,7 @@
         data.addRows([
         	['완료됨', ${getTaskMe_comp}],  
             ['마감일 지남', ${getTaskMe_enddateLate}],
-            ['계획됨', ${getTaskMe_ing}],
+            ['진행중', ${getTaskMe_ing}],
             ['마감일 없음', ${getTaskMe_enddateNo}], 
           
         ]);
@@ -131,7 +131,7 @@
           data.addRows([
         	  ['완료됨',  ${getTaskI_comp}],
               ['마감일 지남', ${getTaskI_enddateLate}],
-              ['계획됨', ${getTaskI_ing}],
+              ['진행중', ${getTaskI_ing}],
               ['마감일 없음', ${getTaskI_enddateNo}],
             
           ]);
@@ -158,7 +158,7 @@
           data.addRows([
         	  ['완료됨', ${getTaskFollow_comp}],
               ['마감일 지남', ${getTaskFollow_enddateLate}],
-              ['계획됨', ${getTaskFollow_ing}],
+              ['진행중', ${getTaskFollow_ing}],
               ['마감일 없음', ${getTaskFollow_enddateNo}],
             
           ]);
@@ -219,11 +219,11 @@
 	  	  </c:forEach>	  	  
     	  
     	  
-   	   var dataArray = [['업무'          ,   '완료됨'           ,   '진행중'      ,   '마감일 지남'   ,   '마감일 없음'           ,   ]];
+   	   var dataArray = [['업무'          ,   '완료됨'           ,   '마감일 지남'      ,   '진행중'   ,   '마감일 없음'           ,   ]];
 
        for (var n =0; n < categoryTitle.length; n++)
        {
-         	 dataArray.push ([categoryTitle[n] , compCount[n] , ingCount[n] , endLateCount[n] , endNoCount[n] , ])
+         	 dataArray.push ([categoryTitle[n] , compCount[n] , endLateCount[n] , ingCount[n] , endNoCount[n] , ])
         }
 
        var data = new google.visualization.arrayToDataTable(dataArray); 
