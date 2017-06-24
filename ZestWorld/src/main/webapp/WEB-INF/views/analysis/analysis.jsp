@@ -76,13 +76,13 @@
           data.addColumn('boolean', '완료 유무');
           data.addRows([
         	  
-            ['장윤희' ,{v: 10, f: '10'}, {v: 8, f: '8'}, {v: 2, f: '2'}, true],
-            ['최담은' ,{v: 5, f: '5'}, {v: 3, f: '3'}, {v: 2, f: '2'}, false],
-            ['양건휘' ,{v: 3, f: '3'}, {v: 1, f: '1'}, {v: 2, f: '2'}, true],
-            ['김민성' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
-            ['백준선' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
-            ['이은경' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
-            ['${getMemberListMe}' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true]
+            ['장윤희' ,{v: 8, f: '8'}, {v: 8, f: '8'}, {v: 0, f: '0'}, true],
+            ['양건휘' ,{v: 3, f: '3'}, {v: 3, f: '3'}, {v: 1, f: '1'}, false],
+            ['황이준' ,{v: 5, f: '5'}, {v: 3, f: '3'}, {v: 2, f: '2'}, false],
+            ['김민성' ,{v: 5, f: '5'}, {v: 4, f: '4'}, {v: 1, f: '1'}, false],
+            ['백준선' ,{v: 4, f: '4'}, {v: 2, f: '2'}, {v: 2, f: '2'}, false],
+            ['최담은' ,{v: 7, f: '7'}, {v: 7, f: '7'}, {v: 0, f: '0'}, true],
+            ['이은경' ,{v: 3, f: '3'}, {v: 1, f: '1'}, {v: 2, f: '2'}, false]
             
           ]);
 
@@ -286,16 +286,17 @@
 </head>
 <body>
     <div class="row" style="background-color:white">
-    	<div class="col-md-5">
+    	<div class="col-md-4">
     	</div>
-    	<div class="col-md-2">
+    	<div class="col-md-4">
     		<ul class="nav nav-tabs">
           		<li><a href="#">업무</a></li>
           		<li><a href="#">분석</a></li>
              	<li><a href="#">파일</a></li>
        		</ul>
+       		
     	</div>
-    	<div class="col-md-5">
+    	<div class="col-md-4">
     	</div>
 	</div>&nbsp
 	
