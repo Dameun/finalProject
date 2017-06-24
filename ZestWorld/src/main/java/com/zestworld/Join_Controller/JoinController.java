@@ -222,7 +222,7 @@ public class JoinController {
 		      
 	         // mail 코드랑, 어떻게 보낼지 생각해보자 spring 이메일초대
 	         String path = "";
-	         String path2 ="http://localhost:8090/main/invitation.htm?workspace_id="+workspace_id;
+	         String path2 ="http://localhost:8081/main/invitation.htm?workspace_id="+workspace_id;
 			//일단 로그인 페이지로 보내줌 로그인페이지에서 값을 받고 처리하자 
 			
 			//StringBuffer realpath = request.getRequestURL();

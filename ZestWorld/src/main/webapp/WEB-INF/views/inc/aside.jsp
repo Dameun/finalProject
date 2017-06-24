@@ -28,19 +28,21 @@
         </div> -->
         <!-- main notification links are placed inside of .sidebar-nav -->
         <ul class="sidebar-nav">
-            <li class="active">
-                <!-- an example of nested submenu. basic bootstrap collapse component -->
-                <a href="#" onclick="ajaxView('totalTask.ajax')"  data-toggle="collapse" data-parent="#sidebar">
+          <li>
+                <a href="#" onclick="ajaxView('totalTask.ajax')">
                     <span class="icon">
                         <i class="glyphicon glyphicon-tasks"></i>
                     </span>
-                   	전체 업무
-                    <i class="toggle fa fa-angle-down"></i>
+                    	전체업무
                 </a>
-                <ul id="sidebar-dashboard" class="collapse in">
-                    <li class="active"><a href="#" onclick="ajaxView('totalTask.ajax')">전체업무</a></li>
-                    <li><a href="#" onclick="ajaxView('taskList.ajax')">개별업무</a></li>
-                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="ajaxView('projectMain.ajax')">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-tasks"></i>
+                    </span>
+                    	개별업무
+                </a>
             </li>
             <li>
                 <a href="#" onclick="ajaxView('wSpace.ajax')">
@@ -49,12 +51,12 @@
                     </span>
                    	프로젝트
                     <span class="label label-danger">
-                        9
+                        new
                     </span>
                 </a>
             </li>
             <li>
-                <a href="#" onclick="ajaxView('chat.ajax')">
+                <a href="#" onclick="ajaxView('analysis.ajax')">
                     <span class="icon">
                         <i class="glyphicon glyphicon-stats"></i>
                     </span>

@@ -274,7 +274,7 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
-	    		 send( '0', title,'zest@kosta.com', 'dam@naver.com');
+	    		 send( '0', title,'yh215@kosta.com', 'dbsl215@naver.com');
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },

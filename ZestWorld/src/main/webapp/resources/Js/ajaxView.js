@@ -59,10 +59,6 @@ function appendMessage(msg) {
 
 }
 
-/*$(function() {
-	connect();
-});*/
-
 //$(function() {
 	function ajaxView(menuName)
 	{
