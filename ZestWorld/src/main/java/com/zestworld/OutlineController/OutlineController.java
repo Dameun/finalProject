@@ -38,9 +38,11 @@ public class OutlineController {
 	
 	@RequestMapping("taskTotalList.htm")
 	public String taskTotalList(String writer,String forme,String follower,String writermember,String success,String datefilter, String order,Model model) throws ClassNotFoundException, SQLException{
-		
 		List<Task_DTO> basic= service.basictasklist();
-		 
+		
+		
+		System.out.println("follower : " + follower);
+		
 		System.out.println("Basic: "+ basic.size());
 		Task_DTO dto=new Task_DTO();
 		System.out.println(order);
@@ -70,7 +72,7 @@ public class OutlineController {
 		//String userid= DataController.getInstance().GetUser().getUserid();
 		
 		//�옉�꽦�옄�븘�꽣
-		if(writermember==""){
+		if(writermember.equals("")){
 			userid=DataController.getInstance().GetUser().getUser_id();
 			dto.setUser_id("");
 		}else{
@@ -106,7 +108,19 @@ public class OutlineController {
 		}
 		
 		dto.setMember(forme);
-		dto.setFollower(follower);
+		System.out.println("forme : " + forme);
+		
+		/*
+		if(forme.equals("assign")){
+			
+		}
+		*/
+		if(follower.equals("check")){
+			dto.setFollower(DataController.getInstance().GetUser().getUser_id());
+		}else{
+			dto.setFollower("");
+		}
+		System.out.println("follower값 확인 : " +dto.getFollower());
 		
 		List<Task_DTO> list= service.taskTest(dto);
 		
@@ -186,7 +200,7 @@ public class OutlineController {
 		return jsonview;
 		
 	}
-	
+	/*
 	@RequestMapping(value="detailModalAssign.htm", method=RequestMethod.GET)
 	public View detailModalAssign(String task_id,int project_id,Model model) throws ClassNotFoundException, SQLException{
 		System.out.println("detailModalAssign*****: " + task_id);
@@ -200,7 +214,7 @@ public class OutlineController {
 		
 	}
 	
-	
+	*/
 	@RequestMapping(value="detailModalCheckList.htm", method=RequestMethod.GET)
 	public String detailModalCheckList(int task_id, Model model) throws ClassNotFoundException, SQLException{
 
@@ -235,7 +249,7 @@ public class OutlineController {
 	}
 	
 	@RequestMapping(value="detailUpdate.htm", method=RequestMethod.GET)
-	public String detailUpdate(int task_id,String start,String end, String explain,String[] chkmember, Model model) throws ClassNotFoundException, SQLException{
+	public String detailUpdate(int task_id,String start,String end, String follower,String explain,String[] chkmember, Model model) throws ClassNotFoundException, SQLException{
 		
 		TaskAssignMember_DTO tm=new TaskAssignMember_DTO();
 		Task_DTO dto= new Task_DTO();
@@ -244,6 +258,7 @@ public class OutlineController {
 		dto.setEnd_date(end);
 		/*dto.setMember(member);*/
 		dto.setExplain(explain);
+		dto.setFollower(follower);
 		
 		int result=service.detailUpdate(dto);
 		System.out.println("여기까지는 괜찮니");
@@ -272,6 +287,80 @@ public class OutlineController {
 		return "/task/totalTaskList";
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="detailModalAssign.htm", method=RequestMethod.GET)
+	public String taskMemberList(int task_id, int project_id, Model model) throws ClassNotFoundException, SQLException{
+
+		List<TaskAssignMember_DTO> assignmember=service.taskMemberList(task_id);
+
+
+		model.addAttribute("assignmember", assignmember);		
+		
+		return "/task/taskassignMember";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="taskMemberListChk.htm", method=RequestMethod.GET)
+	public View taskMemberListChk(int project_id, int task_id , Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("멤버배정 리스트 확인");
+		List<Users_DTO> member=service.assignMemberList(task_id);
+		System.out.println("멤버 리스트: " + member.size());
+
+		model.addAttribute("assignmember", member);		
+		
+		return jsonview;
+	}
+	
+	
+/*	
+	System.out.println("detailModalAssign*****: " + task_id);
+	System.out.println("detailModalAssign project_id*****: " + project_id);
+	
+	List<Users_DTO> assignmember=service.assignMemberList(project_id);
+
+	System.out.println("assignmember: "+assignmember.size());
+	model.addAttribute("assignmember", assignmember);
+	return jsonview;
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="checkListReg.htm", method=RequestMethod.GET)
 	public String checkListReg(int task_id,String contents,Model model) throws ClassNotFoundException, SQLException{

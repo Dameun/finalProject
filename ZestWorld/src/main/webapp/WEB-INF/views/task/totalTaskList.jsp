@@ -10,7 +10,27 @@
 	<c:forEach items="${list}" var="n">
 		<div id="totalTaskajax" >
 			<div class="articlesteam" >
-			<input type="checkbox" 
+			
+						   		<!-- <h2>팀원 모집</h2> -->
+				<ol class="group">
+						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id});""location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
+						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
+						<li class="comment" >
+						<%-- <p class="text">
+						&nbsp ${n.title}</p>
+						<!-- <input type="checkbox" value="dd" >&nbsp ${n.title}</p> -->
+						<div>
+							    <time>${n.p_title} > ${n.user_id}</time>
+							    <a class="remove" >마감일  : ${n.end_date }</a>
+							    <hr>
+						</div> --%>
+						
+						
+						
+						
+						<section class="event">
+                        <span class="thumb-sm avatar pull-left mr-sm">
+                            <input type="checkbox" 
 			<c:if test="${n.success_f eq 1}">
 	             checked= "checked"
 	             onclick="changeSuccessF_zero(${n.task_id});"
@@ -29,19 +49,18 @@
 			    </c:when>
 			</c:choose> --%>
 	        >
-						   		<!-- <h2>팀원 모집</h2> -->
-				<ol class="group">
-						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id});""location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
-						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
-						<li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id},${n.project_id});">
-						<p class="text">
-						&nbsp ${n.title}</p>
-						<!-- <input type="checkbox" value="dd" >&nbsp ${n.title}</p> -->
-						<div>
-							    <time>${n.p_title} > ${n.user_id}</time>
-							    <a class="remove" >마감일  : ${n.end_date }</a>
-							    <hr>
-						</div>
+                        </span>
+                        <h4 class="event-heading" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id},${n.project_id});"><a href="#">${n.title}</a> <small><a href="#">마감일: ${n.end_date}</a></small></h4>
+                        <p class="fs-sm text-muted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        		follower > ${n.user_id}</p>
+                        <p class="fs-mini">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           ${n.explain}
+                        </p>
+                        <br>
+                    </section>
+						
+						
+						
 						</li>
 				</ol>
 			</div>

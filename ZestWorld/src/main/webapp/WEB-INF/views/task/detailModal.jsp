@@ -5,7 +5,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css"> -->
 
-		<div class="modal fade" id = "detailModal" role="dialog">
+<script type="text/javascript">
+function taskMemberListChk(project_id,task_id){
+	console.log("taskMemberListChk");
+	$.ajax({
+	    type : "get",
+	    url : "taskMemberListChk.htm?project_id="+project_id+"&task_id="+task_id,
+	    success : function(data) {
+	 		console.log("data:    " + data);
+	 		
+	 		$.each(data.member,function(index,value){
+					console.log(index + "/" + value.user_id);
+					str+="<input type='checkbox' value='"+value.user_id+"' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					/* "+value.user_id+" */
+					
+			});
+	 		var htm="<form name='memberChk'>"+str+"</form>";
+	 		console.log("str   :" +str);
+	 		$("#wMemberList").append($('#wMemberList').html(str));
+	    },
+	    error : function() {
+	       alert('Error while request..');
+	    }
+	 });
+}
+</script>
+
+
+	<div class="modal fade" id = "detailModal" role="dialog">
 	<div class="modal-dialog modal-lg">
 	     	 <div class="modal-content">
     <section class="widget">
@@ -135,10 +162,65 @@
                                 	배정된 멤버
                             </label>
                             <div class="col-sm-9">
-                            <div id="assignMemberCheck">
                             
-                            </div>
+                            <div
+								class="select2-container select2-container-multi select2 form-control"
+								id="s2id_multiple-select" data-toggle="modal"
+								data-target="#taskAssignMember" onclick="taskAssignMemberList(${n.project_id},${n.task_id});">
+							
+								
+								<ul class="select2-choices">
+									<div id="assignMemberCheck">
+									
+									 </div>
+								</ul>
+							</div>
                             
+                            
+                            
+                            
+                            
+                            <div class="modal fade" id="taskAssignMember" style="display: none;">
+								<div class="modal-dialog">
+						            <div class="modal-content">
+						                <div class="modal-header">
+						                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						                    <h4 class="modal-title text-xl-center fw-bold mt" id="myModalLabel18">프로젝트 멤버 배정</h4>
+						                    <p class="text-xl-center text-muted mt-sm fs-mini">
+						                        We need a bit of your detailed information to proceed. US ticketing system requires
+						                        us to process and check your personal infromation before we can go.
+						                    </p>
+						                </div>
+						                <div class="modal-body bg-gray-lighter">
+						                    	
+						                    <div id="wMemberList">
+						                    
+											</div>
+						                    
+						                    
+						                    
+						                    
+						                    
+						                </div>
+						                <div class="modal-footer">
+						                    <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
+						                    <button type="button" class="btn btn-success" onclick="projectAssign();" data-dismiss="modal">Assign</button>
+						                </div>
+						            </div>
+						       </div>
+							</div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                           
+                        <%--     
                             <div class="select2-container select2-container-multi select2 form-control" id="s2id_multiple-select" data-toggle="modal" data-target="#assignMember" onclick="projectAssignMemberList(3,2);">
 		                    	<ul class="select2-choices"> 
 			                    	<c:forEach items="${project.projectMember}" var="member">
@@ -148,7 +230,13 @@
 			                    	</c:forEach>	
  								</ul>
  							</div>
+                             --%>
                             
+                           <!--       <div class="modal fade" id="assignMember" style="display: none;">
+
+								</div>
+                            
+                             -->
                             
                             
                                 <!-- <input type="text"  class="form-control"

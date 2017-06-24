@@ -98,6 +98,12 @@ public class OutlineService {
 		return result;
 	}
 	
+	public List<TaskAssignMember_DTO>  taskMemberList(int task_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<TaskAssignMember_DTO> result= dao.taskMemberList(task_id);
+		return result;
+	}
+	
 	public int checkListReg(CheckList_DTO dto) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
 		int result= dao.checkListReg(dto);

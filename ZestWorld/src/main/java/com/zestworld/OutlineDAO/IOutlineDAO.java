@@ -45,6 +45,8 @@ public interface IOutlineDAO {
 	//상세보기(업무) 삭제
 	public int detailDelete(int task_id) throws ClassNotFoundException, SQLException;
 	
+	public List<TaskAssignMember_DTO> taskMemberList(int task_id) throws ClassNotFoundException, SQLException;
+	
 	
 	//체크리스트 등록
 	public int checkListReg(CheckList_DTO dto) throws ClassNotFoundException, SQLException;
