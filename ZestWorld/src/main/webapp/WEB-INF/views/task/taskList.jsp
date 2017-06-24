@@ -3,31 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<!--민성 추가부분  -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" type="text/css" href="resources/dist/css/taskList.css">
 <!--/민성추가부분  -->
+
 
 <!--민성 dropdown 사용하기위해 필요한 부분 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--민성 dropdown 사용하기위해 필요한 부분 -->
-
-
-
 
 <script type="text/javascript">
 	 
 
 	$(function(){
 
-		
-	/* 		
- $("#datepicker").datepicker({
-		      showOn: "button",
-		      buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-		      buttonImageOnly: true,
-		      buttonText: "Select date"
-		    });
-		 */
-		
+	
 		//리스트 비동기로 뿌리는 ajax부분
 		$.ajax({
 			type:"get",
@@ -42,6 +33,8 @@
 			}
 		});
 		
+
+		
 		//category insert ajax부분
 		
 		$("#add_taskTitle").on("submit", function(e) {
@@ -53,8 +46,8 @@
 				data : 'title=' + $("#title").val(),
 				success : function(data) {
 					console.log("insert 성공^^");	
-					$("#add-modal").hide();
-					$('.modal-backdrop').remove();
+				 	$("#add-modal").hide();
+					$('.modal-backdrop').remove(); 
 					$("#View").empty();
 					$("#View").append(data); 
 					
@@ -129,7 +122,7 @@
 	
 		//task title 완료체크
 		
-		$(document).on("click",".chkSuccess",function(){
+		 $(document).on("click",".chkSuccess",function(){
 			
 			if($(this).is(":checked")){
 			
@@ -138,7 +131,7 @@
 					url:"tasktitleCheck.htm",
 					data: "task_id="+$(this).val(),
 					success:function(data){
-						
+									
 						$("#View").empty();
 						$("#View").append(data); 
 					},
@@ -148,9 +141,42 @@
 				});
 			
 			}
+		}); 
+		
+
+	
+		/* $(document).find(".datepicker").removeClass('hasDatepicker').datepicker({
+		    dateFormat: "yy-mm-dd",
+		    defaultDate: "+1w",
+		    numberOfMonths: 1,
+		    changeMonth: true,
+		    showMonthAfterYear: true ,
+		    changeYear: true
 		});
-		
-		
+ 		*/
+ 	
+		$(document).on("click","#calendar",function(){        
+            
+            $(this).parent(".form-btn").find(".datepicker").removeClass('hasDatepicker').datepicker({                        
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd'                       
+                }).datepicker("show");
+        });
+
+ 		
+ 		
+ 		$("#detailStart").datepicker({
+ 				 dateFormat: 'yy-mm-dd'    
+ 			});
+ 	
+
+ 		
+ 			$("#detailEnd").datepicker({
+ 				 dateFormat: 'yy-mm-dd'    
+ 			}); 
+ 		
+ 		
 	});
 	
 	
@@ -160,11 +186,13 @@
 			
 		var title = $("#task-content_"+number).val();
 		var cateTitle = $("#membername_"+number).text();
+		var end_date = $("input[name=edate_"+number+"]").val();
+		
 		$.ajax({
 			type : "post",
 			url : "tasktitleInsert.htm",
 			cache : false,
-			data : 'title='+title+'&cateTitle='+cateTitle,
+			data : 'title='+title+'&cateTitle='+cateTitle+'&end_date='+end_date,
 			
 			success : function(data) {
 				console.log("taskinsert 성공^^");				
@@ -225,7 +253,8 @@
 	function detailUpdate(){
 		var startdate=$('#detailStart').val();
 		var enddate=$('#detailEnd').val();
-		var member=$('#member').val();
+	    var member=$('#member').val();
+	/* 	var member="김민성" */
 		var follower=$('#follower22').val();
 		var explain=$('#modalDetailExplain').val();
 		
@@ -306,62 +335,6 @@
 		       }
 		});
 	}
-	
-	
-	/* 
-	function modalChangeSuccessF(){
-		changeSuccessF(detailUpdateID);
-		
-	}
-	function modalChangeSuccessF_zero(){
-		changeSuccessF(detailUpdateID);
-		
-	}
-	
-	
-	function changeSuccessF(taskid){
-		
-		 $.ajax({
-				type:"get",
-				url:"updateSuccess.htm?task_id="+taskid,
-				dataType:'html',
-				success:function(data){
-					    $("#detailModal").hide();
-						$('.modal-backdrop').remove();
-						$("#View").empty();
-						$("#View").append(data); 	
-				},
-				error:function(){
-					alert(' 에러! 관리자에게 문의하세요');
-				}
-			});
-		 
-		 
-	 }
-	function changeSuccessF_zero(taskid){
-		 alert(taskid);
-		 $.ajax({
-				type:"get",
-				url:"updateSuccessZero.htm?task_id="+taskid,
-				dataType:'html',
-				success:function(data){
-					    $("input:checkbox[id='complete']").attr("checked", false);
-					    $("#detailModal").hide();
-						$('.modal-backdrop').remove();
-						$("#View").empty();
-						$("#View").append(data); 		
-				},
-				error:function(){
-					alert('검색 에러! 관리자에게 문의하세요');
-				}
-			});
-		 
-		 
-	} 
-	
-	*/
-	
-	
 	
 </script>
 
@@ -530,12 +503,12 @@
                                 	배정된 멤버
                             </label>
                             <div class="col-sm-9">
-                                <!-- <input type="text"  class="form-control"
+                                <input type="text"  class="form-control"
                                        id="member" name="member"
                                        data-parsley-range="[10, 100]"
                                        data-parsley-trigger="change"
                                        data-parsley-validation-threshold="1"
-                                       required="required"> -->
+                                       required="required">
                               <!--          <input type="checkbox">
                               
                               
@@ -658,11 +631,13 @@
 
 </div>
 
-<br>
+
+	
 <br>
  
-<!-- <p>Date: <input type="text" id="datepicker"></p>-->
+
 
 <div id="View">
 
 </div>
+

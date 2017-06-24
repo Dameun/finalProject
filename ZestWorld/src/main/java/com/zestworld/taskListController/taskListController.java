@@ -45,7 +45,7 @@ public class taskListController {
 		System.out.println("선택한 project_id : "+ project_id);	
 		cateDto.setProject_id(project_id);
 		*/
-		
+		System.out.println("insert성공함");
 		List<Category_DTO> list = service.tasklist(cateDto);
 		List<Task_DTO> list2 = service.tasklist2();
 		
@@ -68,16 +68,18 @@ public class taskListController {
 		
 		cateDto.setTitle(cateTitle);
 		task.setTitle(title);
+
 		
 		System.out.println("카테고리 타이틀 : " + cateTitle);
 		System.out.println("타이틀 : " + title);
-	
+		
 		//String userid = dao.getUser_Id();
 		int category_id = dao.getCategory_Id(cateDto);
 	
 		String userid = DataController.getInstance().GetUser().getUser_id();
 		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		
 		System.out.println("유저아이디 : " + userid);
 		System.out.println("카테고리 아이디: " + category_id);
 		System.out.println("프로젝트 ID : " + project_id);
@@ -93,7 +95,6 @@ public class taskListController {
 		cateDto.setProject_id(project_id);
 		List<Category_DTO> list = service.tasklist(cateDto);
 		List<Task_DTO> list2 = service.tasklist2();
-		
 		
 		model.addAttribute("list",list);
 		model.addAttribute("list2",list2);
@@ -239,6 +240,10 @@ public class taskListController {
 	public String detailUpdate(int task_id,String start,String end,String member, String explain,Model model) throws ClassNotFoundException, SQLException{
 
 		Task_DTO dto= new Task_DTO();
+		
+
+		String user_id = DataController.getInstance().getCurrentWorkspace().getUser_id();
+		dto.setFollower(user_id);
 		dto.setTask_id(task_id);
 		dto.setStart_date(start);
 		dto.setEnd_date(end);
