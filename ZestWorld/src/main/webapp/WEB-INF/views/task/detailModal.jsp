@@ -5,31 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css"> -->
 
-<script type="text/javascript">
-function taskMemberListChk(project_id,task_id){
-	console.log("taskMemberListChk");
-	$.ajax({
-	    type : "get",
-	    url : "taskMemberListChk.htm?project_id="+project_id+"&task_id="+task_id,
-	    success : function(data) {
-	 		console.log("data:    " + data);
-	 		
-	 		$.each(data.member,function(index,value){
-					console.log(index + "/" + value.user_id);
-					str+="<input type='checkbox' value='"+value.user_id+"' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
-					/* "+value.user_id+" */
-					
-			});
-	 		var htm="<form name='memberChk'>"+str+"</form>";
-	 		console.log("str   :" +str);
-	 		$("#wMemberList").append($('#wMemberList').html(str));
-	    },
-	    error : function() {
-	       alert('Error while request..');
-	    }
-	 });
-}
-</script>
+
 
 
 	<div class="modal fade" id = "detailModal" role="dialog">
@@ -166,7 +142,7 @@ function taskMemberListChk(project_id,task_id){
                             <div
 								class="select2-container select2-container-multi select2 form-control"
 								id="s2id_multiple-select" data-toggle="modal"
-								data-target="#taskAssignMember" onclick="taskAssignMemberList(${n.project_id},${n.task_id});">
+								data-target="#taskAssignMember" onclick="taskMemberListChk(${n.project_id},${n.task_id});">
 							
 								
 								<ul class="select2-choices">

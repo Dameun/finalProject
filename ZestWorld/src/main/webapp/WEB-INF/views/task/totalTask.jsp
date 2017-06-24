@@ -432,6 +432,31 @@ function checkListDelete(chk){
 	});
 }
 
+
+function taskMemberListChk(project_id,task_id){
+	console.log("taskMemberListChk");
+	
+	$.ajax({
+	    type : "get",
+	    url : "taskMemberListChk.htm?project_id="+project_id+"&task_id="+task_id,
+	    success : function(data) {
+	 		console.log("data:    " + data);
+	 		
+	 		$.each(data.member,function(index,value){
+					console.log(index + "/" + value.user_id);
+					str+="<input type='checkbox' value='"+value.user_id+"' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					/* "+value.user_id+" */
+					
+			});
+	 		var htm="<form name='memberChk'>"+str+"</form>";
+	 		console.log("str   :" +str);
+	 		$("#wMemberList").append($('#wMemberList').html(str));
+	    },
+	    error : function() {
+	       alert('Error while request..');
+	    }
+	 });
+}
 </script>
 
 

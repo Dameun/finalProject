@@ -6,7 +6,7 @@ var wsocket;
 var msg 
 function connect() {
 	//ws://192.168.0.136:8091/http://localhost:8081/main/
-	wsocket = new WebSocket("ws://localhost:8081/main/chat-ws.htm");
+	wsocket = new WebSocket("ws://l92.168.0.152:8081/main/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;

@@ -161,6 +161,7 @@ public class OutlineController {
 		dto.setProject_id(project_id);
 		int workspaceId=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		dto.setWorkspace_id(workspaceId);
+		dto.setFollower(userid);
 		
 	/*	if(enddate!=null){
 			dto.setEnd_date(enddate);
@@ -302,7 +303,7 @@ public class OutlineController {
 	
 	
 	
-	
+	//업무 배정인원
 	@RequestMapping(value="detailModalAssign.htm", method=RequestMethod.GET)
 	public String taskMemberList(int task_id, int project_id, Model model) throws ClassNotFoundException, SQLException{
 
