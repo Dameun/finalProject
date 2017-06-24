@@ -126,9 +126,9 @@
 		
 		
 	</select>
-	
+	<!-- 전체 업무 흐름 - 완료한 업무 -->
 	<select id="getTaskAllFlow_comp_count" resultType="int" >
-		select count( success_f )
+		select count( * )
 		from category c inner join task t
 		on c. category_id = t.category_id
 		where t.success_f = 1 
@@ -138,7 +138,7 @@
 	
 	<!-- 전체 업무 흐름 - 마감일지난 업무 -->
 	<select id="getTaskAllFlow_enddateLate_count" resultType="int">
-		select count( end_date )
+		select count( * )
 		from category c inner join task t
 		on c. category_id = t.category_id
 		where t.end_date <![CDATA[< to_char(sysdate, 'yy/mm/dd')]]>
@@ -148,7 +148,7 @@
 	
 	<!-- 전체 업무 흐름 - 마감일없는 업무 -->
 	<select id="getTaskAllFlow_enddateNo_count" resultType="int">
-		select count( end_date )
+		select count( * )
 		from category c inner join task t
 		on c. category_id = t.category_id
 		where t.end_date is null
@@ -158,7 +158,7 @@
 	 
 	 <!-- 전체 업무 흐름 - 진행중인 업무 -->
 	<select id="getTaskAllFlow_ing_count" resultType="int">
-		select count( start_date )
+		select count( * )
 		from category c inner join task t
 		on c. category_id = t.category_id
 		where t.start_date <![CDATA[<= to_char(sysdate, 'yy/mm/dd')]]>
