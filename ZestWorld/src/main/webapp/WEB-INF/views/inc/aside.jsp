@@ -31,7 +31,7 @@
           <li>
                 <a href="#" onclick="ajaxView('totalTask.ajax')">
                     <span class="icon">
-                        <i class="glyphicon glyphicon-tasks"></i>
+                        <i class="glyphicon glyphicon-tasks"style="padding-top:5px;"> </i>
                     </span>
                     	전체업무
                 </a>
@@ -39,7 +39,7 @@
             <li>
                 <a href="#" onclick="ajaxView('projectMain.ajax')">
                     <span class="icon">
-                        <i class="glyphicon glyphicon-tasks"></i>
+                        <i class="glyphicon glyphicon-tasks" style="padding-top:5px;"></i>
                     </span>
                     	개별업무
                 </a>
@@ -47,18 +47,18 @@
             <li>
                 <a href="#" onclick="ajaxView('wSpace.ajax')">
                     <span class="icon">
-                        <i class="fa fa-envelope"></i>
+                        <i class="fa fa-envelope" style="padding-top:5px;"></i>
                     </span>
                    	프로젝트
-                    <span class="label label-danger">
+                    <!-- <span class="label label-danger">
                         new
-                    </span>
+                    </span> -->
                 </a>
             </li>
             <li>
                 <a href="#" onclick="ajaxView('analysis.ajax')">
                     <span class="icon">
-                        <i class="glyphicon glyphicon-stats"></i>
+                        <i class="glyphicon glyphicon-stats" style="padding-top:5px;"></i>
                     </span>
                     Charts
                 </a>
@@ -66,18 +66,26 @@
             <li>
                 <a href="#" onclick="location.href=('joinEdit.htm')">
                     <span class="icon">
-                        <i class="glyphicon glyphicon-user"></i>
+                        <i class="glyphicon glyphicon-user"style="padding-top:5px;"></i>
                     </span>
                     Profile
-                    <sup class="text-warning fw-semi-bold">
+                    <!-- <sup class="text-warning fw-semi-bold">
                         new
-                    </sup>
+                    </sup> -->
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="location.href='chat.htm'">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-comment" style="padding-top:5px;"></i>
+                    </span>
+                    Chat
                 </a>
             </li>
             <li>
                 <a href="#" onclick="ajaxView('template.ajax')">
                     <span class="icon">
-                        <i class="glyphicon glyphicon-stats"></i>
+                        <i class="glyphicon glyphicon-inbox" style="padding-top:5px;"></i>
                     </span>
                     Template
                 </a>
