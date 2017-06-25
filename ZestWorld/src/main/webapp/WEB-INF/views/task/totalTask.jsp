@@ -219,25 +219,6 @@ function detailModalView(view,project_id){
 	       }
 	    });
  	
-	/* $.ajax({
-	       type : "get",
-	       url : "detailModalAssign.htm?task_id="+view+"&project_id="+project_id,
-	       success : function(data2) {
-	    		console.log("assignment: " + data2.user_id);
-	    		
-	    		$.each(data2.assignmember,function(index,value){
-					console.log(index + "/" + value);
-					str+="<input type='checkbox' value='"+value.user_id+"' name='membercheck' >"+value.user_id + "<br>";
-					
-					
-				});
-	    		var htm="<form name='memberChk'>"+str+"</form>";
-	    		$("#assignMemberCheck").append($('#assignMemberCheck').html(htm));
-	       },
-	       error : function() {
-	          alert('Error while request..');
-	       }
-	    }); */
 	    
 	    $.ajax({
 		       type : "get",

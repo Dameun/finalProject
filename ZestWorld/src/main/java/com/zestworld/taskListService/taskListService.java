@@ -11,7 +11,9 @@ import com.zestworld.OutlineDAO.IOutlineDAO;
 import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
+import com.zestworld.Table_DTO.TaskAssignMember_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
+import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.taskListDAO.taskListDao;
 import com.zestworld.util.DataController;
 
@@ -131,4 +133,34 @@ public class taskListService {
 		return assginmemberReg;
 	}
 		
+	public List<Users_DTO> assignMemberList(int project_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<Users_DTO> user= dao.assignMemberList(project_id);
+		return user;
+	}
+	
+	public int assignMemberReg(TaskAssignMember_DTO dto) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int assginmemberReg= dao.assignMemberReg(dto);
+		return assginmemberReg;
+	}
+	
+	public Task_DTO detailTask(String task_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		Task_DTO list= dao.detailTask(task_id);
+		return list;
+	}
+	
+	public List<TaskAssignMember_DTO>  taskMemberList(int task_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<TaskAssignMember_DTO> result= dao.taskMemberList(task_id);
+		return result;
+	}
+	
+	public int updateChkFlagZero(int check_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int result= dao.updateChkFlagZero(check_id);
+		return result;
+	}
+	
 }

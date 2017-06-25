@@ -56,7 +56,7 @@
 			<input type="checkbox" class="chkSuccess" value="${j.task_id}">
 		</div>
  	${j.title}   
- 		<span class="glyphicon glyphicon-check" style="float:right;padding-right:17px;cursor:pointer" data-toggle="modal" data-target="#detailModal" onclick="detailModalView(${j.task_id})"></span>
+ 		<span class="glyphicon glyphicon-check" style="float:right;padding-right:17px;cursor:pointer" data-toggle="modal" data-target="#detailModal" onclick="detailModalView(${j.task_id},${n.project_id})"></span>
 	</div>
 	</c:if>
 </c:forEach>	
