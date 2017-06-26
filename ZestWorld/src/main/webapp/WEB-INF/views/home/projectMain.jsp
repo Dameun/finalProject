@@ -5,8 +5,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<!DOCTYPE html>
-
 
 <script type="text/javascript">
 

@@ -304,7 +304,7 @@ function userState(userStateStr)
 			data : "state="+userStateStr,
 			success:function(data)
 			{
-				conselo.log("sccess");
+				conselo.log("success");
 			},
 			
 			error:function(){

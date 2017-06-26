@@ -2,6 +2,7 @@ package com.zestworld.util;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.zestworld.AlarmService.AlarmService;
 import com.zestworld.Alarm_DAO.AlarmDAO;
 import com.zestworld.Table_DTO.Alarm_DTO;
+import com.zestworld.Table_DTO.EssenceDefine_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
@@ -38,7 +40,11 @@ public class DataController {
 	private ArrayList<Workspace_DTO> workspaceList = new ArrayList<Workspace_DTO> ();
 	private ArrayList<Project_DTO> projectList = new ArrayList<Project_DTO> ();
 	private ArrayList<Task_DTO> taskList = new ArrayList<Task_DTO> ();
-	
+	private String[] milestoneList = {};
+	private String selectEssenPage = "";
+
+
+
 	private DataController()
 	{
 	}
@@ -224,9 +230,18 @@ public class DataController {
 		if( pathType.equals( "analysis")) path = "/WEB-INF/views/analysis/";
 		if( pathType.equals( "template")) path = "/WEB-INF/views/template/";
 		if( pathType.equals( "alarm")) path = "/WEB-INF/views/alarm/";
+		if( pathType.equals( "essence")) path = "/WEB-INF/views/essence/";
 		return path;
 	}
 	
 
+	
+	public String getSelectEssenPage() {
+		return selectEssenPage;
+	}
+
+	public void setSelectEssenPage(String selectEssenPage) {
+		this.selectEssenPage = selectEssenPage;
+	}
 
 }

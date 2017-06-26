@@ -11,7 +11,6 @@
   <!-- ㅠㅠ..민성 추가부분2(datepicker) 없으면 이벤트발생안해요 -->
 <script type="text/javascript">
 $(function() {
-		alert('projectMain');
 		ajaxView('projectMain.ajax');
 		connect();
 		AlarmCountView();

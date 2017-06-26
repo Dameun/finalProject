@@ -28,7 +28,10 @@
 	<context:component-scan base-package="com.zestworld.AlarmService"/>
 	<context:component-scan base-package="com.zestworld.AlarmController"/>
 	
-
+	<context:component-scan base-package="com.zestworld.EssenceService"/>
+	<context:component-scan base-package="com.zestworld.EssenceController"/>
+	
+	
 <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com"></beans:property>
 		<beans:property name="port" value="465"></beans:property>

@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zestworld.AnalysisService.AnalysisService;
+import com.zestworld.EssenceService.EssenceService;
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.ProjectDAO.IProjectDAO;
 import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.EssenceDefine_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
@@ -48,6 +52,20 @@ public class AjaxViewController {
 	public AjaxViewController() {
 	}
 
+
+	
+	
+	@RequestMapping(value = "/CreateDefineEssence.ajax", method = RequestMethod.GET)
+	public String CreateDefineEssence() {
+		
+		return DataController.getInstance().GetviewPath("essence") + "defineEssence.jsp";
+	}
+	
+	@RequestMapping(value = "/CreateEssence.ajax", method = RequestMethod.GET)
+	public String CreateEssence() {
+		return DataController.getInstance().GetviewPath("essence") + "CreateEssence.jsp";
+	}
+	
 	@RequestMapping(value = "/Createproject.ajax", method = RequestMethod.GET)
 	public String CreateProject() {
 		return DataController.getInstance().GetviewPath("home") + "CreateProject.jsp";
@@ -113,7 +131,6 @@ public class AjaxViewController {
 	public String file() {
 		return DataController.getInstance().GetviewPath("file") + "file.jsp";
 	}
-	
 	
 
 	@Autowired
@@ -305,7 +322,7 @@ public class AjaxViewController {
 		project.setP_title(p_title);
 		project.setExplain(explain);
 		project.setP_admin(DataController.getInstance().GetUser().getUser_id());
-		// test源�
+		// test
 		project.setStart_date("2017-06-14");
 		project.setEnd_date("2017-07-06");
 		project.setAUTHORITY("0");
@@ -343,8 +360,9 @@ public class AjaxViewController {
 		userState.setState(Str);
 		userState.setWorkspace_id(DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
 		userstatesService.UpdateUserState(userState);
-		return DataController.getInstance().GetviewPath("home") + "sccess.jsp";
+		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
+	
 	
 
 }

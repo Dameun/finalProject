@@ -46,8 +46,8 @@
 	<context:component-scan base-package="com.zestworld.fullcalendarController"/>
 	<context:component-scan base-package="com.zestworld.fullcalendarService"/>
 	
-	<context:component-scan base-package="com.zestworld.fullcalendarController"/>
-	<context:component-scan base-package="com.zestworld.fullcalendarService"/>
+	
+
 
 	<beans:bean class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
 	
