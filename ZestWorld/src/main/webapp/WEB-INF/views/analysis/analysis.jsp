@@ -76,13 +76,13 @@
           data.addColumn('boolean', '완료 유무');
           data.addRows([
         	  
-            ['장윤희' ,{v: 10, f: '10'}, {v: 8, f: '8'}, {v: 2, f: '2'}, true],
-            ['최담은' ,{v: 5, f: '5'}, {v: 3, f: '3'}, {v: 2, f: '2'}, false],
-            ['양건휘' ,{v: 3, f: '3'}, {v: 1, f: '1'}, {v: 2, f: '2'}, true],
-            ['김민성' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
-            ['백준선' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
-            ['이은경' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true],
-            ['${getMemberListMe}' ,{v: 8, f: '8'}, {v: 7, f: '7'}, {v: 1, f: '1'}, true]
+            ['장윤희' ,{v: 8, f: '8'}, {v: 8, f: '8'}, {v: 0, f: '0'}, true],
+            ['양건휘' ,{v: 3, f: '3'}, {v: 3, f: '3'}, {v: 1, f: '1'}, false],
+            ['황이준' ,{v: 5, f: '5'}, {v: 3, f: '3'}, {v: 2, f: '2'}, false],
+            ['김민성' ,{v: 5, f: '5'}, {v: 4, f: '4'}, {v: 1, f: '1'}, false],
+            ['백준선' ,{v: 4, f: '4'}, {v: 2, f: '2'}, {v: 2, f: '2'}, false],
+            ['최담은' ,{v: 7, f: '7'}, {v: 7, f: '7'}, {v: 0, f: '0'}, true],
+            ['이은경' ,{v: 3, f: '3'}, {v: 1, f: '1'}, {v: 2, f: '2'}, false]
             
           ]);
 
@@ -103,7 +103,7 @@
         data.addRows([
         	['완료됨', ${getTaskMe_comp}],  
             ['마감일 지남', ${getTaskMe_enddateLate}],
-            ['계획됨', ${getTaskMe_ing}],
+            ['진행중', ${getTaskMe_ing}],
             ['마감일 없음', ${getTaskMe_enddateNo}], 
           
         ]);
@@ -131,7 +131,7 @@
           data.addRows([
         	  ['완료됨',  ${getTaskI_comp}],
               ['마감일 지남', ${getTaskI_enddateLate}],
-              ['계획됨', ${getTaskI_ing}],
+              ['진행중', ${getTaskI_ing}],
               ['마감일 없음', ${getTaskI_enddateNo}],
             
           ]);
@@ -158,7 +158,7 @@
           data.addRows([
         	  ['완료됨', ${getTaskFollow_comp}],
               ['마감일 지남', ${getTaskFollow_enddateLate}],
-              ['계획됨', ${getTaskFollow_ing}],
+              ['진행중', ${getTaskFollow_ing}],
               ['마감일 없음', ${getTaskFollow_enddateNo}],
             
           ]);
@@ -219,11 +219,11 @@
 	  	  </c:forEach>	  	  
     	  
     	  
-   	   var dataArray = [['업무'          ,   '완료됨'           ,   '진행중'      ,   '마감일 지남'   ,   '마감일 없음'           ,   ]];
+   	   var dataArray = [['업무'          ,   '완료됨'           ,   '마감일 지남'      ,   '진행중'   ,   '마감일 없음'           ,   ]];
 
        for (var n =0; n < categoryTitle.length; n++)
        {
-         	 dataArray.push ([categoryTitle[n] , compCount[n] , ingCount[n] , endLateCount[n] , endNoCount[n] , ])
+         	 dataArray.push ([categoryTitle[n] , compCount[n] , endLateCount[n] , ingCount[n] , endNoCount[n] , ])
         }
 
        var data = new google.visualization.arrayToDataTable(dataArray); 
@@ -286,16 +286,17 @@
 </head>
 <body>
     <div class="row" style="background-color:white">
-    	<div class="col-md-5">
+    	<div class="col-md-4">
     	</div>
-    	<div class="col-md-2">
+    	<div class="col-md-4">
     		<ul class="nav nav-tabs">
           		<li><a href="#">업무</a></li>
           		<li><a href="#">분석</a></li>
              	<li><a href="#">파일</a></li>
        		</ul>
+       		
     	</div>
-    	<div class="col-md-5">
+    	<div class="col-md-4">
     	</div>
 	</div>&nbsp
 	

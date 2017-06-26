@@ -13,9 +13,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--민성 dropdown 사용하기위해 필요한 부분 -->
 
-<script type="text/javascript">
-	 
 
+
+<script type="text/javascript">
+var categoryId='';
+var categoryTitle='';
+var detailUpdateID='';
+
+var detailStart='';
+var detailEnd='';
+var member='';
+var detailExplain='';
+var clickTask='';
+
+var detailpid='';
 	$(function(){
 
 	
@@ -144,17 +155,6 @@
 		}); 
 		
 
-	
-		/* $(document).find(".datepicker").removeClass('hasDatepicker').datepicker({
-		    dateFormat: "yy-mm-dd",
-		    defaultDate: "+1w",
-		    numberOfMonths: 1,
-		    changeMonth: true,
-		    showMonthAfterYear: true ,
-		    changeYear: true
-		});
- 		*/
- 	
 		$(document).on("click","#calendar",function(){        
             
             $(this).parent(".form-btn").find(".datepicker").removeClass('hasDatepicker').datepicker({                        
@@ -206,11 +206,16 @@
 
 	}
 
-	function detailModalView(number){
-	 	$.ajax({
+function detailModalView(view,project_id){
+	 	var str='';
+	 	detailpid=project_id;
+	 
+		clickTask= view;
+		$.ajax({
 		       type : "get",
-		       url : "detailtaskModal.htm?task_id="+number,
+		       url : "detailtaskModal.htm?task_id="+view+"&project_id="+project_id,
 		       success : function(data) {
+		    	  console.log("detailmodal success: "+data.detail.user_id);
 		    	   var datailTitle=data.detail.title;
 		    	   var datailEnrolldate=data.detail.endrolldate;
 		    	   console.log(data.detail.endrolldate);
@@ -227,18 +232,34 @@
 		    		$('#detailStart').val(data.detail.start_date);
 		    		$('#detailEnd').val(data.detail.end_date);
 		    		$('#member').val(data.detail.member);
-		    		$('#follower22').val(data.detail.user_id);
+		    		$('#follower22').val(data.detail.follower);
 		    		$('#modalTask').val(data.detail.datailTitle);
 		    		$('#modalDetailExplain').val(data.detail.explain);
+		    		
+		    		console.log("assignment: " + assignmember.user_id);
+		    		
 		       },
 		       error : function() {
 		          alert('Error while request..');
 		       }
 		    });
 	 	
+		    
+		    $.ajax({
+			       type : "get",
+			       url : "detailAssign.htm?task_id="+view+"&project_id="+project_id,
+			       success : function(data2) {
+			    		
+			    		$("#assignMemberCheck").append($('#assignMemberCheck').html(data2));
+			       },
+			       error : function() {
+			          alert('Error while request..');
+			       }	
+			    });
+		
 	 	$.ajax({
 		       type : "get",
-		       url : "detailtaskModalCheckList.htm?task_id="+number,
+		       url : "detailtaskModalCheckList.htm?task_id="+view,
 		       success : function(data) {
 		    		$("#checkListAjax").append($('#checkListAjax').html(data)); 
 		       },
@@ -246,10 +267,7 @@
 		          alert('Error while request..');
 		       }
 		    });
-	 	
-	 	
-	}
-	
+	} 
 	function detailUpdate(){
 		var startdate=$('#detailStart').val();
 		var enddate=$('#detailEnd').val();
@@ -289,10 +307,10 @@
 		
 	}
 	
-	function updateChklistFlag(chk){
+	function updateChkFlag(chk){
 		$.ajax({
 		       type : "get",
-		       url : "updateChkFlag.htm?task_id="+detailUpdateID+"&check_id="+chk,
+		       url : "updateChklistFlag.htm?task_id="+detailUpdateID+"&check_id="+chk,
 		       success : function(data) { 
 		    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
 		       },
@@ -302,6 +320,22 @@
 		}); 
 		
 	}
+	
+	function updateChkFlag_zero(chk){
+		console.log("updateChkFlag_zero : "+ detailUpdateID);
+		$.ajax({
+		       type : "get",
+		       url : "updateChkFlag_Zero.htm?task_id="+detailUpdateID+"&check_id="+chk,
+		       success : function(data) { 
+		    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		}); 
+		
+	}
+	
 	
 	function modalDeleteTask(){
 		
@@ -323,6 +357,7 @@
 	}
 	
 	
+	
 	function checkListDelete(chk){
 		$.ajax({
 		       type : "get",
@@ -336,6 +371,54 @@
 		});
 	}
 	
+	
+	function taskMemberListChk(){
+		console.log("taskMemberListChk");
+		console.log(detailpid);
+		var strlist='';
+		$.ajax({
+		    type : "get",
+		    url : "taskMemberListCheck1.htm?project_id="+detailpid,
+		    		
+		    success : function(data) {
+		 		console.log("data:    " + data);
+		 		
+		 		$.each(data.assignmember,function(index,value){
+						console.log(index + "/" + value.user_id);
+						strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+						/* "+value.user_id+" */
+						
+				});
+		 		var htm="<form name='memberChk'>"+strlist+"</form>";
+		 		$("#wMemberList").append($('#wMemberList').html(htm));
+		    },
+		    error : function() {
+		       alert('Error while request..');
+		    }
+		 });
+	}
+	
+	
+	function taskAssign(taskId){
+		var checkboxValues = [];
+	    $("input[name='taskMemberChk']:checked").each(function(i) {
+	        checkboxValues.push($(this).val());
+	    });
+	    console.log('들어오니');
+	    $.ajax({
+		       type : "get",
+		       url : "TaskAssign.htm?checkboxValues="+checkboxValues+"&taskid="+clickTask,
+		       success : function(data) {
+		    	   if(data.success.equals("success")){
+		    	   		console.log('성공');
+		    	   		location.reload();
+		    	   }
+		       },
+		       error : function() {
+		          alert('Error while request..');
+		       }
+		}); 
+	}
 </script>
 
 
@@ -498,25 +581,54 @@
                                        required="required">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        
+                        
+                  <div class="form-group row">
                             <label class="control-label col-sm-3" for="range">
                                 	배정된 멤버
                             </label>
                             <div class="col-sm-9">
-                                <input type="text"  class="form-control"
-                                       id="member" name="member"
-                                       data-parsley-range="[10, 100]"
-                                       data-parsley-trigger="change"
-                                       data-parsley-validation-threshold="1"
-                                       required="required">
-                              <!--          <input type="checkbox">
-                              
-                              
-                              	멤버리스트 들어갈 부분
-                              
-                              
-                              
-                               -->         
+                            
+                            <div
+								class="select2-container select2-container-multi select2 form-control"
+								id="s2id_multiple-select" data-toggle="modal"
+								data-target="#taskAssignMember" onclick="taskMemberListChk();">
+							
+								
+								<ul class="select2-choices">
+									<div id="assignMemberCheck">
+									
+									 </div>
+								</ul>
+							</div>
+                            
+                            <div class="modal fade" id="taskAssignMember" style="display: none;">
+								<div class="modal-dialog">
+						            <div class="modal-content">
+						                <div class="modal-header">
+						                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						                    <h4 class="modal-title text-xl-center fw-bold mt" id="myModalLabel18">프로젝트 멤버 배정</h4>
+						                    <p class="text-xl-center text-muted mt-sm fs-mini">
+						                        We need a bit of your detailed information to proceed. US ticketing system requires
+						                        us to process and check your personal infromation before we can go.
+						                    </p>
+						                </div>
+						                <div class="modal-body bg-gray-lighter">
+						                    	
+						                    <div id="wMemberList">
+						                    
+											</div>
+						                    
+						                </div>
+						                <div class="modal-footer">
+						                    <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
+						                    <button type="button" class="btn btn-success" onclick="taskAssign(${n.task_id});" data-dismiss="modal">Assign</button>
+						                </div>
+						            </div>
+						       </div>
+							</div>
+                            
+                   
                             </div>
                         </div>
                         

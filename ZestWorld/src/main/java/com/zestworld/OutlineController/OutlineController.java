@@ -328,10 +328,11 @@ public class OutlineController {
 	
 	
 	
-	@RequestMapping(value="taskMemberListChk.htm", method=RequestMethod.GET)
-	public View taskMemberListChk(int project_id, int task_id , Model model) throws ClassNotFoundException, SQLException{
+	@RequestMapping(value="taskMemberListChk1.htm", method=RequestMethod.GET)
+	public View taskMemberListChk(int project_id , Model model) throws ClassNotFoundException, SQLException{
 		System.out.println("멤버배정 리스트 확인");
-		List<Users_DTO> member=service.assignMemberList(task_id);
+		List<Users_DTO> member=service.assignMemberList(project_id);
+		System.out.println("task_id: " + project_id);
 		System.out.println("멤버 리스트: " + member.size());
 
 		model.addAttribute("assignmember", member);		
@@ -434,6 +435,25 @@ public class OutlineController {
 		
 	}*/
 }
+	
+	
+	@RequestMapping(value="taskAssign.htm", method=RequestMethod.GET)
+	public View taskAssign(String[] checkboxValues,int taskid,Model model) throws ClassNotFoundException, SQLException{
+		/*int result=service.updateChkFlagZero(check_id);
+
+		List<CheckList_DTO> chklist=service.checkListView(task_id);
+		model.addAttribute("chklist", chklist);*/
+		TaskAssignMember_DTO dto= new TaskAssignMember_DTO();
+		for(int i=0; i<checkboxValues.length;i++){
+			System.out.println("sdasdsadasdas:  "+checkboxValues[i]);
+			dto.setUser_id(checkboxValues[i]);
+			dto.setTask_id(taskid);
+			int result2=service.assignMemberReg(dto);
+		}
+ 
+		return jsonview;
+		
+	}
 }
 
 

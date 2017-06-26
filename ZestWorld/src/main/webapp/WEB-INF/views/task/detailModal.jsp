@@ -14,15 +14,15 @@
     <section class="widget">
         <header>
             <h4>
-            	<input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
-            		<%-- <c:if test="${n.success_f eq 0}">
+            	<%-- <input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
+            		<c:if test="${n.success_f eq 0}">
 			             
 			             onclick="modalChangeSuccessF();"
 			        </c:if> 
 			        <c:if test="${n.success_f eq 1}">
 			        	checked= "checked"
 			             onclick="modalChangeSuccessF_zero();"
-			        </c:if> --%>
+			        </c:if>
 			        
 			        
 			        <c:if test="${n.success_f eq 1}">
@@ -34,7 +34,7 @@
 			        </c:if>
 			        
 			        
-            	>
+            	> --%>
             	
                 <span class="fw-semi-bold" id="span1">
                 	<!--  <input type="text" id="modalTask" name="modalTask" class="form-control" style="board=0"> -->  
@@ -142,7 +142,7 @@
                             <div
 								class="select2-container select2-container-multi select2 form-control"
 								id="s2id_multiple-select" data-toggle="modal"
-								data-target="#taskAssignMember" onclick="taskMemberListChk(${n.project_id},${n.task_id});">
+								data-target="#taskAssignMember" onclick="taskMemberListChk();">
 							
 								
 								<ul class="select2-choices">
@@ -180,7 +180,7 @@
 						                </div>
 						                <div class="modal-footer">
 						                    <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
-						                    <button type="button" class="btn btn-success" onclick="projectAssign();" data-dismiss="modal">Assign</button>
+						                    <button type="button" class="btn btn-success" onclick="taskAssign(${n.task_id});" data-dismiss="modal">Assign</button>
 						                </div>
 						            </div>
 						       </div>

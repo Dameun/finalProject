@@ -13,7 +13,9 @@ import org.springframework.web.servlet.View;
 
 import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.CheckList_DTO;
+import com.zestworld.Table_DTO.TaskAssignMember_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
+import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.taskListDAO.taskListDao;
 import com.zestworld.taskListService.taskListService;
 import com.zestworld.util.DataController;
@@ -217,12 +219,16 @@ public class taskListController {
 	}
 	
 	@RequestMapping(value="detailtaskModal.htm", method=RequestMethod.GET)
-	public View detailTask(String task_id, Model model) throws ClassNotFoundException, SQLException{
+	public View detailTask(String task_id,int project_id,Model model) throws ClassNotFoundException, SQLException{
 		System.out.println("detailmodal*****: " + task_id);
-		Task_DTO result= service.detailtask(task_id);
+		System.out.println("detailmodal project_id*****: " + project_id);
+		Task_DTO result= service.detailTask(task_id);
+		System.out.println("enrolldate:"+result.getEndrolldate());
 		
+		List<Users_DTO> assignmember=service.assignMemberList(project_id);
+
 		model.addAttribute("detail", result);
- 
+		
 		return jsonview;
 		
 	}
@@ -237,18 +243,20 @@ public class taskListController {
 		
 	}
 	@RequestMapping(value="detailtaskUpdate.htm", method=RequestMethod.GET)
-	public String detailUpdate(int task_id,String start,String end,String member, String explain,Model model) throws ClassNotFoundException, SQLException{
+	public String detailUpdate(int task_id,String start,String end, String follower,String member, String explain,Model model) throws ClassNotFoundException, SQLException{
 
 		Task_DTO dto= new Task_DTO();
 		
 
-		String user_id = DataController.getInstance().getCurrentWorkspace().getUser_id();
-		dto.setFollower(user_id);
+		//String user_id = DataController.getInstance().getCurrentWorkspace().getUser_id();
+		dto.setFollower(follower);
 		dto.setTask_id(task_id);
 		dto.setStart_date(start);
 		dto.setEnd_date(end);
 		dto.setMember(member);
+		
 		dto.setExplain(explain);
+		
 		
 		int result=service.detailUpdate(dto);
 
@@ -285,7 +293,7 @@ public class taskListController {
 		
 	}
 	@RequestMapping(value="updateChklistFlag.htm", method=RequestMethod.GET)
-	public String updateChkFlag(int task_id,int check_id, Model model) throws ClassNotFoundException, SQLException{
+	public String updateChklistFlag(int task_id,int check_id, Model model) throws ClassNotFoundException, SQLException{
 		int result=service.updateChkFlag(check_id);
 
 		List<CheckList_DTO> chklist=service.checkListView(task_id);
@@ -347,7 +355,7 @@ public class taskListController {
 		return "/task/taskLists";
 	}
 	
-	//체크리스 삭제
+	//체크리스트 삭제
 	@RequestMapping(value="chkListDelete.htm", method=RequestMethod.GET)
 	public String checkListDelete(int task_id,int check_id,Model model) throws ClassNotFoundException, SQLException{
 		System.out.println("checklist");
@@ -357,8 +365,64 @@ public class taskListController {
 		model.addAttribute("chklist", chklist);
  
 		return "/task/checkList";
-		
+	}	
 	
+	//배정된멤버 리스트
+	
+	@RequestMapping(value="taskMemberListCheck1.htm", method=RequestMethod.GET)
+	public View taskMemberListCheck(int project_id , Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("멤버배정 리스트 확인");
+		List<Users_DTO> member=service.assignMemberList(project_id);
+		System.out.println("task_id: " + project_id);
+		System.out.println("멤버 리스트: " + member.size());
+
+		model.addAttribute("assignmember", member);		
+		
+		return jsonview;
+	}
+	
+	@RequestMapping(value="TaskAssign.htm", method=RequestMethod.GET)
+	public View taskAssign(String[] checkboxValues,int taskid,Model model) throws ClassNotFoundException, SQLException{
+		
+		TaskAssignMember_DTO dto= new TaskAssignMember_DTO();
+		for(int i=0; i<checkboxValues.length;i++){
+			System.out.println("sdasdsadasdas:  "+checkboxValues[i]);
+			dto.setUser_id(checkboxValues[i]);
+			dto.setTask_id(taskid);
+			int result2=service.assignMemberReg(dto);
+		}
+ 
+		return jsonview;
+		
+	}
+		
+
+	//업무 배정인원
+	@RequestMapping(value="detailAssign.htm", method=RequestMethod.GET)
+	public String taskMemberList(int task_id, int project_id, Model model) throws ClassNotFoundException, SQLException{
+
+		List<TaskAssignMember_DTO> assignmember=service.taskMemberList(task_id);
+
+
+		model.addAttribute("assignmember", assignmember);		
+		
+		return "/task/taskassignMember";
+	}
+	
+	
+	@RequestMapping(value="updateChkFlag_Zero.htm", method=RequestMethod.GET)
+	public String updateChkFlagZero(int task_id,int check_id, Model model) throws ClassNotFoundException, SQLException{
+		int result=service.updateChkFlagZero(check_id);
+
+		List<CheckList_DTO> chklist=service.checkListView(task_id);
+		model.addAttribute("chklist", chklist);
+ 
+		return "/task/checkList";
+		
+	}
+	
+	
+		
 /*	@RequestMapping(value="updateChkFlagZero.htm", method=RequestMethod.GET)
 	public View assignMemberList(int project_id, Model model) throws ClassNotFoundException, SQLException{
 		List<Users_DTO> assignmember=service.assignMemberList(project_id);
@@ -379,6 +443,6 @@ public class taskListController {
 		return "/task/checkList";
 		
 	}*/
-}
+
 	
 }
