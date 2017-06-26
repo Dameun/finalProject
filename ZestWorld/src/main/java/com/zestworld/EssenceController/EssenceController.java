@@ -218,7 +218,7 @@ public class EssenceController {
 				int cateidx = Integer.parseInt(strArr[1]);
 				define.setEcate_id(cateidx);
 				defineNew = essenceService.getDefineByid(define);
-				String taskName = cateStrList[idx]+ ": "+defineNew.getTitle();
+				String taskName = cateStrList[idx]+ ": "+defineNew.getSubTitle();
 				Category_DTO cateDtoNew= essenceService.getCategory(cateDto);
 				task.setCategory_id(cateDtoNew.getCategory_id());
 				task.setTitle(taskName);
