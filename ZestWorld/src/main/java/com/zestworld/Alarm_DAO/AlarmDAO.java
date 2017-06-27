@@ -2,10 +2,15 @@ package com.zestworld.Alarm_DAO;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-
 import com.zestworld.Table_DTO.Alarm_DTO;
 
+/*
+ * @FileName : AlarmDAO.java
+ * @Project : ZestWorld
+ * @Date : 2017.06.18
+ * @Author : 장윤희
+ * @Desc : 알람DAO
+ * */
 public interface AlarmDAO {
 	
 	//알람리스트 가져오기

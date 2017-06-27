@@ -315,7 +315,7 @@
 			&nbsp&nbsp&nbsp&nbsp
 			<input type="text" id="to" name="to">
 			&nbsp&nbsp&nbsp&nbsp
-			<button type="button" class="btn btn-primary btn-sm">추가</button>
+			<button type="button" class="btn btn-warning btn-sm">추가</button>
 			
 			<%-- <c:forEach items="${getTaskAllFlow_comp}"  var="n">
 				${n.categorytitle}

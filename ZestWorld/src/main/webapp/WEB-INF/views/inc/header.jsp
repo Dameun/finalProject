@@ -81,8 +81,8 @@
 								<a class="btn btn-cta btn-cta-secondary" href="join.htm">회원가입</a>
 							</li>
 							</sec:authorize>
-            <ul class="nav navbar-nav navbar-right">
-                 <li class="dropdown" id="dropdownid" onclick="AlarmReadCheck()" >
+             <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown" id="dropdownid" onclick="AlarmReadCheck()" >
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown"
                    >
                         <span class="thumb-sm avatar pull-left">
@@ -154,7 +154,7 @@
             			</i>
             		</a>
             	</li>
-            </ul> 
+          </ul>
         </div>
     </div>
 </nav>

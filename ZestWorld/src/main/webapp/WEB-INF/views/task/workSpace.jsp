@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<h3>워크스페이지스 부분</h3>
+<h3>워크스페이스 부분</h3>
 
 	<script type="text/javascript">
 	function searc() {
@@ -21,9 +21,9 @@
 </div>
 
  	<!-- 초대 email -->
-					<div class="container">
+					<div class="container" style="float:right;">
 						<!-- Trigger the modal with a button -->
-						<button type="button" class="btn btn-info btn-lg"
+						<button type="button" class="btn btn-warning btn-lg"
 							data-toggle="modal" data-target="#myModal">초대하기</button>
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" role="dialog">
