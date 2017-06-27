@@ -530,7 +530,7 @@ function deleteTaskMember(memberId){
 	padding: 8px 15px;
 	text-decoration: none;
 	font-weight: bold;
-	color: #069;
+	color: #666;
 	border-right: 1px solid #ccc;
 }
 
