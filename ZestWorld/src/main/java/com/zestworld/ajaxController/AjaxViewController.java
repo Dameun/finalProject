@@ -314,11 +314,10 @@ public class AjaxViewController {
 	@RequestMapping(value = "/CreateProjectProcess.ajax", method = RequestMethod.GET)
 	public String createProject(String p_title, String explain, String etcStr, Model model) {
 		String user_id = DataController.getInstance().GetUser().getUser_id();
-		String[] strArr = etcStr.split(",");
+
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Project_DTO project = new Project_DTO();
 		project.setWorkspace_id(DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
-
 		project.setP_title(p_title);
 		project.setExplain(explain);
 		project.setP_admin(DataController.getInstance().GetUser().getUser_id());
@@ -328,8 +327,8 @@ public class AjaxViewController {
 		project.setAUTHORITY("0");
 		project.setP_state("0");
 		project.setMark_f(0);
-		project.setOpen_f(Integer.parseInt(strArr[0])); // 怨듦컻�뿬遺�
-		project.setEssence_f(Integer.parseInt(strArr[1])); // �뿉�꽱�뒪�봽濡쒖젥�듃 �쑀臾�
+		project.setOpen_f(Integer.parseInt(etcStr)); // 怨듦컻�뿬遺�
+		project.setEssence_f(0); // �뿉�꽱�뒪�봽濡쒖젥�듃 �쑀臾�
 		taskDao.insertProject(project);
 
 		Project_DTO projectNew = taskDao.GetProjectByname(project);
