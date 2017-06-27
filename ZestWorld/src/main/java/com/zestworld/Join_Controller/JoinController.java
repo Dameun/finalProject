@@ -162,8 +162,7 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "/updateUser.htm", method = RequestMethod.POST)
-	public ModelAndView update(@RequestParam Map<String, Object> paramMap, Users_DTO member, HttpServletRequest request,
-			ModelAndView mav, Model model) throws ClassNotFoundException, SQLException, IOException {
+	public String update(@RequestParam Map<String, Object> paramMap, Users_DTO member, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
 		String filename = member.getFile().getOriginalFilename();
 		
 		String path = request.getServletContext().getRealPath("upload");
@@ -190,17 +189,13 @@ public class JoinController {
 		int result = service.updateUser(updateMember);
 		if (result != 0) {
 		DataController.getInstance().SetUserSavedata(updateMember);
-			/*Users_DTO users = DataController.getInstance().GetUser();
-			 model.addAttribute("member", users);*/
-			// mav= new ModelAndView("");//성공시
-		mav = new ModelAndView("redirect:joinEdit.htm");// 실패시
-		return mav;
+	
+		return "home.main";//성공시
 
 		} else {
-			// 성공시
-			// return mav;
-			mav = new ModelAndView("redirect:joinEdit.htm");// 실패시
-			return mav;
+			
+			// 실패시
+			return "redirect:/index.htm";
 		}
 
 	}
