@@ -141,16 +141,16 @@
                   </div>
                   <br>
                   <div class="modal-body">
-                  
-                     <input class="form-control input-sm" type="text" id="milestoneContent" name="milestoneContent"
+                  <div class="input-group">
+                     <input class="form-control" type="text" id="milestoneContent" name="milestoneContent"
                         placeholder="',' 로구분해주세요"  style="width:90%;">
-                       <!--  </div>
-                        <div class="form-group" style="text-align:right;"> -->
-                        <div class="widget-controls">
+                       
+                        <div class="input-group-btn">
                      <button type="button" class="btn btn-warning"
                         id="btn" onclick= "CreateMilestone()"   data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
+                     </div>
                      </div>
                   </div>
                </div>
