@@ -84,30 +84,36 @@
 		    });
 	}
 </script>
-
+<div class="content-wrap">
+<main id="content" class="widget-login-container" role="main">
+<div class="col-md-8">
+<section class="widget">
 <div class="widget-body">
 	<h4>
-		<i class="fa fa-circle text-gray"></i> Create Project <i
-			class="fa fa-circle text-warning"></i>
+		Create Project 
+		
 	</h4>
+	<div class="widget-controls">
+	<button type="button" class="btn btn-warning" data-toggle="modal"
+	         data-target="#milestone-modal"> + Essence</button>
+	</div>
 	<form role="form">
 		<fieldset>
 			<legend></legend>
 			<div class="form-group">
-				<label class="login-field-icon fui-user" label for="p_title">프로젝트
-					이름</label> <br><input type="text" style="width: 50%;" class="form-controll"
-					value="" placeholder="Project Name" id="p_title" name="p_title">
+				<label for="p_title">프로젝트
+					이름</label> <br><input type="text" class="form-control"
+					placeholder="Project Name" id="p_title" name="p_title">
 
 			</div>
 			<div class="form-group">
-				<label class="login-field-icon fui-user" label for="explain">프로젝트
-					설명</label> <br><input type="text" "class="form-controll" style="width: 50%;"
-					value="" placeholder="Discription" id="explain" name="explain">
+				<label for="explain">프로젝트
+					설명</label> <br><input type="text" class="form-control"
+					 placeholder="Discription" id="explain" name="explain">
 
 			</div>
 
-			<button type="button" class="btn btn-primary" data-toggle="modal"
-	         data-target="#milestone-modal"> +Essence</button>
+			
 			<div class="form-group">
 				<button type="reset" class="btn btn-secondary btn-sm">Reset</button>
 				<button type="button" onclick="CreateBtn()"
@@ -116,32 +122,36 @@
 		</fieldset>
 	</form>
 </div>
+</section>
+</div>
+</main>
+</div>
  <!--마일스톤 팝업창  -->
          <!-- modal -->
          <form id="milestone" name="milestone" method="post">
          <div class="modal fade" id="milestone-modal" style="display: none;">
-            <div class="modal-dialog">
+            <div class="modal-dialog"style="width:40%;">
                <div class="modal-content">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">×</span>
                      </button>
-                     <h4 class="modal-title" style="align: center">마일스톤 명을 입력하세요</h4>
+                     <h4 class="modal-title">마일스톤 명을 입력하세요</h4>
                   </div>
                   <br>
                   <div class="modal-body">
-                     <input class="form-control" type="text" id="milestoneContent" name="milestoneContent"
-                        placeholder=",구분해주세요" >
-                     <button type="button" class="btn btn-info btn-circle btn-lg"
+                  
+                     <input class="form-control input-sm" type="text" id="milestoneContent" name="milestoneContent"
+                        placeholder="',' 로구분해주세요"  style="width:90%;">
+                       <!--  </div>
+                        <div class="form-group" style="text-align:right;"> -->
+                        <div class="widget-controls">
+                     <button type="button" class="btn btn-warning"
                         id="btn" onclick= "CreateMilestone()"   data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
-                     <button type="button" class="btn btn-warning btn-circle btn-lg"
-                        data-dismiss="modal" id="ucancle">
-                        <i class="fa fa-times"></i>
-                     </button>
-                     
+                     </div>
                   </div>
                </div>
 

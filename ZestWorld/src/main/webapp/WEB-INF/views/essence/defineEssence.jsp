@@ -91,10 +91,8 @@ $(document).ready(function(){
 	 			
 	 			*/
 	 			console.log(value.subTitle);
-	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
-				"<input id='0_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
-		 		"<label for='0_"+ value.ecate_id +"'>"+
-		 			value.subTitle
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' ><input id='0_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='0_"+ value.ecate_id +"'>"+
+		 			value.subTitle+
 		 		"</label></div>";
 			});
 	 		
@@ -104,10 +102,8 @@ $(document).ready(function(){
 	 		$.each(data.defineist_1,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
-				"<input id='1_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
-		 		"<label for='1_"+ value.ecate_id +"'>"+
-		 			value.subTitle
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' ><input id='1_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='1_"+ value.ecate_id +"'>"+
+		 			value.subTitle+
 		 		"</label></div>";
 			});
 	 		
@@ -117,10 +113,8 @@ $(document).ready(function(){
 	 		$.each(data.defineist_2,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
-				"<input id='2_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
-		 		"<label for='2_"+ value.ecate_id +"'>"+
-		 			value.subTitle
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' ><input id='2_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='2_"+ value.ecate_id +"'>"+
+		 			value.subTitle+
 		 		"</label></div>";
 			});
 	 		
@@ -130,10 +124,8 @@ $(document).ready(function(){
 	 		$.each(data.defineist_3,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
-				"<input id='3_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox'  onclick='subTitlechecked(this)'>"+
-		 		"<label for='3_"+ value.ecate_id +"'>"+
-		 			value.subTitle
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' ><input id='3_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox'  onclick='subTitlechecked(this)'><label for='3_"+ value.ecate_id +"'>"+
+		 			value.subTitle+
 		 		"</label></div>";
 			});
 	 		
@@ -143,10 +135,8 @@ $(document).ready(function(){
 	 		$.each(data.defineist_4,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
-				"<input id='4_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox'  onclick='subTitlechecked(this)'>"+
-		 		"<label for='4_"+ value.ecate_id +"'>"+
-		 			value.subTitle
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' ><input id='4_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox'  onclick='subTitlechecked(this)'><label for='4_"+ value.ecate_id +"'>"+
+		 			value.subTitle+
 		 		"</label></div>";
 			});
 	 		
@@ -156,10 +146,8 @@ $(document).ready(function(){
 	 		$.each(data.defineist_5,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
-				"<input id='5_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
-		 		"<label for='5_"+ value.ecate_id +"'>"+
-		 			value.subTitle
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' ><input id='5_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='5_"+ value.ecate_id +"'>"+
+		 			value.subTitle+
 		 		"</label></div>";
 			});
 	 		
@@ -222,9 +210,11 @@ $(document).ready(function(){
                                         <div class="tab-pane bg-gray-lighter" id="tab0" style="height: 444px;">
                                             <form action="" method="POST" >
                                                 <fieldset>
-                                                
+                                                 
                                                    <div id="tab0_checkList">
+                                                  
                                                    </div>
+                                                   
                                                <!--     <input type="text" id="destination" name="destination" placeholder="" class="form-control parsley-success" required="required" data-parsley-id="24" -->
 												
                                                 </fieldset>
