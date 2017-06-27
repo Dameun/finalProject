@@ -5,8 +5,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css"> -->
 
-
-
+<script>
+  $( function() {
+	  $("#detailEnd").datepicker({ dateFormat: 'yy/mm/dd' });
+      $("#detailStart" ).datepicker({ dateFormat: 'yy/mm/dd' });
+  } );
+  
+  
+</script>
 
 	<div class="modal fade" id = "detailModal" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -14,27 +20,6 @@
     <section class="widget">
         <header>
             <h4>
-            	<%-- <input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
-            		<c:if test="${n.success_f eq 0}">
-			             
-			             onclick="modalChangeSuccessF();"
-			        </c:if> 
-			        <c:if test="${n.success_f eq 1}">
-			        	checked= "checked"
-			             onclick="modalChangeSuccessF_zero();"
-			        </c:if>
-			        
-			        
-			        <c:if test="${n.success_f eq 1}">
-			             checked= "checked"
-			             onclick="modalChangeSuccessF_zero(${n.task_id});"
-			        </c:if> 
-			        <c:if test="${n.success_f eq 0}">
-			            onclick="modalChangeSuccessF(${n.task_id});"
-			        </c:if>
-			        
-			        
-            	> --%>
             	
                 <span class="fw-semi-bold" id="span1">
                 	<!--  <input type="text" id="modalTask" name="modalTask" class="form-control" style="board=0"> -->  
@@ -78,30 +63,6 @@
     		        		
     		        		
     		        		</div>
-    		        		
-    		        		
-                         <!--    <div class="clearfix">
-					            <div class="btn-toolbar">
-					                <div class="btn-group">
-					                    <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-secondary">
-					                        Popular <span class="caret"></span>
-					                    </a>
-					                    <ul class="dropdown-menu">
-					                        <li><a class="dropdown-item" href="#">All</a></li>
-					                        <li><a class="dropdown-item" href="#">Popular</a></li>
-					                        <li><a class="dropdown-item" href="#">Interesting</a></li>
-					                        <li><a class="dropdown-item" href="#">Latest</a></li>
-					                    </ul>
-					                </div>
-					            </div>
-				        	</div> -->
-                                <!-- <input type="text" id="email" name="email" class="form-control"
-                                       data-parsley-trigger="change"
-                                       data-parsley-validation-threshold="1"
-                                       required="required" >
-		                        <span class="help-block">
-		                            This one is triggered even when 1 character has been input
-		                        </span> -->
                             </div>
                         </div>
                         <div class="form-group row">
@@ -134,15 +95,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-sm-3" for="range">
-                                	배정된 멤버
-                            </label>
+	                        <div  data-toggle="modal"
+									data-target="#taskAssignMember" onclick="taskMemberListChk();">
+	                            <label class="control-label col-sm-3" for="range">
+	                                	배정된 멤버
+	                            </label>
+	                        </div>
                             <div class="col-sm-9">
                             
                             <div
 								class="select2-container select2-container-multi select2 form-control"
-								id="s2id_multiple-select" data-toggle="modal"
-								data-target="#taskAssignMember" onclick="taskMemberListChk();">
+								id="s2id_multiple-select">
 							
 								
 								<ul class="select2-choices">
@@ -151,10 +114,6 @@
 									 </div>
 								</ul>
 							</div>
-                            
-                            
-                            
-                            
                             
                             <div class="modal fade" id="taskAssignMember" style="display: none;">
 								<div class="modal-dialog">
@@ -171,11 +130,7 @@
 						                    	
 						                    <div id="wMemberList">
 						                    
-											</div>
-						                    
-						                    
-						                    
-						                    
+											</div>                    
 						                    
 						                </div>
 						                <div class="modal-footer">
@@ -184,50 +139,7 @@
 						                </div>
 						            </div>
 						       </div>
-							</div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                           
-                        <%--     
-                            <div class="select2-container select2-container-multi select2 form-control" id="s2id_multiple-select" data-toggle="modal" data-target="#assignMember" onclick="projectAssignMemberList(3,2);">
-		                    	<ul class="select2-choices"> 
-			                    	<c:forEach items="${project.projectMember}" var="member">
-			                    			<li class="select2-search-choice"><div>${member.user_id}</div>
-			                    				<a href="#" class="select2-search-choice-close" tabindex="-1" onclick="assignMemberDelete(${member.user_id});"></a>
-			                    			</li>
-			                    	</c:forEach>	
- 								</ul>
- 							</div>
-                             --%>
-                            
-                           <!--       <div class="modal fade" id="assignMember" style="display: none;">
-
-								</div>
-                            
-                             -->
-                            
-                            
-                                <!-- <input type="text"  class="form-control"
-                                       id="member" name="member"
-                                       data-parsley-range="[10, 100]"
-                                       data-parsley-trigger="change"
-                                       data-parsley-validation-threshold="1"
-                                       required="required"> -->
-                              <!--         
-                              		<input type="checkbox">
-                              		멤버리스트 들어갈 부분
-                              
-                              
-                              
-                               -->         
+							</div>     
                             </div>
                         </div>
                         
@@ -242,12 +154,9 @@
                                        required="required">
                             </div>
                         </div>
-                        
-                        
-                               <hr>        
-                                       
-                                       
-                                       
+                    
+						<hr>        
+                    
                        <div class="form-group row">
                             <label class="control-label col-sm-3" for="password">
                                		 체크리스트
@@ -264,54 +173,10 @@
                             </div>
                             
                         </div>  
-                        
-                       <!--  <div id="writecomment" onsubmit="return false;">
-							<input type="hidden" name="test" />
-							<div class="wrap">
-								<input id="comment_input" autocomplete="off" type="text"
-									placeholder="댓글을 입력해주세요."
-									onkeydown="javascript: if(event.keyCode == 13) fnReplyWrite();">
-								<span class="submit" onclick="fnReplyWrite();"></span>
-							</div>
-						</div>
-                         -->
+
                         <div id="checkListAjax">
                         
                         </div>
-                   
-                                       
-
-                                           
-                        
-                        <%-- <div class="comments">
-							<h2>댓글목록</h2>
-							<ol class="group">
-								<!--  for문 -->
-								<c:forEach var="reply" items="<%=replyResult%>">
-									<c:set var="contents" value="${reply.getContents()}" />
-									<c:set var="enrollDate" value="${reply.getEnrollDate()}" />
-									<c:set var="groupCn" value="${reply.getGroupCN()}" />
-									<c:set var="memCode" value="${reply.getMemCode()}" />
-				
-									<li class="comment"><p class="text">${contents}</p> <time>${enrollDate}</time>
-										<a class="remove" onclick="fnReplyDelete(${groupCn},${memCode});">삭제</a>
-										<hr></li>
-								</c:forEach>
-							</ol>
-						</div> --%>
-<!-- 						<div id="detailModalCheck">
-							<form class="writecomment" onsubmit="return false;">
-							<div class="writecomment">
-								<input type="hidden" name="test" />
-								<div class="wrap">
-									<input id="comment_input" autocomplete="off" type="text"
-										placeholder="댓글을 입력해주세요."
-										onkeydown="javascript: if(event.keyCode == 13) fnReplyWrite();">
-									<span class="submit" onclick="fnReplyWrite();"></span>
-								</div>
-							</form>   
-	                        </div>
-                        </div> -->
                 </fieldset>
 
                 <div class="form-actions">

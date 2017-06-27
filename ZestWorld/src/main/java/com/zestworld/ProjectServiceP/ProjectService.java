@@ -18,9 +18,9 @@ public class ProjectService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	public int assignMemberDelete(int memberId){
-		IProjectDAO dao = sqlsession.getMapper(IProjectDAO.class);		
-		int result=dao.assignMemberDelete(memberId);
+	public int assignMemberDelete(Project_user_DTO dto){
+		IProjectDAO dao = sqlsession.getMapper(IProjectDAO.class);
+		int result=dao.assignMemberDelete(dto);
 		
 		return result;
 		

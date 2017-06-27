@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+import com.zestworld.ProjectDAO.IProjectDAO;
 import com.zestworld.ProjectServiceP.ProjectService;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
@@ -26,14 +27,37 @@ public class ProjectController {
 	@Autowired(required=false)
 	private View jsonview;
 	
-	/*@RequestMapping(value="assignMemberDelete.htm", method=RequestMethod.GET)
-	public String categoryFilterList(int memberId, Model model) throws ClassNotFoundException, SQLException{
+	@RequestMapping(value="assignMemberDelete.htm", method=RequestMethod.GET)
+	public View assignMemberDelete(String memberId, int project_id,Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("assignMemberDelete: "+project_id);
+		Project_user_DTO dto= new Project_user_DTO();
+		dto.setUser_id(memberId);
+		dto.setProject_id(project_id);;
+		int result=service.assignMemberDelete(dto);
 		
-		int result=service.assignMemberDelete(memberId);
+		model.addAttribute("check", "check");
 		
-		//model.addAttribute("list", list);			
-		return "/task/categotyFilterList";
-	}*/
+		
+		/*List<Project_DTO> projectList = DataController.getInstance().GetProjectList();
+		
+		
+		int projectid =0;
+		for( int i =0; i <projectList.size(); i++)
+		{
+			System.out.println("projectList : "+i+"    " +projectList.get(i).getProject_id());
+			projectid = projectList.get(i).getProject_id();
+			projectList.get(i).setProjectMember(service.projectMemberList(projectid));
+			projectList.get(i).projectMember = projectDao.projectMemberList(projectid);
+		}
+
+		model.addAttribute("projectList", projectList);*/
+		return jsonview;
+		
+		
+		
+		
+		/*return "/projectMain.ajax";*/
+	}
 	
 	@RequestMapping(value="projectAssignMemberList.htm", method=RequestMethod.GET)
 	public View projectAssignMemberList(int workspace_id, Model model) throws ClassNotFoundException, SQLException{

@@ -249,6 +249,14 @@ function submit2(){
 		title=$("#title").val();
 		var project_id= $('#project').val();
 	 	console.log(title); 
+	 	if(project_id=="before"){
+			alert('프로젝트 선택');
+			//return false; 
+		}
+		if(categoryId=="cateBefore"){
+			alert('카테고리 선택');
+			//return false; 
+		}
 		 $.ajax({
 		       type : "get",
 		       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate+"&project_id="+project_id,
@@ -267,12 +275,15 @@ function submit2(){
 		          alert('Error while request..');
 		       }
 		    });
-		    console.log("check");
+			console.log("check");
+		    $('#datepicker').val('');
+		    $('#title').val('');
+		    $('#project').val('');
+		    $('#catechange').val('');
 	}
 function projectchange(){
 
 	projectId=$("#project").val();
-	console.log("dsadasdasdsadasdas"+ projectId);
 	/* categoryTitle=$("#title").val(); */
 	if(projectId!=""){
 		console.log("ProjectID: 0");
@@ -295,7 +306,6 @@ function projectchange(){
 function projectchange2(){
 
 	projectId=$("#project2").val();
-	console.log("dsadasdasdsadasdas"+ projectId);
 	/* categoryTitle=$("#title").val(); */
 	if(projectId!=""){
 		console.log("ProjectID: 0");
@@ -466,7 +476,14 @@ function taskAssign(taskId){
 	       }
 	}); 
 }
-
+function dataErase(){
+	$('#datepicker').val('');
+    $('#title').val('');
+    $('#project').val('');
+    $('#catechange').val('');
+	
+}
+</script>
 </script>
 
 
@@ -603,7 +620,7 @@ function taskAssign(taskId){
             <div class="modal-dialog">
                <div class="modal-content">
                   <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal"
+                     <button type="button" class="close" data-dismiss="modal"  onclick="dataErase();"
                         aria-label="Close">
                         <span aria-hidden="true">×</span>
                      </button>

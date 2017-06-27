@@ -139,6 +139,11 @@
 	<select id ="taskMemberList" resultType="com.zestworld.Table_DTO.TaskAssignMember_DTO" >
 		select * from TaskAssignMember where task_id=#{task_id}
 	</select>
+	
+	<!-- 업무 배정 멤버 삭제 -->
+	<delete id ="deleteTaskMember"  >
+		delete from TaskAssignMember where user_id=#{user_id}
+	</delete>
 </mapper>
 
 

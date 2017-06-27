@@ -29,14 +29,16 @@ function projectClick(project_id)
 /* 배정된 멤버 삭제  */
 function assignMemberDelete(memberId)
 {
+	console.log('멤버삭제 들어가라');
 	$.ajax({
 		type:"get",
 		url:"assignMemberDelete.htm?memberId="+memberId,
-		data:{"project_id" : project_id},
 		success:function(data){
-			
-			
-			ajaxView('taskList.ajax');
+			/* if(data=="check"){
+				window.location.reload()
+			} */
+			/* 
+			ajaxView('taskList.ajax'); */
 		},
 		error:function(){
 			alert('error');
@@ -81,7 +83,7 @@ function projectAssign(){
 	       type : "get",
 	       url : "projectAssignChk.htm?project_id="+current_project_id+"&chkmember="+checkboxValues,
 	       success : function(data) {
-	    	   if(data.success.equals("success")){
+	    	   if(data.success=="success"){
 	    	   		console.log('성공');
 	    	   		location.reload();
 	    	   }
@@ -118,16 +120,18 @@ projectmain
 		                        
 		                        <hr>
 		                        
-                        	<label class="col-md-4 control-label" for="multiple-select">
-                                     	<h4>Member</h4>
+                        	<label class="col-md-4 control-label" for="multiple-select"  onclick= "projectAssignMemberList(${project.workspace_id},${project.project_id});" data-toggle="modal" data-target="#assignMember">
+                                     	<h4 >Member</h4>
                             </label>
-		                    <div class="select2-container select2-container-multi select2 form-control" id="s2id_multiple-select"  data-toggle="modal" data-target="#assignMember"
-		                     onclick= "projectAssignMemberList(${project.workspace_id},${project.project_id});">
-		                    	<ul class="select2-choices"> 
+                            </div>
+		                    <div class="select2-container select2-container-multi select2 form-control" id="s2id_multiple-select"  >
+		                    	<ul class="select2-choices" > 
 			                    		<c:forEach items="${project.projectMember}" var="member">
 			                    			<li class="select2-search-choice"><div>${member.user_id}</div>
-			                    				<a href="#" class="select2-search-choice-close" tabindex="-1" onclick="assignMemberDelete(${member.user_id});"></a>
-			                    			</li>
+<%-- 			                    				<a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}'" class="select2-search-choice-close" tabindex="-1" onclick="assignMemberDelete(${member.user_id});"></a>
+ --%>			                    		
+ 												<a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}&project_id=${member.project_id }'" class="select2-search-choice-close" tabindex="-1"></a>
+ 											</li>
 			                    		</c:forEach>
 		                    	
  								</ul>

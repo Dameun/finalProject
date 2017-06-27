@@ -12,7 +12,7 @@ public interface IProjectDAO {
 	public List<Project_user_DTO> projectMemberList(int projectid);
 	
 	//프로젝트 멤버 삭제
-	public int assignMemberDelete(int memberId);
+	public int assignMemberDelete(Project_user_DTO memberId);
 	
 	//워크 스페이스 멤버 리스트
 	public List<WorkspaceUser_DTO> workspaceMemberList(int workspaceId);

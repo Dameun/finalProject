@@ -450,7 +450,15 @@ public class OutlineController {
 			dto.setTask_id(taskid);
 			int result2=service.assignMemberReg(dto);
 		}
- 
+		return jsonview;
+		
+	}
+	
+	@RequestMapping(value="deleteTaskMember.htm", method=RequestMethod.GET)
+	public View deleteTaskMember(String userid,Model model) throws ClassNotFoundException, SQLException{
+		int result=service.deleteTaskMember(userid);
+		
+		/*model.addAttribute("check", "check");*/
 		return jsonview;
 		
 	}
