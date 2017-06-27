@@ -152,9 +152,9 @@ public class OutlineService {
 		return list;
 	}
 	
-	public int deleteTaskMember(String user_id) throws ClassNotFoundException, SQLException{
+	public int deleteTaskMember(TaskAssignMember_DTO dto) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
-		int result= dao.deleteTaskMember(user_id);
+		int result= dao.deleteTaskMember(dto);
 		return result;
 		
 	}

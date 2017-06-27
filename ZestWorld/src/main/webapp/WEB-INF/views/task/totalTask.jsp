@@ -16,6 +16,7 @@ var detailExplain='';
 var clickTask='';
 
 var detailpid='';
+
 $(document).ready(function(){
 	console.log("dsadasd:");
 	var forme='';
@@ -114,8 +115,6 @@ function changeSuccessF_zero(taskid){
 				alert('검색 에러! 관리자에게 문의하세요');
 			}
 		});
-	 
-	 
 }
 function myfilter(){
 	var forme='';
@@ -483,7 +482,24 @@ function dataErase(){
     $('#catechange').val('');
 	
 }
-</script>
+/* 배정된 멤버 삭제  */
+function deleteTaskMember(memberId){
+	console.log('멤버삭제 들어가라');
+	$.ajax({
+		type:"get",
+		url:"deleteTaskMember.htm?memberId="+memberId+"&taskId="+clickTask,
+		success:function(data){
+		    if(data.check=="check"){
+				window.location.reload()
+		    }
+			/* 
+			ajaxView('taskList.ajax'); */
+		},
+		error:function(){
+			alert('error');
+		}
+	});	
+}
 </script>
 
 
@@ -598,7 +614,7 @@ function dataErase(){
 	<div id="filter" style=" width: 880px">
 	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
-		<button type="button" class="btn btn-warning" data-toggle="modal"
+		<button type="button" class="btn btn-primary" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
 	         
 	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">

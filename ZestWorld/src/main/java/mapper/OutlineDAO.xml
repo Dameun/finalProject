@@ -141,8 +141,8 @@
 	</select>
 	
 	<!-- 업무 배정 멤버 삭제 -->
-	<delete id ="deleteTaskMember"  >
-		delete from TaskAssignMember where user_id=#{user_id}
+	<delete id ="deleteTaskMember" parameterType="com.zestworld.Table_DTO.TaskAssignMember_DTO" >
+		delete from TaskAssignMember where user_id=#{user_id} and task_id=#{task_id}
 	</delete>
 </mapper>
 
