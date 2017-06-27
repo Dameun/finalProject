@@ -48,7 +48,7 @@ $(document).ready(function(){
 			milestoneListView = data.milestoneList;
 	 		$.each(data.milestoneList,function(index,value)
 	 		{
-	 				str += "<button type='button' class='btn btn-inverse btn-block' onclick='milestoneClick("+ index + ")''>"+ value +"</button>";
+	 				str += "<button type='button' class='btn btn-warning btn-block' onclick='milestoneClick("+ index + ")''>"+ value +"</button>";
 			});
 	 		
 	 		$("#tabs").append ($('#tabs').html(str));
@@ -68,7 +68,7 @@ $(document).ready(function(){
 				<section class="widget">
 					<header>
 						<h4>
-							 <span class="fw-semi-bold">미일스톤</span>
+							 <span class="fw-semi-bold">마일스톤</span>
 						</h4>
 						<div class="widget-controls">
 							<a data-widgster="expand" title="Expand" href="#"

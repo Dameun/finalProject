@@ -22,6 +22,14 @@ import com.zestworld.taskDAO.TaskDataDAO;
 import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
 
+/*
+ * @FileName : workspaceController.java
+ * @Project : ZestWorld
+ * @Date : 2017.06.16
+ * @Author : 장윤희
+ * @Desc : workspace, project 생성 및 수정 
+ * */
+
 @Controller
 public class workspaceController {
 
@@ -34,6 +42,7 @@ public class workspaceController {
 	@Autowired
 	private UserStateService userstateService;
 	
+	//
 	@RequestMapping("/workSpace.htm")
 	public String GetWorkSpace(Principal principal,HttpSession session, Model model)
 	{	
@@ -45,24 +54,16 @@ public class workspaceController {
 		
 		if( session.getAttribute("workspace_id") != null){
 			workspaceid = (String)session.getAttribute("workspace_id");
-			
 			int strWorkspaceId=Integer.parseInt(workspaceid);
-			
 			WorkspaceUser_DTO workspaceUser= new WorkspaceUser_DTO ();
 			workspaceUser.setWorkspace_id(strWorkspaceId);
 			workspaceUser.setUser_id(usernameid);
-			
-			//String visitUser=DataController.getInstance().GetUser().getUser_id();
-			
 			List<WorkspaceUser_DTO> listSize= taskDao.GetWorkSpaceMemberChk(workspaceUser);
 			
-			if(listSize.size()==0){
-				taskDao.insertWorkSpaceUser(workspaceUser);
-			}	
+			if(listSize.size()==0)taskDao.insertWorkSpaceUser(workspaceUser);				
 		}
-		workspaceid = "";
 		
-
+		workspaceid = "";
         List<WorkspaceUser_DTO> workspaceUserList = taskDao.GetWorkSpaceList(usernameid);
         List<Workspace_DTO>workspaceList = new ArrayList<Workspace_DTO>();
         Workspace_DTO workspace;
@@ -79,26 +80,20 @@ public class workspaceController {
 		return "home/workSpace";
 	}
 
+	//워크스페이스 선택시 
 	@RequestMapping("/selectWorkspace.htm")
 	public String selectWorkspace(String selectWorkspaceID, Model model)
 	{
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Workspace_DTO workspace= taskDao.GetWorkSpace(Integer.parseInt(selectWorkspaceID));
 		DataController.getInstance().SetCurrentWorkspace(workspace);
-		
-		//data값 확인
-	/*	UserState_DTO SearchuserState= new UserState_DTO();
-		List<UserState_DTO> list= userstateService.GetuserStateList( workspace.getWorkspace_id());
-		System.out.println(SearchuserState.getState());*/
-		
+
 		ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
 		model.addAttribute("selectWorkspace", workspace);
 		model.addAttribute("projectList", projectList);
 		return "home.main";
 	}
 	
-	
-	//�썙�겕�뒪�럹�씠�뒪 �깉濡쒕쭔�뱾湲� �셿猷� createWorkspace.htm?workspaceName 
 	@RequestMapping("/createWorkspace.htm")
 	public String createWorkspace(String workspaceName,String workspaceDiscription,Model model)
 	{
@@ -109,13 +104,10 @@ public class workspaceController {
 		workspace.setUser_id(DataController.getInstance().GetUser().getUser_id());
 		taskDao.insertWorkSpace(workspace);
 		
-		//�떎���떎 愿�怨�
-		//�쑀�졇�� �썙�겕�뒪�럹�씠�뒪 �뀒�씠釉�(workspaceUser)�뿉�룄 異붽�
 		WorkspaceUser_DTO workspaceUser= new WorkspaceUser_DTO ();
 		workspace = taskDao.GetWorkSpaceByname(workspace);
 		workspaceUser.setWorkspace_id(workspace.getWorkspace_id());
 		workspaceUser.setUser_id(DataController.getInstance().GetUser().getUser_id());
-		
 		
 		taskDao.insertWorkSpaceUser(workspaceUser);
 		DataController.getInstance().dataChange();
@@ -135,7 +127,4 @@ public class workspaceController {
 		userState.setWorkspace_id(workspace_id);
 		userstateService.InsertUserState(userState);
 	}
-
-
-
 }

@@ -4542,8 +4542,8 @@ tbody.collapse.in {
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus
 	{
-	color: #fff;
-	background-color: #5d8fc2
+	color:  #f0b518;
+	background-color: #f0b518;
 }
 
 .nav-stacked>li {
@@ -5505,7 +5505,7 @@ a.label:hover, a.label:focus {
 
 .list-group-item.active>.badge, .nav-pills>.active>a>.badge {
 	color: #218BC3;
-	background-color: #fff
+	background-color: #f0b518;
 }
 
 .list-group-item>.badge {
@@ -5636,9 +5636,9 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 .alert-success {
-	background-color: #ecfaec;
-	border-color: #ddf5d8;
-	color: #3c763d
+	background-color: #ddd;
+	border-color: #d0d0d0;
+	color: #555;
 }
 
 .alert-success hr {
@@ -29794,7 +29794,7 @@ input.parsley-error {
 }
 
 .form-wizard .nav-pills>li.active>a {
-	background-color: #5d8fc2;
+	background-color:  #f0b518;
 	color: #fff
 }
 

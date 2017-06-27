@@ -9,29 +9,19 @@
 <script type="text/javascript">
 	function CreateBtn() 
 	{
-		var p_title = $('#p_title').val();
-		var explain = $('#explain').val();
-		var etcStr = "";
-		var publicProjectCheck = "0";
-		var eProjectCheck = "0";
-		if ($("#private").is(':checked'))
-			publicProjectCheck = "1"; //공개 0,비공개 1
-		if ($("#e_check").is(':checked'))
-			eProjectCheck = "1"; //에센스미사용 0,에센시사용 1
-		etcStr = publicProjectCheck + "," + eProjectCheck;
-		
-	   //에센스 만듬
-	   if( eProjectCheck == "1")
-	   {
-		   CreateEssence ();
-	   }else{
-		   CreateProjcetProcess ();
-	   }
+		CreateProjcetProcess();
 	}
 	
 	//프로젝트 생성 
 	function CreateProjcetProcess()
 	{
+		var p_title = $('#p_title').val();
+		var explain = $('#explain').val();
+		var etcStr = "0";
+
+		if ($("#private").is(':checked'))
+			etcStr = "1"; //공개 0,비공개 1
+			
 		$.ajax({
 			type : "get",
 			url : "CreateProjectProcess.ajax",
@@ -55,14 +45,11 @@
 	{
 		var p_title = $('#p_title').val();
 		var explain = $('#explain').val();
-		var etcStr = "";
-		var publicProjectCheck = "0";
+		var etcStr = "0";
 		var eProjectCheck = "0";
 		if ($("#private").is(':checked'))
-			publicProjectCheck = "1"; //공개 0,비공개 1
-		if ($("#e_check").is(':checked'))
-			eProjectCheck = "1"; //에센스미사용 0,에센시사용 1
-		etcStr = publicProjectCheck + "," + eProjectCheck;
+			etcStr = "1"; //공개 0,비공개 1
+		
 			
 		$.ajax({
 		       type : "get",
@@ -141,16 +128,16 @@
                   </div>
                   <br>
                   <div class="modal-body">
-                  
-                     <input class="form-control input-sm" type="text" id="milestoneContent" name="milestoneContent"
+                  <div class="input-group">
+                     <input class="form-control" type="text" id="milestoneContent" name="milestoneContent"
                         placeholder="',' 로구분해주세요"  style="width:90%;">
-                       <!--  </div>
-                        <div class="form-group" style="text-align:right;"> -->
-                        <div class="widget-controls">
+                       
+                        <div class="input-group-btn">
                      <button type="button" class="btn btn-warning"
                         id="btn" onclick= "CreateMilestone()"   data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
+                     </div>
                      </div>
                   </div>
                </div>
