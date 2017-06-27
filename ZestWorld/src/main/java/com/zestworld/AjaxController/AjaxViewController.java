@@ -65,6 +65,13 @@ public class AjaxViewController {
 	public String addWorkspace() {
 		return DataController.getInstance().GetviewPath("home") + "CreateWorkspace.jsp";
 	}
+	
+	@RequestMapping(value = "/joinEdit.ajax", method = RequestMethod.GET)
+	public String joinEdit(Model model) {
+		Users_DTO users = DataController.getInstance().GetUser();
+		model.addAttribute("member", users);
+		return DataController.getInstance().GetviewPath("home") + "joinEdit.jsp";
+	}
 
 	@RequestMapping(value = "/taskList.ajax", method = RequestMethod.GET)
 	public String totalList(Model model) throws ClassNotFoundException, SQLException {

@@ -64,7 +64,8 @@
                 </a>
             </li>
             <li>
-                <a href="#" onclick="location.href=('joinEdit.htm')">
+<!--             location.href=('joinEdit.htm') -->
+                <a href="#" onclick="ajaxView('joinEdit.ajax')">
                     <span class="icon">
                         <i class="glyphicon glyphicon-user"style="padding-top:5px;"></i>
                     </span>
