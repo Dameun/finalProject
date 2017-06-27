@@ -614,7 +614,7 @@ function deleteTaskMember(memberId){
 	<div id="filter" style=" width: 880px">
 	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
-		<button type="button" class="btn btn-primary" data-toggle="modal"
+		<button type="button" class="btn btn-warning" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
 	         
 	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
