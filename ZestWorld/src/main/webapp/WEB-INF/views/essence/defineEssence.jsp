@@ -81,13 +81,21 @@ $(document).ready(function(){
 		{
 			var str= "";
 	 		$.each(data.defineist_0,function(index,value)
-	 		{
+	 		{	/*
+	 			<div class="checkbox checkbox-circle">
+	                <input id="checkbox7" type="checkbox">
+	                <label for="checkbox7">
+	                    Simply Rounded
+	                </label>
+            	</div>
+	 			
+	 			*/
 	 			console.log(value.subTitle);
-	 			str += "<p><div class='checkbox checkbox-info checkbox-circle' >"+	
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
 				"<input id='0_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
 		 		"<label for='0_"+ value.ecate_id +"'>"+
 		 			value.subTitle
-		 		"</label></div></p>";
+		 		"</label></div>";
 			});
 	 		
 	 		$("#tab0_checkList").append ($('#tab0_checkList').html(str));
@@ -96,11 +104,11 @@ $(document).ready(function(){
 	 		$.each(data.defineist_1,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<p><div class='checkbox checkbox-info checkbox-circle' >"+	
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
 				"<input id='1_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
 		 		"<label for='1_"+ value.ecate_id +"'>"+
 		 			value.subTitle
-		 		"</label></div></p>";
+		 		"</label></div>";
 			});
 	 		
 	 		$("#tab1_checkList").append ($('#tab1_checkList').html(str));
@@ -109,11 +117,11 @@ $(document).ready(function(){
 	 		$.each(data.defineist_2,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<p><div class='checkbox checkbox-info checkbox-circle' >"+	
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
 				"<input id='2_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
 		 		"<label for='2_"+ value.ecate_id +"'>"+
 		 			value.subTitle
-		 		"</label></div></p>";
+		 		"</label></div>";
 			});
 	 		
 	 		$("#tab2_checkList").append ($('#tab2_checkList').html(str));
@@ -122,11 +130,11 @@ $(document).ready(function(){
 	 		$.each(data.defineist_3,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<p><div class='checkbox checkbox-info checkbox-circle' >"+	
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
 				"<input id='3_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox'  onclick='subTitlechecked(this)'>"+
 		 		"<label for='3_"+ value.ecate_id +"'>"+
 		 			value.subTitle
-		 		"</label></div></p>";
+		 		"</label></div>";
 			});
 	 		
 	 		$("#tab3_checkList").append ($('#tab3_checkList').html(str));
@@ -135,11 +143,11 @@ $(document).ready(function(){
 	 		$.each(data.defineist_4,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<p><div class='checkbox checkbox-info checkbox-circle' >"+	
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
 				"<input id='4_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox'  onclick='subTitlechecked(this)'>"+
 		 		"<label for='4_"+ value.ecate_id +"'>"+
 		 			value.subTitle
-		 		"</label></div></p>";
+		 		"</label></div>";
 			});
 	 		
 	 		$("#tab4_checkList").append ($('#tab4_checkList').html(str));
@@ -148,11 +156,11 @@ $(document).ready(function(){
 	 		$.each(data.defineist_5,function(index,value)
 	 		{
 	 			console.log(value.subTitle);
-	 			str += "<p><div class='checkbox checkbox-info checkbox-circle' >"+	
+	 			str += "<div class='checkbox checkbox-info checkbox-circle' >"+	
 				"<input id='5_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'>"+
 		 		"<label for='5_"+ value.ecate_id +"'>"+
 		 			value.subTitle
-		 		"</label></div></p>";
+		 		"</label></div>";
 			});
 	 		
 	 		$("#tab5_checkList").append ($('#tab5_checkList').html(str));
@@ -187,11 +195,11 @@ $(document).ready(function(){
                                 <p>An example of complete wizard form in widget.</p>
 
                                 <div id="wizard" class="form-wizard">
-                                     <ul class="nav-justified mb-sm">
+                                     <ul class="nav-justified mb-sm nav nav-pills">
                                         <li class="active"><a href="#tab0" data-toggle="tab" aria-expanded="true">
                                             <small>1.</small>
                                             	 기회</a></li>
-                                        <li><a href="#tab1" data-toggle="tab">
+                                        <li><a href="#tab1" data-toggle="tab" aria-expanded="false">
                                             <small>2.</small>
                                            		 이해관계자</a></li>
                                         <li><a href="#tab2" data-toggle="tab">
@@ -208,15 +216,17 @@ $(document).ready(function(){
                                            		작업</a></li>    
                                     </ul>
                                     <div id="bar" class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-gray-light" style="width: 25%;"></div>
+                                        <div class="progress-bar progress-bar-gray-light active" style="width: 25%;"></div>
                                     </div>
                                     <div class="tab-content">
-                                        <div class="tab-pane bg-gray-lighter active" id="tab0" style="height: 444px;">
+                                        <div class="tab-pane bg-gray-lighter" id="tab0" style="height: 444px;">
                                             <form action="" method="POST" >
                                                 <fieldset>
+                                                
                                                    <div id="tab0_checkList">
                                                    </div>
-                                                   <input type="text" id="destination" name="destination" placeholder="" class="form-control parsley-success" required="required" data-parsley-id="24">
+                                               <!--     <input type="text" id="destination" name="destination" placeholder="" class="form-control parsley-success" required="required" data-parsley-id="24" -->
+												
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -271,7 +281,7 @@ $(document).ready(function(){
                                                 <button class="btn btn-primary btn-rounded pull-right">
                                                     Next &nbsp; <i class="fa fa-caret-right"></i></button>
                                             </li>
-                                            <li class="finish" >
+                                            <li class="finish" style="display:none;">
                                                 <button class="btn btn-success btn-rounded pull-right" onclick="finishMilstone()">
                                                     Finish &nbsp; <i class="glyphicon glyphicon-ok"></i>
                                                 </button>
@@ -298,3 +308,12 @@ $(document).ready(function(){
             </div>
         </div>
 </div>
+<script src="resources/build/bootstrap/js/form-wizard.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-application-wizard/src/bootstrap-wizard.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+<script src="resources/build/bootstrap/vendor/parsleyjs/dist/parsley.min.js"></script>
+<script src="resources/build/bootstrap/vendor/jasny-bootstrap/js/inputmask.js"></script>
+<script src="resources/build/bootstrap/vendor/select2/select2.js"></script>
+<script src="resources/build/bootstrap/vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>

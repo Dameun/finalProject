@@ -9,8 +9,6 @@
 <script type="text/javascript">
 var milestoneListView = new Array(); 
 var count = 0;
-
-
 function FinishCreateEssence()
 {
 	$.ajax({
@@ -24,6 +22,7 @@ function FinishCreateEssence()
 		}
 	});
 }
+
 //클릭시 
 function milestoneClick(milestoneIdx)
 {
@@ -38,8 +37,6 @@ function milestoneClick(milestoneIdx)
 			alert('error');
 		}
 	});
-	
-	
 }
 
 $(document).ready(function(){
@@ -51,7 +48,7 @@ $(document).ready(function(){
 			milestoneListView = data.milestoneList;
 	 		$.each(data.milestoneList,function(index,value)
 	 		{
-	 				str += "<button type='button' class='btn btn-info btn-block' onclick='milestoneClick("+ index + ")''>"+ value +"</button>";
+	 				str += "<button type='button' class='btn btn-inverse btn-block' onclick='milestoneClick("+ index + ")''>"+ value +"</button>";
 			});
 	 		
 	 		$("#tabs").append ($('#tabs').html(str));
@@ -64,34 +61,39 @@ $(document).ready(function(){
 
 </script>
 <div>
-<div class="col-lg-4 col-md-6">
-                <section class="widget">
-                    <header>
-                        <h4>
-                            Block <span class="fw-semi-bold">Buttons</span>
-                        </h4>
-                        <div class="widget-controls">
-                            <a data-widgster="expand" title="Expand" href="#" style="display: none;"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body">
-                        <p class="fs-mini text-muted">
-                            Create block level buttons - those that span the full width
-                            of a parent— by adding <code>.btn-block</code>.
-                            Great for menu &amp; social buttons.
-                        </p>
-                        <p id="tabs">
-                            
-                        </p>
-                     	<button class="btn btn-info btn-rounded" id="open-wizard" type="button" onclick="FinishCreateEssence()">
-                                    Edit complete!
-                        </button>
-                    </div>
-                </section>
-            </div>
-
-
-
+	<div class="container">
+		<main id="content" class="widget-login-container" role="main">
+		<div class="row">
+			<div class="col-lg-4 col-md-6">
+				<section class="widget">
+					<header>
+						<h4>
+							 <span class="fw-semi-bold">미일스톤</span>
+						</h4>
+						<div class="widget-controls">
+							<a data-widgster="expand" title="Expand" href="#"
+								style="display: none;"><i
+								class="glyphicon glyphicon-chevron-up"></i></a> <a
+								data-widgster="collapse" title="Collapse" href="#"><i
+								class="glyphicon glyphicon-chevron-down"></i></a> <a href="#"
+								data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+						</div>
+					</header>
+					<div class="widget-body">
+						<p class="fs-mini text-muted">
+							개발 방법론의 마일스톤 혹은 단계 설정 시 해단 단계에서 
+							완료되어야 할 상태에 대한 정의를 통해 각 단계의 정의를 명확히 한다.
+						</p>
+						<p id="tabs"></p>
+					<!-- 	<button class="btn btn-info btn-rounded" id="open-wizard"
+							type="button" onclick="FinishCreateEssence()">Edit
+							complete!</button> -->
+					</div>
+				</section>
+			</div>
+		</div>
+	</main>
+	</div>
 </div>
+
+	
