@@ -27,6 +27,8 @@ public class Task_DTO
 	
 	private String p_title;
 	
+	private int paging;
+	
 	
 	public String getP_title() {
 		return p_title;
@@ -142,4 +144,11 @@ public class Task_DTO
 	public void setProject_id(int project_id) {
 		this.project_id = project_id;
 	}
+	public int getPaging() {
+		return paging;
+	}
+	public void setPaging(int paging) {
+		this.paging = paging;
+	}
+	
 }

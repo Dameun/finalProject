@@ -12,34 +12,82 @@
  
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		
-		 select * from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
+		 <!-- select * from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f} -->
 		 
+	      SELECT * FROM
+					 (SELECT ROWNUM NUM, N.* 
+					  FROM 
+					      ( SELECT * 
+					        FROM task 
+					       where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
+					       <if test="user_id!=null and user_id !=''">
+								and user_id=#{user_id}
+						   </if>
+							
+						   <if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
+								and member=#{member}
+						   </if>
+							
+						   <if test="follower!=null and follower != ''">  <!-- 팔로워  -->
+								and follower=#{follower}
+						   </if>
+
+					       ) N
+				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
+				      <if test="order.equals('desc')">
+							    order by enrolldate asc
+					  </if>
+						   
+					  <if test="order.equals('asc')">
+							    order by enrolldate desc
+					  </if>
+				     
+				     
+				     <!-- 
+				     SELECT * FROM
+					 (SELECT ROWNUM NUM, N.* 
+					  FROM 
+					      ( SELECT * 
+					        FROM task 
+					        order by enrolldate desc) N
+				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) *5 AND 5 + (#{paging} - 1) * 5 -->
+		 <!-- 
+		 
+		 SELECT * FROM
+					 (SELECT ROWNUM NUM, N.* 
+					  FROM 
+					      ( SELECT * 
+					        FROM task 
+					        where user_id='dam@naver.com' order by enrolldate desc) N
+				     ) WHERE NUM BETWEEN 1 + (1 - 1) * 5 AND 5 + (1 - 1) * 5;
+		 
+		 
+		 
+		  -->
 		<!-- select t.title,t.user_id,t.end_date, p.p_title ,t.project_id, t.task_id, t.success_f from task t , project p where enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f} -->
-		<if test="user_id!=null and user_id !=''">
+		<!-- <if test="user_id!=null and user_id !=''">
 			and user_id=#{user_id}
 		</if>
 		
-		<if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
+		<if test="member!=null and member != ''">  배정된 멤버 
 			and member=#{member}
 		</if>
 		
-		<if test="follower!=null and follower != ''">  <!-- 팔로워  -->
+		<if test="follower!=null and follower != ''">  팔로워 
 			and follower=#{follower}
 		</if>
-		<!-- 
-		<if test="project_id!=null and project_id != ''">  팔로워 
-			and project_id=#{project_id}
-		</if>
-		 -->
-		<!-- <if test="success_f!=null and success_f != ''">  성공여부 
-			and success_f=#{success_f}
-		</if> -->
+		
 		<if test="order.equals('desc')">
 		      order by enrolldate asc
 		    </if>
 		<if test="order.equals('asc')">
 		      order by enrolldate desc
-   	    </if>
+   	    </if> -->
+   	    <!-- <if test="paging!=null and follower != ''">
+   	    	) N
+				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
+   	    
+   	    </if> -->
 		<!-- <choose>
 		    <when test="order !=null and order !=''">
 		      order by enrolldate asc
@@ -51,6 +99,29 @@
 		
 	</select>
 	
+	<select id="countList" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	    select count(*) from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
+		 
+		<if test="user_id!=null and user_id !=''">
+			and user_id=#{user_id}
+		</if>
+		
+		<if test="member!=null and member != ''"> 
+			and member=#{member}
+		</if>
+		
+		<if test="follower!=null and follower != ''">  
+			and follower=#{follower}
+		</if>
+		
+		<if test="order.equals('desc')">
+		      order by enrolldate asc
+		    </if>
+		<if test="order.equals('asc')">
+		      order by enrolldate desc
+   	    </if>
+   	 
+	</select>
 	<select id="projectlist" resultType="com.zestworld.Table_DTO.Project_DTO">
 		
 		select * from project

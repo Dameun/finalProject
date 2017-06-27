@@ -37,10 +37,10 @@ public class OutlineController {
 	}
 	
 	@RequestMapping("taskTotalList.htm")
-	public String taskTotalList(String writer,String forme,String follower,String writermember,String success,String datefilter, String order,Model model) throws ClassNotFoundException, SQLException{
+	public String taskTotalList(String writer,String forme,String follower,String writermember,String success,String datefilter, String order,int paging, Model model) throws ClassNotFoundException, SQLException{
 		List<Task_DTO> basic= service.basictasklist();
 		
-		
+		System.out.println("paging******************: " + paging);
 		System.out.println("follower : " + follower);
 		
 		System.out.println("Basic: "+ basic.size());
@@ -50,45 +50,33 @@ public class OutlineController {
 		Calendar cal = Calendar.getInstance(new SimpleTimeZone(0x1ee6280, "KST"));
 		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		dto.setWorkspace_id(workspace_id);
-		//湲곌컙寃��깋
+		dto.setPaging(paging);
+		
 		if(datefilter.equals("30")){
-			cal.add(Calendar.MONTH ,-1); // �븳�떖�쟾 �궇吏� 媛��졇�삤湲�
+			cal.add(Calendar.MONTH ,-1); 
 		}else if(datefilter.equals("60")){
-			cal.add(Calendar.MONTH ,-2); // �몢�떖�쟾 �궇吏� 媛��졇�삤湲�
+			cal.add(Calendar.MONTH ,-2);
 		}else{
-			cal.add(Calendar.YEAR ,-1); // �씪�뀈�쟾 �궇吏� 媛��졇�삤湲�
+			cal.add(Calendar.YEAR ,-1);
 		}
-	    //cal.add(Calendar.MONTH ,-1); // �븳�떖�쟾 �궇吏� 媛��졇�삤湲�
+	    
 	    java.util.Date monthago = cal.getTime();
 	    
 	    String sDate = sdf.format(monthago);
 	    
 	    dto.setFilterDay(sDate);
-	    /*
-	    dto.setProject_id(project_id);
-	    */
+
 		String userid="";
 	
-		//String userid= DataController.getInstance().GetUser().getUserid();
 		
-		//�옉�꽦�옄�븘�꽣
 		if(writermember.equals("")){
 			userid=DataController.getInstance().GetUser().getUser_id();
 			dto.setUser_id("");
 		}else{
-			//userid=writermember;
 			dto.setUser_id(writermember);
 		}
 		
-		//�긽�깭�븘�꽣
-		/*if(success.equals("ing")){
-			dto.setSuccess_f("0");
-		}else if(success.equals("complete")){
-			dto.setSuccess_f("1");
-		}else{
-			dto.setSuccess_f("");
-			System.out.println("Success_fffffffffffffffffffffff:"+dto.getSuccess_f());
-		}*/
+		
 		System.out.println(success);
 		if(success.equals("complete")){
 			dto.setSuccess_f("1");
@@ -123,13 +111,16 @@ public class OutlineController {
 		System.out.println("follower값 확인 : " +dto.getFollower());
 		
 		List<Task_DTO> list= service.taskTest(dto);
-		
-		
+		int count=service.countList(dto);
+		System.out.println("CountList:****************"+ count);
 		if(basic.size()==0){
 			model.addAttribute("list", basic); //�옄�룞 forward 
 		}else{
 			model.addAttribute("list", list); //�옄�룞 forward 
 		}
+		int resultCount=(count/5)+1;
+		model.addAttribute("count", resultCount);
+		model.addAttribute("paging", paging);
 		System.out.println("LIST: "+ list.size());
 	
 		System.out.println("success_flag="+dto.getSuccess_f());

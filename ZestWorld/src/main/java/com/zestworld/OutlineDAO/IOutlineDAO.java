@@ -27,6 +27,9 @@ public interface IOutlineDAO {
 	public List<Project_DTO> projectlist() throws ClassNotFoundException, SQLException;
 	//필터에 있는 작성자 목록
 	public List<Workspace_DTO> writerlist(int workspace_id) throws ClassNotFoundException, SQLException;
+	//필터된 리스트 개수
+	public int countList(Task_DTO dto) throws ClassNotFoundException, SQLException;
+	
 	
 	//task success flag
 	public int updateFlag(String task_id) throws ClassNotFoundException, SQLException;
@@ -58,9 +61,6 @@ public interface IOutlineDAO {
 	
 	//체크리스트 삭제
 	public int checkListDelete(int check_id) throws ClassNotFoundException, SQLException;
-	
-	
-	
 	
 	
 	//배정된 멤버 목록

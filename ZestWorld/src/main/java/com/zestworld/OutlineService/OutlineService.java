@@ -158,4 +158,11 @@ public class OutlineService {
 		return result;
 		
 	}
+	
+	public int countList(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int result= dao.countList(dto);
+		return result;
+		
+	}
 }

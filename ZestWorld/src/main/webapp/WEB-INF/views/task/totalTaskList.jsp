@@ -6,7 +6,54 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
+<script>
+function backPaging(cp,ps){
+	
+		$.ajax({
+			type:"get",
+			url:"backPaging.htm?cp="+cp+"&ps="+ps,
+			dataType:'html',
+			success:function(data){
+			
+				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+			},
+			error:function(){
+				alert('검색 에러! 관리자에게 문의하세요');
+			}
+		});
+}
+
+</script>
 <div style="margin-top: 30px">
+	<div>
+		<%-- <button onclick="myfilter(${paging},0);">
+			<c:if test="${cpage>1}">
+					onclick="backPaging(${cpage-1},${pagesize});"
+				<a href="activityboardcontent?cp=${cpage-1}&ps=${pagesize}">이전</a>
+				<!--페이지 리스트 구현  -->
+			</c:if>>
+				<    
+		</button> --%>
+		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
+		<button 
+			<c:if test="${paging>1}">
+					onclick="myfilter(${paging},0);"
+				
+			</c:if>>
+				<    
+		</button>
+		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
+		
+		
+		<button 
+			<c:if test="${paging<count}">
+					onclick="myfilter(${paging},1);"
+				
+			</c:if>>
+			    >
+		</button>
+    </div>
+    <div><input type="hidden" id="paging" value='${paging}'></div>
 	<c:forEach items="${list}" var="n">
 		<div id="totalTaskajax" >
 			<div class="articlesteam" >

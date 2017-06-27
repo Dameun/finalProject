@@ -16,7 +16,7 @@ var detailExplain='';
 var clickTask='';
 var datailTitle='';
 var detailpid='';
-
+var paging=1;
 $(document).ready(function(){
 	var forme='';
 	var writer='';
@@ -26,11 +26,14 @@ $(document).ready(function(){
 	var datefilter='';
 	var order='';
 	var p='';
+	//var paging=$('#paging').val();
+	
+	console.log('Paging:  ******'+paging);
 	/* 
 	url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p, */
 	$.ajax({
 		type:"get",
-		url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p,
+		url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p+"&paging=1",
 		/* dataType:'html', */
 		success:function(data){
 			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
@@ -117,7 +120,7 @@ function changeSuccessF_zero(taskid){
 			}
 		});
 }
-function myfilter(){
+function myfilter(paging,flag){
 	var forme='';
 	var writer='';
 	var follower='';
@@ -126,7 +129,18 @@ function myfilter(){
 	var datefilter='';
 	var order='';
 	var project='';
+	var resultPaging=0;
 	
+	if(flag==0){
+		resultPaging=paging-1;
+	}else if(flag==1){
+		resultPaging=paging+1;
+	}else{
+		resultPaging=1;
+	}
+	
+	
+	console.log('resultPaging:  ******'+paging);
 	 //나에게 배정된, 내가 작성한, 내가 팔로워하는..  필터
 	 if(document.getElementById("forme").checked == true){
 		 forme="assign";
@@ -161,7 +175,7 @@ function myfilter(){
 	 
 		$.ajax({
 			type:"get",
-			url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project="+project,
+			url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project="+project+"&paging="+resultPaging,
 			dataType:'html',
 			success:function(data){
 			
@@ -645,6 +659,7 @@ function deleteTaskMember(memberId){
 	        </select>
 	    </div>
 	</div>
+
          <!-- modal -->
          <form id="add_taskTitle" name="add_taskTitle" method="post">
          <div class="modal fade" id="add-modal" style="display: none;">
