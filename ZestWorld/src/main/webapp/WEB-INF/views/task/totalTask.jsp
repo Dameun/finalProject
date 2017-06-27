@@ -14,11 +14,10 @@ var detailEnd='';
 var member='';
 var detailExplain='';
 var clickTask='';
-
+var datailTitle='';
 var detailpid='';
 
 $(document).ready(function(){
-	console.log("dsadasd:");
 	var forme='';
 	var writer='';
 	var follower='';
@@ -85,22 +84,24 @@ function modalChangeSuccessF_zero(taskid){
 	
 }
 function changeSuccessF(taskid){
+	console.log("hidden :   "+ $('#hiddenFollower').val());
+	console.log("hiddenUserId :   "+ $('#hiddenUserId').val());
+	
 	 /* alert(taskid); */
 	 $.ajax({
 			type:"get",
 			url:"updateFlag.htm?task_id="+taskid,
 			dataType:'html',
 			success:function(data){
-			
+				/* console.log("성공시 보내는 사람 :     "+data.userId); */
+				send('1','title',$('#hiddenFollower').val(), $('#hiddenUserId').val());
 				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
 			},
 			error:function(){
 				alert('검색 에러! 관리자에게 문의하세요');
 			}
 		});
-	 
-	 
- }
+}
 function changeSuccessF_zero(taskid){
 	 alert(taskid);
 	 $.ajax({
@@ -183,7 +184,7 @@ function detailModalView(view,project_id){
 	       url : "detailModal.htm?task_id="+view+"&project_id="+project_id,
 	       success : function(data) {
 	    	  console.log("detailmodal success: "+data.detail.user_id);
-	    	   var datailTitle=data.detail.title;
+	    	   datailTitle=data.detail.title;
 	    	   var datailEnrolldate=data.detail.endrolldate;
 	    	   console.log(data.detail.endrolldate);
 	    	   detailUpdateID=data.detail.task_id;
@@ -266,7 +267,7 @@ function submit2(){
 	    		{
 	    		 	ajaxView('totalTask.ajax');
 	    		 } */
-	    		 send( '0', title,'dbsl215@naver.com', 'yh215@naver.com');
+	    		/*  send( '0', title,'dbsl215@naver.com', 'yh215@naver.com'); */
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },
@@ -443,6 +444,7 @@ function taskMemberListChk(){
 					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
 					/* "+value.user_id+" */
 					
+					
 			});
 	 		var htm="<form name='memberChk'>"+strlist+"</form>";
 	 		$("#wMemberList").append($('#wMemberList').html(htm));
@@ -461,14 +463,22 @@ function taskAssign(taskId){
         checkboxValues.push($(this).val());
     });
     console.log('들어오니');
+    console.log('들어오니:::: '+ datailTitle);
     $.ajax({
 	       type : "get",
 	       url : "taskAssign.htm?checkboxValues="+checkboxValues+"&taskid="+clickTask,
 	       success : function(data) {
-	    	   if(data.success.equals("success")){
-	    	   		console.log('성공');
-	    	   		location.reload();
-	    	   }
+	    	
+	    		   //send( '0', title,'dbsl215@naver.com', 'yh215@naver.com');
+	    		   console.log('추가성공되라  보내는사람 :::::   '+data.send);
+	    		   for(var i=0;i<checkboxValues.length;i++){
+	    			   console.log('추가성공되라:::::   '+checkboxValues[i]);
+	    			   
+	    			   send( '0', datailTitle,checkboxValues[i], data.send);
+	    		   }
+	    	   	
+	    	   		/* location.reload(); */
+	    	   
 	       },
 	       error : function() {
 	          alert('Error while request..');
@@ -489,7 +499,12 @@ function deleteTaskMember(memberId){
 		type:"get",
 		url:"deleteTaskMember.htm?memberId="+memberId+"&taskId="+clickTask,
 		success:function(data){
+			console.log("멤버삭제 받는 사람: " +memberId)
+			console.log("멤버삭제 보내는 사람: " + data.userid);
+			console.log("멤버삭제 제목: " +datailTitle)
+			
 		    if(data.check=="check"){
+		    	send( '3', datailTitle, data, data.userid);
 				window.location.reload()
 		    }
 			/* 
@@ -530,7 +545,7 @@ function deleteTaskMember(memberId){
 	padding: 8px 15px;
 	text-decoration: none;
 	font-weight: bold;
-	color: #666;
+	color: #069;
 	border-right: 1px solid #ccc;
 }
 
@@ -614,7 +629,7 @@ function deleteTaskMember(memberId){
 	<div id="filter" style=" width: 880px">
 	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
-		<button type="button" class="btn btn-warning" data-toggle="modal"
+		<button type="button" class="btn btn-primary" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
 	         
 	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
@@ -652,7 +667,7 @@ function deleteTaskMember(memberId){
 					 </c:forEach>
  --%>
 
-					<select id="project" onchange="projectchange();" style="margin-top:10px; margin-bottom:10px">
+					<select id="project" onchange="projectchange();">
 						<option value="" selected="selected">  </option>
 						<c:forEach items="${projectlist}" var="n">
 						 	<option value="${n.project_id}">${n.p_title}</option>		

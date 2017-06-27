@@ -228,10 +228,16 @@ public class OutlineController {
 	
 	@RequestMapping(value="updateFlag.htm", method=RequestMethod.GET)
 	public String updateFlag(String task_id, Model model) throws ClassNotFoundException, SQLException{
+		
 		System.out.println("updateFlag*****: " + task_id);
+		
 		service.updateFlag(task_id);
+		
 		List<Task_DTO> list=service.tasklist();
+		String userId=DataController.getInstance().GetUser().getUser_id();
+		System.out.println("User:::::"+ userId);
 		model.addAttribute("list", list);
+		model.addAttribute("userId", userId);
  
 		return "/task/totalTaskList";
 		
@@ -309,7 +315,7 @@ public class OutlineController {
 
 		List<TaskAssignMember_DTO> assignmember=service.taskMemberList(task_id);
 
-
+		
 		model.addAttribute("assignmember", assignmember);		
 		
 		return "/task/taskassignMember";
@@ -443,6 +449,7 @@ public class OutlineController {
 
 		List<CheckList_DTO> chklist=service.checkListView(task_id);
 		model.addAttribute("chklist", chklist);*/
+		String send="";
 		TaskAssignMember_DTO dto= new TaskAssignMember_DTO();
 		for(int i=0; i<checkboxValues.length;i++){
 			System.out.println("sdasdsadasdas:  "+checkboxValues[i]);
@@ -450,20 +457,26 @@ public class OutlineController {
 			dto.setTask_id(taskid);
 			int result2=service.assignMemberReg(dto);
 		}
+		send= DataController.getInstance().GetUser().getUser_id();
+		model.addAttribute("send", send);
 		return jsonview;
 		
 	}
 	
 	@RequestMapping(value="deleteTaskMember.htm", method=RequestMethod.GET)
 	public View deleteTaskMember(String memberId,int taskId,Model model) throws ClassNotFoundException, SQLException{
+		
 		TaskAssignMember_DTO dto = new TaskAssignMember_DTO();
 		System.out.println("deleteTaskMember taskId: " + taskId);
 		System.out.println("deleteTaskMember userid: " + memberId);
+		
 		dto.setTask_id(taskId);
 		dto.setUser_id(memberId);
 		int result=service.deleteTaskMember(dto);
 		
-		/*model.addAttribute("check", "check");*/
+		String userid=DataController.getInstance().GetUser().getUser_id();
+		model.addAttribute("userid", userid);
+		
 		return jsonview;
 		
 	}

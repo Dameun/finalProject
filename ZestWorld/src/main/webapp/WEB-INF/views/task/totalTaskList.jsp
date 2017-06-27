@@ -65,5 +65,7 @@
 				</ol>
 			</div>
 		</div>
+		<input type="hidden" id="hiddenFollower" value="${n.follower}">
+		<input type="hidden" id="hiddenUserId" value="${userId}">
 	</c:forEach> 
 </div>
