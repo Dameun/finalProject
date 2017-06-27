@@ -69,5 +69,5 @@ public interface IOutlineDAO {
 	public int assignMemberReg(TaskAssignMember_DTO dto) throws ClassNotFoundException, SQLException;
 	
 	//배정된 멤버 삭제
-	public int deleteTaskMember(String user_id) throws ClassNotFoundException, SQLException;
+	public int deleteTaskMember(TaskAssignMember_DTO dto) throws ClassNotFoundException, SQLException;
 }

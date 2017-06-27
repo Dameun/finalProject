@@ -17,6 +17,8 @@
 </div> --%>
 <c:forEach items="${assignmember}" var="member">
 		<li class="select2-search-choice"><div>${member.user_id}</div> <a
-			 onclick="location.href='deleteTaskMember.htm?userid=${member.user_id}'" class="select2-search-choice-close" tabindex="-1"
+			<%--  onclick="location.href='deleteTaskMember.htm?userid=${member.user_id}'" class="select2-search-choice-close" tabindex="-1" --%>
+			onclick="deleteTaskMember('${member.user_id}');" class="select2-search-choice-close" tabindex="-1"
+	
 			></a></li>
 </c:forEach>

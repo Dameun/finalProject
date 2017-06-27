@@ -27,16 +27,15 @@ function projectClick(project_id)
 }
 
 /* 배정된 멤버 삭제  */
-function assignMemberDelete(memberId)
-{
+function assignMemberDelete(memberId,projectId){
 	console.log('멤버삭제 들어가라');
 	$.ajax({
 		type:"get",
-		url:"assignMemberDelete.htm?memberId="+memberId,
+		url:"assignMemberDelete.htm?memberId="+memberId+"&projectId="+projectId,
 		success:function(data){
-			/* if(data=="check"){
+		    if(data.check=="check"){
 				window.location.reload()
-			} */
+		    }
 			/* 
 			ajaxView('taskList.ajax'); */
 		},
@@ -46,7 +45,10 @@ function assignMemberDelete(memberId)
 	});	
 }
 
-
+/* function avb(member){
+	alert('함수호출 테스트');
+	
+}; */
 function projectAssignMemberList(workspace_id,project_id){
 	var str='';
 	console.log("멤버배정 리스트");
@@ -128,9 +130,9 @@ projectmain
 		                    	<ul class="select2-choices" > 
 			                    		<c:forEach items="${project.projectMember}" var="member">
 			                    			<li class="select2-search-choice"><div>${member.user_id}</div>
-<%-- 			                    				<a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}'" class="select2-search-choice-close" tabindex="-1" onclick="assignMemberDelete(${member.user_id});"></a>
- --%>			                    		
- 												<a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}&project_id=${member.project_id }'" class="select2-search-choice-close" tabindex="-1"></a>
+			                    				<%-- <a href='javascript:void(0);' onclick="assignMemberDelete1234(${member.user_id},${member.project_id});" class="select2-search-choice-close" tabindex="-1"></a> --%>
+			                    			<a href='#' onclick="assignMemberDelete('${member.user_id}',${member.project_id});" class="select2-search-choice-close" tabindex="-1"></a>
+ 												<%-- <a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}&project_id=${member.project_id }'" class="select2-search-choice-close" tabindex="-1"></a> --%>
  											</li>
 			                    		</c:forEach>
 		                    	

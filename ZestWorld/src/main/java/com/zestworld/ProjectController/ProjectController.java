@@ -28,11 +28,11 @@ public class ProjectController {
 	private View jsonview;
 	
 	@RequestMapping(value="assignMemberDelete.htm", method=RequestMethod.GET)
-	public View assignMemberDelete(String memberId, int project_id,Model model) throws ClassNotFoundException, SQLException{
-		System.out.println("assignMemberDelete: "+project_id);
+	public View assignMemberDelete(String memberId, int projectId,Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("assignMemberDelete: "+projectId);
 		Project_user_DTO dto= new Project_user_DTO();
 		dto.setUser_id(memberId);
-		dto.setProject_id(project_id);;
+		dto.setProject_id(projectId);
 		int result=service.assignMemberDelete(dto);
 		
 		model.addAttribute("check", "check");
