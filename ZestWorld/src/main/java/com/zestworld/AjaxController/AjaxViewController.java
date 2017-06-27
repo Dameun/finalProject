@@ -1,24 +1,17 @@
-package com.zestworld.ajaxController;
-
+package com.zestworld.AjaxController;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.zestworld.AnalysisService.AnalysisService;
-import com.zestworld.EssenceService.EssenceService;
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.ProjectDAO.IProjectDAO;
 import com.zestworld.Table_DTO.Category_DTO;
-import com.zestworld.Table_DTO.EssenceDefine_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
@@ -26,16 +19,16 @@ import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
-import com.zestworld.taskListService.taskListService;
 import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
 
 /*
-2017-06-14 yoonhee
-전체 화면 비동기 처리
-@RequestMapping(xxx.ajax)
-return xxx.jsp
-*/
+ * @FileName : AjaxController.java
+ * @Project : ZestWorld
+ * @Date : 2017.06.18
+ * @Author : 장윤희
+ * @Desc : 비동기 페이지 처리 
+ * */
 @Controller
 public class AjaxViewController {
 
@@ -48,26 +41,23 @@ public class AjaxViewController {
 	@Autowired
 	private UserStateService userstatesService;
 
-	
 	public AjaxViewController() {
+		System.out.println("AjaxViewController.AjaxViewController()");
 	}
-
-
 	
-	
+
 	@RequestMapping(value = "/CreateDefineEssence.ajax", method = RequestMethod.GET)
-	public String CreateDefineEssence() {
-		
+	public String createDefineEssence() {
 		return DataController.getInstance().GetviewPath("essence") + "defineEssence.jsp";
 	}
 	
 	@RequestMapping(value = "/CreateEssence.ajax", method = RequestMethod.GET)
-	public String CreateEssence() {
+	public String createEssence() {
 		return DataController.getInstance().GetviewPath("essence") + "CreateEssence.jsp";
 	}
 	
 	@RequestMapping(value = "/Createproject.ajax", method = RequestMethod.GET)
-	public String CreateProject() {
+	public String createProject() {
 		return DataController.getInstance().GetviewPath("home") + "CreateProject.jsp";
 	}
 
@@ -76,27 +66,6 @@ public class AjaxViewController {
 		return DataController.getInstance().GetviewPath("home") + "CreateWorkspace.jsp";
 	}
 
-	// mainContentView
-	@RequestMapping(value = "/totalTask.ajax", method = RequestMethod.GET)
-	public String totalTask(Model model) throws ClassNotFoundException, SQLException {
-		// List<Project_DTO> projectlist= service.projectlist();
-		List<Project_DTO> list = service.projectlist();
-		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
-		System.out.println("AJAC: "+ workspace_id);
-		List<Workspace_DTO> assign = service.writerlist(workspace_id);
-
-		// ModelAndView mav = new ModelAndView("totalTask.jsp");
-		model.addAttribute("projectlist", list); // 자동 forward
-		model.addAttribute("assign", assign); // 자동 forward
-		System.out.println("LIST: " + list.size());
-		/*
-		 * String workspaceid = DataController.getInstance().getCu
-		 */
-		return DataController.getInstance().GetviewPath("totalTesk") + "totalTask.jsp";
-	}
-
-
-	// mainContentView
 	@RequestMapping(value = "/taskList.ajax", method = RequestMethod.GET)
 	public String totalList(Model model) throws ClassNotFoundException, SQLException {
 		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
@@ -133,6 +102,8 @@ public class AjaxViewController {
 	}
 	
 
+	//======================================================================================================================
+	//DATA 
 	@Autowired
 	private AnalysisService analysisService;
 	//나에게 배정된 도넛차트_01
@@ -172,15 +143,6 @@ public class AjaxViewController {
 		donutChart_03(user_id);
 		barChart();
 		
-		/*List<Users_DTO> getMemberListMe = analysisService.getMemberListMe(dto);
-		System.out.println("getMemberListMe : " + getMemberListMe);*/
-		/*String getTitle = analysisService.getTitle(dto2.getTitle());
-		
-		model.addAttribute("getTitle" , getTitle);*/
-		/*String getTaskAllFlow_taskName = analysisService.getTaskAllFlow_taskName(dto);
-		System.out.println("getTaskAllFlow_taskName :" + getTaskAllFlow_taskName);*/
-		
-
 		model.addAttribute("getTaskMe_comp", getTaskMe_comp);
 		model.addAttribute("getTaskMe_enddateLate", getTaskMe_enddateLate);
 		model.addAttribute("getTaskMe_enddateNo", getTaskMe_enddateNo);
@@ -201,21 +163,6 @@ public class AjaxViewController {
 		model.addAttribute("getTaskAllFlow_enddateLate_count", getTaskAllFlow_enddateLate_count);
 		model.addAttribute("getTaskAllFlow_enddateNo_count", getTaskAllFlow_enddateNo_count);
 		model.addAttribute("getTaskAllFlow_ing_count", getTaskAllFlow_ing_count);
-		/*model.addAttribute("getMemberListMe", getMemberListMe);*/
-		
-		/*ArrayList<String> list = new ArrayList<String>();
-		list.add("5");
-		list.add("2");*/
-		/*int[] catagoryArr = {1,1};
-		int[] task_Complete = {2,3};
-		int[] task_unComplete = {1,3};
-		int[] task_noneDate = {5,3};*/
-		/*model.addAttribute("catagoryArr", list);
-		model.addAttribute("task_Complete", list);
-		model.addAttribute("task_unComplete", list);
-		model.addAttribute("task_noneDate", list);*/
-
-		/*model.addAttribute("getTaskAllFlow_taskName", getTaskAllFlow_taskName);*/
 		
 		return DataController.getInstance().GetviewPath("analysis")+"analysis.jsp";
 	}	
@@ -265,8 +212,6 @@ public class AjaxViewController {
 		getTaskAllFlow_ing_count = analysisService.getTaskAllFlow_ing_count();
 	}
 	
-	
-
 	@RequestMapping(value = "/template.ajax", method = RequestMethod.GET)
 	public String template() {
 		return DataController.getInstance().GetviewPath("template") + "template.jsp";
@@ -285,24 +230,28 @@ public class AjaxViewController {
 			System.out.println("projectList : "+i+"    " +projectList.get(i).getProject_id());
 			projectid = projectList.get(i).getProject_id();
 			projectList.get(i).setProjectMember(projectDao.projectMemberList(projectid));
-			/*projectList.get(i).projectMember = projectDao.projectMemberList(projectid);*/
 		}
 
 		model.addAttribute("projectList", projectList);
 		return DataController.getInstance().GetviewPath("home") + "projectMain.jsp";
 	}
 
-/*	// 회원정보 수정
-	@RequestMapping(value = "/joinEdit.ajax", method = RequestMethod.GET)
-	public String GetUser(Model model) throws ClassNotFoundException, SQLException {
+	@RequestMapping(value = "/totalTask.ajax", method = RequestMethod.GET)
+	public String totalTask(Model model) throws ClassNotFoundException, SQLException {
+		// List<Project_DTO> projectlist= service.projectlist();
+		List<Project_DTO> list = service.projectlist();
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		System.out.println("AJAC: "+ workspace_id);
+		List<Workspace_DTO> assign = service.writerlist(workspace_id);
 
-		Users_DTO users = DataController.getInstance().GetUser();
-		model.addAttribute("member", users);
+		model.addAttribute("projectlist", list); // 자동 forward
+		model.addAttribute("assign", assign); // 자동 forward
+		System.out.println("LIST: " + list.size());
 
-		return DataController.getInstance().GetviewPath("home") + "joinEdit.jsp";
+		return DataController.getInstance().GetviewPath("totalTesk") + "totalTask.jsp";
 	}
-*/
-	// 프로젝트 선택시
+
+	//프로젝트 선택시
 	@RequestMapping(value = "/selectProject.ajax", method = RequestMethod.GET)
 	public String selectProject(String project_id) {
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
@@ -311,6 +260,7 @@ public class AjaxViewController {
 		return "";
 	}
 
+	//프로젝트 생성시
 	@RequestMapping(value = "/CreateProjectProcess.ajax", method = RequestMethod.GET)
 	public String createProject(String p_title, String explain, String etcStr, Model model) {
 		String user_id = DataController.getInstance().GetUser().getUser_id();
@@ -335,7 +285,6 @@ public class AjaxViewController {
 		Project_user_DTO projectUsers = new Project_user_DTO();
 		projectUsers.setProject_id(projectNew.getProject_id());
 		projectUsers.setUser_id(user_id);
-		//projectUsers.setWorkspace_id(DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
 		taskDao.InsertProjectUsers(projectUsers);
 
 		DataController.getInstance().dataChangeProject();
@@ -344,7 +293,7 @@ public class AjaxViewController {
 		return DataController.getInstance().GetviewPath("home") + "CreateProject.jsp";
 	}
 
-	
+	//유져 상태 변경시
 	@RequestMapping(value = "/userState.ajax", method = RequestMethod.GET)
 	public String userStateUpdate(String state) {
 		
@@ -361,7 +310,4 @@ public class AjaxViewController {
 		userstatesService.UpdateUserState(userState);
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
-	
-	
-
 }

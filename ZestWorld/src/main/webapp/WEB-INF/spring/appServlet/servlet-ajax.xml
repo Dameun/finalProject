@@ -24,13 +24,11 @@
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	<context:component-scan base-package="com.zestworld.userStateService"/>
-	<context:component-scan base-package="com.zestworld.ajaxController" />
 	<context:component-scan base-package="com.zestworld.AlarmService"/>
 	<context:component-scan base-package="com.zestworld.AlarmController"/>
-	
 	<context:component-scan base-package="com.zestworld.EssenceService"/>
 	<context:component-scan base-package="com.zestworld.EssenceController"/>
-	
+	<context:component-scan base-package="com.zestworld.AjaxController" />
 	
 <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com"></beans:property>
