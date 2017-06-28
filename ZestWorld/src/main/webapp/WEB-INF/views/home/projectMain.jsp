@@ -85,7 +85,7 @@ function projectAssignMemberList(workspace_id,project_id){
 	 		current_project_id=project_id
 	 		$.each(data.wMemberList,function(index,value){
 					console.log(index + "/" + value.user_id);
-					str+="<input type='checkbox' value='"+value.user_id+"' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					str+="<input type='checkbox' value='"+value.user_id+"' id = 'checkbox1' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
 					
 			});
 	 	
@@ -123,16 +123,18 @@ function projectAssign(){
 </script>
 
 		 <div class="row">
+		    		 <div class="clearfix">
+                                <div class="btn-toolbar pull-right">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="ajaxView('Createproject.ajax')" >+ 새로운 프로젝트</button>
+                                    <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
+                                </div>
+                     </div>  
 		 		<c:forEach items="${projectList}" var="project">
-		            <div class="col-md-6 widget-container">
+		            <div class="col-md-6 widget-container" id="border1">
 		                <section class="widget" id="default-widget" data-widgster-load="demo/ajax/widgets/default.php">
 		                    <header>
 		                        <h5><span class="fw-semi-bold">${project.p_title}</span></h5>
 		                        <div class="widget-controls">
-		                            <a data-widgster="load" title="Reload" href="#"><i class="fa fa-refresh"></i></a>
-		                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-		                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-		                            <a data-widgster="fullscreen" title="Full Screen" href="#"><i class="glyphicon glyphicon-fullscreen"></i></a>
 		                            <a data-widgster="restore" title="Restore" onclick="projectEdit(${project.project_id})" href="#"><i class="glyphicon glyphicon-resize-small"></i></a>
 		                            <a data-widgster="close" title="Close" onclick="projectDelete(${project.project_id})" href="#"><i class="glyphicon glyphicon-remove"></i></a>
 		                        </div>
@@ -141,42 +143,31 @@ function projectAssign(){
 		                    <div class="widget-body">
 		                        <p>${project.p_title}</p>                        
 		                        <p>${project.explain}</p>
-		              
 		                        
-		                        <hr>
-		                        
-                        	<label class="col-md-4 control-label" for="multiple-select"  onclick= "projectAssignMemberList(${project.workspace_id},${project.project_id});" data-toggle="modal" data-target="#assignMember">
-                                     	<h4 >Member</h4>
-                            </label>
-                            </div>
+		                       <legend></legend>
+		                     
+                        	Member <span class="glyphicon glyphicon-plus text-warning" onclick= "projectAssignMemberList(${project.workspace_id},${project.project_id});" data-toggle="modal" data-target="#assignMember"></span>
+							</div>
+                           
 		                    <div class="select2-container select2-container-multi select2 form-control" id="s2id_multiple-select"  >
 		                    	<ul class="select2-choices" > 
 			                    		<c:forEach items="${project.projectMember}" var="member">
 			                    			<li class="select2-search-choice"><div>${member.user_id}</div>
-			                    				<%-- <a href='javascript:void(0);' onclick="assignMemberDelete1234(${member.user_id},${member.project_id});" class="select2-search-choice-close" tabindex="-1"></a> --%>
+			                    				<!-- <a href='javascript:void(0);' onclick="assignMemberDelete1234(${member.user_id},${member.project_id});" class="select2-search-choice-close" tabindex="-1"></a> -->
 			                    			<a href='#' onclick="assignMemberDelete('${member.user_id}',${member.project_id});" class="select2-search-choice-close" tabindex="-1"></a>
- 												<%-- <a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}&project_id=${member.project_id }'" class="select2-search-choice-close" tabindex="-1"></a> --%>
+ 												<!-- <a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}&project_id=${member.project_id }'" class="select2-search-choice-close" tabindex="-1"></a> -->
  											</li>
 			                    		</c:forEach>
 		                    	
  								</ul>
  							</div>
 		                        <br>
-		                        <button type="button" onclick="projectClick(${project.project_id})"
-											class="btn btn-lg btn-block btn-primary" >Enter</button>
-		                    </div>
+		                        <button type="button" onclick="projectClick(${project.project_id})"	class="btn btn-ms btn-block btn-inverse" >Enter</button>
 		                </section>
-		      	</div>
-		      	
+		                    </div>
 		    </c:forEach>
 		    
-		     <div class="clearfix">
-                                <div class="btn-toolbar pull-right">
-                                    <button type="button" class="btn btn-default btn-sm" onclick="ajaxView('Createproject.ajax')" >+새로운 프로젝트</button>
-                                    <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
-                                </div>
-                     </div>  
-		</div>
+
 
      <div class="modal fade" id="assignMember" style="display: none;">
 		<div class="modal-dialog">
@@ -185,27 +176,22 @@ function projectAssign(){
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title text-xl-center fw-bold mt" id="myModalLabel18">프로젝트 멤버 배정</h4>
                     <p class="text-xl-center text-muted mt-sm fs-mini">
-                        We need a bit of your detailed information to proceed. US ticketing system requires
-                        us to process and check your personal infromation before we can go.
+                      
                     </p>
                 </div>
-                <div class="modal-body bg-gray-lighter">
+                <div class="modal-body">
                     	
                     <div id="wMemberList">
                     
 					</div>
                     
-                    
-                    
-                    
-                    
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" onclick="projectAssign();" data-dismiss="modal">Assign</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="projectAssign();" data-dismiss="modal">Assign</button>
                 </div>
             </div>
        </div>
 	</div>
 
-
+</div>
