@@ -16,7 +16,7 @@
 	<!-- ajax쓸 때 return 주소 설정하는 객체 -->
 	<context:component-scan base-package="com.zestworld.userStateService"/>
 	
-	<context:component-scan base-package="com.zestworld.ProjectServiceP"/>
+	<context:component-scan base-package="com.zestworld.ProjectService"/>
 	<context:component-scan base-package="com.zestworld.ProjectController"/>
 	
 	<context:component-scan base-package="com.zestworld.AnalysisService"/>

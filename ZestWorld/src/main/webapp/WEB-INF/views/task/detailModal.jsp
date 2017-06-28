@@ -1,6 +1,13 @@
+<%--
+	@Project : ZestWorld
+	@File name : detailModal.jsp
+	@Author : 최담은
+	@Data : 2017.6.28
+	@Desc : 전체개요 상세보기 모달창 (수정가능 폼)
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <link rel="stylesheet" type="text/css" href="./resource/dist/css/ContestBoardView.css"> -->

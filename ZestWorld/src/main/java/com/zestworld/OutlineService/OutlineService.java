@@ -17,6 +17,14 @@ import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskListDAO.taskListDao;
 
+/*
+* @FileName : OutlineService.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 28.
+* @Author : 최담은
+* @Desc : 전체개요(리스트,필터,상세정보 수정)
+*/
+
 @Service
 public class OutlineService {
 
