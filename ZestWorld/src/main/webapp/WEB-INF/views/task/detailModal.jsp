@@ -51,7 +51,7 @@
                         </span> -->
                        
                     </legend>
-                        <div class="form-group row">
+<%--                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="email">
                                		 위치
                             </label>
@@ -71,7 +71,7 @@
     		        		
     		        		</div>
                             </div>
-                        </div>
+                        </div> --%>
                         <div class="form-group row">
                         	<label class="control-label col-sm-3" for="number">
                                 	상세 설명

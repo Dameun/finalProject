@@ -597,12 +597,12 @@ function deleteTaskMember(memberId){
 	<div id="nav">
 		<div class="col-sm-5"></div>
 		<div class="col-sm-2">
-			<nav> <span>
+			<!-- <nav> <span>
 				<ul>
 					<li class="active"><a href="#">업무</a></li>
 					<li><a href="#">캘린더</a></li>
 				</ul>
-			</span> </nav>
+			</span> </nav> -->
 		</div>
 	</div>
 	<div class="col-sm-5"></div>
@@ -611,8 +611,16 @@ function deleteTaskMember(memberId){
 
 
 <div class="row" >
-	<div class="col-sm-2" style="background-color: #ffffff; height: 900px">
 
+	<div class="col-sm-2" style="background-color: #ffffff; height: 900px">
+	<br>
+	정렬<br>
+			<select id="select_order" onchange="myfilter();">
+	            <option value="">최신순</option>
+	            <option value="end">마감순</option>
+	            
+	        </select>
+	    <hr>
 	<br>
 		기간<br> 
 		<select id="dayfilter" onChange="myfilter();">
@@ -631,12 +639,12 @@ function deleteTaskMember(memberId){
 		빠른필터<br>
 		<input type="checkbox" id="forme" name="filter" value="for" onclick="myfilter();">나에게 배정된 업무<br>
 		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
-		<hr>
-		프로젝트<br>
+		
+		<%-- 프로젝트<br>
 			<input type="radio" name="projectlist" value="" checked>전체<br>
 		<c:forEach items="${projectlist}" var="n">
 			<input type="radio" name="projectlist" value="${n.project_id}" >${n.p_title}<br>
-		</c:forEach>
+		</c:forEach> --%>
 		
 		<hr>
 		작성자<br>
@@ -670,13 +678,7 @@ function deleteTaskMember(memberId){
 	         	차트보기
 		</button>
 		</div>
-		<div class="col-sm-1">
-			<select id="select_order" onchange="myfilter();">
-	            <option value="">최신순</option>
-	            <option value="end">마감순</option>
-	            
-	        </select>
-	    </div>
+		
 	</div>
 
          <!-- modal -->

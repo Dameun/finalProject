@@ -13,7 +13,7 @@
 					  FROM 
 					      ( SELECT * 
 					        FROM task WHERE success_f='0' and workspace_id=#{workspace_id}
-                  			order by enrolldate desc) N
+                  			order by task_id desc) N
 				     ) WHERE NUM BETWEEN 1 + (1 - 1) *5 AND 5 + (1 - 1) * 5
 	</select>
  
@@ -42,11 +42,11 @@
 					       ) N
 				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
 				      <if test="order.equals('desc')">
-							    order by enrolldate asc
+							    order by task_id desc
 					  </if>
 						   
 					  <if test="order.equals('asc')">
-							    order by enrolldate desc
+							    order by end_date asc
 					  </if>
 				     
 				     
@@ -122,10 +122,10 @@
 		</if>
 		
 		<if test="order.equals('desc')">
-		      order by enrolldate asc
+		      order by task_id desc
 		    </if>
 		<if test="order.equals('asc')">
-		      order by enrolldate desc
+		      order by end_date asc
    	    </if>
    	 
 	</select>
