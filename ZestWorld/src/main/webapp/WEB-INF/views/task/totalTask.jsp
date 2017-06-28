@@ -17,6 +17,7 @@ var clickTask='';
 var datailTitle='';
 var detailpid='';
 var paging=1;
+var assignFollower='';
 $(document).ready(function(){
 	var forme='';
 	var writer='';
@@ -191,7 +192,7 @@ function myfilter(paging,flag){
 function detailModalView(view,project_id){
  	var str='';
  	detailpid=project_id;
- 
+ 	
 	clickTask= view;
 	$.ajax({
 	       type : "get",
@@ -210,7 +211,8 @@ function detailModalView(view,project_id){
 	    	   document.getElementById('span1').innerHTML=datailTitle;
 	     	   document.getElementById('Modalenrolldate').innerHTML=datailEnrolldate;
 	    	    
-	    	   
+	     	   assignFollower=data.detail.follower;
+	     	   
 	    		$('#detailStart').val(data.detail.start_date);
 	    		$('#detailEnd').val(data.detail.end_date);
 	    		$('#member').val(data.detail.member);
@@ -480,15 +482,15 @@ function taskAssign(taskId){
     console.log('들어오니:::: '+ datailTitle);
     $.ajax({
 	       type : "get",
-	       url : "taskAssign.htm?checkboxValues="+checkboxValues+"&taskid="+clickTask,
+	       url : "taskAssign.htm?checkboxValues="+checkboxValues+"&taskid="+clickTask+"&follower="+follower,
 	       success : function(data) {
 	    	
 	    		   //send( '0', title,'dbsl215@naver.com', 'yh215@naver.com');
-	    		   console.log('추가성공되라  보내는사람 :::::   '+data.send);
+	    		   console.log('추가성공되라  보내는사람 :::::   '+assignFollower);
 	    		   for(var i=0;i<checkboxValues.length;i++){
 	    			   console.log('추가성공되라:::::   '+checkboxValues[i]);
 	    			   
-	    			   send( '0', datailTitle,checkboxValues[i], data.send);
+	    			   send( '0', datailTitle,checkboxValues[i], assignFollower);
 	    		   }
 	    	   	
 	    	   		/* location.reload(); */
