@@ -141,8 +141,8 @@
 						                    
 						                </div>
 						                <div class="modal-footer">
-						                    <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
-						                    <button type="button" class="btn btn-success" onclick="taskAssign(${n.task_id});" data-dismiss="modal">Assign</button>
+						                    <button type="button" id="closeModal" class="btn btn-gray" data-dismiss="modal">Close</button>
+						                    <button type="button" class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
 						                </div>
 						            </div>
 						       </div>
@@ -179,7 +179,7 @@
                             	<button type="button" class="btn btn-warning" onclick="checkreg();"><i class="fa fa-plus" style="margin-left:5px"></i></button>
                             </div>
                             
-                        </div>  
+                        </div>   
 
                         <div id="checkListAjax">
                         
@@ -192,7 +192,8 @@
                     		<button style="margin-left:20px" type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
                     	</div>
                     	<div class="col-sm-2">
-                    		<button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button>
+                    		<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
+                			<button style="margin-left:20px" type="button" class="btn btn-success" id="detailClose"  data-dismiss="modal" onclick="detailUpdate();">Submit</button> 
                 		</div>
                 	</div>
                 </div>

@@ -134,6 +134,7 @@ public class OutlineController {
 		Task_DTO dto=new Task_DTO();
 		String userid="";
 		int workspaceId=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		int paging=1;
 		
 		dto.setTitle(title);
 		dto.setCategory_id(categoryId);
@@ -148,6 +149,7 @@ public class OutlineController {
 		List<Task_DTO> list= service.tasklist();
 		
 		model.addAttribute("list", list); //�옄�룞 forward 
+		model.addAttribute("paging", paging);
 		return "/task/totalTaskList";
 	}
 	
