@@ -10,7 +10,7 @@
 <c:forEach items="${list}" var="n" varStatus="status">
 	
 	
-<section class="task-section" style="margin-left: 45px;float:left;width:330px;display:inline-block">
+<div class="task-section" style="margin-left: 45px;float:left;width:330px;height:500px;display:inline-block">
 <div class="tasklist">
 	<div class="membername" id="membername_${n.category_id}" style="padding-top: 15px;padding-left:10px;color: #fff;">${n.title}
 	<input type="hidden" class="cateValue" value="${n.category_id}">
@@ -36,10 +36,6 @@
  	     <span class="glyphicon glyphicon-calendar" id="calendar" style="font-size:15px;margin-left:10px">
 		 <input type="text" class="datepicker" id="end_date_${n.category_id}" name="edate_${n.category_id}" style="margin-left:88px;border: none;background-color: transparent;text-align: right">
 		 --%>       
-			
-	    		
-	    	
-	    		</span>
 				<!-- <input type="text" id="calendar" name="calendar" style="font-size:20px;margin-left:10px"> -->
 		</div> 
 	
@@ -63,5 +59,5 @@
 	</c:if>
 </c:forEach>	
 </div>
-</section>
+</div>
 </c:forEach>

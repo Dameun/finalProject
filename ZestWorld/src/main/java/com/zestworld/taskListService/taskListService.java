@@ -163,4 +163,11 @@ public class taskListService {
 		return result;
 	}
 	
+	public int deleteTaskMember(TaskAssignMember_DTO dto) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		int result= dao.deleteTaskMember(dto);
+		return result;
+		
+	}
+	
 }

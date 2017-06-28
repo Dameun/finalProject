@@ -417,7 +417,7 @@ function detailModalView(view,project_id){
 		    	   		location.reload();
 		    	   } */
 		    	   $("#taskAssignMember").hide();
-		    	
+		    	   detailModalView(clickTask,detailpid);
 				   		    	  
 		       },
 		       error : function() {
@@ -445,6 +445,29 @@ function detailModalView(view,project_id){
 			}
 		});
 		
+	}
+	
+	/* 배정된 멤버 삭제  */
+	function deleteTaskMember(memberId){
+		console.log('멤버삭제 들어가라');
+		$.ajax({
+			type:"get",
+			url:"deleteAssignMember.htm?memberId="+memberId+"&taskId="+clickTask,
+			success:function(data){
+				console.log("멤버삭제 받는 사람: " +memberId)
+				console.log("멤버삭제 보내는 사람: " + data.userid);
+				console.log("멤버삭제 제목: " +datailTitle)
+				
+			   /*  if(data.check=="check"){
+			    	send( '3', datailTitle, data, data.userid);
+					window.location.reload()
+			    } */
+				 detailModalView(clickTask,detailpid);
+			},
+			error:function(){
+				alert('error');
+			}
+		});	
 	}
 	
 </script>
@@ -610,17 +633,19 @@ function detailModalView(view,project_id){
                             </div>
                         </div>
                         
-                        
                   <div class="form-group row">
+                            <div data-toggle="modal"
+									data-target="#taskAssignMember" onclick="taskMemberListChk();">
                             <label class="control-label col-sm-3" for="range">
                                 	배정된 멤버
                             </label>
+                           </div>
                             <div class="col-sm-9">
+                            
                             
                             <div
 								class="select2-container select2-container-multi select2 form-control"
-								id="s2id_multiple-select" data-toggle="modal"
-								data-target="#taskAssignMember" onclick="taskMemberListChk();">
+								id="s2id_multiple-select">
 							
 								
 								<ul class="select2-choices">
@@ -765,7 +790,7 @@ function detailModalView(view,project_id){
 
 	</div>
 
-</div>
+
 
 
 	
