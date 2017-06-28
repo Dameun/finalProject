@@ -50,6 +50,7 @@ public class workspaceController {
 		String workspaceid=" ";
 		String usernameid = principal.getName();
 		Users_DTO user = service.GetSearchUser(usernameid);
+		session.setAttribute("user", user);
 		DataController.getInstance().SetUserSavedata(user);
 		
 		if( session.getAttribute("workspace_id") != null){
