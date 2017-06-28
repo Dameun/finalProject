@@ -71,7 +71,7 @@ var detailpid='';
 		});
 			 */	
 		//카테고리 title 수정
-		$("#cateUpdate").on("submit", function(e) {
+	/* 	$("#cateUpdate").on("submit", function(e) {
 			
 			$.ajax({
 				type : "post",
@@ -91,7 +91,7 @@ var detailpid='';
 			});
 			e.preventDefault();
 		});
-		
+		 */
 		
 		
 		
@@ -298,6 +298,7 @@ function detailModalView(view,project_id){
 	
 	function checkreg(){
 		var contents=$('#CheckContents').val();
+		if(contents!="" && contents!=null){
 		$.ajax({
 		       type : "get",
 		       url : "checklistReg.htm?task_id="+detailUpdateID+"&contents="+contents,
@@ -308,7 +309,7 @@ function detailModalView(view,project_id){
 		          alert('Error while request..');
 		       }
 		}); 
-		
+	   }
 	}
 	
 	function updateChkFlag(chk){
@@ -435,7 +436,8 @@ function detailModalView(view,project_id){
 			success : function(data) {
 				console.log("insert 성공^^");	
 			 	$("#add-modal").hide();
-				$('.modal-backdrop').remove(); 
+				$('.modal-backdrop').remove();
+				$('#title').val('');
 				$("#View").empty();
 				$("#View").append(data); 
 				
@@ -454,9 +456,9 @@ function detailModalView(view,project_id){
 			type:"get",
 			url:"deleteAssignMember.htm?memberId="+memberId+"&taskId="+clickTask,
 			success:function(data){
-				console.log("멤버삭제 받는 사람: " +memberId)
+				console.log("멤버삭제 받는 사람: " +memberId);
 				console.log("멤버삭제 보내는 사람: " + data.userid);
-				console.log("멤버삭제 제목: " +datailTitle)
+			
 				
 			   /*  if(data.check=="check"){
 			    	send( '3', datailTitle, data, data.userid);
@@ -470,10 +472,33 @@ function detailModalView(view,project_id){
 		});	
 	}
 	
+	function cateUpdate(){
+		$.ajax({
+			type : "post",
+			url : "cateUpdate.htm",
+			cache : false,
+			data : 'category_id='+$("#categoryTitle option:selected").val()+'&changeTitle='+$("#changeTitle").val(),
+			success : function(data){	
+				$("#cateTitle_Update").hide();
+				$('#changeTitle').val('');
+				$('.modal-backdrop').remove();
+								
+				$("#View").empty();
+				$("#View").append(data); 
+				
+			},
+			error : function() {
+				alert('Error while request..');
+			}
+		});
+	}
+	
+	
+	
 </script>
 
 
-<div class="row">
+<!-- <div class="row">
 	<div class="col-md-5"></div>
 	<div class="col-md-2">
 		<ul class="nav nav-tabs">
@@ -483,30 +508,35 @@ function detailModalView(view,project_id){
 		</ul>
 	</div>
 	<div class="col-md-5"></div>
-</div>
+</div> -->
+
+
+
+			
 
 <div class="row ">
-	<div class="col-md-1" align="right">
+	<div class="col-md-1">
 		<button class="btn btn-default dropdown-toggle" type="button"
-			id="menu1" data-toggle="dropdown">
-			정보 수정<span class="caret"></span>
+			id="menu1" data-toggle="dropdown" style="margin-left:45px">
+			업무메뉴<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-			<li role="presentation" ><a role="menuitem" tabindex="-1"
-				href="#cateTitle_Update" data-toggle="modal">카테고리제목   수정</a></li>
 			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">업무제목   수정</a></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">필요시 추후 추가 예정</a></li>
+				href="#add-modal" data-toggle="modal">업무리스트 추가</a>
+				
+				</li>
 			<li role="presentation" class="divider"></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">필요시 추후 추가 예정</a></li>
+			
+				<li role="presentation" ><a role="menuitem" tabindex="-1"
+				href="#cateTitle_Update" data-toggle="modal">카테고리제목   수정</a>
+				</li>
+			
 		</ul>
 	</div>
 </div>
       
 	<!--카테고리 title 수정 모달  -->
-	  <form id="cateUpdate" name="cateUpdate" method="post">
+
 	  <div class="modal fade" id="cateTitle_Update" >
          <div class="modal-dialog">
                <div class="modal-content">
@@ -548,14 +578,14 @@ function detailModalView(view,project_id){
                                       
                                     </div>
                                     <div class="modal-footer">
-                                         <button type="submit" class="btn btn-success" id="cateUpdate">Save changes</button>
+                                         <button type="button" class="btn btn-success" data-dismiss="modal" onclick="cateUpdate()">Save changes</button>
                                         <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
                                    
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      </form>
+                
                 
 	
 	
@@ -634,10 +664,12 @@ function detailModalView(view,project_id){
                         </div>
                         
                   <div class="form-group row">
-                            <div data-toggle="modal"
-									data-target="#taskAssignMember" onclick="taskMemberListChk();">
+                            <div>
                             <label class="control-label col-sm-3" for="range">
-                                	배정된 멤버
+                                	배정된 멤버&nbsp;
+                                	<i class="fa fa-plus-square" aria-hidden="true" data-toggle="modal"
+									data-target="#taskAssignMember" onclick="taskMemberListChk();" style="cursor:pointer"></i>
+									
                             </label>
                            </div>
                             <div class="col-sm-9">
@@ -784,11 +816,11 @@ function detailModalView(view,project_id){
 
 	<div class="col-md-7"></div>
 
-	<div class="col-md-2" align="right">
+	<!-- <div class="col-md-2" align="right">
 		<button type="button" class="btn btn-default" data-toggle="modal"
 			data-target="#add-modal" data-dismiss="modal">업무리스트 추가</button>
 
-	</div>
+	</div> -->
 
 
 

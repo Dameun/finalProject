@@ -270,6 +270,7 @@ public class taskListController {
 		
 	}
 	
+	//체크리스트 등록
 	@RequestMapping(value="checklistReg.htm", method=RequestMethod.GET)
 	public String checkListReg(int task_id,String contents,Model model) throws ClassNotFoundException, SQLException{
 		
@@ -427,6 +428,7 @@ public class taskListController {
 		
 		String userid=DataController.getInstance().GetUser().getUser_id();
 		model.addAttribute("userid", userid);
+	
 		
 		return jsonview;
 		
