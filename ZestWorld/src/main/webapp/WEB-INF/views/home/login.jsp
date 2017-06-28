@@ -117,7 +117,7 @@ $(document).ready(function () {
 								data-target="#myModal">비밀번호를 잊으셨나요?</a>
 							<!-- Modal -->
 							<div class="modal fade" id="myModal" role="dialog"
-								style="padding-left: 30%; width: 70%;">
+								>
 								<div class="modal-dialog">
 
 									<!-- Modal content-->

@@ -64,20 +64,20 @@ $(document).ready(function(){
 	<div class="container">
 		<main id="content" class="widget-login-container" role="main">
 		<div class="row">
-			<div class="col-lg-4 col-md-6">
+			<div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
 				<section class="widget">
 					<header>
 						<h4>
 							 <span class="fw-semi-bold">마일스톤</span>
 						</h4>
-						<div class="widget-controls">
+					<!-- 	<div class="widget-controls">
 							<a data-widgster="expand" title="Expand" href="#"
 								style="display: none;"><i
 								class="glyphicon glyphicon-chevron-up"></i></a> <a
 								data-widgster="collapse" title="Collapse" href="#"><i
 								class="glyphicon glyphicon-chevron-down"></i></a> <a href="#"
 								data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-						</div>
+						</div> -->
 					</header>
 					<div class="widget-body">
 						<p class="fs-mini text-muted">
@@ -85,8 +85,11 @@ $(document).ready(function(){
 							완료되어야 할 상태에 대한 정의를 통해 각 단계의 정의를 명확히 한다.
 						</p>
 						<p id="tabs"></p>
-					<<button class="btn btn-info btn-rounded" id="open-wizard"
-							type="button" onclick="FinishCreateEssence()">Finish</button>
+						
+							<div class="widget-controls">
+					<button class="btn btn-default width-100 mb-xs" id="open-wizard"
+							type="button" onclick="FinishCreateEssence()">Finish<span class="glyphicon glyphicon-ok"></span></button>
+					</div>
 					</div>
 				</section>
 			</div>

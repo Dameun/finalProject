@@ -73,7 +73,7 @@
 </script>
 <div class="content-wrap">
 <main id="content" class="widget-login-container" role="main">
-<div class="col-md-8">
+<div class="col-md-7 col-sm-6 col-xs-10 col-lg-offset-2 col-sm-offset-3 col-xs-offset-1">
 <section class="widget">
 <div class="widget-body">
 	<h4>
