@@ -51,18 +51,26 @@ function CreateWorkspace()
 </script>
 </head>
 <body>
-<div id="contentDiv">
+<div id="contentDiv"  style="display:inline;overflow-x:auto;">
+
  	<div class="container">
-    <main id="content" class="widget-login-container" role="main">
+ 	   
+    <main id="content" class="widget-login-container">
+    <div class="clearfix">
+                                <div class="btn-toolbar pull-right">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="CreateWorkspace()" >+ Create Workspace</button>
+                                    <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
+                                </div>
+                     </div>
         <div class="row">
 		 		<c:forEach items="${workspaceList}" var="workSpace">
-				<div class="col-md-3">
+				<div class="col-md-3"style="padding-bottom:20px;">
 		                <div class="live-tile flip ha" data-mode="flip" data-direction="horizontal" data-speed="600" data-delay="3000" data-height="373" data-play-onhover="true" style="height: 373px;">
 		                    <div class="flip-front ha" style="transform: rotateY(360deg); transition: all 600ms ease 0s;">
 		                        <section class="widget windget-padding-lg widget-md bg-gray-dark text-white">
 		                            <div class="widget-body widget-body-container">
 		                                <div class="text-align-center">
-		                                    <i class="fa fa-child text-warning fa-5x"></i>
+		                                    <i class="glyphicon glyphicon-globe text-warning fa-5x"></i>
 		                                </div>
 		                                <h3 class="fw-normal">${workSpace.workspace_name}</h3>
 		                                <div class="widget-footer-bottom">
@@ -89,12 +97,7 @@ function CreateWorkspace()
 		                </div>
 		            </div>
 		            </c:forEach>
-		            <div class="clearfix">
-                                <div class="btn-toolbar pull-right">
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick="CreateWorkspace()" >+ Create Workspace</button>
-                                    <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
-                                </div>
-                     </div>  
+		           
            </div>
       </main>
     </div>
