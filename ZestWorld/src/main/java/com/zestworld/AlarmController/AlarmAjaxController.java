@@ -96,17 +96,16 @@ public class AlarmAjaxController {
 		  String[] alarmIdArr={};
 		  String[] msgArr = newAlarm.split("/");
 		  int alarmType 	= Integer.parseInt(msgArr[0]);
-		  alarmIdArr 		= msgArr[2].split(",");
-		  String writer 	= msgArr[3];
+		  String follower 	= msgArr[3];
 		  
 		  //�븡�씫�� db濡� ���옣�븯怨�  �븣�엺 移댁슫�듃 �삱�젮二쇨린 
 		  Alarm_DTO alarm = new Alarm_DTO();
 		  alarm.setAlarm_type(alarmType);
 		  alarm.setCheck_f(0);
 		  alarm.setImg("img");
-		  alarm.setUser_id(writer);
-		  alarm.setAcceptUsers(DataController.getInstance().GetUser().getUser_id());
-		  alarm.setAlarmTitle(alarmStrMake(newAlarm));
+		  alarm.setUser_id(msgArr[3]);
+		  alarm.setAcceptUsers(msgArr[2]);
+		  alarm.setAlarmTitle(alarmStrMak(newAlarm));
 		  service.insert(alarm);
 
 		  String success = "success";
@@ -114,30 +113,31 @@ public class AlarmAjaxController {
 	      return success;
 	}
 	
-	//�븣�엺 stirng 留뚮뱾湲� 
-	private String alarmStrMake(String newAlarm)
+	//e�븣�엺 stirng 留뚮뱾湲� 
+	private String alarmStrMak(String newAlarm)
 	{
 		  String[] msgArr = newAlarm.split("/");
 		  String alarmType 	= msgArr[0];
 		  String taskTitle 	= msgArr[1];
-		  String writer 	= msgArr[3];
+		  String follower 	= msgArr[3];
 		  String userId		= DataController.getInstance().GetUser().getUser_id();
 		  String returnMsg = "";
-		  //0 �뾽臾대같�젙諛쏆쓬
-		  //1 �뾽臾댁셿猷뚯븣由�
+		
+		  //업무 배정시 
 		  if( alarmType.equals("0"))
 		  {
-			  if( !writer.equals(userId) )
-				  returnMsg = "�깉濡쒖슫 �뾽臾� "+ taskTitle+ "媛� 留뚮뱾�뼱議뚯뒿�땲�떎.";
+			  if( userId.equals(follower) )
+				  returnMsg = "업무 :  " + taskTitle +"가 배정되었습니다. ";
 			  else
-				  returnMsg = writer+"�떂�씠" + userId + "�떂猿�" + taskTitle+ "諛곗젙�뻽�뒿�땲�떎.";
-		  }else
+				  returnMsg = "업무 :  " + taskTitle +"가 배정되었습니다. follower: "+ follower+ "입니다.";
+		  }/*else
+		  //완료
 		  {
 			  if( !writer.equals(userId) )
 				  returnMsg = "�뾽臾� "+ taskTitle+ "瑜� �셿猷뚰븯���뒿�땲�떎.";
 			  else
 				  returnMsg = writer+"�떂�씠" +"�뾽臾대�� �셿猷뚰븯���뒿�땲�떎.";
-		  }
+		  }*/
 		  
 		  return returnMsg;
 	}

@@ -16,8 +16,6 @@ function projectClick(project_id)
 		url:"selectProject.ajax",
 		data:{"project_id" : project_id},
 		success:function(data){
-			
-			
 			ajaxView('taskList.ajax');
 		},
 		error:function(){
@@ -26,9 +24,37 @@ function projectClick(project_id)
 	});	
 }
 
+//프로젝트 수정 
+function projectEdit(project_id)
+{
+	$.ajax({
+	    type : "get",
+	    url : "projectEdit.htm?project_id="+project_id,
+	    success : function(data) {
+	 		console.log("data:    " + data);
+	 		current_project_id=project_id
+	 		$.each(data.wMemberList,function(index,value){
+					console.log(index + "/" + value.user_id);
+					str+="<input type='checkbox' value='"+value.user_id+"' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					
+			});
+	 	
+	 		console.log("str   :" +str);
+	 		$("#wMemberList").append($('#wMemberList').html(str));
+	    },
+	    error : function() {
+	       alert('Error while request..');
+	    }
+	 });
+}
+
+//프로젝트 삭제 
+function projectDelete()
+{
+}
+
 /* 배정된 멤버 삭제  */
 function assignMemberDelete(memberId,projectId){
-	console.log('멤버삭제 들어가라');
 	$.ajax({
 		type:"get",
 		url:"assignMemberDelete.htm?memberId="+memberId+"&projectId="+projectId,
@@ -51,7 +77,6 @@ function assignMemberDelete(memberId,projectId){
 }; */
 function projectAssignMemberList(workspace_id,project_id){
 	var str='';
-	console.log("멤버배정 리스트");
 	$.ajax({
 	    type : "get",
 	    url : "projectAssignMemberList.htm?workspace_id="+workspace_id,
@@ -61,10 +86,9 @@ function projectAssignMemberList(workspace_id,project_id){
 	 		$.each(data.wMemberList,function(index,value){
 					console.log(index + "/" + value.user_id);
 					str+="<input type='checkbox' value='"+value.user_id+"' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
-					/* "+value.user_id+" */
 					
 			});
-	 		/* var htm="<form name='memberChk'>"+str+"</form>"; */
+	 	
 	 		console.log("str   :" +str);
 	 		$("#wMemberList").append($('#wMemberList').html(str));
 	    },
@@ -80,7 +104,6 @@ function projectAssign(){
     $("input[name='AssignMemberChk']:checked").each(function(i) {
         checkboxValues.push($(this).val());
     });
-    console.log('들어오니');
     $.ajax({
 	       type : "get",
 	       url : "projectAssignChk.htm?project_id="+current_project_id+"&chkmember="+checkboxValues,
@@ -98,7 +121,7 @@ function projectAssign(){
 
 
 </script>
-projectmain
+
 		 <div class="row">
 		 		<c:forEach items="${projectList}" var="project">
 		            <div class="col-md-6 widget-container">
@@ -110,8 +133,8 @@ projectmain
 		                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
 		                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
 		                            <a data-widgster="fullscreen" title="Full Screen" href="#"><i class="glyphicon glyphicon-fullscreen"></i></a>
-		                            <a data-widgster="restore" title="Restore" href="#"><i class="glyphicon glyphicon-resize-small"></i></a>
-		                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+		                            <a data-widgster="restore" title="Restore" onclick="projectEdit(${project.project_id})" href="#"><i class="glyphicon glyphicon-resize-small"></i></a>
+		                            <a data-widgster="close" title="Close" onclick="projectDelete(${project.project_id})" href="#"><i class="glyphicon glyphicon-remove"></i></a>
 		                        </div>
 		                    </header>
 	                    

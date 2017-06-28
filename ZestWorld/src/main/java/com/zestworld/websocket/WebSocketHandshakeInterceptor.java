@@ -20,21 +20,8 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
     @Override
     public boolean beforeHandshake(ServerHttpRequest request,ServerHttpResponse response, WebSocketHandler wsHandler,
          Map<String, Object> attributes) throws Exception {     
-    
-        System.out.println("beforehandshake 시작");
-          
-          
         ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
-        System.out.println("URI:"+request.getURI());
-  
         HttpServletRequest req =  ssreq.getServletRequest();
-        
-
-        
-        
-        //로그인한 사람 아이디 뽑기
-		//Join_DTO dto = (Join_DTO) req.getSession().getAttribute("info");
-		
         attributes.put("userId", DataController.getInstance().GetUser().getUser_id());
         System.out.println("로그인 아이디 id:"+ DataController.getInstance().GetUser().getUser_id());
 

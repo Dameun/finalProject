@@ -27,6 +27,13 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(
 			WebSocketSession session) throws Exception {
 	      String userid = (String) session.getAttributes().get("userId");      
+	      for( Map.Entry<String, String> elem : ids.entrySet() ){
+	           if( elem.getKey().equals(userid))
+	           {
+	        	   System.out.println("로그인 중복입니다.다시 로그인 해주세요~ ");
+	           }
+	        }
+
 	      users.put(userid, session);
 	      ids.put(session.getId(), userid);
 	      System.out.println("WebSocketHandler.afterConnectionEstablished() userid: "+ userid);
@@ -48,29 +55,32 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		  String taskTitle = "";
 		  String[] alarmIdArr={};
 
-		  //alarmType+'/'+ taskTitle +'/'+selectId
+		  //var alarmMsg = alarmType+'/'+ taskTitle +'/'+selectId + '/' + follower;
 		  String msg = message.getPayload();
 		  String[] id_count_type = msg.split("/");
-/*		  alarmType = id_count_type[0];
-		  taskTitle = id_count_type[1];*/
 		  alarmIdArr = id_count_type[2].split(",");
 		  int connertUser = 0;
 	       for(int i =0; i < alarmIdArr.length; i++){
 	        	   for (WebSocketSession s : users.values()) 
 	        	   { 
-		        	  //접속해있는 유져일경우 
-		        	   if( ids.get(s.getId()).equals(alarmIdArr[i]) )
+		        	   //접속해있는 유져일경우 
+		        	   if(ids.get(s.getId()).equals(alarmIdArr[i]) )
 		        	   {
+		        		 //ajaxview.onMessage(evt)로 전송
 		                 s.sendMessage(new TextMessage(msg) );
-		                 System.out.println("***************************");
-		                 System.out.println(s.getId()+"에게"+msg+"를 보냅니다.");
+		                 System.out.println("접속시***************************");
+		                 System.out.println("sendmessage:"+alarmIdArr[i] +"애게 follower가 " +
+		                 id_count_type[3]+ "인" +id_count_type[1]+ "업무를 알람으로 전송합니다.");
 		                 connertUser++;
 		        	   }
 		        	   
 	        	   }
 	        	 if( connertUser== 0 )
 	   	         {
-	   	        	DataController.getInstance().SetAlarm(msg);
+	        		 System.out.println("미 접속시***************************");
+		             System.out.println("sendmessage:"+alarmIdArr[i] +"에개 follower가 " +
+		             id_count_type[2]+ "인" +id_count_type[1]+ "을 알람으로 전송합니다.");
+	   	        	 DataController.getInstance().SetAlarm(msg);
 	   	         }
 	        	 connertUser = 0;
 	        }
