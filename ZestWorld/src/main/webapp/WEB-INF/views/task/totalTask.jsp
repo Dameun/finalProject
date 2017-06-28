@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 	 }); 
 	 $(this).removeClass('hasDatepicker').datepicker();
-	 $( "#datepicker" ).datepicker();
+	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' });
 	
 	  
 	 
@@ -199,7 +199,7 @@ function myfilter(paging,flag){
 function detailModalView(view,project_id){
  	var str='';
  	detailpid=project_id;
- 	
+	var strlist='';
 	clickTask= view;
 	$.ajax({
 	       type : "get",
@@ -227,7 +227,6 @@ function detailModalView(view,project_id){
 	    		$('#modalTask').val(data.detail.datailTitle);
 	    		$('#modalDetailExplain').val(data.detail.explain);
 	    		
-	    		console.log("assignment: " + assignmember.user_id);
 	    		
 	    		/* $.each(data.assignmember,function(index,value){
 					console.log(index + "/" + value);
@@ -265,6 +264,29 @@ function detailModalView(view,project_id){
 	          alert('Error while request..');
 	       }
 	    });
+ 	
+ 
+	$.ajax({
+	    type : "get",
+	    url : "taskMemberListChk1.htm?project_id="+detailpid+"&task_id="+view,
+	    		
+	    success : function(data) {
+	 		console.log("data:    " + data);
+	 		
+	 		$.each(data.assignmember,function(index,value){
+					console.log(index + "/" + value.user_id);
+					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					/* "+value.user_id+" */
+					
+					
+			});
+	 		var htm="<form name='memberChk'>"+strlist+"</form>";
+	 		$("#wMemberList").append($('#wMemberList').html(htm));
+	    },
+	    error : function() {
+	       alert('Error while request..');
+	    }
+	 });
 } 
 function submit2(){
 	    
@@ -459,7 +481,7 @@ function checkListDelete(chk){
 }
 
 
-function taskMemberListChk(){
+/*  function taskMemberListChk(){
 	console.log("taskMemberListChk");
 	console.log(detailpid);
 	var strlist='';
@@ -473,7 +495,7 @@ function taskMemberListChk(){
 	 		$.each(data.assignmember,function(index,value){
 					console.log(index + "/" + value.user_id);
 					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
-					/* "+value.user_id+" */
+					
 					
 					
 			});
@@ -484,8 +506,8 @@ function taskMemberListChk(){
 	       alert('Error while request..');
 	    }
 	 });
-}
-
+} 
+ */
 
 
 function taskAssign(taskId){
@@ -508,10 +530,11 @@ function taskAssign(taskId){
 	    			   send( '0', datailTitle,checkboxValues[i], assignFollower);
 	    		   }
 	    		   $('#taskAssignMember').hide();
+	    		   detailModalView(clickTask,detailpid);
 	    	/* 	   $(".modal-backdrop fade in").remove(); 
 	    		 */
-	    		   
-	    		   detailModalView(clickTask,detailpid);
+	    		   /* 
+	    		    */
 	    	   
 	       },
 	       error : function() {

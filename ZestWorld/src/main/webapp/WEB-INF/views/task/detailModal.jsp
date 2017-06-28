@@ -121,8 +121,13 @@
 									 </div>
 								</ul>
 							</div>
+							<br>
+							<div id="wMemberList" style="background-color:#EAEAEA">
+						                    
+							</div>
+							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
                             
-                            <div class="modal fade" id="taskAssignMember" style="display: none;">
+                         <%--    <div class="modal fade" id="taskAssignMember" style="display: none;">
 								<div class="modal-dialog">
 						            <div class="modal-content">
 						                <div class="modal-header">
@@ -146,7 +151,7 @@
 						                </div>
 						            </div>
 						       </div>
-							</div>     
+							</div>   --%>   
                             </div>
                         </div>
                         

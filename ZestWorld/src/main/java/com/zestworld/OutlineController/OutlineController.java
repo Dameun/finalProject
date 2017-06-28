@@ -2,6 +2,7 @@ package com.zestworld.OutlineController;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.SimpleTimeZone;
@@ -264,6 +265,17 @@ public class OutlineController {
 	}
 	
 	
+/*	@RequestMapping(value="taskMemberListChk1.htm", method=RequestMethod.GET)
+	public View taskMemberListChk(int project_id , Model model) throws ClassNotFoundException, SQLException{
+		System.out.println("taskMemberListChk1: 들어왔늬");
+		List<Users_DTO> member=service.assignMemberList(project_id);
+		System.out.println("taskMemberListChk1: "+ member.size());
+		model.addAttribute("assignmember", member);		
+		
+		return jsonview;
+	}*/
+	
+	
 	@RequestMapping(value="checkListReg.htm", method=RequestMethod.GET)
 	public String checkListReg(int task_id,String contents,Model model) throws ClassNotFoundException, SQLException{
 		CheckList_DTO dto= new CheckList_DTO();
@@ -328,7 +340,21 @@ public class OutlineController {
 		return jsonview;
 		
 	}
+	/*@RequestMapping(value="taskAssign.htm", method=RequestMethod.GET)
+	public View taskAssign(String checkboxValues,int taskid,Model model) throws ClassNotFoundException, SQLException{
+
+		String send="";
+		TaskAssignMember_DTO dto= new TaskAssignMember_DTO();
 	
+			dto.setUser_id(checkboxValues);
+			dto.setTask_id(taskid);
+			int result2=service.assignMemberReg(dto);
+		
+		send= DataController.getInstance().GetUser().getUser_id();
+		model.addAttribute("send", send);
+		return jsonview;
+		
+	}*/
 	@RequestMapping(value="deleteTaskMember.htm", method=RequestMethod.GET)
 	public View deleteTaskMember(String memberId,int taskId,Model model) throws ClassNotFoundException, SQLException{
 		
