@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.zestworld.fullcalendarDAO.CalendarDAO">
+<select id="scheduleList" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
+		select title, explain, start_date, end_date from task where project_id=#{project_id}  and user_id=#{user_id}
+</select>
+
+<delete id="scheduleDelete" parameterType="com.zestworld.Table_DTO.Task_DTO">
+delete from task where title=#{title} and explain=#{explain}
+</delete>
+
+<insert id="scheduleInsert" parameterType="com.zestworld.Table_DTO.Task_DTO">
+insert into task(task_id,category_id,workspace_id,project_id,user_id,title,explain,start_date,end_date,success_f,enrolldate) values(task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{title},#{explain},#{start_date},#{end_date},0,sysdate)
+</insert>
+
+</mapper>

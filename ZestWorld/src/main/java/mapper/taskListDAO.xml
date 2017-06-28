@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="catetitleDelete" parameterType="com.zestworld.Table_DTO.Category_DTO">
 	<!-- delete from task where title=#{title}-->
 
-	delete from category where title=#{title}
+	delete from category where category_id=#{category_id}
 	</delete>
 	
 	<delete id="chkListDelete">

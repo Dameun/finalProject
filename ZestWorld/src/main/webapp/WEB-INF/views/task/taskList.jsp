@@ -47,7 +47,7 @@ var detailpid='';
 
 		
 		//category insert ajax부분
-		
+/* 		
 		$("#add_taskTitle").on("submit", function(e) {
 
 			$.ajax({
@@ -69,7 +69,7 @@ var detailpid='';
 			});
 			e.preventDefault();
 		});
-				
+			 */	
 		//카테고리 title 수정
 		$("#cateUpdate").on("submit", function(e) {
 			
@@ -119,7 +119,7 @@ var detailpid='';
 			  $.ajax({
 					type:"get",
 					url:"deleteTaskList.htm",
-					data : "title=" + $(this).parent(".tasklist").find(".membername").text(),
+					data : "cateId=" + $(this).parent(".tasklist").find(".cateValue").val(),
 					success:function(data){
 						$("#View").empty();
 						$("#View").append(data); 		
@@ -185,15 +185,13 @@ var detailpid='';
 	{
 			
 		var title = $("#task-content_"+number).val();
-		var cateTitle = $("#membername_"+number).text();
-		var end_date = $("input[name=edate_"+number+"]").val();
+		//var cateTitle = $("#membername_"+number).text();
 		
 		$.ajax({
 			type : "post",
 			url : "tasktitleInsert.htm",
 			cache : false,
-			data : 'title='+title+'&cateTitle='+cateTitle+'&end_date='+end_date,
-			
+			data : 'title='+title+'&cateId='+number,
 			success : function(data) {
 				console.log("taskinsert 성공^^");				
 				$("#View").empty();
@@ -203,7 +201,9 @@ var detailpid='';
 				alert('실패');
 			}
 		});
-
+		
+		
+		
 	}
 
 function detailModalView(view,project_id){
@@ -267,6 +267,10 @@ function detailModalView(view,project_id){
 		          alert('Error while request..');
 		       }
 		    });
+	 	
+	 	
+	 	
+	 	
 	} 
 	function detailUpdate(){
 		var startdate=$('#detailStart').val();
@@ -379,7 +383,6 @@ function detailModalView(view,project_id){
 		$.ajax({
 		    type : "get",
 		    url : "taskMemberListCheck1.htm?project_id="+detailpid,
-		    		
 		    success : function(data) {
 		 		console.log("data:    " + data);
 		 		
@@ -409,16 +412,41 @@ function detailModalView(view,project_id){
 		       type : "get",
 		       url : "TaskAssign.htm?checkboxValues="+checkboxValues+"&taskid="+clickTask,
 		       success : function(data) {
-		    	   if(data.success.equals("success")){
+		    	 /*   if(data.success.equals("success")){
 		    	   		console.log('성공');
 		    	   		location.reload();
-		    	   }
+		    	   } */
+		    	   $("#taskAssignMember").hide();
+		    	
+				   		    	  
 		       },
 		       error : function() {
-		          alert('Error while request..');
+		          alert('Error wh	ile request..');
 		       }
 		}); 
 	}
+	
+	function cateTitle_Add(){
+		$.ajax({
+			type : "post",
+			url : "titleInsert.htm",
+			cache : false,
+			data : 'title=' + $("#title").val(),
+			success : function(data) {
+				console.log("insert 성공^^");	
+			 	$("#add-modal").hide();
+				$('.modal-backdrop').remove(); 
+				$("#View").empty();
+				$("#View").append(data); 
+				
+			},
+			error : function() {
+				alert('Error while request..');
+			}
+		});
+		
+	}
+	
 </script>
 
 
@@ -426,7 +454,7 @@ function detailModalView(view,project_id){
 	<div class="col-md-5"></div>
 	<div class="col-md-2">
 		<ul class="nav nav-tabs">
-			<li><a href="#">업무</a></li>
+			<li><a href="Schedule.htm">캘린더</a></li>
 			<li><a href="#">분석</a></li>
 			<li><a href="#">파일</a></li>
 		</ul>
@@ -456,7 +484,7 @@ function detailModalView(view,project_id){
       
 	<!--카테고리 title 수정 모달  -->
 	  <form id="cateUpdate" name="cateUpdate" method="post">
-	  <div class="modal fade" id="cateTitle_Update">
+	  <div class="modal fade" id="cateTitle_Update" >
          <div class="modal-dialog">
                <div class="modal-content">
                  <div class="modal-header">
@@ -511,7 +539,7 @@ function detailModalView(view,project_id){
 	
 	<!-- detail task modal  -->
 	
-	<div class="modal fade" id = "detailModal" role="dialog">
+	<div class="modal fade" id = "detailModal" role="dialog"  aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 	     	 <div class="modal-content">
     <section class="widget">
@@ -601,8 +629,8 @@ function detailModalView(view,project_id){
 									 </div>
 								</ul>
 							</div>
-                            
-                            <div class="modal fade" id="taskAssignMember" style="display: none;">
+                            <!-- 프로젝트 멤버 배정 모달  -->
+                            <div class="modal fade" id="taskAssignMember"   aria-hidden="true" style="display: none;">
 								<div class="modal-dialog">
 						            <div class="modal-content">
 						                <div class="modal-header">
@@ -621,8 +649,8 @@ function detailModalView(view,project_id){
 						                    
 						                </div>
 						                <div class="modal-footer">
-						                    <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
-						                    <button type="button" class="btn btn-success" onclick="taskAssign(${n.task_id});" data-dismiss="modal">Assign</button>
+						                    <button type="button" class="btn btn-gray" id="taClose" aria-hidden="true" data-dismiss="modal">Close</button>
+						                    <button type="button" id="submitbtn" class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
 						                </div>
 						            </div>
 						       </div>
@@ -644,9 +672,7 @@ function detailModalView(view,project_id){
                             </div>
                         </div>
                         
-                        
                                <hr>        
-                                       
                                        
                                        
                        <div class="form-group row">
@@ -691,12 +717,8 @@ function detailModalView(view,project_id){
 	
 	<!--/detail task modal  -->
 	
+	<!-- category title 모달  -->
 	
-	
-	<div class="col-md-2">
-
-		<!-- modal -->
-		<form id="add_taskTitle" name="add_taskTitle" method="post">
 			<div class="modal fade" id="add-modal" style="display: none;">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -715,7 +737,8 @@ function detailModalView(view,project_id){
 						<div class="modal-footer">
 
 							<!--   <button type="button" class="btn btn-primary">Save changes</button> -->
-							<button type="submit" class="btn btn-info btn-circle btn-lg">
+							<button type="button" class="btn btn-info btn-circle btn-lg"  data-dismiss="modal"
+							 onclick="cateTitle_Add()">
 								<i class="fa fa-check"></i>
 							</button>
 							<button type="button" class="btn btn-warning btn-circle btn-lg"
@@ -728,8 +751,9 @@ function detailModalView(view,project_id){
 				</div>
 
 			</div>
-			<!-- /modal  -->
-		</form>
+	
+	<!-- /category title 모달 -->
+	<div class="col-md-2">
 
 	</div>
 
@@ -737,7 +761,7 @@ function detailModalView(view,project_id){
 
 	<div class="col-md-2" align="right">
 		<button type="button" class="btn btn-default" data-toggle="modal"
-			data-target="#add-modal">업무리스트 추가</button>
+			data-target="#add-modal" data-dismiss="modal">업무리스트 추가</button>
 
 	</div>
 

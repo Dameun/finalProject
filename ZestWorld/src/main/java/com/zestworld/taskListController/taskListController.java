@@ -60,34 +60,31 @@ public class taskListController {
 	}
 	
 	@RequestMapping("tasktitleInsert.htm")
-	public String tasktitleInsert(String title, String cateTitle,Model model) throws ClassNotFoundException, SQLException{
+	public String tasktitleInsert(String title, int cateId,Model model) throws ClassNotFoundException, SQLException{
 		
 		System.out.println("tasktitleInsert.htm 접근성공");
 		taskListDao dao = sqlsession.getMapper(taskListDao.class);
 		
-		Category_DTO cateDto = new Category_DTO();
 		Task_DTO task = new Task_DTO();
-		
-		cateDto.setTitle(cateTitle);
+		Category_DTO cateDto =  new Category_DTO();
 		task.setTitle(title);
 
 		
-		System.out.println("카테고리 타이틀 : " + cateTitle);
+		System.out.println("카테고리 ID : " + cateId);
 		System.out.println("타이틀 : " + title);
 		
 		//String userid = dao.getUser_Id();
-		int category_id = dao.getCategory_Id(cateDto);
+		//int category_id = dao.getCategory_Id(cateDto);
 	
 		String userid = DataController.getInstance().GetUser().getUser_id();
 		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		
 		System.out.println("유저아이디 : " + userid);
-		System.out.println("카테고리 아이디: " + category_id);
 		System.out.println("프로젝트 ID : " + project_id);
 		System.out.println("워크스페이스 아이디: " + workspace_id);
 	
-		task.setCategory_id(category_id);
+		task.setCategory_id(cateId);
 		task.setUser_id(userid);
 		task.setProject_id(project_id);
 		task.setWorkspace_id(workspace_id);
@@ -134,21 +131,19 @@ public class taskListController {
 	
 	
 	@RequestMapping("deleteTaskList.htm")
-	public String delete(String title , Model model) throws ClassNotFoundException, SQLException{
+	public String delete(int cateId , Model model) throws ClassNotFoundException, SQLException{
 		
-		System.out.println("제목 : " + title);
 		taskListDao dao = sqlsession.getMapper(taskListDao.class);
 		
 		Category_DTO cateDto = new Category_DTO();
 
-		cateDto.setTitle(title);
+		//cateDto.setTitle(title);
 		
-	
-		int category_id = dao.getCategory_Id(cateDto);
 		
-		System.out.println("카테고리 ID : "+ category_id);
+		cateDto.setCategory_id(cateId);
+		System.out.println("카테고리 ID : "+ cateId);
 		
-		dao.tasktitleDelete(category_id);
+		dao.tasktitleDelete(cateId);
 		dao.catetitleDelete(cateDto);
 
 		
