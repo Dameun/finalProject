@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -75,14 +75,12 @@
           data.addColumn('number', '남은 업무');
           data.addColumn('boolean', '완료 유무');
           data.addRows([
-        	  
+        	
+/*           for(i = 0; i < years.length; i++)
+        	  data.addRow([years[i], sales[i]]); */
+  
             ['장윤희' ,{v: 8, f: '8'}, {v: 8, f: '8'}, {v: 0, f: '0'}, true],
-            ['양건휘' ,{v: 3, f: '3'}, {v: 3, f: '3'}, {v: 1, f: '1'}, false],
-            ['황이준' ,{v: 5, f: '5'}, {v: 3, f: '3'}, {v: 2, f: '2'}, false],
-            ['김민성' ,{v: 5, f: '5'}, {v: 4, f: '4'}, {v: 1, f: '1'}, false],
-            ['백준선' ,{v: 4, f: '4'}, {v: 2, f: '2'}, {v: 2, f: '2'}, false],
-            ['최담은' ,{v: 7, f: '7'}, {v: 7, f: '7'}, {v: 0, f: '0'}, true],
-            ['이은경' ,{v: 3, f: '3'}, {v: 1, f: '1'}, {v: 2, f: '2'}, false]
+            
             
           ]);
 
@@ -187,7 +185,7 @@
     	  		json =  "${categoryTitle.title}";
     	  		categoryTitle.push(json);
     	  </c:forEach>
-    	  //alert( ${getTaskAllFlow_comp_task} );
+    	  
     	  
     	  var compCount = new Array();
     	  <c:forEach items="${getTaskAllFlow_comp_count}" var ="compCount">
@@ -285,7 +283,7 @@
 </script>
 </head>
 <body>
-    <div class="row" style="background-color:white">
+    <!-- <div class="row" style="background-color:white">
     	<div class="col-md-4">
     	</div>
     	<div class="col-md-4">
@@ -298,14 +296,14 @@
     	</div>
     	<div class="col-md-4">
     	</div>
-	</div>&nbsp
+	</div>&nbsp -->
 	
-	<b style="font-size:18px" >업무추가 </b> <br><br>
+	<!-- <b style="font-size:18px" >업무추가 </b> <br><br>
 	
 	<table class="columns">
 		<tr>
-			<!-- <td><p>시작일 <input type="text" id="datepicker"></p></td>
-			<td><p>마감일 <input type="text" id="datepicker2"></p></td> -->
+			<td><p>시작일 <input type="text" id="datepicker"></p></td>
+			<td><p>마감일 <input type="text" id="datepicker2"></p></td>
 			<label for="from">&nbsp&nbsp&nbsp&nbsp시작일</label>
 			&nbsp&nbsp
 			<input type="text" id="from" name="from">
@@ -315,7 +313,7 @@
 			&nbsp&nbsp&nbsp&nbsp
 			<input type="text" id="to" name="to">
 			&nbsp&nbsp&nbsp&nbsp
-			<button type="button" class="btn btn-warning btn-sm">추가</button>
+			<button type="button" class="btn btn-warning btn-sm">추가</button> -->
 			
 			<%-- <c:forEach items="${getTaskAllFlow_comp}"  var="n">
 				${n.categorytitle}
@@ -330,7 +328,7 @@
         	
 	<br>
 	<!-- 테이블 차트 -->
-	<div id="table_div" style="width: 1350px; height: 200px;"></div>
+	<!-- <div id="table_div" style="width: 1350px; height: 200px;"></div> -->
 	<br>
 	
     <table class="columns">

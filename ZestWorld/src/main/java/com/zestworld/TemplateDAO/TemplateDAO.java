@@ -9,7 +9,7 @@ public interface TemplateDAO {
 	
 
 	//게시물 입력
-	public int insert(Template_DTO dto) throws ClassNotFoundException, SQLException;
+	public int insert(Template_DTO n) throws ClassNotFoundException, SQLException;
 	//전체 게시물
 	public List<Template_DTO> getNotice(Template_DTO dto) throws ClassNotFoundException, SQLException;
 	//게시물 삭제
