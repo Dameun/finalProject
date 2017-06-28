@@ -10,7 +10,7 @@
 	<!-- 게시물 삽입  -->
 	<insert id="insert" parameterType="com.zestworld.Table_DTO.Template_DTO">
 		insert into template (template_id , title , filesrc , user_id)
-		values (template_seq.nexval , #{title} , #{filesrc} , #{user_id} )
+		values (template_seq.nextval , #{title} , #{filesrc} , #{user_id} )
 	</insert>
 	
 	<update id="update" parameterType="com.zestworld.Table_DTO.Template_DTO">

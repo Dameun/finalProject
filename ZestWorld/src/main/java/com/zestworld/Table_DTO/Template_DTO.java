@@ -11,7 +11,10 @@ public class Template_DTO {
 	private String filesrc2;
 	
 	private String user_id;
+	
 	private List<CommonsMultipartFile> files;
+	
+	
 	
 	public List<CommonsMultipartFile> getFiles() {
 		return files;

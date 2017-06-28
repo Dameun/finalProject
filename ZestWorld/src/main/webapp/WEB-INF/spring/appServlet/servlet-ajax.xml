@@ -28,7 +28,8 @@
 	<context:component-scan base-package="com.zestworld.AlarmController"/>
 	<context:component-scan base-package="com.zestworld.EssenceService"/>
 	<context:component-scan base-package="com.zestworld.EssenceController"/>
-	
+	<context:component-scan base-package="com.zestworld.TemplateController"/>
+	<context:component-scan base-package="com.zestworld.TemplateService"/>
 	<context:component-scan base-package="com.zestworld.AjaxController" />
 	
 <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
