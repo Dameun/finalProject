@@ -85,9 +85,8 @@ $(document).ready(function(){
 							완료되어야 할 상태에 대한 정의를 통해 각 단계의 정의를 명확히 한다.
 						</p>
 						<p id="tabs"></p>
-					<!-- 	<button class="btn btn-info btn-rounded" id="open-wizard"
-							type="button" onclick="FinishCreateEssence()">Edit
-							complete!</button> -->
+					<<button class="btn btn-info btn-rounded" id="open-wizard"
+							type="button" onclick="FinishCreateEssence()">Finish</button>
 					</div>
 				</section>
 			</div>
