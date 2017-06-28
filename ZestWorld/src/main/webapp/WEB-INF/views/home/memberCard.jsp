@@ -7,28 +7,42 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div class="container"style="margin-top:-70px;" >
- <main id="content" class="content" role="main">
+  <div class="container" >
+ 
       <c:set var="member" value="${member}"/>
-       <h4 class="widget-login-logo animated fadeInUp">${member.name} - <span class="fw-semi-bold">Profile</span></h4>
+       <h3>${member.name} - <span class="fw-semi-bold">Profile</span></h3>
         <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
-                <section class="widget">
-                    <div class="widget-body">
-                        <div class="widget-top-overflow text-white">
-                            <div class="height-250 overflow-hidden">
-                                <img class="img-responsive" src="resources/img/pictures/19.jpg">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="well well-sm">
+                
+                    <div class="row">
+                        
+                            <div class="col-sm-4 col-md-4">
+                                <img class="img-rounded img-responsive" style="height:250px;width:500px;"src="resources/img/pictures/19.jpg">
                             </div>
-                            <div class="btn-toolbar">
-                              <!--   <a href="#" class="btn btn-outline btn-sm pull-right">
+                            <!-- <div class="btn-toolbar">
+                                <a href="#" class="btn btn-outline btn-sm pull-right">
                                     <i class="fa fa-twitter mr-xs"></i>
                                     Follow
-                                </a> -->
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5 text-center">
-                                <div class="post-user post-user-profile">
+                                </a> 
+                            </div>-->
+                       
+                   
+                            <div class="col-sm-6 col-md-8"style="padding-left:80px;">
+                             <h2>
+                            ${member.name }</h2>
+                        <!-- <small>San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                        </i></small> -->
+                       <hr>
+                        <p>
+                            <i class="fa fa-envelope fa-fw mr-xs"></i>${member.user_id }
+                            <br />
+                            <i class="fa fa-phone fa-fw mr-xs"></i>${member.phone }
+                            <br />
+                            <i class="fa fa-map-marker fa-fw mr-xs"></i> 한국소프트웨어기술진흥협회, KOSTA
+                            </p>
+                  
+                               <%--  <div class="post-user post-user-profile">
                                     <span class="thumb-xlg">
                                         <img class="img-circle" src="upload/${member.img }" alt="...">
                                     </span>
@@ -40,16 +54,16 @@
                                         <li><i class="fa fa-envelope fa-fw mr-xs"></i><a href="#"> ${member.user_id }</a></li>
                                        <li><i class="fa fa-map-marker fa-fw mr-xs"></i><a href="#"> 한국소프트웨어기술진흥협회, KOSTA</a></li>
                                     </ul>
-                                </div>
+                                </div> --%>
                             </div>
-                            <div class="col-sm-7">
+                            <div class="col-md-7">
                                 <div class="stats-row stats-row-profile mt text-right">
                               <div class="stat-item">
                                         <a href="#" onclick="ajaxView('joinEdit.ajax')"class="btn btn-danger btn-sm mt">
                                         &nbsp;Edit
                                         <i class="fa fa-edit ml-xs"></i>&nbsp;
                                     </a>
-                                    </div>
+                              </div>
                                     <!-- <div class="stat-item">
                                         <p class="value">9.38%</p>
                                         <h5 class="name">Conversion</h5>
@@ -74,11 +88,11 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
             
         </div>
-    </main>
+
     </div>
 </body>
 </html>
