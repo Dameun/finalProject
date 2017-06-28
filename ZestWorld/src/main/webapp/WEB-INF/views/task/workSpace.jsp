@@ -4,14 +4,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <h3>워크스페이스 </h3>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 	function searc() {
 		pwsearch.submit();
 }
 
 </script>
 <br>
-
 
 <div class="btn-group">
                       <button type="button" class="btn btn-default" onclick="location.href='taskList.htm'">업무리스트</button>
@@ -57,4 +56,3 @@
 							</div>
 						</div>
 					</div>
-					<!--  -->

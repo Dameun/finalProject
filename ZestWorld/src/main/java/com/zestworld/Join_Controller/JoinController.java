@@ -181,7 +181,7 @@ public class JoinController {
 		Users_DTO updateMember = new Users_DTO();
 		updateMember.setUser_id(member.getUser_id());
 		updateMember.setName(member.getName());
-		updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
+		/*updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));*/
 		updateMember.setImg(filename);
 		updateMember.setPhone(member.getPhone());
 
@@ -195,7 +195,7 @@ public class JoinController {
 		} else {
 			
 			// 실패시
-			return "redirect:/index.htm";
+			return "redirect:/joinEdit.htm";
 		}
 
 	}

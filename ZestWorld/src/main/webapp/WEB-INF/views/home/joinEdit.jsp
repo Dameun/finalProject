@@ -144,10 +144,11 @@ $('#myEdit').click("submit",function(){
       <div class="row">
          <div
             class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
-            <h4 class="widget-login-logo animated fadeInUp">
+           <!--  <h4 class="widget-login-logo animated fadeInUp">
                <i class="fa fa-circle text-gray"></i> 회원정보 수정 <i
                   class="fa fa-circle text-warning"></i>
-            </h4>
+            </h4> -->
+             <h4 class="widget-login-logo animated fadeInUp">${member.name} - <span class="fw-semi-bold">Profile</span></h4>
             <section class="widget widget-login animated fadeInUp"> 
             <div class="widget-body">
               
@@ -175,10 +176,10 @@ $('#myEdit').click("submit",function(){
                         id="exampleInputEmail1" placeholder="email" value="${member.user_id}" readonly>
                   </div>
                   <!-- 비번 -->
-                  <div class="form-group">
+                  <%-- <div class="form-group">
                      <input name="password" class="form-control" id="pswd" type="password"
                         placeholder="Password" value="${member.password}">
-                  </div>
+                  </div> --%>
                   <!-- 이름 -->
                   <div class="form-group">
                      <input name="name" class="form-control" id="name" type="text"

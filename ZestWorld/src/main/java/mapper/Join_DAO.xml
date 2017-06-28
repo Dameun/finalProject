@@ -18,7 +18,7 @@
 	</update>
 	
 	<update id="updateUser">
-      update users set password=#{password} , phone=#{phone} ,img=#{img,jdbcType=VARCHAR} where user_id=#{user_id}
+      update users set phone=#{phone} ,img=#{img,jdbcType=VARCHAR} where user_id=#{user_id}
    </update>
 	
 	<!-- 비밀번호 찾기 -->

@@ -1,3 +1,10 @@
+<%--
+	@Project : ZestWorld
+	@File name : detailModal.jsp
+	@Author : 최담은
+	@Data : 2017.6.28
+	@Desc : 전체개요 -> 기본 페이지(필터 선택)
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
