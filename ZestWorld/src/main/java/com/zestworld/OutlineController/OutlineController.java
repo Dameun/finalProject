@@ -150,6 +150,7 @@ public class OutlineController {
 		
 		model.addAttribute("list", list); //�옄�룞 forward 
 		model.addAttribute("paging", paging);
+		model.addAttribute("count", 2);
 		return "/task/totalTaskList";
 	}
 	
