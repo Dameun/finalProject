@@ -499,8 +499,8 @@ function taskAssign(taskId){
 	    			   
 	    			   send( '0', datailTitle,checkboxValues[i], assignFollower);
 	    		   }
-	    	   	
-	    	   		/* location.reload(); */
+	    		   $('#taskAssignMember').hide();
+	    		   detailModalView(clickTask,detailpid);
 	    	   
 	       },
 	       error : function() {
@@ -526,12 +526,11 @@ function deleteTaskMember(memberId){
 			console.log("멤버삭제 보내는 사람: " + data.userid);
 			console.log("멤버삭제 제목: " +datailTitle)
 			
-		    if(data.check=="check"){
+		   /*  if(data.check=="check"){
 		    	send( '3', datailTitle, data, data.userid);
 				window.location.reload()
-		    }
-			/* 
-			ajaxView('taskList.ajax'); */
+		    } */
+			 detailModalView(clickTask,detailpid);
 		},
 		error:function(){
 			alert('error');
