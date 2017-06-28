@@ -251,8 +251,9 @@ public class AjaxViewController {
 	@RequestMapping(value = "/totalTask.ajax", method = RequestMethod.GET)
 	public String totalTask(Model model) throws ClassNotFoundException, SQLException {
 		// List<Project_DTO> projectlist= service.projectlist();
-		List<Project_DTO> list = service.projectlist();
+		
 		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		List<Project_DTO> list = service.projectlist(workspace_id);
 		System.out.println("AJAC: "+ workspace_id);
 		List<Workspace_DTO> assign = service.writerlist(workspace_id);
 

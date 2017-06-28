@@ -16,7 +16,7 @@ public interface IOutlineDAO {
 	//task 테이블에 아무것도 없을 경우(전체 리스트)
 	public List<Task_DTO> basictasklist() throws ClassNotFoundException, SQLException;
 	//필터되기 전 (전체리스트)
-	public List<Task_DTO> tasklist() throws ClassNotFoundException, SQLException;
+	public List<Task_DTO> tasklist(int workspace_id) throws ClassNotFoundException, SQLException;
 	//내업무 (전체리스트)
 	public List<Task_DTO> tasklist_mytask(String user_id) throws ClassNotFoundException, SQLException;
 	//필터 (전체리스트)
@@ -24,7 +24,7 @@ public interface IOutlineDAO {
 	
 	
 	//필터에 있는 프로젝트 목록
-	public List<Project_DTO> projectlist() throws ClassNotFoundException, SQLException;
+	public List<Project_DTO> projectlist(int workspace_id) throws ClassNotFoundException, SQLException;
 	//필터에 있는 작성자 목록
 	public List<Workspace_DTO> writerlist(int workspace_id) throws ClassNotFoundException, SQLException;
 	//필터된 리스트 개수

@@ -37,9 +37,9 @@ public class OutlineService {
 		return list;
 	}
 	
-	public List<Task_DTO> tasklist() throws ClassNotFoundException, SQLException{
+	public List<Task_DTO> tasklist(int workspace_id) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
-		List<Task_DTO> list=dao.tasklist();
+		List<Task_DTO> list=dao.tasklist(workspace_id);
 		return list;
 	}
 	public List<Task_DTO> tasklist_mytask(String userid) throws ClassNotFoundException, SQLException{
@@ -53,9 +53,9 @@ public class OutlineService {
 		List<Task_DTO> list=dao.taskTest(dto);
 		return list;
 	}
-	public List<Project_DTO> projectlist() throws ClassNotFoundException, SQLException{
+	public List<Project_DTO> projectlist(int workspace_id) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
-		List<Project_DTO> list=dao.projectlist();
+		List<Project_DTO> list=dao.projectlist(workspace_id);
 		return list;
 	}
 	public List<Workspace_DTO> writerlist(int workspace_id) throws ClassNotFoundException, SQLException{

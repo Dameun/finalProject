@@ -133,7 +133,7 @@ public class OutlineController {
 
 		Task_DTO dto=new Task_DTO();
 		String userid="";
-		int workspaceId=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		int paging=1;
 		
 		dto.setTitle(title);
@@ -142,11 +142,11 @@ public class OutlineController {
 		dto.setUser_id(userid);
 		dto.setEnd_date(enddate);
 		dto.setProject_id(project_id);	
-		dto.setWorkspace_id(workspaceId);
+		dto.setWorkspace_id(workspace_id);
 		dto.setFollower(userid);
 			
 		int result= service.insertTask(dto);
-		List<Task_DTO> list= service.tasklist();
+		List<Task_DTO> list= service.tasklist(workspace_id);
 		
 		model.addAttribute("list", list); //�옄�룞 forward 
 		model.addAttribute("paging", paging);
@@ -179,13 +179,14 @@ public class OutlineController {
 	@RequestMapping(value="updateFlag.htm", method=RequestMethod.GET)
 	public String updateFlag(String task_id, Model model) throws ClassNotFoundException, SQLException{		
 		service.updateFlag(task_id);
-		
-		List<Task_DTO> list=service.tasklist();
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		int paging=1;
+		List<Task_DTO> list=service.tasklist(workspace_id);
 		String userId=DataController.getInstance().GetUser().getUser_id();
 
 		model.addAttribute("list", list);
 		model.addAttribute("userId", userId);
- 
+		model.addAttribute("paging", paging);
 		return "/task/totalTaskList";
 		
 	}
@@ -193,10 +194,12 @@ public class OutlineController {
 	@RequestMapping(value="updateFlagZero.htm", method=RequestMethod.GET)
 	public String updateFlagZero(String task_id, Model model) throws ClassNotFoundException, SQLException{
 		service.updateFlagZero(task_id);
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		int paging=1;
+		List<Task_DTO> list=service.tasklist(workspace_id);
 		
-		List<Task_DTO> list=service.tasklist();
 		model.addAttribute("list", list);
- 
+		model.addAttribute("paging", paging);
 		return "/task/totalTaskList";
 		
 	}
@@ -218,20 +221,24 @@ public class OutlineController {
 			tm.setTask_id(task_id);
 			int result2=service.assignMemberReg(tm);
 		}
-
-		List<Task_DTO> list=service.tasklist();
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		int paging=1;
+		List<Task_DTO> list=service.tasklist(workspace_id);
 		model.addAttribute("list", list);
- 
+		model.addAttribute("paging", paging);
+		
 		return "/task/totalTaskList";
 		
 	}
 	@RequestMapping(value="detailDelete.htm", method=RequestMethod.GET)
 	public String detailDelete(int task_id,Model model) throws ClassNotFoundException, SQLException{
 		int result=service.detailDelete(task_id);
-
-		List<Task_DTO> list=service.tasklist();
+		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		int paging=1;
+		
+		List<Task_DTO> list=service.tasklist(workspace_id);
 		model.addAttribute("list", list);
- 
+		model.addAttribute("paging", paging);
 		return "/task/totalTaskList";
 		
 	}
