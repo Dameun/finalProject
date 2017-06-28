@@ -6,24 +6,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<script>
-function backPaging(cp,ps){
-	
-		$.ajax({
-			type:"get",
-			url:"backPaging.htm?cp="+cp+"&ps="+ps,
-			dataType:'html',
-			success:function(data){
-			
-				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
-			},
-			error:function(){
-				alert('검색 에러! 관리자에게 문의하세요');
-			}
-		});
-}
 
-</script>
 <div style="margin-top: 30px">
 	<div>
 		<%-- <button onclick="myfilter(${paging},0);">
