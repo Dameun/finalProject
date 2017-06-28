@@ -416,7 +416,21 @@ public class taskListController {
 		
 	}
 	
-	
+	@RequestMapping(value="deleteAssignMember.htm", method=RequestMethod.GET)
+	public View deleteTaskMember(String memberId,int taskId,Model model) throws ClassNotFoundException, SQLException{
+		
+		TaskAssignMember_DTO dto = new TaskAssignMember_DTO();
+		
+		dto.setTask_id(taskId);
+		dto.setUser_id(memberId);
+		int result=service.deleteTaskMember(dto);
+		
+		String userid=DataController.getInstance().GetUser().getUser_id();
+		model.addAttribute("userid", userid);
+		
+		return jsonview;
+		
+	}
 		
 /*	@RequestMapping(value="updateChkFlagZero.htm", method=RequestMethod.GET)
 	public View assignMemberList(int project_id, Model model) throws ClassNotFoundException, SQLException{

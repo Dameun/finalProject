@@ -272,12 +272,20 @@ function submit2(){
 		title=$("#title").val();
 		var project_id= $('#project').val();
 	 	console.log(title); 
+	 	if(title==""){
+			alert('제목을 입력해주세요');
+			$('#add-modal').modal('show');
+			return;
+			//return false; 
+		}
 	 	if(project_id=="before"){
 			alert('프로젝트 선택');
+			return;
 			//return false; 
 		}
 		if(categoryId=="cateBefore"){
 			alert('카테고리 선택');
+			return;
 			//return false; 
 		}
 		 $.ajax({
@@ -500,6 +508,9 @@ function taskAssign(taskId){
 	    			   send( '0', datailTitle,checkboxValues[i], assignFollower);
 	    		   }
 	    		   $('#taskAssignMember').hide();
+	    	/* 	   $(".modal-backdrop fade in").remove(); 
+	    		 */
+	    		   
 	    		   detailModalView(clickTask,detailpid);
 	    	   
 	       },
@@ -691,7 +702,7 @@ function deleteTaskMember(memberId){
  --%>
 
 					<select id="project" onchange="projectchange();">
-						<option value="" selected="selected">  </option>
+						<option value="before" selected="selected">  </option>
 						<c:forEach items="${projectlist}" var="n">
 						 	<option value="${n.project_id}">${n.p_title}</option>		
 						</c:forEach>
