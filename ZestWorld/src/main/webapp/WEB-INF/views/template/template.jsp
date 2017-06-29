@@ -50,7 +50,7 @@
     //use jQuery MultiFile Plugin 
     $('#multiform input[name=file]').MultiFile({
         max: 5, //업로드 최대 파일 갯수 (지정하지 않으면 무한대)
-        accept: 'jpg|png|gif', //허용할 확장자(지정하지 않으면 모든 확장자 허용)
+        /* accept: 'jpg|png|gif', */ //허용할 확장자(지정하지 않으면 모든 확장자 허용)
         maxfile: 1024, //각 파일 최대 업로드 크기
         maxsize: 3024,  //전체 파일 최대 업로드 크기
         STRING: { //Multi-lingual support : 메시지 수정 가능
@@ -81,7 +81,7 @@ $(function(){
     $('#multiform').ajaxForm({
        cache: false,
        url : "templateUpload.htm",
-       dataType:"html",
+       dataType:"json",
 
        //보내기전 validation check가 필요할경우
        beforeSubmit: function (data, frm, opt) {
@@ -286,15 +286,21 @@ function output(data) {
 	          
 	        	</div>
 	        
-	        <form action="<%=request.getContextPath() %>/templateUpload.htm" id="multiform" method="post" enctype="multipart/form-data"0>
+
+	        
+	        
+		 <form action="<%=request.getContextPath() %>/templateUpload.htm" id="multiform" enctype="multipart/form-data">
 	        
 	        	title: <input type="text" name="title"  value=""/> <br/>
 				description: <input type="text" name="description"  value=""/> <br/>
 
-				<!-- 다중 파일업로드  -->
-				file : <input type="file" class="afile3"  name="file" /> <br/>
+				<!-- 다중 파일업로드  -->			
+				file : <input type="file" name="file" /> <br/>
+				
 				<button type="submit" id="btnSubmit" class="glyphicon glyphicon-upload" value="업로드"/><br/>
-			</form>
+		
+		</form>
+		
 	        	<!-- <div class="modal-body"  id="uploadFile">
 	    	    	 <div class="form-group row">
                         	<label class="control-label col-sm-4" for="number">

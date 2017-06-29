@@ -14,7 +14,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +26,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.zestworld.TemplateDAO.TemplateDAO;
 import com.zestworld.AnalysisDAO.AnalysisDAO;
-import com.zestworld.Table_DTO.FileInfoModel;
+import com.zestworld.Table_DTO.TemplateFileInfo_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Template_DTO;
 import com.zestworld.TemplateService.TemplateService;
@@ -47,29 +46,31 @@ public class TemplateController {
 	@RequestMapping(value="templateUpload.htm" , produces = "application/json")
 	@ResponseBody
 	public HashMap<String, Object> noticeReg(Template_DTO n, MultipartHttpServletRequest request) throws ClassNotFoundException, SQLException, IOException{
+		
 		System.out.println("템블릿 컨트롤러 들어옴!");
 		
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
+		String filesrc = request.getParameter("filesrc");
+		String filesrc2 = request.getParameter("filesrc2");
 		
-		/*logger.info("타이틀:"+title);
-		logger.info("설명:"+description);
+		System.out.println("title");
+		System.out.println("description");
+		System.out.println("filesrc");
+		System.out.println("filesrc2");
+		
 		
 		//출력 데이터를 저장하기위한 맵 객체 생성.
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		
 		//업로드한 파일 리스트 얻어오기
 		List<MultipartFile> mfList = request.getFiles("file");			
-		logger.info("업로드 파일 개수:"+mfList.size()); 
 		
 		
-		List<FileInfoModel> fileList = new ArrayList<FileInfoModel>();		
+		List<TemplateFileInfo_DTO> fileList = new ArrayList<TemplateFileInfo_DTO>();		
 		
 		for(MultipartFile mf:mfList){			
 				
-			logger.info("파라미터이름:"+mf.getName());
-			logger.info("파일명:"+mf.getOriginalFilename());
-			logger.info("파일사이즈:"+mf.getSize());
 		    
 			String name = mf.getName(); //필드 이름 얻기
 			String fileName = mf.getOriginalFilename(); //파일명 얻기
@@ -81,7 +82,7 @@ public class TemplateController {
 					+ UUID.randomUUID().toString()+fileName.substring(fileName.lastIndexOf("."));
 		
 		    String uploadPath = request.getSession().getServletContext().getRealPath("upload");
-		    logger.info("실제 파일 업로드 경로 : "+uploadPath);
+
 		    
 		    //지정한주소에 파일 저장	    
 		    if(mf.getSize() != 0) {	    	
@@ -91,7 +92,7 @@ public class TemplateController {
 		    String downlink = "fileDownload2?of="+URLEncoder.encode(fileName,"UTF-8")
 		    						+"&f="+URLEncoder.encode(uploadedFileName,"UTF-8");
 		  
-		    FileInfoModel file = new FileInfoModel(
+		    TemplateFileInfo_DTO file = new TemplateFileInfo_DTO(
 		    							name, 
 		    							fileName, 
 		    							uploadedFileName,
@@ -107,8 +108,8 @@ public class TemplateController {
 	    result.put("description", description);
 	    result.put("file", fileList);
 	   	   
-	    return result;*/
-		return null;
+	    return result;
+	
 	
 			
 			

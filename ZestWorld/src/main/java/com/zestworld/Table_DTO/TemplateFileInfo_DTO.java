@@ -1,6 +1,6 @@
 package com.zestworld.Table_DTO;
 
-public class FileInfoModel {
+public class TemplateFileInfo_DTO {
 
 	private String name;
 	private String fileName;
@@ -9,7 +9,7 @@ public class FileInfoModel {
 	private String contentType;
 	private String downlink;
 
-	public FileInfoModel(String name, String fileName, String uploadedFileName,
+	public TemplateFileInfo_DTO(String name, String fileName, String uploadedFileName,
 			long fileSize, String contentType, String downlink) {
 		super();
 		this.name = name;
