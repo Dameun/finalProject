@@ -90,10 +90,7 @@ function assignMemberDelete(memberId,projectId){
 	});	
 }
 
-/* function avb(member){
-	alert('함수호출 테스트');
-	
-}; */
+
 function projectAssignMemberList(workspace_id,project_id){
 	var str='';
 	$.ajax({

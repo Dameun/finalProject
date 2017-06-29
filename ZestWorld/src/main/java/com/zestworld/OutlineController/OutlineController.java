@@ -48,7 +48,7 @@ public class OutlineController {
 
 	@RequestMapping("taskTotalList.htm")
 	public String taskTotalList(String writer, String forme, String follower, String writermember, String success,
-			String datefilter, String order, int paging, Model model) throws ClassNotFoundException, SQLException {
+			String datefilter, String order,int project_id, int paging, Model model) throws ClassNotFoundException, SQLException {
 		List<Task_DTO> basic = service.basictasklist();
 		int resultCount = 0;
 		Task_DTO dto = new Task_DTO();
@@ -91,7 +91,19 @@ public class OutlineController {
 		} else {
 			dto.setOrder("asc");
 		}
-
+		System.out.println(project_id);
+		/*if(!(project_id==500000)){
+			dto.setProject_id(project_id);
+		}*/
+		int parseInt=0;
+		/*if(!(project_id==500000)){
+			System.out.println(project_id);
+			parseInt= Integer.parseInt(project_id);
+			dto.setProject_id(project_id);
+		}*/
+		
+		dto.setProject_id(project_id);
+		
 		dto.setMember(forme);
 
 		if (follower.equals("check")) {
@@ -102,7 +114,7 @@ public class OutlineController {
 
 		List<Task_DTO> list = service.taskTest(dto);
 		int count = service.countList(dto);
-
+System.out.println("count : "+ count);
 		if (basic.size() == 0) {
 			model.addAttribute("list", basic); // �옄�룞 forward
 		} else {

@@ -38,17 +38,20 @@
 						   <if test="follower!=null and follower != ''">  <!-- 팔로워  -->
 								and follower=#{follower}
 						   </if>
-
-					       ) N
-				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
-				      <if test="order.equals('desc')">
+						   <if test="!project_id.equals(500000)">
+						   		and project_id=#{project_id}
+						   </if>
+    					   <if test="order.equals('asc')">
 							    order by task_id desc
-					  </if>
+					       </if>
 						   
-					  <if test="order.equals('asc')">
+					  <if test="order.equals('desc')">
 							    order by end_date asc
 					  </if>
 				     
+					       ) N
+				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
+				  
 				     
 				     <!-- 
 				     SELECT * FROM
@@ -120,7 +123,9 @@
 		<if test="follower!=null and follower != ''">  
 			and follower=#{follower}
 		</if>
-		
+		<if test="!project_id.equals(500000)">
+						   		and project_id=#{project_id}
+		</if>
 		<if test="order.equals('desc')">
 		      order by task_id desc
 		    </if>
