@@ -37,17 +37,11 @@ public class taskListController {
 		
 		Category_DTO cateDto = new Category_DTO();
 		cateDto.setTitle(title);
-		//int project_id = DataController.getInstance().getCurrentProject().getProject_id();
-
-		System.out.println("타이틀 : " + title);
 		
 		service.titleInsert(cateDto);
 		
-		/*int project_id = DataController.getInstance().getCurrentProject().getProject_id();
-		System.out.println("선택한 project_id : "+ project_id);	
-		cateDto.setProject_id(project_id);
-		*/
-		System.out.println("insert성공함");
+	
+	
 		List<Category_DTO> list = service.tasklist(cateDto);
 		List<Task_DTO> list2 = service.tasklist2();
 		

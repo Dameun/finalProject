@@ -42,17 +42,14 @@ public class taskListService {
 		taskListDao dao = sqlsession.getMapper(taskListDao.class);
 		Project_DTO projdto = new Project_DTO();
 		String title = DataController.getInstance().getCurrentProject().getP_title();
-		System.out.println("프로젝트 Title : " + title);
- 		projdto.setP_title(title);
+		projdto.setP_title(title);
 	
 		
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
-		//projdto.setWorkspace_id(workspace_id);
-		
-		
+		dto.setWorkspace_id(workspace_id);
 		
 		int project_id = dao.getProject_Id(projdto);
-		System.out.println("프로젝트ID :" + project_id);
+		
 		dto.setProject_id(project_id);
 		dao.titleInsert(dto);
 		
