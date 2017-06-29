@@ -209,12 +209,14 @@ var detailpid='';
 function detailModalView(view,project_id){
 	 	var str='';
 	 	detailpid=project_id;
-	 
+	 	var strlist='';
 		clickTask= view;
 		$.ajax({
 		       type : "get",
 		       url : "detailtaskModal.htm?task_id="+view+"&project_id="+project_id,
 		       success : function(data) {
+
+		    	  $("#CheckContents").val('');
 		    	  console.log("detailmodal success: "+data.detail.user_id);
 		    	   var datailTitle=data.detail.title;
 		    	   var datailEnrolldate=data.detail.endrolldate;
@@ -268,7 +270,27 @@ function detailModalView(view,project_id){
 		       }
 		    });
 	 	
-	 	
+	 	$.ajax({
+		    type : "get",
+		    url : "taskMemberCheck.htm?project_id="+detailpid+"&task_id="+view,
+		    		
+		    success : function(data) {
+		 		console.log("data:    " + data);
+		 		
+		 		$.each(data.assignmember,function(index,value){
+						console.log(index + "/" + value.user_id);
+						strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+						/* "+value.user_id+" */
+						
+						
+				});
+		 		var htm="<form name='memberChk'>"+strlist+"</form>";
+		 		$("#wMemberList").append($('#wMemberList').html(htm));
+		    },
+		    error : function() {
+		       alert('Error while request..');
+		    }
+		 });
 	 	
 	 	
 	} 
@@ -418,8 +440,9 @@ function detailModalView(view,project_id){
 		    	   		location.reload();
 		    	   } */
 		    	   $("#taskAssignMember").hide();
+		    	   $('#taskAssignMember .modal-backdrop').remove();
 		    	   detailModalView(clickTask,detailpid);
-				   		    	  
+
 		       },
 		       error : function() {
 		          alert('Error wh	ile request..');
@@ -473,6 +496,8 @@ function detailModalView(view,project_id){
 	}
 	
 	function cateUpdate(){
+		
+		
 		$.ajax({
 			type : "post",
 			url : "cateUpdate.htm",
@@ -485,7 +510,9 @@ function detailModalView(view,project_id){
 								
 				$("#View").empty();
 				$("#View").append(data); 
+		
 				
+       		
 			},
 			error : function() {
 				alert('Error while request..');
@@ -557,10 +584,10 @@ function detailModalView(view,project_id){
                                                    
                                            			
                                            			<select id="categoryTitle">
-                                           			<option selected>선택하기</option>
+                                           		<%-- 	<option selected>선택하기</option>
 														<c:forEach items="${list}" var="n">
 						 								<option value="${n.category_id}">${n.title}</option>		
-														</c:forEach>
+														</c:forEach> --%>
     		        								</select>
                                                     </div>
                                                 </div>
@@ -611,12 +638,11 @@ function detailModalView(view,project_id){
             	 --%>
                 <span class="fw-semi-bold" id="span1">
                
-                </span> 
+                </span>&nbsp;&nbsp; 
+                <span class="label label-danger fw-normal" id="modal_delete" style="cursor:pointer" data-dismiss="modal" onclick="modalDeleteTask();">delete</span>
                 <small><span id="Modalenrolldate"></span></small>
             </h4>
             <div class="widget-controls">
-            	<span class="label label-danger fw-normal" id="modal_delete" style="cursor:pointer" data-dismiss="modal" onclick="modalDeleteTask();">delete</span>
-            	&nbsp;&nbsp;&nbsp;&nbsp;
                 <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
             </div>
         </header>
@@ -666,10 +692,11 @@ function detailModalView(view,project_id){
                   <div class="form-group row">
                             <div>
                             <label class="control-label col-sm-3" for="range">
-                                	배정된 멤버&nbsp;
+                                	배정된 멤버
+                                	<!-- &nbsp;
                                 	<i class="fa fa-plus-square" aria-hidden="true" data-toggle="modal"
 									data-target="#taskAssignMember" onclick="taskMemberListChk();" style="cursor:pointer"></i>
-									
+									 -->
                             </label>
                            </div>
                             <div class="col-sm-9">
@@ -686,8 +713,17 @@ function detailModalView(view,project_id){
 									 </div>
 								</ul>
 							</div>
+							<br>
+							<div id="wMemberList" style="background-color:#EAEAEA">
+						                    
+							</div>
+							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
+                            
+							
+							
                             <!-- 프로젝트 멤버 배정 모달  -->
-                            <div class="modal fade" id="taskAssignMember"   aria-hidden="true" style="display: none;">
+                        <%--     
+                        <div class="modal fade" id="taskAssignMember"   aria-hidden="true" style="display: none;">
 								<div class="modal-dialog">
 						            <div class="modal-content">
 						                <div class="modal-header">
@@ -711,8 +747,9 @@ function detailModalView(view,project_id){
 						                </div>
 						            </div>
 						       </div>
-							</div>
-                            
+							</div> 
+							--%>
+                          
                    
                             </div>
                         </div>

@@ -433,27 +433,16 @@ public class taskListController {
 		return jsonview;
 		
 	}
-		
-/*	@RequestMapping(value="updateChkFlagZero.htm", method=RequestMethod.GET)
-	public View assignMemberList(int project_id, Model model) throws ClassNotFoundException, SQLException{
-		List<Users_DTO> assignmember=service.assignMemberList(project_id);
-
-		model.addAttribute("assignmember", assignmember);
- 
-		return jsonview;
-		
-	}*/
 	
-	/*@RequestMapping(value="updateChkFlagZero.htm", method=RequestMethod.GET)
-	public String assignMemberReg(int task_id,int check_id, Model model) throws ClassNotFoundException, SQLException{
-		int result=service.updateChkFlagZero(check_id);
+	@RequestMapping(value="taskMemberCheck.htm", method=RequestMethod.GET)
+	public View taskMemberListChk(int project_id , Model model) throws ClassNotFoundException, SQLException{
 
-		List<CheckList_DTO> chklist=service.checkListView(task_id);
-		model.addAttribute("chklist", chklist);
- 
-		return "/task/checkList";
+		List<Users_DTO> member=service.assignMemberList(project_id);
+		model.addAttribute("assignmember", member);		
 		
-	}*/
+		return jsonview;
+	}
+	
 
 	
 }
