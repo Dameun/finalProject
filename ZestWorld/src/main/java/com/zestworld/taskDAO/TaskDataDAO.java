@@ -19,6 +19,8 @@ public interface TaskDataDAO
    public List<Project_DTO> GetProjectList(int WorkSpaceid);	  //�썙�겕�뒪�럹�씠�뒪 湲곗� �봽濡쒖젥�듃 諛섑솚
    public Project_DTO GetProject(String projectid);			  //�봽濡쒖젥�듃 諛섑솚
    public Project_DTO GetProjectByname(Project_DTO project);			  //�봽濡쒖젥�듃 諛섑솚
-   
+   public void updateProject(Project_DTO project);
+   public void deleteProject(Project_DTO project);
+   public void deleteTaskByProjectid(Project_DTO project);
    public List<WorkspaceUser_DTO> GetWorkSpaceMemberChk(WorkspaceUser_DTO workspaceUser_DTO);
 }

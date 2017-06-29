@@ -8,7 +8,6 @@
 <script type="text/javascript">
 var milestoneListView = new Array(); 
 
-
 function getCheckedByName(name){
     var chks = document.getElementsByName(name);
     var results = [];
@@ -17,9 +16,11 @@ function getCheckedByName(name){
     }
     return results;
 }
+
 function nextMilstone(){
 	
 }
+
 //완료시 체크 된것만 담기 
 function finishMilstone()
 {
@@ -31,6 +32,7 @@ function finishMilstone()
 			url : 	"selectCateSaveByMilstone.ajax",
 			data : {"results" : results},
 			success : function(data) {
+				   alert('데이터저장성공');
 				   ajaxView('CreateEssence.ajax');
 			},
 			error : function() {
@@ -42,7 +44,6 @@ function finishMilstone()
 
 function subTitlechecked(checkbox)
 {
-	
 	var str ="";
 	if( $(checkbox).is(":checked"))
 	{
@@ -72,7 +73,6 @@ function subTitlechecked(checkbox)
 			}
 		});
 	}
-	
 }
 
 $(document).ready(function(){
@@ -83,15 +83,8 @@ $(document).ready(function(){
 		{
 			var str= "";
 	 		$.each(data.defineist_0,function(index,value)
-	 		{	/*
-	 			<div class="checkbox checkbox-circle">
-	                <input id="checkbox7" type="checkbox">
-	                <label for="checkbox7">
-	                    Simply Rounded
-	                </label>
-            	</div>
+	 		{	
 	 			
-	 			*/
 	 			console.log(value.subTitle);
 	 			str += "<div class='checkbox checkbox-warning checkbox-circle' ><input id='0_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='0_"+ value.ecate_id +"'>"+
 		 			value.subTitle+
@@ -301,12 +294,3 @@ $(document).ready(function(){
             </div>
         </div>
 </div>
-<script src="resources/build/bootstrap/js/form-wizard.js"></script>
-<script src="resources/build/bootstrap/vendor/bootstrap-application-wizard/src/bootstrap-wizard.js"></script>
-<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
-<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
-<script src="resources/build/bootstrap/vendor/parsleyjs/dist/parsley.min.js"></script>
-<script src="resources/build/bootstrap/vendor/jasny-bootstrap/js/inputmask.js"></script>
-<script src="resources/build/bootstrap/vendor/select2/select2.js"></script>
-<script src="resources/build/bootstrap/vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-<script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>

@@ -51,7 +51,7 @@
                         </span> -->
                        
                     </legend>
-                        <div class="form-group row">
+<%--                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="email">
                                		 위치
                             </label>
@@ -71,7 +71,7 @@
     		        		
     		        		</div>
                             </div>
-                        </div>
+                        </div> --%>
                         <div class="form-group row">
                         	<label class="control-label col-sm-3" for="number">
                                 	상세 설명
@@ -121,8 +121,13 @@
 									 </div>
 								</ul>
 							</div>
+							<br>
+							<div id="wMemberList" style="background-color:#EAEAEA">
+						                    
+							</div>
+							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
                             
-                            <div class="modal fade" id="taskAssignMember" style="display: none;">
+                         <%--    <div class="modal fade" id="taskAssignMember" style="display: none;">
 								<div class="modal-dialog">
 						            <div class="modal-content">
 						                <div class="modal-header">
@@ -146,7 +151,7 @@
 						                </div>
 						            </div>
 						       </div>
-							</div>     
+							</div>   --%>   
                             </div>
                         </div>
                         

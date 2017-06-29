@@ -53,4 +53,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="GetWorkSpaceMemberChk" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
    		select* from Workspace_User where user_id=#{user_id} and workspace_id=#{workspace_id}
    </select>
+   <!-- 상세보기 수정 -->
+	<update id ="updateProject" parameterType="com.zestworld.Table_DTO.Project_DTO" >
+		update project set p_title=#{p_title},explain=#{explain} where project_id=#{project_id}
+	</update>
+	<update id ="deleteProject" parameterType="com.zestworld.Table_DTO.Project_DTO" >
+		delete FROM project where project_id=#{project_id}
+	</update>
+	 <delete id="deleteTaskByProjectid"  parameterType="com.zestworld.Table_DTO.Project_DTO">
+   		delete FROM task where project_id=#{project_id}
+   </delete>
 </mapper>

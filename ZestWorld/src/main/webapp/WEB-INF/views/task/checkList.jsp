@@ -96,7 +96,7 @@
 	                            	<div class="col-sm-3"></div>
 	                            	
 	                            	<div class="col-sm-7">
-	                                	<small class="text-muted">등록날짜...?</small>
+	                                	<small class="text-muted">${n.enrolldate}</small>
 	                            	</div>
 	                            	
 	                            	<div class="col-sm-2">

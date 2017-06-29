@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 	 }); 
 	 $(this).removeClass('hasDatepicker').datepicker();
-	 $( "#datepicker" ).datepicker();
+	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' });
 	
 	  
 	 
@@ -199,7 +199,7 @@ function myfilter(paging,flag){
 function detailModalView(view,project_id){
  	var str='';
  	detailpid=project_id;
- 	
+	var strlist='';
 	clickTask= view;
 	$.ajax({
 	       type : "get",
@@ -227,7 +227,6 @@ function detailModalView(view,project_id){
 	    		$('#modalTask').val(data.detail.datailTitle);
 	    		$('#modalDetailExplain').val(data.detail.explain);
 	    		
-	    		console.log("assignment: " + assignmember.user_id);
 	    		
 	    		/* $.each(data.assignmember,function(index,value){
 					console.log(index + "/" + value);
@@ -265,6 +264,29 @@ function detailModalView(view,project_id){
 	          alert('Error while request..');
 	       }
 	    });
+ 	
+ 
+	$.ajax({
+	    type : "get",
+	    url : "taskMemberListChk1.htm?project_id="+detailpid+"&task_id="+view,
+	    		
+	    success : function(data) {
+	 		console.log("data:    " + data);
+	 		
+	 		$.each(data.assignmember,function(index,value){
+					console.log(index + "/" + value.user_id);
+					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					/* "+value.user_id+" */
+					
+					
+			});
+	 		var htm="<form name='memberChk'>"+strlist+"</form>";
+	 		$("#wMemberList").append($('#wMemberList').html(htm));
+	    },
+	    error : function() {
+	       alert('Error while request..');
+	    }
+	 });
 } 
 function submit2(){
 	    
@@ -459,7 +481,7 @@ function checkListDelete(chk){
 }
 
 
-function taskMemberListChk(){
+/*  function taskMemberListChk(){
 	console.log("taskMemberListChk");
 	console.log(detailpid);
 	var strlist='';
@@ -473,7 +495,7 @@ function taskMemberListChk(){
 	 		$.each(data.assignmember,function(index,value){
 					console.log(index + "/" + value.user_id);
 					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
-					/* "+value.user_id+" */
+					
 					
 					
 			});
@@ -484,8 +506,8 @@ function taskMemberListChk(){
 	       alert('Error while request..');
 	    }
 	 });
-}
-
+} 
+ */
 
 
 function taskAssign(taskId){
@@ -508,10 +530,11 @@ function taskAssign(taskId){
 	    			   send( '0', datailTitle,checkboxValues[i], assignFollower);
 	    		   }
 	    		   $('#taskAssignMember').hide();
+	    		   detailModalView(clickTask,detailpid);
 	    	/* 	   $(".modal-backdrop fade in").remove(); 
 	    		 */
-	    		   
-	    		   detailModalView(clickTask,detailpid);
+	    		   /* 
+	    		    */
 	    	   
 	       },
 	       error : function() {
@@ -597,12 +620,12 @@ function deleteTaskMember(memberId){
 	<div id="nav">
 		<div class="col-sm-5"></div>
 		<div class="col-sm-2">
-			<nav> <span>
+			<!-- <nav> <span>
 				<ul>
 					<li class="active"><a href="#">업무</a></li>
 					<li><a href="#">캘린더</a></li>
 				</ul>
-			</span> </nav>
+			</span> </nav> -->
 		</div>
 	</div>
 	<div class="col-sm-5"></div>
@@ -611,8 +634,16 @@ function deleteTaskMember(memberId){
 
 
 <div class="row" >
-	<div class="col-sm-2" style="background-color: #ffffff; height: 900px">
 
+	<div class="col-sm-2" style="background-color: #ffffff; height: 900px">
+	<br>
+	정렬<br>
+			<select id="select_order" onchange="myfilter();">
+	            <option value="">최신순</option>
+	            <option value="end">마감순</option>
+	            
+	        </select>
+	    <hr>
 	<br>
 		기간<br> 
 		<select id="dayfilter" onChange="myfilter();">
@@ -631,12 +662,12 @@ function deleteTaskMember(memberId){
 		빠른필터<br>
 		<input type="checkbox" id="forme" name="filter" value="for" onclick="myfilter();">나에게 배정된 업무<br>
 		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
-		<hr>
-		프로젝트<br>
+		
+		<%-- 프로젝트<br>
 			<input type="radio" name="projectlist" value="" checked>전체<br>
 		<c:forEach items="${projectlist}" var="n">
 			<input type="radio" name="projectlist" value="${n.project_id}" >${n.p_title}<br>
-		</c:forEach>
+		</c:forEach> --%>
 		
 		<hr>
 		작성자<br>
@@ -670,13 +701,7 @@ function deleteTaskMember(memberId){
 	         	차트보기
 		</button>
 		</div>
-		<div class="col-sm-1">
-			<select id="select_order" onchange="myfilter();">
-	            <option value="">최신순</option>
-	            <option value="end">마감순</option>
-	            
-	        </select>
-	    </div>
+		
 	</div>
 
          <!-- modal -->

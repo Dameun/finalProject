@@ -13,7 +13,7 @@
 					  FROM 
 					      ( SELECT * 
 					        FROM task WHERE success_f='0' and workspace_id=#{workspace_id}
-                  			order by enrolldate desc) N
+                  			order by task_id desc) N
 				     ) WHERE NUM BETWEEN 1 + (1 - 1) *5 AND 5 + (1 - 1) * 5
 	</select>
  
@@ -42,11 +42,11 @@
 					       ) N
 				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
 				      <if test="order.equals('desc')">
-							    order by enrolldate asc
+							    order by task_id desc
 					  </if>
 						   
 					  <if test="order.equals('asc')">
-							    order by enrolldate desc
+							    order by end_date asc
 					  </if>
 				     
 				     
@@ -122,10 +122,10 @@
 		</if>
 		
 		<if test="order.equals('desc')">
-		      order by enrolldate asc
+		      order by task_id desc
 		    </if>
 		<if test="order.equals('asc')">
-		      order by enrolldate desc
+		      order by end_date asc
    	    </if>
    	 
 	</select>
@@ -180,9 +180,9 @@
 		delete from task where task_id=#{task_id}
 	</update>
 	
-	<!-- checkList 추가 -->
+	<!-- checkList 추가 --><!-- 민성 enrolldate 추가함 -->
 	<insert id ="checkListReg" parameterType="com.zestworld.Table_DTO.CheckList_DTO" >
-		insert into checkList(check_id,task_id,contents,success_f) values (checklist_seq.nextval,#{task_id},#{contents},0)
+		insert into checkList(check_id,task_id,contents,success_f,enrolldate) values (checklist_seq.nextval,#{task_id},#{contents},0,sysdate)
 	</insert>
 	
 	<!-- checkList 리스트 -->

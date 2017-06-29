@@ -323,4 +323,36 @@ public class AjaxViewController {
 		userstatesService.UpdateUserState(userState);
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
+	
+	
+	
+	//프로젝트 수정시 
+	@RequestMapping(value = "/projectEdit.ajax", method = RequestMethod.GET)
+	public String projectEdit(String project_id, String editTitle, String editExplain) 
+	{
+		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
+		Project_DTO project = taskDao.GetProject(project_id);
+		project.setP_title(editTitle);
+		project.setExplain(editExplain);
+		
+		taskDao.updateProject(project);
+		 DataController.getInstance().dataChangeProject();
+		return DataController.getInstance().GetviewPath("home") + "success.jsp";
+	}
+	
+	//프로젝트 삭제시
+	@RequestMapping(value = "/projectDelete.ajax", method = RequestMethod.GET)
+	public String projectDelete(String project_id) 
+	{
+		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
+		Project_DTO project = taskDao.GetProject(project_id);
+		//체크리스트 지움
+		//테스크 지움
+		taskDao.deleteTaskByProjectid(project);
+		//프로젝트 지움 
+		taskDao.deleteProject(project);
+		DataController.getInstance().dataChangeProject();
+		return DataController.getInstance().GetviewPath("home") + "success.jsp";
+	}
+
 }

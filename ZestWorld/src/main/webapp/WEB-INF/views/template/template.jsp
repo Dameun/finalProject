@@ -480,6 +480,7 @@ function output(data) {
 	          
 	        	</div>
 	        
+	        <form action="" method="post" enctype="multipart/form-data">
 	        	<div class="modal-body"  id="uploadFile">
 	    	    	 <div class="form-group row">
                         	<label class="control-label col-sm-4" for="number">
@@ -518,11 +519,12 @@ function output(data) {
 						</form> --%>
                         
 	        	</div>
-	        
+	        </form>
 	        
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal" id ="upload" onclick="/templateList.htm">확인</button>
+	          <button type="submit" class="btn btn-default" data-dismiss="modal" id ="upload" onclick="templateUpload.htm">확인</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="button22();">취소</button>
+	          
 	        </div>
 	        
 	       </div>

@@ -45,7 +45,7 @@
 				<ol class="group">
 						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id});""location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
 						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
-						<li class="comment" >
+						<li style="list-style-type: none" class="comment" >
 						<%-- <p class="text">
 						&nbsp ${n.title}</p>
 						<!-- <input type="checkbox" value="dd" >&nbsp ${n.title}</p> -->

@@ -81,4 +81,6 @@ public interface AnalysisDAO {
 	public String getTaskAllFlow_taskName(Task_DTO dto) throws ClassNotFoundException, SQLException;
 	
 	
+	public String getMemberName ();
+	
 }

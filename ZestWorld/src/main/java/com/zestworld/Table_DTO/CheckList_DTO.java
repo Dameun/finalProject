@@ -5,7 +5,14 @@ public class CheckList_DTO {
 	private int task_id;
 	private String contents;
 	private int success_f;
+	private String enrolldate;
 	
+	public String getEnrolldate() {
+		return enrolldate;
+	}
+	public void setEndrolldate(String enrolldate) {
+		this.enrolldate = enrolldate;
+	}
 	public int getCheck_id() {
 		return check_id;
 	}

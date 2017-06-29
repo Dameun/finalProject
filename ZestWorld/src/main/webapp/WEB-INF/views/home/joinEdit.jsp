@@ -42,135 +42,43 @@
 </style>
 
 <script type="text/javascript">
-
-/*  function Edit()
-{
-	var imgSrc = $("#myImg").attr("src")
-	
-	
-	console.log(imgSrc); // Outputs: "Hello World!"
-	
-	alert($("#exampleInputEmail1").val()+ atob(imgSrc)+$("#pswd").val()+$("#name").val()+$("#phone").val());
-	
-	$.ajax({
-		type:"post",
-		url:"updateUser.htm",
-		data: { "user_id"   : $("#exampleInputEmail1").val(),
-			    "file"     : atob(imgSrc),
-			    "password" : $("#pswd").val(),
-			    "name"     : $("#name").val(),
-			    "phone"    : $("#phone").val()
- 		},
-		
-	
-		success:function(data){
-			//data값이 성공일때 
-			//수정되었씁니다 팝업창후 
-			//ajaxView('');
-		
-			alert('수정되었습니다~'); 	
-			ajaxView('joinEdit.ajax');
-		
-		},
-		error:function(){
-			alert('검색 에러! 관리자에게 문의하세요');
-		}
-		
-	});
-}   */
-/* function base64dec() {
- 	/*  var str = document.getElementById("myImg").src.split(",");
- 	 console.log(str[1]);
-	document.getElementById("myImg").src = window.btoa(unescape(encodeURIComponent(str[1]))); */
-//console.log(document.getElementById("myImg").src);
- 
-/*  var str2 = document.getElementById("myImg").src.split(",");
-	document.getElementById("myImg").src = unescape(window.atob(str2[1]));
-	console.log(document.getElementById("myImg").src); 
-  */
-/*  var str1 = document.getElementById("myImg").src.split(",");
- console.log(str1);
-	var ret = decodeURIComponent(str1);
-	//console.log(ret)
-	document.getElementById("myImg").src = ret;   */ 
-
-	/* 
-	function Edit(){
-	 	var paramData=$("#userEdit").serialize(); 
-	var path = $('input[name=file]').val();
-	var  filename = path.substr(12);
-	$.ajax({
-		type:"post",
-		url:"updateUser.htm",
-		data:  {
-			    "user_id"   : $('input[name=user_id]').val(),
-		
-			    "img"  :   filename,
-			    "password" : $('input[name=password]').val(),
-			    "name"     :  $('input[name=name]').val(),
-			    "phone"    :  $('input[name=phone]').val() 
-		},
- 	
-		success:function(data){
-			//data값이 성공일때 
-			//수정되었씁니다 팝업창후 
-			//ajaxView('');
-		
-			alert('수정되었습니다~'); 	
-			ajaxView('joinEdit.ajax');
-		
-		},
-		error:function(){
-			alert('검색 에러! 관리자에게 문의하세요');
-		}
-		
-	});
-	}
-$('#myEdit').click("submit",function(){
-	   
-	            ajaxView('joinEdit.ajax');
-	
-	   //<- 이 문장으로 새로고침(reload)이 방지됨
-	});
-  */
 </script>
 </head>
 <body class="nav-collapsed chat-sidebar-container pace-done">
 
-
+<div class="container">
 <c:set var="member" value="${member}"/>
-   <div class="container" style="margin-top:-100px;">
-      <main id="content" class="widget-login-container" role="main">
+<h3>${member.name} - <span class="fw-semi-bold">Profile</span></h3>
       <div class="row">
-         <div
-            class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
-           <!--  <h4 class="widget-login-logo animated fadeInUp">
-               <i class="fa fa-circle text-gray"></i> 회원정보 수정 <i
-                  class="fa fa-circle text-warning"></i>
-            </h4> -->
-             <h4 class="widget-login-logo animated fadeInUp">${member.name} - <span class="fw-semi-bold">Profile</span></h4>
-            <section class="widget widget-login animated fadeInUp"> 
-            <div class="widget-body">
-              
-             <c:url value="/updateUser.htm" var="loginURL" /> 
+         <div class="col-xs-12 col-sm-6 col-md-6">
+           <div class="well well-sm">
+              <div class="row">
+	           
+	            	<c:url value="/updateUser.htm" var="loginURL" /> 
                <form action="${loginURL}"method="post" id="userEdit"enctype="multipart/form-data">
-              <div class="form-group" style="text-align:center;">
+            <!--   <div class="form-group" style="text-align:center;"> -->
+               <div class="col-sm-4 col-md-4" style="text-align:center;">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
-                                            <div id="fileinput"class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                <img name ="img"  id="filename" src="upload/${member.img}" data-holder-rendered="true" style="height: 100%; width: 100%; display: block;">
+                                        
+                                            <div id="fileinput" class="fileinput-new thumbnail" style="width: 230px; height: 250px;">
+                                                <img name ="img" class="img-rounded img-responsive" src="upload/${member.img}" data-holder-rendered="true" style="height: 100%; width: 100%; display: block;">
                                             <!--data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE5MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTAwJQpDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNS4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnMvPjxyZWN0IHdpZHRoPSIxOTAiIGhlaWdodD0iMTQwIiBmaWxsPSIjRUVFRUVFIi8+PGc+PHRleHQgeD0iNjkuMDQ2ODc1IiB5PSI3MCIgc3R5bGU9ImZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE5MHgxNDA8L3RleHQ+PC9nPjwvc3ZnPg==-->
                                             </div>
-                                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail" ></div>
                                             <div>
                                                 <span class="btn btn-default btn-file"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span>
                                                 <input type="file" name="file"></span>
                                                 <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                             </div>
                                         </div>
-                                        
+                          </div>              
                                         <!-- <span class="fileinput-new" id="myBtn">Select image</span> -->
-                 </div>
+              <!--    </div> -->
                   <!-- 이메일 -->
+                   <div class="col-sm-6 col-md-8" style="padding-left:80px;">
+                    <h2>
+                            ${member.name }</h2>
+                            <hr>
                   <div class="form-group">
                      <input type="text" name="user_id" class="form-control"
                         id="exampleInputEmail1" placeholder="email" value="${member.user_id}" readonly>
@@ -199,13 +107,17 @@ $('#myEdit').click("submit",function(){
                      <button type="submit"  id="myEdit"class="btn btn-default btn-file">수정</button>
                      <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
                   </div>
-                  
+                  </div>
                </form>
+	    		</div>
+            <div class="widget-body">
+              
+             
                </div>
-            </section>
+         </div>
          </div>
       </div>
-      </main>
+</div>
    </div>
    <!-- common libraries. required for every page-->
 <script src="resources/build/bootstrap/vendor/jquery/dist/jquery.min.js"></script>
