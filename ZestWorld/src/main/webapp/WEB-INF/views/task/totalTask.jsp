@@ -33,7 +33,7 @@ $(document).ready(function(){
 	var writermember='';
 	var datefilter='';
 	var order='';
-	var p='';
+	var p=500000;
 	//var paging=$('#paging').val();
 	
 	console.log('Paging:  ******'+paging);
@@ -64,6 +64,47 @@ $(document).ready(function(){
 	  
 	 
 }); 
+
+function refresh(){
+	
+	var forme='';
+	var writer='';
+	var follower='';
+	var success='';
+	var writermember='';
+	var datefilter='';
+	var order='';
+	var p=500000;
+	//var paging=$('#paging').val();
+	
+	console.log('Paging:  ******'+paging);
+	/* 
+	url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p, */
+	$.ajax({
+		type:"get",
+		url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p+"&paging=1",
+		/* dataType:'html', */
+		success:function(data){
+			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+		},
+		error:function(){
+			alert('검색 에러! 관리자에게 문의하세요');
+		}
+	});
+	 $("#addbtn").on("click", function() {
+
+	   // $("#add_taskTitle").submit();
+
+	    $("#add-modal").hide();
+	    $('.modal-backdrop').hide();
+
+	 }); 
+	 $(this).removeClass('hasDatepicker').datepicker();
+	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' });
+	
+	  
+	 
+}
 function modalChangeSuccessF(taskid){
 	$.ajax({
 		type:"get",
@@ -136,7 +177,7 @@ function myfilter(paging,flag){
 	var success='';
 	var datefilter='';
 	var order='';
-	var project='';
+	var project=500000;;
 	var resultPaging=0;
 	
 	if(flag==0){
@@ -156,6 +197,7 @@ function myfilter(paging,flag){
 		 forme="";
 		 console.log("forme check해제");
 	 }
+	 
 	 if(document.getElementById("follower").checked == true){
 		 follower="check";
 	 }else {
@@ -183,7 +225,7 @@ function myfilter(paging,flag){
 	 
 		$.ajax({
 			type:"get",
-			url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project="+project+"&paging="+resultPaging,
+			url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+project+"&paging="+resultPaging,
 			dataType:'html',
 			success:function(data){
 			
@@ -401,11 +443,13 @@ function detailUpdate(){
 	       url : "detailUpdate.htm?task_id="+detailUpdateID+"&start="+startdate+"&end="+enddate+"&follower="+follower+"&explain="+explain+"&chkmember="+checkboxValues,
 	       success : function(data) {
 	    	   console.log('성공');
+	    	   refresh();
 	       },
 	       error : function() {
 	          alert('Error while request..');
 	       }
 	}); 
+	
 }
 
 function modalDeleteTask(){
@@ -660,14 +704,14 @@ function deleteTaskMember(memberId){
 		<hr> -->
 		<br>
 		빠른필터<br>
-		<input type="checkbox" id="forme" name="filter" value="for" onclick="myfilter();">나에게 배정된 업무<br>
+		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();"><br>
 		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
-		
-		<%-- 프로젝트<br>
-			<input type="radio" name="projectlist" value="" checked>전체<br>
-		<c:forEach items="${projectlist}" var="n">
-			<input type="radio" name="projectlist" value="${n.project_id}" >${n.p_title}<br>
-		</c:forEach> --%>
+		<br><hr>
+		 프로젝트<br>
+			<input type="radio" name="projectlist" onclick="myfilter();" value="500000" checked>전체<br>
+		<c:forEach items="${projectlist}"  var="n">
+			<input type="radio" name="projectlist" value="${n.project_id}" onclick="myfilter();">${n.p_title}<br>
+		</c:forEach> 
 		
 		<hr>
 		작성자<br>
