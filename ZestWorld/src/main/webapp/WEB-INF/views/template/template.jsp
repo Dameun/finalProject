@@ -68,9 +68,6 @@
 
 
 
-
-
-
 /*jQuery form 플러그인을 사용하여 폼데이터를 ajax로 전송*/
 
 var downGroupCnt =0; //다운로드그룹 개수카운트
@@ -289,17 +286,15 @@ function output(data) {
 
 	        
 	        
-		 <form action="<%=request.getContextPath() %>/templateUpload.htm" id="multiform" enctype="multipart/form-data">
+		 <form action="<%=request.getContextPath() %>/templateUpload.htm" id="multiform" method="POST" enctype="multipart/form-data">
 	        
 	        	title: <input type="text" name="title"  value=""/> <br/>
 				description: <input type="text" name="description"  value=""/> <br/>
 
-				<!-- 다중 파일업로드  -->			
-				file : <input type="file" name="file" /> <br/>
-				
-				<button type="submit" id="btnSubmit" class="glyphicon glyphicon-upload" value="업로드"/><br/>
-		
-		</form>
+				<!-- 다중 파일업로드  -->
+				file : <input type="file" class="afile3"  name="file" /> <br/>
+				<input type="submit" id="btnSubmit" value="전송"/><br/>
+		</form>	
 		
 	        	<!-- <div class="modal-body"  id="uploadFile">
 	    	    	 <div class="form-group row">

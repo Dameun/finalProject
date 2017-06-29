@@ -177,22 +177,7 @@
 		and project_id = #{project_id}
 	</select>
 
-	
-	
-	<!-- 전체 업무 흐름 - 카테고리 아이디 -->
-	<select id="getTitle" resultType="com.zestworld.Table_DTO.Category_DTO" >
-		select title from category  
-	</select>
-	
-	
-	
-	
-	<!-- 전체 업무 흐름 - 업무명 -->
-	<!-- <select id="getTaskAllFlow_taskName" resultType="com.zestworld.Table_DTO.Task_DTO" >
-		
-		select title from task where success_f = 1
-		
-	</select>  -->
+
 	
 		<!--********** BARCHART (ALL)  *************-->	
 	
@@ -264,7 +249,7 @@
 	<select id="getTaskAllFlow_compU" resultType="com.zestworld.Table_DTO.Task_DTO" >
 		select c.title , count( success_f )
 		from category c inner join task t
-		on c. workspace_id = t.workspace_id
+		on c. project_id = t.ptoject_id
 		where t.success_f = 1 
 		group by c.title
 		
