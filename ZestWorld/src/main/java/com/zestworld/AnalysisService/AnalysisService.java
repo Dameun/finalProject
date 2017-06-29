@@ -48,7 +48,89 @@ public class AnalysisService {
 		return result;
 	}
 	
+/* DONUTCHART (USER)	*/
 	
+	//나에게 배정된 업무 - 완료된 업무
+	public int getTaskMe_compU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskMe_compU(dto);
+		return result;
+	}
+	//나에게 배정된 업무 - 마감일 지난 업무
+	public int getTaskMe_enddateLateU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskMe_enddateLateU(dto);
+		return result;
+	}
+	//나에게 배정된 업무 - 마감일 없는 업무
+	public int getTaskMe_enddateNoU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskMe_enddateNoU(dto);
+		return result;
+	}
+	//나에게 배정된 업무 - 진행중인 업무
+	public int getTaskMe_ingU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskMe_ingU(dto);
+		return result;
+	}
+	
+	
+	//내가 작성한 업무 - 완료된 업무
+	public int getTaskI_compU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskI_compU(dto);
+		return result;
+	}
+	//내가 작성한 업무 - 마감일 지난 업무
+	public int getTaskI_enddateLateU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskI_enddateLateU(dto);
+		return result;
+	}
+	//내가 작성한 업무 - 마감일 없는 업무
+	public int getTaskI_enddateNoU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskI_enddateNoU(dto);
+		return result;
+	}
+	//내가 작성한 업무 - 진행중인 업무
+	public int getTaskI_ingU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskI_ingU(dto);
+		return result;
+	}
+	
+	
+	
+	//내가 팔로우하는 업무 - 완료된 업무
+	public int getTaskFollow_compU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskFollow_compU(dto);
+		return result;
+	}
+	//내가 팔로우하는 업무 - 마감일 지난 업무
+	public int getTaskFollow_enddateLateU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskFollow_enddateLateU(dto);
+		return result;
+	}
+	//내가 팔로우하는 업무 - 마감일 없는 업무
+	public int getTaskFollow_enddateNoU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskFollow_enddateNoU(dto);
+		return result;
+	}
+	//내가 팔로우하는 업무 - 진행중인 업무
+	public int getTaskFollow_ingU(Task_DTO dto) throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		int result = dao.getTaskFollow_ingU(dto);
+		return result;
+	}
+	
+	
+	
+/* DONUTCHART (ALL)	*/
 	
 	//나에게 배정된 업무 - 완료된 업무
 	public int getTaskMe_comp(Task_DTO dto) throws ClassNotFoundException, SQLException{
@@ -126,7 +208,7 @@ public class AnalysisService {
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
 		int result = dao.getTaskFollow_ing(dto);
 		return result;
-	}
+	}	
 	
 	
 	
@@ -140,6 +222,7 @@ public class AnalysisService {
 		
 		
 		
+/* BARCHART (ALL)	*/	
 	
 	//전체 업무 - 완료된 업무
 	public List<Task_DTO> getTaskAllFlow_comp() throws ClassNotFoundException, SQLException{
@@ -156,10 +239,7 @@ public class AnalysisService {
 		List<Task_DTO> result = dao.getTaskAllFlow_comp_count();
 		return result;
 	}
-	
-	
-	
-	
+		
 	//전체 업무 - 마감일 지난 업무 개수
 	public List<Task_DTO> getTaskAllFlow_enddateLate_count() throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
@@ -179,18 +259,43 @@ public class AnalysisService {
 		return result;
 	}
 	
-	//리스트 - 유저 아이디
-	/*public List<Users_DTO> getMemberListMe(Task_DTO dto) throws ClassNotFoundException, SQLException{
-		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Users_DTO> result = dao.getMemberListMe(dto);
-		return result;
-	}*/
+/* BARCHART (CHART)	*/	
 	
-	//전체업무 흐름 - 업무 이름
-	/*public String getTaskAllFlow_taskName(Task_DTO dto) throws ClassNotFoundException, SQLException{
+	//전체 업무 - 완료된 업무
+	public List<Task_DTO> getTaskAllFlow_compU() throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		String result = dao.getTaskAllFlow_taskName(dto);
+		List<Task_DTO> result = dao.getTaskAllFlow_compU();
 		return result;
-	}*/
+	}
+	
+	
+	
+	//전체업무 = 완료된 업무 개수
+	public List<Task_DTO> getTaskAllFlow_comp_countU() throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		List<Task_DTO> result = dao.getTaskAllFlow_comp_countU();
+		return result;
+	}
+		
+	//전체 업무 - 마감일 지난 업무 개수
+	public List<Task_DTO> getTaskAllFlow_enddateLate_countU() throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		List<Task_DTO> result = dao.getTaskAllFlow_enddateLate_countU();
+		return result;
+	}
+	//전체 업무 - 마감일 없는 업무 개수
+	public List<Task_DTO> getTaskAllFlow_enddateNo_countU() throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		List<Task_DTO> result = dao.getTaskAllFlow_enddateNo_countU();
+		return result;
+	}
+	//전체 업무 - 진행중인 업무 개수
+	public List<Task_DTO> getTaskAllFlow_ing_countU() throws ClassNotFoundException, SQLException{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		List<Task_DTO> result = dao.getTaskAllFlow_ing_countU();
+		return result;
+	}
+	
+
 	
 }

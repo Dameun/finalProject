@@ -115,6 +115,7 @@ public class AjaxViewController {
 	
 
 	//======================================================================================================================
+/* CHART(ALL) */	
 	//DATA 
 	@Autowired
 	private AnalysisService analysisService;
@@ -223,6 +224,132 @@ public class AjaxViewController {
 		getTaskAllFlow_enddateNo_count = analysisService.getTaskAllFlow_enddateNo_count();
 		getTaskAllFlow_ing_count = analysisService.getTaskAllFlow_ing_count();
 	}
+	
+/* CHART(USER) */
+	
+
+	int getTaskMe_compU;
+	int getTaskMe_enddateLateU;
+	int getTaskMe_enddateNoU;
+	int getTaskMe_ingU;
+	//나에게 배정된 도넛차트_02
+	int getTaskI_compU;
+	int getTaskI_enddateLateU;
+	int getTaskI_enddateNoU;
+	int getTaskI_ingU;
+	//나에게 배정된 도넛차트_03
+	int getTaskFollow_compU;
+	int getTaskFollow_enddateLateU;
+	int getTaskFollow_enddateNoU;
+	int getTaskFollow_ingU;
+	//바차트
+	List<Task_DTO> getTaskAllFlow_compU = new ArrayList<Task_DTO>();
+	List<Task_DTO> getTaskAllFlow_comp_countU ;
+	List<Task_DTO> getTaskAllFlow_enddateLate_countU = new ArrayList<Task_DTO>();
+	List<Task_DTO> getTaskAllFlow_enddateNo_countU = new ArrayList<Task_DTO>();
+	List<Task_DTO> getTaskAllFlow_ing_countU = new ArrayList<Task_DTO>();	
+	
+	@RequestMapping(value="/analysisU.ajax", method=RequestMethod.GET)
+	public String analysisU(Model model) throws ClassNotFoundException, SQLException
+	{	
+		
+		String user_id = DataController.getInstance().GetUser().getUser_id(); 
+		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		System.out.println("!! @@ user_id @@ !!"+ user_id);
+		Task_DTO dto = new Task_DTO();
+		Users_DTO dto2 = new Users_DTO();
+		
+		dto.setUser_id(user_id);
+		dto.setProject_id(project_id);
+		
+		donutChartU_01(user_id);
+		donutChartU_02(user_id);
+		donutChartU_03(user_id);
+		barChartU();
+		
+		model.addAttribute("getTaskMe_compU", getTaskMe_compU);
+		model.addAttribute("getTaskMe_enddateLateU", getTaskMe_enddateLateU);
+		model.addAttribute("getTaskMe_enddateNoU", getTaskMe_enddateNoU);
+		model.addAttribute("getTaskMe_ingU", getTaskMe_ingU);
+		
+		model.addAttribute("getTaskI_compU", getTaskI_compU);
+		model.addAttribute("getTaskI_enddateLateU", getTaskI_enddateLateU);
+		model.addAttribute("getTaskI_enddateNoU", getTaskI_enddateNoU);
+		model.addAttribute("getTaskI_ingU", getTaskI_ingU);
+		
+		model.addAttribute("getTaskFollow_compU", getTaskFollow_compU);
+		model.addAttribute("getTaskFollow_enddateLateU", getTaskFollow_enddateLateU);
+		model.addAttribute("getTaskFollow_enddateNoU", getTaskFollow_enddateNoU);
+		model.addAttribute("getTaskFollow_ingU", getTaskFollow_ingU);
+		
+		model.addAttribute("getTaskAllFlow_compU", getTaskAllFlow_compU );
+		model.addAttribute("getTaskAllFlow_comp_countU", getTaskAllFlow_comp_countU);
+		model.addAttribute("getTaskAllFlow_enddateLate_countU", getTaskAllFlow_enddateLate_countU);
+		model.addAttribute("getTaskAllFlow_enddateNo_countU", getTaskAllFlow_enddateNo_countU);
+		model.addAttribute("getTaskAllFlow_ing_countU", getTaskAllFlow_ing_countU);
+		
+		
+		
+		return DataController.getInstance().GetviewPath("analysis")+"analysis2.jsp";
+	}	
+	
+	private void donutChartU_01(String user_id) throws ClassNotFoundException, SQLException
+	{
+		Task_DTO dto = new Task_DTO();
+		dto.setUser_id(user_id);
+ 		
+		getTaskMe_compU = analysisService.getTaskMe_compU(dto);
+	    getTaskMe_enddateLateU = analysisService.getTaskMe_enddateLateU(dto);
+		getTaskMe_enddateNoU = analysisService.getTaskMe_enddateNoU(dto);
+		getTaskMe_ingU = analysisService.getTaskMe_ingU(dto);
+		
+	}
+	
+	private void donutChartU_02(String user_id) throws ClassNotFoundException, SQLException
+	{
+		Task_DTO dto = new Task_DTO();
+		dto.setUser_id(user_id);
+	
+		 getTaskI_compU = analysisService.getTaskI_compU(dto);
+		 getTaskI_enddateLateU = analysisService.getTaskI_enddateLateU(dto);
+		 getTaskI_enddateNoU = analysisService.getTaskI_enddateNoU(dto);
+		 getTaskI_ingU = analysisService.getTaskI_ingU(dto);		 
+	}
+	
+	
+	private void donutChartU_03(String user_id) throws ClassNotFoundException, SQLException
+	{
+		 Task_DTO dto = new Task_DTO();
+		 dto.setUser_id(user_id);
+		 
+		 
+		 getTaskFollow_compU = analysisService.getTaskFollow_compU(dto);
+		 getTaskFollow_enddateLateU = analysisService.getTaskFollow_enddateLateU(dto);
+		 getTaskFollow_enddateNoU = analysisService.getTaskFollow_enddateNoU(dto);
+		 getTaskFollow_ingU = analysisService.getTaskFollow_ingU(dto);
+		 
+	}
+
+	
+	private void barChartU()throws ClassNotFoundException, SQLException
+	{
+		
+		getTaskAllFlow_compU = analysisService.getTaskAllFlow_compU();
+		getTaskAllFlow_comp_countU = analysisService.getTaskAllFlow_comp_countU();
+		
+		getTaskAllFlow_enddateLate_countU = analysisService.getTaskAllFlow_enddateLate_countU();
+		getTaskAllFlow_enddateNo_countU = analysisService.getTaskAllFlow_enddateNo_countU();
+		getTaskAllFlow_ing_countU = analysisService.getTaskAllFlow_ing_countU();		
+		
+	}
+	
+	
+	///////////////////////////
+	
+	
+	
+	
+
 	
 	@RequestMapping(value = "/template.ajax", method = RequestMethod.GET)
 	public String template() {

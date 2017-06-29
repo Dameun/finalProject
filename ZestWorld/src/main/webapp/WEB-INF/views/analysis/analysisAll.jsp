@@ -298,9 +298,9 @@
     	</div>
 	</div>&nbsp -->
 	
-	<!-- <b style="font-size:18px" >업무추가 </b> <br><br>
+	<b style="font-size:18px" >WorkSpace All Chart</b> <br><br>
 	
-	<table class="columns">
+<!-- 	<table class="columns">
 		<tr>
 			<td><p>시작일 <input type="text" id="datepicker"></p></td>
 			<td><p>마감일 <input type="text" id="datepicker2"></p></td>
