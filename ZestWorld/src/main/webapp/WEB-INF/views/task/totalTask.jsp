@@ -275,7 +275,7 @@ function detailModalView(view,project_id){
 	 		
 	 		$.each(data.assignmember,function(index,value){
 					console.log(index + "/" + value.user_id);
-					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					strlist+="<input type='checkbox' value='"+value+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value+ "<br>";
 					/* "+value.user_id+" */
 					
 					
