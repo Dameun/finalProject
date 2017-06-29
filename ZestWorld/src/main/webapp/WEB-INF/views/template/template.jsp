@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<%-- <!-- jQuery import -->
+<!-- jQuery import -->
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- jQuery Form Plugin import -->
 <script src="<%=request.getContextPath() %>/resources/js/jquery.form.min.js"></script>
 <!-- jQuery MultiFile Plugin import -->
-<script src="<%=request.getContextPath() %>/resources/js/jQuery.MultiFile.min.js"></script> --%>
+<script src="<%=request.getContextPath() %>/resources/js/jQuery.MultiFile.min.js"></script>
 <script type="text/javascript">
 
 	
@@ -42,9 +43,9 @@
 	    });
 	 
 	  
-} */
+}  */
 
-/* $(document).ready(function(){
+ $(document).ready(function(){
     
     //use jQuery MultiFile Plugin 
     $('#multiform input[name=file]').MultiFile({
@@ -63,18 +64,25 @@
         },
         list:"#afile3-list" //파일목록을 출력할 요소 지정가능
     });
-}); */
+}); 
+
+
+
+
+
 
 /*jQuery form 플러그인을 사용하여 폼데이터를 ajax로 전송*/
 
-/* var downGroupCnt =0; //다운로드그룹 개수카운트
+var downGroupCnt =0; //다운로드그룹 개수카운트
 
 $(function(){
     
 	//폼전송 : 해당폼의 submit 이벤트가 발생했을경우 실행  
     $('#multiform').ajaxForm({
        cache: false,
-       dataType:"json",
+       url : "templateUpload.htm",
+       dataType:"html",
+
        //보내기전 validation check가 필요할경우
        beforeSubmit: function (data, frm, opt) {
 	       //console.log(data);
@@ -100,9 +108,9 @@ $(function(){
 //전달받은 정보를 가지고 화면에 보기 좋게 출력
 function output(data) {
 	//업로드한 파일을 다운로드할수있도록 화면 구성
-	$("#result").append("<h3>("+(++downGroupCnt)+") 다운로드</h3>");
-    $("#result").append("제목:"+data.title+"<br/>");
-    $("#result").append("설명:"+data.description+"<br/>");
+	$("#uploadTable").append("<h3>("+(++downGroupCnt)+") 다운로드</h3>");
+    $("#uploadTable").append("제목:"+data.title+"<br/>");
+    $("#uploadTable").append("설명:"+data.description+"<br/>");
   
     if(data.file && data.file.length != 0){
         $("#result").append("파일:<br/>");           
@@ -117,7 +125,7 @@ function output(data) {
     //$('#multiform').resetForm(); //(jQuery.Form 플러그인 메서드)
     //$('#multiform').clearForm(); //(jQuery.Form 플러그인 메서드)  
     $('#multiform input:file').MultiFile('reset'); //멀티파일 초기화        
-} */
+} 
 	
 </script>
 
@@ -153,58 +161,6 @@ function output(data) {
     	
 	</div>
 	
-	
-	
-	
-	
-	
-	
-	
-	<!-- 
-	<table>
-
-   		
-		<tr  class="row" >
-			<td class="col-md-1"></td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-2">a</td>
-    	</tr>   
-   
-    	<tr  class="row" >
-    		<td class="col-md-1"></td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-2">a</td>
-    	</tr>
-    	
-    	<tr  class="row" >
-          	<td class="col-md-1"></td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-2">a</td>
-    	</tr>
-    	
-    	<tr  class="row" >
-    		<td class="col-md-1"></td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-2">a</td>
-    	</tr>
-    	
-    	<tr  class="row" >
-    		<td class="col-md-1"></td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-3">a</td>
-    		<td class="col-md-2">a</td>
-    	</tr>
-    	
-	</table> -->
 	
 	 <div class="col-md-12" style="background-color:black">
 	
@@ -285,160 +241,10 @@ function output(data) {
                                 </td>
                                 
                                 
-                                
-                                <!-- <td class="width-150">
-                                    <div class="progress progress-sm mt-xs js-progress-animate">
-                                    	<div class="progress-bar progress-bar-success" data-width="35%" style="width: 35%;"></div>
-                                    </div>
-                                </td> -->
+
                                 
                             </tr>
-                            
-                            
-                            <!-- <tr>
-                                <td class="hidden-xs">2</td>
-                                <td>
-                                    <img class="img-rounded" src="demo/img/pictures/2.jpg" alt="" height="50">
-                                </td>
-                                <td>
-                                    The Sky
-                                </td>
-                                <td class="hidden-xs">
-                                    <p class="no-margin">
-                                        <small>
-                                            <span class="fw-semi-bold">Type:</span>
-                                            <span class="text-semi-muted">&nbsp; PSD</span>
-                                        </small>
-                                    </p>
-                                    <p>
-                                        <small>
-                                            <span class="fw-semi-bold">Dimensions:</span>
-                                            <span class="text-semi-muted">&nbsp; 2400x1455</span>
-                                        </small>
-                                    </p>
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    November 14, 2012
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    15.3 MB
-                                </td>
-                                <td class="width-150">
-                                    <div class="progress progress-sm mt-xs js-progress-animate">
-                                        <div class="progress-bar progress-bar-warning" data-width="33%" style="width: 33%;"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            
-                            
-                            <tr>
-                                <td class="hidden-xs">3</td>
-                                <td>
-                                    <img class="img-rounded" src="demo/img/pictures/3.jpg" alt="" height="50">
-                                </td>
-                                <td>
-                                    Down the road
-                                    <br>
-                                    
-                                </td>
-                                <td class="hidden-xs">
-                                    <p class="no-margin">
-                                        <small>
-                                            <span class="fw-semi-bold">Type:</span>
-                                            <span class="text-semi-muted">&nbsp; JPEG</span>
-                                        </small>
-                                    </p>
-                                    <p>
-                                        <small>
-                                            <span class="fw-semi-bold">Dimensions:</span>
-                                            <span class="text-semi-muted">&nbsp; 200x150</span>
-                                        </small>
-                                    </p>
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    September 14, 2012
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    49.0 KB
-                                </td>
-                                <td class="width-150">
-                                    <div class="progress progress-sm mt-xs js-progress-animate">
-                                        <div class="progress-bar progress-bar-gray" data-width="38%" style="width: 38%;"></div>
-                                    </div>
-                                </td>
-                                
-                                
-                            </tr>
-                            <tr>
-                                <td class="hidden-xs">4</td>
-                                <td>
-                                    <img class="img-rounded" src="demo/img/pictures/4.jpg" alt="" height="50">
-                                </td>
-                                <td>
-                                    The Edge
-                                </td>
-                                <td class="hidden-xs">
-                                    <p class="no-margin">
-                                        <small>
-                                            <span class="fw-semi-bold">Type:</span>
-                                            <span class="text-semi-muted">&nbsp; PNG</span>
-                                        </small>
-                                    </p>
-                                    <p>
-                                        <small>
-                                            <span class="fw-semi-bold">Dimensions:</span>
-                                            <span class="text-semi-muted">&nbsp; 210x160</span>
-                                        </small>
-                                    </p>
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    September 15, 2012
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    69.1 KB
-                                </td>
-                                <td class="width-150">
-                                    <div class="progress progress-sm mt-xs js-progress-animate">
-                                        <div class="progress-bar progress-bar-danger" data-width="17%" style="width: 17%;"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            
-                            
-                            <tr>
-                                <td class="hidden-xs">5</td>
-                                <td>
-                                    <img class="img-rounded" src="demo/img/pictures/11.jpg" alt="" height="50">
-                                </td>
-                                <td>
-                                    Fortress
-                                </td>
-                                <td class="hidden-xs">
-                                    <p class="no-margin">
-                                        <small>
-                                            <span class="fw-semi-bold">Type:</span>
-                                            <span class="text-semi-muted">&nbsp; JPEG</span>
-                                        </small>
-                                    </p>
-                                    <p>
-                                        <small>
-                                            <span class="fw-semi-bold">Dimensions:</span>
-                                            <span class="text-semi-muted">&nbsp; 1452x1320</span>
-                                        </small>
-                                    </p>
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    October 1, 2012
-                                </td>
-                                <td class="hidden-xs text-semi-muted">
-                                    2.3 MB
-                                </td>
-                                <td class="width-150">
-                                    <div class="progress progress-sm mt-xs js-progress-animate">
-                                        <div class="progress-bar" data-width="41%" style="width: 41%;"></div>
-                                    </div>
-                                </td>
-                            </tr> -->
+
                             
                             
                             </tbody>
@@ -480,15 +286,24 @@ function output(data) {
 	          
 	        	</div>
 	        
-	        <form action="" method="post" enctype="multipart/form-data">
-	        	<div class="modal-body"  id="uploadFile">
+	        <form action="<%=request.getContextPath() %>/templateUpload.htm" id="multiform" method="post" enctype="multipart/form-data"0>
+	        
+	        	title: <input type="text" name="title"  value=""/> <br/>
+				description: <input type="text" name="description"  value=""/> <br/>
+
+				<!-- 다중 파일업로드  -->
+				file : <input type="file" class="afile3"  name="file" /> <br/>
+				<button type="submit" id="btnSubmit" class="glyphicon glyphicon-upload" value="업로드"/><br/>
+			</form>
+	        	<!-- <div class="modal-body"  id="uploadFile">
 	    	    	 <div class="form-group row">
                         	<label class="control-label col-sm-4" for="number">
                                 	제목
                             </label>
                         	<div class="col-sm-8">
                         		<input rows="3" class="autogrow form-control transition-height" id="title"
-                             	                     placeholder="제목을 입력하시오."></input>
+                             	                     placeholder="제목을 입력하시오.">
+                             	</input>
                         	</div>
                         </div>
                         <div class="form-group row">
@@ -496,18 +311,18 @@ function output(data) {
                                 	파일첨부
                             </label>
                             <div class="col-sm-4">
-                                <input type="file" id="filesrc" name="files[0]" class="form-control">
+                                <input type="file" id="filesrc" name="file" class="form-control">
                             </div>
                             <div class="col-sm-4">
-                                <input type="file" id="filesrc2" name="files[1]" class="form-control">
+                                <input type="file" id="filesrc2" name="file" class="form-control">
                             </div>
                             <div class="col-sm-4">
                             	&nbsp;&nbsp;&nbsp;
-                                <button type="button" id="detailStart" name="detailStart" class="glyphicon glyphicon-upload">
+                                <button type="submit" id="detailStart" name="detailStart" class="glyphicon glyphicon-upload">
                             </div>
-                        </div>
+                        </div> -->
                         
-                        <%-- <form name="multiform" id="multiform" action="<%=request.getContextPath() %>/fileUpload1"
+                        <%-- <<form name="multiform" id="multiform" action="<%=request.getContextPath() %>/fileUpload1"
                                       method="POST" enctype="multipart/form-data">
 	
 										title: <input type="text" name="title"  value=""/> <br/>
@@ -519,13 +334,14 @@ function output(data) {
 						</form> --%>
                         
 	        	</div>
-	        </form>
+	       
 	        
-	        <div class="modal-footer">
-	          <button type="submit" class="btn btn-default" data-dismiss="modal" id ="upload" onclick="templateUpload.htm">확인</button>
-	          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="button22();">취소</button>
+	        	<!-- <div class="modal-footer">
+	         	 <button type="submit" class="btn btn-default" data-dismiss="modal" id ="upload" onclick="" >확인</button>
+	         	 <button type="button" class="btn btn-default" data-dismiss="modal" onclick="button22();">취소</button>
 	          
-	        </div>
+	        	</div> -->
+	        </form> 
 	        
 	       </div>
 	    </div>
