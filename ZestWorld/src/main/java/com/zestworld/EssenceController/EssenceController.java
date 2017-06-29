@@ -74,7 +74,7 @@ public class EssenceController {
 	//마일스톤 및 카테고리 선택 화면 구성
 	@RequestMapping(value="CreateEssenceData.ajax", method=RequestMethod.GET)
 	public View CreateEssence ( Model model) {
-
+		
 		EssenceDefine_DTO define_dto = new EssenceDefine_DTO();
 		
 		define_dto.setTitle(cateStrList[0]);

@@ -6,7 +6,7 @@ var wsocket;
 var msg 
 function connect() {
 
-	wsocket = new WebSocket("ws://192.168.0.191:8081/main/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.0.131:8081/main/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -21,6 +21,7 @@ function onOpen(evt) {
 }
 
 function onMessage(evt) {
+	console.log("onMessage:"+evt.data);
 	$.ajax({
 		  type:"post",
 		  dataType: "html",
@@ -44,7 +45,6 @@ function send(alarmType, taskTitle, selectId , writerId) {
 
 	var alarmMsg = alarmType+'/'+ taskTitle +'/'+selectId + '/' + writerId;
 	console.log("메세지 받을 사람들:"+selectId);
-	
 	wsocket.send(alarmMsg);
 	
 }

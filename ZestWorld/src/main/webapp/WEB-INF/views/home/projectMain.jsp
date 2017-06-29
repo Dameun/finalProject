@@ -36,7 +36,7 @@ function projectEditModalView(project_id,p_title,explain)
 
 function projectUpdate()
 {
-	alert('project_id'+edit_project_id);
+
 	var editTitle = $('#modalDetailTitle').val();
 	var editExplain = $('#modalDetailExplain').val();
 

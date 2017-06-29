@@ -146,13 +146,13 @@
                         </section>
                     </div>
                 </li>
-          
                 <li  style="padding-top:5px;">
-                    <a href="#">
+                    <a href="workSpace.htm">
                         <i class="fa fa-globe fa-lg"></i>
                     <i class="chat-notification-sing animated bounceIn"></i></a>
                    
                 </li>
+           
                 <li style="padding-top:5px;">
      				<a href="javascript:popupOpen();" >
             			<i class="fa fa-reddit fa-lg">

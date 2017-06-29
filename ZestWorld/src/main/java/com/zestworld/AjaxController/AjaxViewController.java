@@ -356,11 +356,11 @@ public class AjaxViewController {
 		return DataController.getInstance().GetviewPath("template") + "template.jsp";
 	}
 
+
 	@RequestMapping(value = "/projectMain.ajax", method = RequestMethod.GET)
 	public String projectMain(Model model) {
 		List<Project_DTO> projectList = DataController.getInstance().GetProjectList();
-		
-		
+		List<Project_DTO> projectUserList = new ArrayList<Project_DTO>();
 		int projectid =0;
 		IProjectDAO projectDao = sqlsession.getMapper(IProjectDAO.class);
 		
@@ -370,11 +370,32 @@ public class AjaxViewController {
 			projectid = projectList.get(i).getProject_id();
 			projectList.get(i).setProjectMember(projectDao.projectMemberList(projectid));
 		}
-
-		model.addAttribute("projectList", projectList);
+		
+		int memberCheck = 0;
+		for( int j=0; j <projectList.size(); j++ )
+		{
+			List<Project_user_DTO> projectmemberList  = projectList.get(j).getProjectMember();
+			for( int k=0; k<projectmemberList.size(); k++)
+			{
+				Project_user_DTO user = projectmemberList.get(k);
+				if( user.getUser_id().equals(DataController.getInstance().GetUser().getUser_id()))
+				{
+					memberCheck++;
+				}
+			}
+			
+			if(memberCheck>0)
+			{
+				projectUserList.add( projectList.get(j) );
+			}
+			memberCheck = 0;
+		}
+		
+		model.addAttribute("projectList",  projectUserList);
 		return DataController.getInstance().GetviewPath("home") + "projectMain.jsp";
 	}
-
+	
+	
 	@RequestMapping(value = "/totalTask.ajax", method = RequestMethod.GET)
 	public String totalTask(Model model) throws ClassNotFoundException, SQLException {
 		// List<Project_DTO> projectlist= service.projectlist();

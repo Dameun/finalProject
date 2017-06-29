@@ -43,9 +43,12 @@ $(document).ready(function(){
 	$.ajax({
 		type : 'get',
 		url : "CreateEssenceData.ajax",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",  
 		success : function(data) {
 			var str= "";
+		
 			milestoneListView = data.milestoneList;
+			alert(milestoneListView[0]);
 	 		$.each(data.milestoneList,function(index,value)
 	 		{
 	 				str += "<button type='button' class='btn btn-warning btn-block' onclick='milestoneClick("+ index + ")''>"+ value +"</button>";

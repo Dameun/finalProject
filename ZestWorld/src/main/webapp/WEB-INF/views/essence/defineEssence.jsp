@@ -79,6 +79,7 @@ $(document).ready(function(){
 	$.ajax({
 		type : 'get',
 		url : "CreateEssenceData.ajax",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",  
 		success : function(data) 
 		{
 			var str= "";

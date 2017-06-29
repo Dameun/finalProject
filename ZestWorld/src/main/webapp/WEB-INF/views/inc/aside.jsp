@@ -75,14 +75,7 @@
                     </sup> -->
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="location.href='chat.htm'">
-                    <span class="icon">
-                        <i class="glyphicon glyphicon-comment" style="padding-top:5px;"></i>
-                    </span>
-                    Chat
-                </a>
-            </li>
+            
             <li>
                 <a href="#" onclick="ajaxView('template.ajax')">
                     <span class="icon">
