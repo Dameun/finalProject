@@ -177,7 +177,7 @@ public class AjaxViewController {
 		model.addAttribute("getTaskAllFlow_enddateNo_count", getTaskAllFlow_enddateNo_count);
 		model.addAttribute("getTaskAllFlow_ing_count", getTaskAllFlow_ing_count);
 		
-		return DataController.getInstance().GetviewPath("analysis")+"analysis.jsp";
+		return DataController.getInstance().GetviewPath("analysis")+"analysisAll.jsp";
 	}	
 	
 	private void donutChart_01(String user_id) throws ClassNotFoundException, SQLException
