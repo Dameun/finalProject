@@ -9,8 +9,7 @@
 
 <c:forEach items="${list}" var="n" varStatus="status">
 	
-	
-<div class="task-section" style="margin-left: 45px;float:left;width:330px;height:500px;display:inline-block">
+<div class="task-section" style="padding-right:40px;float:left; height:400px">
 <div class="tasklist">
 	<div class="membername" id="membername_${n.category_id}" style="padding-top: 15px;padding-left:10px;color: #fff;">${n.title}
 	<input type="hidden" class="cateValue" value="${n.category_id}">
@@ -49,7 +48,7 @@
 </div>
 <c:forEach items="${list2}" var="j" varStatus="status">	
 	<c:if test="${n.category_id eq j.category_id && j.success_f == 0 }">
-	<div class="task-content" id="taskTitle">
+	<div class="task-content" id="taskTitle" style="float:left">
 		<div class="task-content-check">
 			<input type="checkbox" class="chkSuccess" value="${j.task_id}">
 		</div>

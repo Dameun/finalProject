@@ -16,7 +16,7 @@
      
      <div class="content-wrap">
    
-     <main id="content" class="content" role="main">
+     <main id="content" class="content" role="main" style="overflow-x:scroll">
    
 	
 

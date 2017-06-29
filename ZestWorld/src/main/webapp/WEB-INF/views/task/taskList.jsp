@@ -27,8 +27,8 @@ var detailExplain='';
 var clickTask='';
 
 var detailpid='';
-	$(function(){
 
+	$(function(){
 	
 		//리스트 비동기로 뿌리는 ajax부분
 		$.ajax({
@@ -36,8 +36,8 @@ var detailpid='';
 			url:"taskLists.htm",
 			dataType:'html',
 			success:function(data){
-				console.log("리스트뿌리기 성공?");
-			$("#View").append(data); 		
+			console.log("리스트뿌리기 성공?");
+			$("#View").append(data); 
 			},
 			error:function(){
 				alert('Error while request..');
@@ -247,7 +247,7 @@ function detailModalView(view,project_id){
 		    });
 	 	
 		    
-		    $.ajax({
+	    $.ajax({
 			       type : "get",
 			       url : "detailAssign.htm?task_id="+view+"&project_id="+project_id,
 			       success : function(data2) {
@@ -259,6 +259,7 @@ function detailModalView(view,project_id){
 			       }	
 			    });
 		
+	    
 	 	$.ajax({
 		       type : "get",
 		       url : "detailtaskModalCheckList.htm?task_id="+view,
@@ -269,6 +270,7 @@ function detailModalView(view,project_id){
 		          alert('Error while request..');
 		       }
 		    });
+
 	 	
 	 	$.ajax({
 		    type : "get",
@@ -408,13 +410,14 @@ function detailModalView(view,project_id){
 		    url : "taskMemberListCheck1.htm?project_id="+detailpid,
 		    success : function(data) {
 		 		console.log("data:    " + data);
-		 		
+			
 		 		$.each(data.assignmember,function(index,value){
 						console.log(index + "/" + value.user_id);
 						strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
 						/* "+value.user_id+" */
 						
 				});
+		 		
 		 		var htm="<form name='memberChk'>"+strlist+"</form>";
 		 		$("#wMemberList").append($('#wMemberList').html(htm));
 		    },
@@ -496,23 +499,29 @@ function detailModalView(view,project_id){
 	}
 	
 	function cateUpdate(){
-		
-		
 		$.ajax({
 			type : "post",
 			url : "cateUpdate.htm",
 			cache : false,
 			data : 'category_id='+$("#categoryTitle option:selected").val()+'&changeTitle='+$("#changeTitle").val(),
-			success : function(data){	
+			success : function(data){
+				console.log(data);
+			
 				$("#cateTitle_Update").hide();
 				$('#changeTitle').val('');
+				$('select').val('0');
 				$('.modal-backdrop').remove();
-								
+				//$("#categoryTitle").empty();
+				//$("#categoryTitle").append("<option selected>선택하기</option>");
+				
+				/* 
+				$("#categoryTitle").empty();
+				$("#categoryTitle").append("<option selected>선택하기</option><c:forEach items='${list}' var='n'><option value='${n.category_id}'>${n.title}</option></c:forEach>");
+				 */
+				 
 				$("#View").empty();
 				$("#View").append(data); 
-		
-				
-       		
+				//location.reload();
 			},
 			error : function() {
 				alert('Error while request..');
@@ -537,9 +546,13 @@ function detailModalView(view,project_id){
 	<div class="col-md-5"></div>
 </div> -->
 
+<div class="row ">
+<div class="col-md-12" align="center">
+<button class="btn btn-inverse width-100 mb-xs" role="button" id="taskChart" onclick="ajaxView('analysisU.ajax')">차트</button>
 
-
-			
+<button class="btn btn-inverse width-100 mb-xs" role="button" id="file">파일</button>
+</div>
+</div>
 
 <div class="row ">
 	<div class="col-md-1">
@@ -584,10 +597,11 @@ function detailModalView(view,project_id){
                                                    
                                            			
                                            			<select id="categoryTitle">
-                                           		<%-- 	<option selected>선택하기</option>
+                                           			<option value="0" selected>선택하기</option>
 														<c:forEach items="${list}" var="n">
 						 								<option value="${n.category_id}">${n.title}</option>		
-														</c:forEach> --%>
+														</c:forEach> 
+											
     		        								</select>
                                                     </div>
                                                 </div>
@@ -867,7 +881,7 @@ function detailModalView(view,project_id){
  
 
 
-<div id="View">
+<div id="View" style="white-space:nowrap;width:100000px">
 
 </div>
 
