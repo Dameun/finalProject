@@ -249,7 +249,7 @@
 	<select id="getTaskAllFlow_compU" resultType="com.zestworld.Table_DTO.Task_DTO" >
 		select c.title , count( success_f )
 		from category c inner join task t
-		on c. project_id = t.ptoject_id
+		on c. project_id = t.project_id
 		where t.success_f = 1 
 		group by c.title
 		
