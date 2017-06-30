@@ -227,7 +227,7 @@ public class JoinController {
 			HttpServletRequest request, Model model, Mail_DTO mail, @RequestParam String userid) throws Exception {
 
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
-		String wid = DataController.getInstance().GetUser().getUser_id();
+		
 		Users_DTO user = new Users_DTO();
 		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
 
@@ -235,7 +235,7 @@ public class JoinController {
 
 		mail.setMailFrom("rorkxso@gmail.com");// 보내는 사람
 		mail.setMailTo(userid);// 입력시 가는놈
-		mail.setMailSubject(id + "ZESTWORLD 초대 이메일입니다.");
+		mail.setMailSubject(id+"님이" + "ZESTWORLD와 함께하길 원합니다.");
 
 		sendMail(mail);
 
@@ -247,6 +247,7 @@ public class JoinController {
 
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
+		String wid = DataController.getInstance().GetUser().getUser_id();
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true,"utf-8");
 		
@@ -255,9 +256,10 @@ public class JoinController {
 		helper.setSubject(mail.getMailSubject());
 
 		Template template = velocityEngine.getTemplate("val/val.vm");
-
+		
 		VelocityContext velocityContext = new VelocityContext();
 		velocityContext.put("path", path2);
+		velocityContext.put("id", wid);
 		StringWriter stringWriter = new StringWriter();
 		template.merge(velocityContext, stringWriter);
 		helper.setText(stringWriter.toString(),true);
