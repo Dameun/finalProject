@@ -228,9 +228,11 @@ public class EssenceController {
 				task.setUser_id(DataController.getInstance().GetUser().getUser_id());
 				task.setProject_id(project_id);
 				task.setWorkspace_id(DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
+				task.setEssence("1");
 				essenceService.tasktitleInsert(task);
 				int taskID = essenceService.getTask(task);
 				CheckList_DTO dto;
+				
 				for( int k=0; k<cheakList.length; k++)
 				{
 					dto= new CheckList_DTO();

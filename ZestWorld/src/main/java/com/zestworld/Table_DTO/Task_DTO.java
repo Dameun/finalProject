@@ -21,12 +21,7 @@ public class Task_DTO
 	private String projectname;
 	
 	private String essence;
-	public String getEssence() {
-		return essence;
-	}
-	public void setEssence(String essence) {
-		this.essence = essence;
-	}
+	
 	private String filterDay;
 	private String order;
 	private String endrolldate;
@@ -157,4 +152,10 @@ public class Task_DTO
 		this.paging = paging;
 	}
 	
+	public String getEssence() {
+		return essence;
+	}
+	public void setEssence(String essence) {
+		this.essence = essence;
+	}
 }
