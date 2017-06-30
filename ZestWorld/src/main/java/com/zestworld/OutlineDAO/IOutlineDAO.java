@@ -10,7 +10,13 @@ import com.zestworld.Table_DTO.TaskAssignMember_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
-
+/*
+* @FileName : IOutline.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 28.
+* @Author : 최담은
+* @Desc : 전체개요(리스트,필터,상세정보 수정)
+*/
 public interface IOutlineDAO {
 	
 	//task 테이블에 아무것도 없을 경우(전체 리스트)

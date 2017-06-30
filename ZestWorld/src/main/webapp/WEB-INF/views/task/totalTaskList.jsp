@@ -1,3 +1,11 @@
+<%--
+	@Project : ZestWorld
+	@File name : totalTaskList.jsp
+	@Author : 최담은
+	@Data : 2017.07.01
+	@Desc : 전체개요 -> 리스트출력
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,59 +21,30 @@
    
 	<c:forEach items="${list}" var="n">
 		<div id="totalTaskajax" >
-			<div class="articlesteam" >
-			
-						   		<!-- <h2>팀원 모집</h2> -->
+			<div class="articlesteam" >		  
 				<ol class="group">
-						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id});""location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
-						<%-- <li class="comment" data-toggle="modal" data-target="#detailModal" onclick= "location.href='detailModal.htm?task_id='+${n.task_id}"> --%>
-						<li style="list-style-type: none" class="comment" >
-						<%-- <p class="text">
-						&nbsp ${n.title}</p>
-						<!-- <input type="checkbox" value="dd" >&nbsp ${n.title}</p> -->
-						<div>
-							    <time>${n.p_title} > ${n.user_id}</time>
-							    <a class="remove" >마감일  : ${n.end_date }</a>
-							    <hr>
-						</div> --%>
-						
-						
-						
-						
-						<section class="event">
-                        <span class="thumb-sm avatar pull-left mr-sm">
-                            <input type="checkbox" 
-			<c:if test="${n.success_f eq 1}">
-	             checked= "checked"
-	             onclick="changeSuccessF_zero(${n.task_id});"
-	        </c:if> 
-	        <c:if test="${n.success_f eq 0}">
-	            onclick="changeSuccessF(${n.task_id});"
-	        </c:if>
-	        
-			<%-- <c:choose>
-			    <c:when test="${n.success_f eq 1}">
-			        checked= "checked"
-	             	onclick="changeSuccessF(${n.task_id});"
-			    </c:when>
-			    <c:when test="${n.success_f eq 0}">
-			        onclick="changeSuccessF_zero(${n.task_id});"
-			    </c:when>
-			</c:choose> --%>
-	        >
-                        </span>
-                        <h4 class="event-heading" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id},${n.project_id});"><a href="#">${n.title}</a> <small><a href="#">마감일: ${n.end_date}</a></small></h4>
-                        <p class="fs-sm text-muted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        		follower > ${n.user_id}</p>
-                        <p class="fs-mini">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                           ${n.explain}
-                        </p>
-                        <br>
-                    </section>
-						
-						
-						
-						</li>
+					<li style="list-style-type: none">
+							<section class="event">
+		                        <span class="thumb-sm avatar pull-left mr-sm">
+		                            <input type="checkbox" 
+											<c:if test="${n.success_f eq 1}">
+									             checked= "checked"
+									             onclick="modalSuccessUpdateDialog(${n.task_id});"
+									        </c:if> 
+									        <c:if test="${n.success_f eq 0}">
+									            onclick="changeSuccessF(${n.task_id});"
+									        </c:if>
+								>
+		                        </span>
+		                        <h4 class="event-heading" data-toggle="modal" data-target="#detailModal" onclick= "detailModalView(${n.task_id},${n.project_id});"><a href="#">${n.title}</a> <small><a href="#">마감일: ${n.end_date}</a></small></h4>
+		                        <p class="fs-sm text-muted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                        		follower > ${n.user_id}</p>
+		                        <p class="fs-mini">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                           ${n.explain}
+		                        </p>
+		                        <br>
+	                      </section>			
+					</li>
 				</ol>
 			</div>
 		
@@ -73,17 +52,9 @@
 		<input type="hidden" id="hiddenFollower" value="${n.follower}">
 		<input type="hidden" id="hiddenUserId" value="${userId}">
 	</c:forEach> 
-		 <div class="clearfix"style="text-align:center;">
-		<%-- <button onclick="myfilter(${paging},0);">
-			<c:if test="${cpage>1}">
-					onclick="backPaging(${cpage-1},${pagesize});"
-				<a href="activityboardcontent?cp=${cpage-1}&ps=${pagesize}">이전</a>
-				<!--페이지 리스트 구현  -->
-			</c:if>>
-				<    
-		</button> --%>
-		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
-		<button class="btn btn-default btn-rounded"
+	
+	<div class="clearfix"style="text-align:center;">
+        <button class="btn btn-default btn-rounded"
 			<c:if test="${paging>1}">
 					onclick="myfilter(${paging},0);"
 				
@@ -91,7 +62,6 @@
 			<i class="fa fa-caret-left"></i>
 				이전
 		</button>
-		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
 		
 		
 		<button class="btn btn-inverse btn-rounded"

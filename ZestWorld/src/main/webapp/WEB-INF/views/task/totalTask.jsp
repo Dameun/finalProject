@@ -2,7 +2,7 @@
 	@Project : ZestWorld
 	@File name : detailModal.jsp
 	@Author : 최담은
-	@Data : 2017.6.28
+	@Data : 2017.07.01
 	@Desc : 전체개요 -> 기본 페이지(필터 선택)
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -26,7 +26,7 @@ var detailpid='';
 var paging=1;
 var assignFollower='';
 var modalCount=0;
-
+var success_f_dialog=0;
 $(document).ready(function(){
 	var forme='';
 	var writer='';
@@ -36,15 +36,10 @@ $(document).ready(function(){
 	var datefilter='';
 	var order='';
 	var p=500000;
-	//var paging=$('#paging').val();
-	
-	console.log('Paging:  ******'+paging);
-	/* 
-	url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p, */
 	$.ajax({
 		type:"get",
 		url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p+"&paging=1",
-		/* dataType:'html', */
+		
 		success:function(data){
 			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
 		},
@@ -52,14 +47,7 @@ $(document).ready(function(){
 			alert('검색 에러! 관리자에게 문의하세요');
 		}
 	});
-	 $("#addbtn").on("click", function() {
-
-	   // $("#add_taskTitle").submit();
-
-	    $("#add-modal").hide();
-	    $('.modal-backdrop').hide();
-
-	 }); 
+	
 	 $(this).removeClass('hasDatepicker').datepicker();
 	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' });
 	
@@ -67,6 +55,7 @@ $(document).ready(function(){
 	 
 }); 
 
+//리스트 새로고침
 function refresh(){
 	
 	var forme='';
@@ -77,15 +66,10 @@ function refresh(){
 	var datefilter='';
 	var order='';
 	var p=500000;
-	//var paging=$('#paging').val();
-	
-	console.log('Paging:  ******'+paging);
-	/* 
-	url:"taskTotalList.htm?forme="+forme+"&writer="+writer+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p, */
 	$.ajax({
 		type:"get",
 		url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p+"&paging=1",
-		/* dataType:'html', */
+	
 		success:function(data){
 			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
 		},
@@ -93,61 +77,21 @@ function refresh(){
 			alert('검색 에러! 관리자에게 문의하세요');
 		}
 	});
-	 $("#addbtn").on("click", function() {
-
-	   // $("#add_taskTitle").submit();
-
-	    $("#add-modal").hide();
-	    $('.modal-backdrop').hide();
-
-	 }); 
+	
 	 $(this).removeClass('hasDatepicker').datepicker();
-	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' });
-	
-	  
-	 
+	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' }); 
 }
-function modalChangeSuccessF(taskid){
-	$.ajax({
-		type:"get",
-		url:"updateFlag.htm?task_id="+taskid,
-		dataType:'html',
-		success:function(data){
-		
-			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
-		},
-		error:function(){
-			alert('검색 에러! 관리자에게 문의하세요');
-		}
-	});
-	
-}
-function modalChangeSuccessF_zero(taskid){
-	$.ajax({
-		type:"get",
-		url:"updateFlagZero.htm?task_id="+taskid,
-		dataType:'html',
-		success:function(data){
-			$("input:checkbox[id='complete']").attr("checked", false);
-			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
-		},
-		error:function(){
-			alert('검색 에러! 관리자에게 문의하세요');
-		}
-	});
-	
-}
+
+//업무완료 
 function changeSuccessF(taskid){
 	console.log("hidden :   "+ $('#hiddenFollower').val());
 	console.log("hiddenUserId :   "+ $('#hiddenUserId').val());
 	
-	 /* alert(taskid); */
 	 $.ajax({
 			type:"get",
 			url:"updateFlag.htm?task_id="+taskid,
 			dataType:'html',
 			success:function(data){
-				/* console.log("성공시 보내는 사람 :     "+data.userId); */
 				send('1','title',$('#hiddenFollower').val(), $('#hiddenUserId').val());
 				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
 			},
@@ -156,6 +100,8 @@ function changeSuccessF(taskid){
 			}
 		});
 }
+
+//업무완료 취소
 function changeSuccessF_zero(taskid){
 	 alert(taskid);
 	 $.ajax({
@@ -171,6 +117,48 @@ function changeSuccessF_zero(taskid){
 			}
 		});
 }
+
+//업무완료취소 여부 확인 dialog
+function modalSuccessUpdateDialog(task_id)
+{
+	success_f_dialog=task_id;
+	dialogPopup("업무 완료를 취소 하시겠습니까?", modalSuccessUpdateDialogY, modalSuccessUpdateDialogN);
+}
+
+//업무완료취소 여부 확인 dialog-Y
+function modalSuccessUpdateDialogY()
+{
+	changeSuccessF_zero(success_f_dialog);
+	alert('업무 완료가 취소되었습니다.');
+}
+//업무완료취소 여부 확인 dialog-N
+function modalSuccessUpdateDialogN()
+{
+	return;
+}
+
+//업무완료 여부 확인 dialog
+function modalSuccess_kUpdateDialog(task_id)
+{
+	success_f_dialog=task_id;
+	dialogPopup("업무를 완료하셨습니까?", modalSuccess_kUpdateDialogY, modalSuccess_kUpdateDialogN);
+}
+
+//업무완료 여부 확인 dialog-Y
+function modalSuccess_kUpdateDialogY()
+{
+	changeSuccessF(success_f_dialog);
+	/* alert('업무가 완료되었습니다.'); */
+ 	refresh(); 
+}
+
+//업무완료 여부 확인 dialog-N
+function modalSuccess_kUpdateDialogN()
+{
+	return;
+}
+
+//필터 처리
 function myfilter(paging,flag){
 	var forme='';
 	var writer='';
@@ -189,9 +177,7 @@ function myfilter(paging,flag){
 	}else{
 		resultPaging=1;
 	}
-	
-	
-	console.log('resultPaging:  ******'+paging);
+
 	 //나에게 배정된, 내가 작성한, 내가 팔로워하는..  필터
 	 if(document.getElementById("forme").checked == true){
 		 forme="assign";
@@ -214,8 +200,7 @@ function myfilter(paging,flag){
 	 }
 	 
 	 //작성자 필터
-	 writermember=$(":input:radio[name=writermember]:checked").val();
-	 
+	 writermember=$(":input:radio[name=writermember]:checked").val();	 
 	 project=$(":input:radio[name=projectlist]:checked").val();
 	 
 	 
@@ -239,7 +224,7 @@ function myfilter(paging,flag){
 		});
 }
 
-
+//상세보기 모달
 function detailModalView(view,project_id){
  	var str='';
  	detailpid=project_id;
@@ -272,13 +257,6 @@ function detailModalView(view,project_id){
 		    		$('#modalDetailExplain').val(data.detail.explain);
 	     	   }
 	    	   modalCount=0;
-	    		/* $.each(data.assignmember,function(index,value){
-					console.log(index + "/" + value);
-					str+="<input type='checkbox' id='"+data.assignmember.user_id+"'>"+assignmember.user_id + "<br>";
-					$("#assignMemberCheck").append($('#assignMemberCheck').html(str));
-					
-					
-				}); */
 	       },
 	       error : function() {
 	          alert('Error while request..');
@@ -286,7 +264,8 @@ function detailModalView(view,project_id){
 	    });
  	
 	    
-	    $.ajax({
+	 //멤버 배정
+	 $.ajax({
 		       type : "get",
 		       url : "detailModalAssign.htm?task_id="+view+"&project_id="+project_id,
 		       success : function(data2) {
@@ -298,6 +277,7 @@ function detailModalView(view,project_id){
 		       }
 		    });
 	
+	//체크리스트
  	$.ajax({
 	       type : "get",
 	       url : "detailModalCheckList.htm?task_id="+view,
@@ -310,6 +290,7 @@ function detailModalView(view,project_id){
 	    });
  	
  
+	//멤버배정 후보 리스트
 	$.ajax({
 	    type : "get",
 	    url : "taskMemberListChk1.htm?project_id="+detailpid+"&task_id="+view,
@@ -332,39 +313,35 @@ function detailModalView(view,project_id){
 	    }
 	 });
 } 
-function submit2(){
-	    
+
+//업무 추가
+function taskReg(){
+
 		var enddate = $("#datepicker").val();
 		title=$("#title").val();
 		var project_id= $('#project').val();
 	 	console.log(title); 
-	 	/* if(title==""){
+	 	
+		if(title==""){
 			alert('제목을 입력해주세요');
 			$('#add-modal').modal('show');
 			return;
-			//return false; 
 		}
 	 	if(project_id=="before"){
 			alert('프로젝트 선택');
 			return;
-			//return false; 
 		}
 		if(categoryId=="cateBefore"){
 			alert('카테고리 선택');
 			return;
-			//return false; 
-		} */
-		 $.ajax({
+		}
+		
+		$.ajax({
 		       type : "get",
 		       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate+"&project_id="+project_id,
 		    
 		       success : function(data) {
-		    	 /* alert(data);
-		    	 if( data == 'success')
-	    		{
-	    		 	ajaxView('totalTask.ajax');
-	    		 } */
-	    		/*  send( '0', title,'dbsl215@naver.com', 'yh215@naver.com'); */
+	
 		    	 $("#ajaxlist").empty();
 		    	 $("#ajaxlist").append($('#ajaxlist').html(data));               
 		       },
@@ -377,7 +354,9 @@ function submit2(){
 		    $('#title').val('');
 		    $('#project').val('');
 		    $('#catechange').val('');
-	}
+}
+
+//프로젝트 선택
 function projectchange(){
 
 	projectId=$("#project").val();
@@ -400,6 +379,7 @@ function projectchange(){
 	}
 }
 
+//상세보기에서 프로젝트 선택
 function projectchange2(){
 
 	projectId=$("#project2").val();
@@ -422,12 +402,14 @@ function projectchange2(){
 	}
 }
 
+//카테고리 선택
 function categorychange(){
 	
 	categoryId=$("#catechange").val();
 	console.log(categoryId);
 }
 
+//상세보기 모달에서 수정
 function detailUpdate(){
 	var checkboxValues = [];
     $("input[name='membercheck']:checked").each(function(i) {
@@ -454,6 +436,7 @@ function detailUpdate(){
 	
 }
 
+//업무 삭제
 function modalDeleteTask(){
 	
 	$.ajax({
@@ -469,6 +452,7 @@ function modalDeleteTask(){
 	
 }
 
+//체크리스트 추가
 function checkreg(){
 	var contents=$('#CheckContents').val();
 	console.log("cheecj: " + contents);
@@ -477,6 +461,7 @@ function checkreg(){
 	       url : "checkListReg.htm?task_id="+detailUpdateID+"&contents="+contents,
 	       success : function(data) { 
 	    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+	    	   $("#CheckContents").val('');
 	       },
 	       error : function() {
 	          alert('Error while request..');
@@ -485,6 +470,7 @@ function checkreg(){
 	
 }
 
+//체크리스트 완료
 function updateChkFlag(chk){
 	console.log("updateChkFlag : "+ detailUpdateID);
 	$.ajax({
@@ -499,6 +485,8 @@ function updateChkFlag(chk){
 	}); 
 	
 }
+
+//체크리스트 완료취소
 function updateChkFlag_zero(chk){
 	console.log("updateChkFlag_zero : "+ detailUpdateID);
 	$.ajax({
@@ -513,6 +501,8 @@ function updateChkFlag_zero(chk){
 	}); 
 	
 }
+
+//체크리스트 삭제
 function checkListDelete(chk){
 	$.ajax({
 	       type : "get",
@@ -526,36 +516,7 @@ function checkListDelete(chk){
 	});
 }
 
-
-/*  function taskMemberListChk(){
-	console.log("taskMemberListChk");
-	console.log(detailpid);
-	var strlist='';
-	$.ajax({
-	    type : "get",
-	    url : "taskMemberListChk1.htm?project_id="+detailpid,
-	    		
-	    success : function(data) {
-	 		console.log("data:    " + data);
-	 		
-	 		$.each(data.assignmember,function(index,value){
-					console.log(index + "/" + value.user_id);
-					strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
-					
-					
-					
-			});
-	 		var htm="<form name='memberChk'>"+strlist+"</form>";
-	 		$("#wMemberList").append($('#wMemberList').html(htm));
-	    },
-	    error : function() {
-	       alert('Error while request..');
-	    }
-	 });
-} 
- */
-
-
+//업무 배정
 function taskAssign(taskId){
 	var checkboxValues = [];
     $("input[name='taskMemberChk']:checked").each(function(i) {
@@ -586,6 +547,8 @@ function taskAssign(taskId){
 	       }
 	}); 
 }
+
+//데이터 초기화
 function dataErase(){
 	$('#datepicker').val('');
     $('#title').val('');
@@ -593,7 +556,8 @@ function dataErase(){
     $('#catechange').val('');
 	
 }
-/* 배정된 멤버 삭제  */
+
+//배정된 멤버 삭제
 function deleteTaskMember(memberId){
 	console.log('멤버삭제 들어가라');
 	$.ajax({
@@ -603,11 +567,7 @@ function deleteTaskMember(memberId){
 			console.log("멤버삭제 받는 사람: " +memberId)
 			console.log("멤버삭제 보내는 사람: " + data.userid);
 			console.log("멤버삭제 제목: " +datailTitle)
-			
-		   /*  if(data.check=="check"){
-		    	send( '3', datailTitle, data, data.userid);
-				window.location.reload()
-		    } */
+
 		    modalCount=1;
 			 detailModalView(clickTask,detailpid);
 		},
@@ -616,49 +576,45 @@ function deleteTaskMember(memberId){
 		}
 	});	
 }
-//업무
-function submitBtn() 
+
+//업무 추가
+function taskInsertDialog()
 {
-	return;
+	dialogPopup("업무를 추가하시겠습니까?", yes, no);
 }
-//yes클릭
+
+//업무추가 yes
 function yes()
 {
-	submit2();
+	
+	taskReg();
 }
-//no 클릭
+//업무 추가 no
 function no()
 {
 	dataErase();
 	return;
 }
 
-//업무 추가
-function taskInsertDialog()
+//상세보기 수정
+function detailModalUpdateDialog()
 {
-/* 	var enddate = $("#datepicker").val();
-	title=$("#title").val();
-	var project_id= $('#project').val();
- 	console.log(title); 
- 	if(title==""){
-		alert('제목을 입력해주세요');
-		$('#add-modal').modal('show');
-		return;
-		//return false; 
-	}
- 	if(project_id=="before"){
-		alert('프로젝트 선택');
-		return;
-		//return false; 
-	}
-	if(categoryId=="cateBefore"){
-		alert('카테고리 선택');
-		return;
-		//return false; 
-	} */
-	dialogPopup("업무를 추가하시겠습니까?", yes, no);
+	dialogPopup("업무를 수정하시겠습니까?", detailModalUpdateDialogY, detailModalUpdateDialogN);
 }
 
+//상세보기 수정 yes
+function detailModalUpdateDialogY()
+{
+	detailUpdate();
+	alert('수정되었습니다.');
+}
+//상세보기 수정 no
+function detailModalUpdateDialogN()
+{
+	alert('취소되었습니다.');
+	dataErase();
+	return;
+}
 
 </script>
 
@@ -724,11 +680,7 @@ function taskInsertDialog()
 		</select>
 
 		<hr>
-<!-- 		<br>
-		<input type="radio" name="task" value="mytask">내업무
-		<br>
-		<input type="radio" name="task" value="alltask" checked="checked">전체업무
-		<hr> -->
+
 	
 		빠른필터<br>
 		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();"><br>
@@ -766,11 +718,6 @@ function taskInsertDialog()
 		<div class="col-sm-11">
 		<button type="button" class="btn btn-warning" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
-	<!--          
-	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
-	   		<span class="glyphicon glyphicon-stats"></span> 
-	         	차트보기
-		</button> -->
 		</div>
 		
 	</div>
@@ -790,12 +737,7 @@ function taskInsertDialog()
                   <div class="modal-body">
                      <input class="form-control" type="text" id="title" name="title"
                         placeholder="업무 제목" >
-                        
-                     <%-- 
-                     <c:forEach items="${projectlist}" var="n">
-						<input type="radio" name="project" value="${n.p_title}">${n.p_title}<br>
-					 </c:forEach>
- --%>
+
 
 					<select id="project" onchange="projectchange();">
 						<option value="before" selected="selected">  </option>
@@ -815,7 +757,7 @@ function taskInsertDialog()
                   <div class="modal-footer">
 
                      <button type="button" class="btn btn-info btn-circle btn-lg"
-                        id="addbtn" onclick="taskInsertDialog();"   data-dismiss="modal">
+                        id="addbtn" onclick="taskReg();"   data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
                      <button type="button" class="btn btn-warning btn-circle btn-lg"
