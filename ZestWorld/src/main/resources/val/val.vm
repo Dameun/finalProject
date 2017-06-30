@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+<style type="text/css">
+#ppemail{
+border:1px solid yellow;
+background-color:yellow;
+
+}
+a:link{
+text-decoration:none;
+font-color:black;
+}
+a:hover{
+text-decoration:none;
+font-color:black;
+}
+
+a:active{
+text-decoration:none;
+font-color:black;
+}
+</style>
+<script type="text/javascript">
+function search() {
+	pwsearch.submit();
+} 
+
+</script>
+</head>
+<body>
+<!-- 	
+	<div>
+	
+	<img alt="" src="./val/git2.PNG">
+<button type="button" onclick="${path}">보튼을눌러주세요</button>
+	<input type="button" onclick="location.href='${path}'" style="width: 100px;height: 100px">
+	</div> -->
+	<div id="ppemail">
+	   <button type="button" onclick="location.href=${path}">보튼을눌러주세요</button>
+	</div>
+	<a href="${path}"> 여기눌러주세</a>
+	<form id="pwsearch" name="pwsearch"> 
+	<input type="submit" name="path" value="sss" onclick="${path}" />
+	<table>
+	</table>
+	
+</form>
+	
+</body>
+</html>

@@ -2,8 +2,8 @@
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:websocket="http://www.springframework.org/schema/websocket" 
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -11,45 +11,47 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven />
-	<resources mapping="/resources/**" location="/resources/" /> 
-    <resources mapping="/img/**" location="/resources/img/" /> 
-    <resources mapping="/Js/**" location="/resources/Js/" /> 
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/Js/**" location="/resources/Js/" />
 
 	<context:annotation-config></context:annotation-config>
-	
+
 	<context:component-scan base-package="com.zestworld.main" />
 	<context:component-scan base-package="com.zestworld.Join_Service" />
 	<context:component-scan base-package="com.zestworld.Join_Controller" />
-	<context:component-scan base-package="com.zestworld.userStateService"/>
-	<context:component-scan base-package="com.zestworld.workspaceController"/>
-	<context:component-scan base-package="com.zestworld.ProjectService"/>
-	<context:component-scan base-package="com.zestworld.ProjectController"/>
-	<context:component-scan base-package="com.zestworld.OutlineController"/>
-	<context:component-scan base-package="com.zestworld.OutlineService"/>
+	<context:component-scan base-package="com.zestworld.userStateService" />
+	<context:component-scan base-package="com.zestworld.workspaceController" />
+	<context:component-scan base-package="com.zestworld.ProjectService" />
+	<context:component-scan base-package="com.zestworld.ProjectController" />
+	<context:component-scan base-package="com.zestworld.OutlineController" />
+	<context:component-scan base-package="com.zestworld.OutlineService" />
 	<context:component-scan base-package="com.zestworld.websocket" />
-	<context:component-scan base-package="com.zestworld.taskListController"/>
-	<context:component-scan base-package="com.zestworld.taskListService"/>
-	<context:component-scan base-package="com.zestworld.fullcalendarController"/>
-	<context:component-scan base-package="com.zestworld.fullcalendarService"/>
-	<context:component-scan base-package="com.zestworld.TemplateController"/>
-	<context:component-scan base-package="com.zestworld.TemplateService"/>
+	<context:component-scan base-package="com.zestworld.taskListController" />
+	<context:component-scan base-package="com.zestworld.taskListService" />
+	<context:component-scan base-package="com.zestworld.fullcalendarController" />
+	<context:component-scan base-package="com.zestworld.fullcalendarService" />
+	<context:component-scan base-package="com.zestworld.TemplateController" />
+	<context:component-scan base-package="com.zestworld.TemplateService" />
 
 
-	<beans:bean class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
-	<beans:bean id="dataController" class="com.zestworld.util.DataController" factory-method="getInstance">
+	<beans:bean
+		class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
+	<beans:bean id="dataController" class="com.zestworld.util.DataController"
+		factory-method="getInstance">
 	</beans:bean>
-	
+
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chat-ws.htm" />
 		<websocket:handshake-interceptors>
-       		<beans:bean class="com.zestworld.websocket.WebSocketHandshakeInterceptor" />
-   		</websocket:handshake-interceptors>
-	</websocket:handlers> 
+			<beans:bean class="com.zestworld.websocket.WebSocketHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
 
 	<beans:bean id="chatHandler" class="com.zestworld.websocket.WebSocketHandler" />
 
-	<mvc:default-servlet-handler /> 
-	
+	<mvc:default-servlet-handler />
+
 	<beans:bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<beans:property name="definitions">
@@ -72,20 +74,38 @@
 		<!-- <beans:property name="order" value="2" /> -->
 	</beans:bean>
 
-<!-- 메일보내기 부분 --> 
-    <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <beans:property name="host" value="smtp.gmail.com"/>
-        <beans:property name="port" value="587"/>
-        <beans:property name="username" value="rorkxso@gmail.com"/>
-        <beans:property name="password" value="aksen417"/>
-        <beans:property name="javaMailProperties">
-            
-            <beans:props>
-                <beans:prop key="mail.transport.protocol">smtp</beans:prop>
-                <beans:prop key="mail.smtp.auth">true</beans:prop>
-                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-                <beans:prop key="mail.debug">true</beans:prop>
-            </beans:props>
-        </beans:property>
-    </beans:bean> 
+	<!-- 메일보내기 부분 -->
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="username" value="rorkxso@gmail.com" />
+		<beans:property name="password" value="aksen417" />
+		<beans:property name="javaMailProperties">
+
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+
+	<!-- Velocity 설정 -->
+	<beans:bean class="org.springframework.ui.velocity.VelocityEngineFactoryBean"
+		id="velocityEngine">
+		<beans:property name="velocityProperties">
+			<beans:props>
+				<beans:prop key="resource.loader">class</beans:prop>
+				<beans:prop key="class.resource.loader.class">
+					org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+				</beans:prop>
+				<beans:prop key="input.encoding">utf-8</beans:prop>
+				<beans:prop key="output.encoding">utf-8</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
 </beans:beans>

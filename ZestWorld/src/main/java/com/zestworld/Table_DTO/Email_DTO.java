@@ -1,4 +1,4 @@
-package com.zestworld.emailDTO;
+package com.zestworld.Table_DTO;
 
 public class Email_DTO {
 

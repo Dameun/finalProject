@@ -2,6 +2,7 @@ package com.zestworld.Join_Controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Random;
@@ -12,9 +13,13 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +29,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zestworld.Join_Service.JoinService;
+import com.zestworld.Table_DTO.Email_DTO;
+import com.zestworld.Table_DTO.Mail_DTO;
 import com.zestworld.Table_DTO.Role_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
-import com.zestworld.emailDTO.Email_DTO;
 import com.zestworld.util.DataController;
 
 @Controller
 public class JoinController {
+
+	@Autowired
+	private VelocityEngine velocityEngine;
 
 	@Autowired
 	private JoinService service;
@@ -132,13 +141,17 @@ public class JoinController {
 	// 이메일 보내는
 	public void SendEmail(Email_DTO email) throws Exception {
 
+		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		MimeMessage msg = mailSender.createMimeMessage();
-
+		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
 		try {
+
+			// MimeMessageHelper messageHelper = new MimeMessageHelper(msg,
+			// true, "UTF-8");
 			msg.setSubject(email.getSubject());
 			msg.setText(email.getContent());
 			msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(email.getReceiver()));
-
+			msg.setHeader("content-type", "text/html;charset=utf-8");
 		} catch (MessagingException e) {
 			System.out.println("MessagingException");
 			e.printStackTrace();
@@ -162,9 +175,10 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "/updateUser.htm", method = RequestMethod.POST)
-	public String update(@RequestParam Map<String, Object> paramMap, Users_DTO member, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
+	public String update(@RequestParam Map<String, Object> paramMap, Users_DTO member, HttpServletRequest request)
+			throws ClassNotFoundException, SQLException, IOException {
 		String filename = member.getFile().getOriginalFilename();
-		
+
 		String path = request.getServletContext().getRealPath("upload");
 
 		String fpath = path + "\\" + filename;
@@ -181,63 +195,74 @@ public class JoinController {
 		Users_DTO updateMember = new Users_DTO();
 		updateMember.setUser_id(member.getUser_id());
 		updateMember.setName(member.getName());
-		/*updateMember.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));*/
+
 		updateMember.setImg(filename);
 		updateMember.setPhone(member.getPhone());
 
-		System.out.println("1111");
 		int result = service.updateUser(updateMember);
 		if (result != 0) {
-		DataController.getInstance().SetUserSavedata(updateMember);
-	
-		return "home.main";//성공시
+			DataController.getInstance().SetUserSavedata(updateMember);
+
+			return "home.main";// 성공시
 
 		} else {
-			
+
 			// 실패시
 			return "redirect:/joinEdit.htm";
 		}
 
 	}
 
-	//멤버 초대 로그인창
-		@RequestMapping(value="/invitation.htm", method=RequestMethod.GET)	
-		 public String memberInvitation (String workspace_id,HttpSession session) throws Exception {
-			
-			session.setAttribute("workspace_id",workspace_id);
-		    return "home/loginOk";
-		}
-		
-		
-		//맴버 초대 이메일
-		@RequestMapping(value = "/invitation.htm", method = RequestMethod.POST)
-		public String invitation(@RequestParam Map<String, Object> paramMap,Workspace_DTO member,HttpServletRequest request,Model model) throws Exception {
+	// 멤버 초대 로그인창
+	@RequestMapping(value = "/invitation.htm", method = RequestMethod.GET)
+	public String memberInvitation(String workspace_id, HttpSession session) throws Exception {
 
-			int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
-		      
-	         // mail 코드랑, 어떻게 보낼지 생각해보자 spring 이메일초대
-	         String path = "";
-	         String path2 ="http://localhost:8081/main/invitation.htm?workspace_id="+workspace_id;
-			//일단 로그인 페이지로 보내줌 로그인페이지에서 값을 받고 처리하자 
-			
-			//StringBuffer realpath = request.getRequestURL();
-			//로그인 경로로 뿌려주고 로그인에서 ? 이것으로 프로잭트명,비싯 설정해서 넘겨줘라
-			
-			String id=(String) paramMap.get("userid"); //보내는 사람 아이디는 필요하니깐
-			
-		    if (path2 != null) {
-				
-				Email_DTO email = new Email_DTO();
-				email.setContent("초대이메일입니다."+ path2 + " 입니다.");
-				email.setReceiver(id);
-				email.setSubject(id+"님 멤버초대 메일입니다.");
-				SendEmail(email);
-			}
-			//이것만 잘 설정하면 될거같은데
-		   // model.addAttribute("workSpace",workSpace);
-			return "task.workSpace";
-		}
+		session.setAttribute("workspace_id", workspace_id);
+		return "home/loginOk";
+	}
+
+	// 맴버 초대 이메일
+	@RequestMapping(value = "/invitation.htm", method = RequestMethod.POST)
+	public String invitation(@RequestParam Map<String, Object> paramMap, Workspace_DTO member,
+			HttpServletRequest request, Model model, Mail_DTO mail, @RequestParam String userid) throws Exception {
+
+		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		String wid = DataController.getInstance().GetUser().getUser_id();
+		Users_DTO user = new Users_DTO();
+		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
+
+		String id = (String) paramMap.get("userid"); // 보내는 사람 아이디는 필요하니깐
+
+		mail.setMailFrom("rorkxso@gmail.com");// 보내는 사람
+		mail.setMailTo(userid);// 입력시 가는놈
+		mail.setMailSubject(id + "ZESTWORLD 초대 이메일입니다.");
+
+		sendMail(mail);
+
+		return "task.workSpace";
+	}
+
+	// 벨로이메일
+	public void sendMail(Mail_DTO mail) throws Exception {
+
+		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true,"utf-8");
 		
-	
+		helper.setFrom(mail.getMailFrom());
+		helper.setTo(mail.getMailTo());
+		helper.setSubject(mail.getMailSubject());
+
+		Template template = velocityEngine.getTemplate("val/val.vm");
+
+		VelocityContext velocityContext = new VelocityContext();
+		velocityContext.put("path", path2);
+		StringWriter stringWriter = new StringWriter();
+		template.merge(velocityContext, stringWriter);
+		helper.setText(stringWriter.toString(),true);
+		mailSender.send(message);
+
+	}
 
 }
