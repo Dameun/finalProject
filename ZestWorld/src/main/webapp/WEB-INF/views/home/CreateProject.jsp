@@ -12,8 +12,7 @@
 		CreateProjcetProcess();
 	}
 	
-	//프로젝트 생성 
-	function CreateProjcetProcess()
+	function yes()
 	{
 		var p_title = $('#p_title').val();
 		var explain = $('#explain').val();
@@ -38,6 +37,18 @@
 				alert('error');
 			},
 		});
+	}
+	
+	function no()
+	{
+		$('#p_title').val("");
+		$('#explain').val("");
+	}
+	
+	//프로젝트 생성 
+	function CreateProjcetProcess()
+	{
+		dialogPopup("프로젝트를 생성하시겠습니까?", yes, no);
 	}
 
 	//마일스톤명 입력시
@@ -113,6 +124,11 @@
 </div>
 </main>
 </div>
+
+<div id="dialog-confirm" title="알람메세지">
+  <div id = "dialogContent"/>
+</div>
+
  <!--마일스톤 팝업창  -->
          <!-- modal -->
          <form id="milestone" name="milestone" method="post">
