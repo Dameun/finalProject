@@ -95,13 +95,13 @@ function projectAssignMemberList(workspace_id,project_id){
 	var str='';
 	$.ajax({
 	    type : "get",
-	    url : "projectAssignMemberList.htm?workspace_id="+workspace_id,
+	    url : "projectAssignMemberList.htm?workspace_id="+workspace_id+"&project_id="+project_id,
 	    success : function(data) {
 	 		console.log("data:    " + data);
 	 		current_project_id=project_id
 	 		$.each(data.wMemberList,function(index,value){
 					console.log(index + "/" + value.user_id);
-					str+="<input type='checkbox' value='"+value.user_id+"' id = 'checkbox1' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+					str+="<input type='checkbox' value='"+value+"' id = 'checkbox1' name='AssignMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value + "<br>";
 					
 			});
 	 	

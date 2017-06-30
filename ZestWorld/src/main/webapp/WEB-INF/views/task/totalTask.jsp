@@ -25,6 +25,8 @@ var datailTitle='';
 var detailpid='';
 var paging=1;
 var assignFollower='';
+var modalCount=0;
+
 $(document).ready(function(){
 	var forme='';
 	var writer='';
@@ -261,15 +263,15 @@ function detailModalView(view,project_id){
 	     	   document.getElementById('Modalenrolldate').innerHTML=datailEnrolldate;
 	    	    
 	     	   assignFollower=data.detail.follower;
-	     	   
-	    		$('#detailStart').val(data.detail.start_date);
-	    		$('#detailEnd').val(data.detail.end_date);
-	    		$('#member').val(data.detail.member);
-	    		$('#follower22').val(data.detail.follower);
-	    		$('#modalTask').val(data.detail.datailTitle);
-	    		$('#modalDetailExplain').val(data.detail.explain);
-	    		
-	    		
+	     	   if(modalCount==0){
+		    		$('#detailStart').val(data.detail.start_date);
+		    		$('#detailEnd').val(data.detail.end_date);
+		    		$('#member').val(data.detail.member);
+		    		$('#follower22').val(data.detail.follower);
+		    		$('#modalTask').val(data.detail.datailTitle);
+		    		$('#modalDetailExplain').val(data.detail.explain);
+	     	   }
+	    	   modalCount=0;
 	    		/* $.each(data.assignmember,function(index,value){
 					console.log(index + "/" + value);
 					str+="<input type='checkbox' id='"+data.assignmember.user_id+"'>"+assignmember.user_id + "<br>";
@@ -573,12 +575,10 @@ function taskAssign(taskId){
 	    			   
 	    			   send( '0', datailTitle,checkboxValues[i], assignFollower);
 	    		   }
+	    		   modalCount=1;
 	    		   $('#taskAssignMember').hide();
 	    		   detailModalView(clickTask,detailpid);
-	    	/* 	   $(".modal-backdrop fade in").remove(); 
-	    		 */
-	    		   /* 
-	    		    */
+	    		  
 	    	   
 	       },
 	       error : function() {
@@ -608,6 +608,7 @@ function deleteTaskMember(memberId){
 		    	send( '3', datailTitle, data, data.userid);
 				window.location.reload()
 		    } */
+		    modalCount=1;
 			 detailModalView(clickTask,detailpid);
 		},
 		error:function(){
@@ -737,7 +738,7 @@ function deleteTaskMember(memberId){
 	<div id="filter" style=" width: 880px">
 	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
-		<button type="button" class="btn btn-warning" data-toggle="modal"
+		<button type="button" class="btn btn-primary" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
 	         
 	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
@@ -770,8 +771,8 @@ function deleteTaskMember(memberId){
 					 </c:forEach>
  --%>
 
-					<select style="margin-top:5px; margin-bottom:5px" id="project" onchange="projectchange();">
-						<option value="before" selected="selected" > 카테고리 </option>
+					<select id="project" onchange="projectchange();">
+						<option value="before" selected="selected">  </option>
 						<c:forEach items="${projectlist}" var="n">
 						 	<option value="${n.project_id}">${n.p_title}</option>		
 						</c:forEach>

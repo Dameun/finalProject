@@ -147,7 +147,7 @@
 	</select> 
 	
 	<insert id="insertTask" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		insert into task(task_id,category_id,workspace_id,project_id,follower,user_id,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{follower},#{user_id},#{title},#{end_date},'0',sysdate)
+		insert into task(task_id,category_id,workspace_id,project_id,follower,user_id,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{user_id},#{title},#{end_date},'0',sysdate)
 	</insert>
 
 <!-- 	프로젝트에 속한 category name -->

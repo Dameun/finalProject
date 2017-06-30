@@ -55,9 +55,55 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="projectAssignMemberList.htm", method=RequestMethod.GET)
-	public View projectAssignMemberList(int workspace_id, Model model) throws ClassNotFoundException, SQLException{
+	public View projectAssignMemberList(int workspace_id,int project_id, Model model) throws ClassNotFoundException, SQLException{
 		List<WorkspaceUser_DTO> wMemberList=service.workspaceMemberList(workspace_id);
-		model.addAttribute("wMemberList", wMemberList);			
+		List<Project_user_DTO> projectMember=service.AssignMemberList(project_id);
+		
+		List<String> workspaceMemberList=new ArrayList<String>();
+		List<String> projectMemberList=new ArrayList<String>();
+		List<String> resultList=new ArrayList<String>();
+		
+		int k=0;
+		int count=0;
+		
+		for(int i=0;i<wMemberList.size();i++){
+			workspaceMemberList.add(i,wMemberList.get(i).getUser_id());
+		}
+		
+		if(projectMember.size()==0){
+			for(int i=0;i<wMemberList.size();i++){
+				resultList.add(i,wMemberList.get(i).getUser_id());
+			}
+		}else{
+			for(int i=0;i<projectMember.size();i++){
+				projectMemberList.add(i,projectMember.get(i).getUser_id());
+			}
+			
+			for(int i=0;i<workspaceMemberList.size();i++){
+				count=0;
+				for (int j=0;j<projectMemberList.size();j++){
+					if (workspaceMemberList.get(i).equals(projectMemberList.get(j))) {
+						count++;
+						
+						
+					}
+				}
+				
+				if (count == 0) {
+					resultList.add(k, workspaceMemberList.get(i));
+					System.out.println("count : "+ count);
+					if(resultList.size()!=0){
+						System.out.println("resultList  : "+resultList.get(k));
+					}
+					k++;
+				}
+				System.out.println();
+			}
+			
+		}
+		
+		
+		model.addAttribute("wMemberList", resultList);					
 		return jsonview;
 	}
 	

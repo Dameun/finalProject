@@ -114,7 +114,8 @@ public class OutlineController {
 
 		List<Task_DTO> list = service.taskTest(dto);
 		int count = service.countList(dto);
-System.out.println("count : "+ count);
+		System.out.println("count : "+ count);
+		
 		if (basic.size() == 0) {
 			model.addAttribute("list", basic); // �옄�룞 forward
 		} else {
@@ -261,8 +262,23 @@ System.out.println("count : "+ count);
 	// 업무 배정인원
 	@RequestMapping(value = "detailModalAssign.htm", method = RequestMethod.GET)
 	public String taskMemberList(int task_id, int project_id, Model model) throws ClassNotFoundException, SQLException {
-
+		
 		List<TaskAssignMember_DTO> assignmember = service.taskMemberList(task_id);
+		/*
+		List<String> memberName= new ArrayList<String>(); 
+		//int idx = mail.indexOf("@");
+		if(assignmember.size()!=0){
+			for(int i=0;i<assignmember.size();i++){
+				memberName.add(i,assignmember.get(i).getUser_id());
+				System.out.println("MEmberName: "+ memberName.get(i));
+			}
+		}
+		for(int i=0;i<assignmember.size();i++){
+			int idx = assignmember.get(i).getUser_id().indexOf("@");
+			memberName.add(i, assignmember.get(i).getUser_id().substring(0, idx));
+		}
+		*/
+		
 		model.addAttribute("assignmember", assignmember);
 
 		return "/task/taskassignMember";
@@ -343,6 +359,9 @@ System.out.println("count : "+ count);
 		List<CheckList_DTO> chklist = service.checkListView(task_id);
 		model.addAttribute("chklist", chklist);
 
+		
+
+		
 		return "/task/checkList";
 
 	}
@@ -418,14 +437,14 @@ System.out.println("count : "+ count);
 	public View deleteTaskMember(String memberId, int taskId, Model model) throws ClassNotFoundException, SQLException {
 
 		TaskAssignMember_DTO dto = new TaskAssignMember_DTO();
-
+		
 		dto.setTask_id(taskId);
 		dto.setUser_id(memberId);
-		int result = service.deleteTaskMember(dto);
-
-		String userid = DataController.getInstance().GetUser().getUser_id();
+		int result=service.deleteTaskMember(dto);
+		
+		String userid=DataController.getInstance().GetUser().getUser_id();
 		model.addAttribute("userid", userid);
-
+		
 		return jsonview;
 
 	}

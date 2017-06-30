@@ -52,4 +52,11 @@ public class ProjectService {
 		
 		return result;
 	}
+	
+	public List<Project_user_DTO> AssignMemberList(int projectId){
+		IProjectDAO dao = sqlsession.getMapper(IProjectDAO.class);		
+		List<Project_user_DTO> result = dao.AssignMemberList(projectId);
+		
+		return result;
+	}
 }
