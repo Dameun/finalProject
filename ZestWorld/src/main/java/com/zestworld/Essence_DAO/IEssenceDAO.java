@@ -6,7 +6,9 @@ import java.util.Map;
 
 import com.zestworld.Table_DTO.Alarm_DTO;
 import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.EssenceDefine_DTO;
+import com.zestworld.Table_DTO.Task_DTO;
 
 public interface IEssenceDAO {
 	
@@ -15,4 +17,6 @@ public interface IEssenceDAO {
 	public List<EssenceDefine_DTO> getDefineAllList();
 	public List<EssenceDefine_DTO> getDefineCateList(EssenceDefine_DTO essenceDefine_DTO);
 	public EssenceDefine_DTO getDefineByid(EssenceDefine_DTO essenceDefine_DTO);
+	public int getTask(Task_DTO task_DTO);
+	public int checkListReg(CheckList_DTO checkList_DTO);
 }

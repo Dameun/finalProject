@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zestworld.Essence_DAO.IEssenceDAO;
+import com.zestworld.OutlineDAO.IOutlineDAO;
 import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.EssenceDefine_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.taskListDAO.taskListDao;
@@ -64,4 +66,18 @@ public class EssenceService {
 		}
 		return 1;
 	}	
+	
+	public int getTask(Task_DTO task_DTO){
+		IEssenceDAO dao = sqlsession.getMapper(IEssenceDAO.class);
+		int taskID= dao.getTask(task_DTO);
+		return taskID;
+	}
+	
+	 public int checkListReg(CheckList_DTO dto) 
+	 {
+	 	IEssenceDAO dao = sqlsession.getMapper(IEssenceDAO.class);
+		int result= dao.checkListReg(dto);
+		return result;
+	}
+	 
 }

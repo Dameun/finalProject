@@ -10,14 +10,56 @@
 
 function CreateBtn()
 {
-	var workspacename = $('#workspacename').val();
-	var workspaceDiscription = $('#workspaceDiscription').val();
-	location.href='createWorkspace.htm?workspaceName='+ workspacename+'&'+ 'workspaceDiscription='+ workspaceDiscription;
+	
 }
 
 function BackBtn()
 {
 	location.href = "workSpace.htm";
+}
+
+function yes()
+{
+	var workspacename = $('#workspacename').val();
+	var workspaceDiscription = $('#workspaceDiscription').val();
+	location.href='createWorkspace.htm?workspaceName='+ workspacename+'&'+ 'workspaceDiscription='+ workspaceDiscription;
+}
+
+function no()
+{
+	$('#workspacename').val("");
+	$('#workspaceDiscription').val("");
+}
+
+function dialogPopup(contents, callback_Y, callback_N ) {
+
+	  $("#dialogContent").val(contents);
+	  $( "#dialog-confirm" ).dialog({
+	      resizable: false,
+	      height: "auto",
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "예": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_Y.call();
+	                }
+	          $( this ).dialog( "close" );
+	        },
+	        "아니오": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_N.call();
+	                }
+	          $( this ).dialog( "close" );
+	        }
+	      }
+	    });
+}
+
+//프로젝트 생성 
+function CreateProjcetProcess()
+{
+	dialogPopup("워크스페이스를 생성하시겠습니까?", yes, no);
 }
 
 </script>
