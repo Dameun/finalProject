@@ -130,6 +130,7 @@ public class workspaceController {
 		userState.setWorkspace_id(workspace_id);
 		userstateService.InsertUserState(userState);
 	}
+	
 	@RequestMapping("/userstateView.htm")
 	@ResponseBody
 	private String UserStateView(){
