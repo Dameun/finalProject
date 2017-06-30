@@ -259,40 +259,40 @@ public class AnalysisService {
 		return result;
 	}
 	
-/* BARCHART (CHART)	*/	
+/* BARCHART (USER)	*/	
 	
 	//전체 업무 - 완료된 업무
-	public List<Task_DTO> getTaskAllFlow_compU() throws ClassNotFoundException, SQLException{
+	public List<Task_DTO> getTaskAllFlow_compU(int project_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_compU();
+		List<Task_DTO> result = dao.getTaskAllFlow_compU(project_id);
 		return result;
 	}
 	
 	
 	
 	//전체업무 = 완료된 업무 개수
-	public List<Task_DTO> getTaskAllFlow_comp_countU() throws ClassNotFoundException, SQLException{
+	public List<Task_DTO> getTaskAllFlow_comp_countU(int project_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_comp_countU();
+		List<Task_DTO> result = dao.getTaskAllFlow_comp_countU(project_id);
 		return result;
 	}
 		
 	//전체 업무 - 마감일 지난 업무 개수
-	public List<Task_DTO> getTaskAllFlow_enddateLate_countU() throws ClassNotFoundException, SQLException{
+	public List<Task_DTO> getTaskAllFlow_enddateLate_countU(int project_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_enddateLate_countU();
+		List<Task_DTO> result = dao.getTaskAllFlow_enddateLate_countU(project_id);
 		return result;
 	}
 	//전체 업무 - 마감일 없는 업무 개수
-	public List<Task_DTO> getTaskAllFlow_enddateNo_countU() throws ClassNotFoundException, SQLException{
+	public List<Task_DTO> getTaskAllFlow_enddateNo_countU(int project_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_enddateNo_countU();
+		List<Task_DTO> result = dao.getTaskAllFlow_enddateNo_countU(project_id);
 		return result;
 	}
 	//전체 업무 - 진행중인 업무 개수
-	public List<Task_DTO> getTaskAllFlow_ing_countU() throws ClassNotFoundException, SQLException{
+	public List<Task_DTO> getTaskAllFlow_ing_countU(int project_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_ing_countU();
+		List<Task_DTO> result = dao.getTaskAllFlow_ing_countU(project_id);
 		return result;
 	}
 	
