@@ -46,8 +46,8 @@
 	
 		<div class="form-submit" align="right" style="background-color:#fff;width:331px;height: 50px;margin-left: -3px;">
 		
-		<button class="btn btn-success width-100 mb-xs" role="button" id="cancleBtn" style="margin-right:5px;margin-top:10px;">취소</button>
-		<button class="btn btn-success width-100 mb-xs" role="button" onclick="createBtn(${n.category_id})" style="margin-right:5px;margin-top:10px;">만들기</button>
+		<button class="btn btn-secondary width-100 mb-xs" role="button" id="cancleBtn" style="margin-right:5px;margin-top:10px;">취소</button>
+		<button class="btn btn-warning width-100 mb-xs" role="button" onclick="createBtn(${n.category_id})" style="margin-right:5px;margin-top:10px;">만들기</button>
 		
 		</div>
 	</div>
@@ -59,7 +59,7 @@
 			<input type="checkbox" class="chkSuccess" value="${j.task_id}">
 		</div>
  	${j.title}   
- 		<span class="glyphicon glyphicon-check" style="float:right;padding-right:17px;cursor:pointer" data-toggle="modal" data-target="#detailModal" onclick="detailModalView(${j.task_id},${n.project_id})"></span>
+ 		<span class="glyphicon glyphicon-cog" style="float:right;padding-right:17px;cursor:pointer" data-toggle="modal" data-target="#detailModal" onclick="detailModalView(${j.task_id},${n.project_id})"></span>
 	</div>
 	</c:if>
 </c:forEach>	

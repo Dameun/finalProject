@@ -613,7 +613,7 @@ function detailModalView(view,project_id){
    
       <br><br>
 <div class="row">
-      <button type="button" class="btn btn-primary mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">업무리스트 추가</button>
+      <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">업무리스트 추가</button>
 </div>
       
 	<!--카테고리 title 수정 모달  -->

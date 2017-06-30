@@ -11,18 +11,18 @@
 	
 	width:350px;
 	height:40px;
-	background-color: #1f5c87;
+	background-color: #555;
 
 }
 
 .membername{
 
- float:left; width:200px;background-color:#1f5c87;
+ float:left; width:200px;background-color:#555;
 
 }
 
  .task_add {
-  float:left; width:50px; background-color:#1f5c87;
+  float:left; width:50px; background-color:#555;
   cursor: pointer;
   display: flex;
  
@@ -32,17 +32,17 @@
   }
   
    .task_update{
-   float:left; width:50px; background-color:#1f5c87;
+   float:left; width:50px; background-color:#555;
    cursor: pointer;
   }
  .task_menu {
-  display:inline-block; width:50px; background-color:#1f5c87;
+  display:inline-block; width:50px; background-color:#555;
    cursor: pointer; 
   }  
  
  
 #panel {
-	background-color:#1f5c87;
+	background-color:#555;
     padding: 12px;
     display: none;
 }
