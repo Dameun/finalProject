@@ -225,8 +225,7 @@ public class AjaxViewController {
 		getTaskAllFlow_ing_count = analysisService.getTaskAllFlow_ing_count();
 	}
 	
-/* CHART(USER) */
-	
+/* CHART(USER) */	
 
 	int getTaskMe_compU;
 	int getTaskMe_enddateLateU;
@@ -243,11 +242,11 @@ public class AjaxViewController {
 	int getTaskFollow_enddateNoU;
 	int getTaskFollow_ingU;
 	//바차트
-	List<Task_DTO> getTaskAllFlow_compU = new ArrayList<Task_DTO>();
+	List<Task_DTO> getTaskAllFlow_compU ;
 	List<Task_DTO> getTaskAllFlow_comp_countU ;
-	List<Task_DTO> getTaskAllFlow_enddateLate_countU = new ArrayList<Task_DTO>();
-	List<Task_DTO> getTaskAllFlow_enddateNo_countU = new ArrayList<Task_DTO>();
-	List<Task_DTO> getTaskAllFlow_ing_countU = new ArrayList<Task_DTO>();	
+	List<Task_DTO> getTaskAllFlow_enddateLate_countU;
+	List<Task_DTO> getTaskAllFlow_enddateNo_countU;
+	List<Task_DTO> getTaskAllFlow_ing_countU;	
 	
 	@RequestMapping(value="/analysisU.ajax", method=RequestMethod.GET)
 	public String analysisU(Model model) throws ClassNotFoundException, SQLException
@@ -255,17 +254,20 @@ public class AjaxViewController {
 		
 		String user_id = DataController.getInstance().GetUser().getUser_id(); 
 		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		
+		
 		System.out.println("!! @@ user_id @@ !!"+ user_id);
 		Task_DTO dto = new Task_DTO();
 		Users_DTO dto2 = new Users_DTO();
 		
 		dto.setUser_id(user_id);
 		dto.setProject_id(project_id);
+		System.out.println(" @project_id 는 :" + project_id);
 		
-		donutChartU_01(user_id);
-		donutChartU_02(user_id);
-		donutChartU_03(user_id);
-		barChartU();
+		donutChartU_01(user_id,project_id);
+		donutChartU_02(user_id,project_id);
+		donutChartU_03(user_id,project_id);
+		barChartU(project_id);
 		
 		model.addAttribute("getTaskMe_compU", getTaskMe_compU);
 		model.addAttribute("getTaskMe_enddateLateU", getTaskMe_enddateLateU);
@@ -293,23 +295,26 @@ public class AjaxViewController {
 		return DataController.getInstance().GetviewPath("analysis")+"analysis2.jsp";
 	}	
 	
-	private void donutChartU_01(String user_id) throws ClassNotFoundException, SQLException
-	{
+	private void donutChartU_01(String user_id , int project_id) throws ClassNotFoundException, SQLException
+	{	
+		
 		Task_DTO dto = new Task_DTO();
 		dto.setUser_id(user_id);
- 		
+		dto.setProject_id(project_id);
+		System.out.println("project_id 담은바보 : " + project_id);
 		getTaskMe_compU = analysisService.getTaskMe_compU(dto);
+		System.out.println("getTaskMe_compU****** : " + getTaskMe_compU);
 	    getTaskMe_enddateLateU = analysisService.getTaskMe_enddateLateU(dto);
 		getTaskMe_enddateNoU = analysisService.getTaskMe_enddateNoU(dto);
 		getTaskMe_ingU = analysisService.getTaskMe_ingU(dto);
 		
 	}
 	
-	private void donutChartU_02(String user_id) throws ClassNotFoundException, SQLException
+	private void donutChartU_02(String user_id , int project_id) throws ClassNotFoundException, SQLException
 	{
 		Task_DTO dto = new Task_DTO();
 		dto.setUser_id(user_id);
-	
+		dto.setProject_id(project_id);
 		 getTaskI_compU = analysisService.getTaskI_compU(dto);
 		 getTaskI_enddateLateU = analysisService.getTaskI_enddateLateU(dto);
 		 getTaskI_enddateNoU = analysisService.getTaskI_enddateNoU(dto);
@@ -317,10 +322,11 @@ public class AjaxViewController {
 	}
 	
 	
-	private void donutChartU_03(String user_id) throws ClassNotFoundException, SQLException
+	private void donutChartU_03(String user_id , int project_id) throws ClassNotFoundException, SQLException
 	{
 		 Task_DTO dto = new Task_DTO();
 		 dto.setUser_id(user_id);
+		 dto.setProject_id(project_id);
 		 
 		 
 		 getTaskFollow_compU = analysisService.getTaskFollow_compU(dto);
@@ -331,15 +337,19 @@ public class AjaxViewController {
 	}
 
 	
-	private void barChartU()throws ClassNotFoundException, SQLException
+	private void barChartU(int project_id)throws ClassNotFoundException, SQLException
 	{
+		Task_DTO dto = new Task_DTO();
+		System.out.println("바차트안" + project_id);  
+		dto.setProject_id(project_id);
+		System.out.println("바차트유저아이디 " +dto.getProject_id());
 		
-		getTaskAllFlow_compU = analysisService.getTaskAllFlow_compU();
-		getTaskAllFlow_comp_countU = analysisService.getTaskAllFlow_comp_countU();
+		getTaskAllFlow_compU = analysisService.getTaskAllFlow_compU(project_id);
+		getTaskAllFlow_comp_countU = analysisService.getTaskAllFlow_comp_countU(project_id);
 		
-		getTaskAllFlow_enddateLate_countU = analysisService.getTaskAllFlow_enddateLate_countU();
-		getTaskAllFlow_enddateNo_countU = analysisService.getTaskAllFlow_enddateNo_countU();
-		getTaskAllFlow_ing_countU = analysisService.getTaskAllFlow_ing_countU();		
+		getTaskAllFlow_enddateLate_countU = analysisService.getTaskAllFlow_enddateLate_countU(project_id);
+		getTaskAllFlow_enddateNo_countU = analysisService.getTaskAllFlow_enddateNo_countU(project_id);
+		getTaskAllFlow_ing_countU = analysisService.getTaskAllFlow_ing_countU(project_id);		
 		
 	}
 	

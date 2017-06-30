@@ -31,23 +31,32 @@
 	
 	<!-- 나에게 배정된 업무 - 완료된 업무 -->
 	<select id="getTaskMe_comp" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where success_f = 1 and member = #{user_id}
+		select count(*) 
+		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
+		where a.task_id= t.task_id and t.success_f = 1
+	
 	</select>
 	
 	 <!-- 나에게 배정된 업무 - 마감일지난 업무 -->
 	<select id="getTaskMe_enddateLate" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and member = #{user_id}
+		select count(*) 
+		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
+		where a.task_id= t.task_id and end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]>
 		
 	</select>
 	
 	<!-- 나에게 배정된 업무 - 마감일없는 업무 -->
 	<select id="getTaskMe_enddateNo" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where end_date is null and member = #{user_id}
+		select count(*) 
+		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
+		where a.task_id= t.task_id and end_date is null
 	</select>
 	
 	<!-- 나에게 배정된 업무 - 진행중인 업무 -->
 	<select id="getTaskMe_ing" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and member = #{user_id}
+		select count(*) 
+		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
+		where a.task_id= t.task_id and start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]>
 	</select>
 	
 	
@@ -246,56 +255,54 @@
 		<!--********** BARCHART (USER)  *************-->	
 
 	<!-- 전체 업무 흐름 - 카테고리 이름 -->
-	<select id="getTaskAllFlow_compU" resultType="com.zestworld.Table_DTO.Task_DTO" >
+	<select id="getTaskAllFlow_compU" resultType="com.zestworld.Table_DTO.Category_DTO" parameterType="int" >
 		select c.title , count( success_f )
 		from category c inner join task t
-		on c. project_id = t.project_id
-		where t.success_f = 1 
+		on c. category_id = t.category_id
+		where t.success_f = 1 and c.project_id = #{project_id}
 		group by c.title
-		
-		
-		
+				
 	</select>
 	<!-- 카테고리별 업무 흐름 - 완료한 업무 -->
-	<select id="getTaskAllFlow_comp_countU" resultType="int" >
+	<select id="getTaskAllFlow_comp_countU" resultType="com.zestworld.Table_DTO.Category_DTO" parameterType="int">
 		select count( * )
 		from category c inner join task t
-		on c. project_id = t.project_id
-		where t.success_f = 1 
+		on c. category_id = t.category_id
+		where t.success_f = 1 and c.project_id = #{project_id}
 		group by c.title
 	
 	</select>
 	
 	<!-- 카테고리별 업무 흐름 - 마감일지난 업무 -->
-	<select id="getTaskAllFlow_enddateLate_countU" resultType="int">
+	<select id="getTaskAllFlow_enddateLate_countU" resultType="com.zestworld.Table_DTO.Category_DTO" parameterType="int">
 		select count( * )
 		from category c inner join task t
-		on c. project_id = t.project_id
-		where t.end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]>
+		on c. category_id = t.category_id
+		where t.end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and c.project_id = #{project_id}
 		group by c.title
 		
 	</select>
 	
 	<!-- 카테고리별 업무 흐름 - 마감일없는 업무 -->
-	<select id="getTaskAllFlow_enddateNo_countU" resultType="int">
+	<select id="getTaskAllFlow_enddateNo_countU" resultType="com.zestworld.Table_DTO.Category_DTO" parameterType="int">
 		select count( * )
 		from category c inner join task t
-		on c. project_id = t.project_id
-		where t.end_date is null
+		on c. category_id = t.category_id
+		where t.end_date is null and c.project_id = #{project_id}
 		group by c.title
 		
 	</select>
 	 
 	 <!-- 카테고리별 업무 흐름 - 진행중인 업무 -->
-	<select id="getTaskAllFlow_ing_countU" resultType="int">
+	<select id="getTaskAllFlow_ing_countU" resultType="com.zestworld.Table_DTO.Category_DTO" parameterType="int">
 		select count( * )
 		from category c inner join task t
-		on c. project_id = t.project_id
-		where t.start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]>
+		on c. category_id = t.category_id
+		where t.start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and c.project_id = #{project_id}
 		group by c.title
 		
 	</select>
-
+	
 	
 	     
 </mapper>
