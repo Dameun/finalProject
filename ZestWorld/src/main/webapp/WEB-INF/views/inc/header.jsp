@@ -28,13 +28,21 @@
     <meta name="author" content="">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <script>
-        /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
-         chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
-         https://code.google.com/p/chromium/issues/detail?id=332189
-         */
-    </script>
-  
+      <script>
+
+	$(document).ready(function(){
+	$(document).ajaxStart(function(){
+		$.blockUI({ 
+			message: $('#domMessage') 
+			}); 
+		});
+	
+	
+		$(document).ajaxStop($.unblockUI); 
+
+	});
+</script>
+
   </head>
 
 
@@ -171,9 +179,10 @@
         </div>
     </div>
 </nav>
-<div class="loader-wrap hiding hide">
-    <i class="fa fa-circle-o-notch fa-spin-fast"></i>
-</div>
+
+<div id="domMessage" style="display:hidden;"> 
+
+</div> 
 <script>
 		
 		</script>
