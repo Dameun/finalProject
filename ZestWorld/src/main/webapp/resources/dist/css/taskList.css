@@ -17,9 +17,10 @@
 
 .membername{
 
- float:left; width:250px;background-color:#1f5c87;
+ float:left; width:200px;background-color:#1f5c87;
 
 }
+
  .task_add {
   float:left; width:50px; background-color:#1f5c87;
   cursor: pointer;
@@ -29,11 +30,16 @@
   justify-content: center;
   border-radius: 2px;
   }
+  
+   .task_update{
+   float:left; width:50px; background-color:#1f5c87;
+   cursor: pointer;
+  }
  .task_menu {
   display:inline-block; width:50px; background-color:#1f5c87;
    cursor: pointer; 
   }  
-  
+ 
  
 #panel {
 	background-color:#1f5c87;

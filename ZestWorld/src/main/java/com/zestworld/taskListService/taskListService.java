@@ -167,4 +167,11 @@ public class taskListService {
 		
 	}
 	
+	public Category_DTO getCatetitle(Category_DTO dto) throws ClassNotFoundException, SQLException{
+		taskListDao dao = sqlsession.getMapper(taskListDao.class);
+		
+		Category_DTO list =	dao.getCatetitle(dto);
+		return list;
+	}
+	
 }

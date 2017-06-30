@@ -12,8 +12,7 @@
 <!--민성 dropdown 사용하기위해 필요한 부분 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--민성 dropdown 사용하기위해 필요한 부분 -->
-
-
+   
 
 <script type="text/javascript">
 var categoryId='';
@@ -27,7 +26,7 @@ var detailExplain='';
 var clickTask='';
 
 var detailpid='';
-
+var modalCount=0;
 	$(function(){
 	
 		//리스트 비동기로 뿌리는 ajax부분
@@ -111,8 +110,10 @@ var detailpid='';
 			$(document).on("click","#cancleBtn",function(){
 				$(this).parent().parent("#panel").toggle();
 
-			})
+			});
 		  
+	
+			
 	  //카테고리 삭제
 		  $(document).on("click","#task_menu",function(){
 			 
@@ -177,6 +178,9 @@ var detailpid='';
  			}); 
  		
  		
+ 			$("#upclose").click(function(){
+ 				$("#changeTitle").val('');
+ 			});
 	});
 	
 	
@@ -206,6 +210,35 @@ var detailpid='';
 		
 	}
 
+	 function cateTitleView(cateId){
+	
+		 
+		 $.ajax({
+				type : "get",
+				url : "getcateTitle.htm",
+				data : 'category_id='+cateId,
+				success : function(data){
+					
+					var cateTitle= data.category.title;
+					var cId = data.category.category_id;
+			    	
+					
+					document.getElementById('select_cateTitle').innerHTML = cateTitle;
+					$("#sel_cateID").val(cId);
+					
+				
+				},
+				error : function(){
+					alert('Error while request..');
+				}
+		   });
+	}
+	
+	
+	
+	
+	
+	
 function detailModalView(view,project_id){
 	 	var str='';
 	 	detailpid=project_id;
@@ -219,6 +252,7 @@ function detailModalView(view,project_id){
 		    	  $("#CheckContents").val('');
 		    	  console.log("detailmodal success: "+data.detail.user_id);
 		    	   var datailTitle=data.detail.title;
+		    	   
 		    	   var datailEnrolldate=data.detail.endrolldate;
 		    	   console.log(data.detail.endrolldate);
 		    	   detailUpdateID=data.detail.task_id;
@@ -230,16 +264,16 @@ function detailModalView(view,project_id){
 		    	   document.getElementById('span1').innerHTML=datailTitle;
 		     	   document.getElementById('Modalenrolldate').innerHTML=datailEnrolldate;
 		    	    
-		    	   
+		    	   if(modalCount == 0){
 		    		$('#detailStart').val(data.detail.start_date);
 		    		$('#detailEnd').val(data.detail.end_date);
 		    		$('#member').val(data.detail.member);
 		    		$('#follower22').val(data.detail.follower);
 		    		$('#modalTask').val(data.detail.datailTitle);
 		    		$('#modalDetailExplain').val(data.detail.explain);
+		    	   }
 		    		
-		    		console.log("assignment: " + assignmember.user_id);
-		    		
+		    	  modalCount=0; 
 		       },
 		       error : function() {
 		          alert('Error while request..');
@@ -296,6 +330,7 @@ function detailModalView(view,project_id){
 	 	
 	 	
 	} 
+	
 	function detailUpdate(){
 		var startdate=$('#detailStart').val();
 		var enddate=$('#detailEnd').val();
@@ -438,12 +473,10 @@ function detailModalView(view,project_id){
 		       type : "get",
 		       url : "TaskAssign.htm?checkboxValues="+checkboxValues+"&taskid="+clickTask,
 		       success : function(data) {
-		    	 /*   if(data.success.equals("success")){
-		    	   		console.log('성공');
-		    	   		location.reload();
-		    	   } */
+		    	
 		    	   $("#taskAssignMember").hide();
 		    	   $('#taskAssignMember .modal-backdrop').remove();
+		    	   modalCount=1;
 		    	   detailModalView(clickTask,detailpid);
 
 		       },
@@ -479,7 +512,7 @@ function detailModalView(view,project_id){
 	function deleteTaskMember(memberId){
 		console.log('멤버삭제 들어가라');
 		$.ajax({
-			type:"get",
+			type:"get",	
 			url:"deleteAssignMember.htm?memberId="+memberId+"&taskId="+clickTask,
 			success:function(data){
 				console.log("멤버삭제 받는 사람: " +memberId);
@@ -490,6 +523,7 @@ function detailModalView(view,project_id){
 			    	send( '3', datailTitle, data, data.userid);
 					window.location.reload()
 			    } */
+			     modalCount=1;
 				 detailModalView(clickTask,detailpid);
 			},
 			error:function(){
@@ -499,17 +533,18 @@ function detailModalView(view,project_id){
 	}
 	
 	function cateUpdate(){
+				
 		$.ajax({
 			type : "post",
 			url : "cateUpdate.htm",
 			cache : false,
-			data : 'category_id='+$("#categoryTitle option:selected").val()+'&changeTitle='+$("#changeTitle").val(),
+			data : 'category_id='+$("#sel_cateID").val()+'&changeTitle='+$("#changeTitle").val(),
 			success : function(data){
 				console.log(data);
 			
 				$("#cateTitle_Update").hide();
 				$('#changeTitle').val('');
-				$('select').val('0');
+				
 				$('.modal-backdrop').remove();
 				//$("#categoryTitle").empty();
 				//$("#categoryTitle").append("<option selected>선택하기</option>");
@@ -528,8 +563,6 @@ function detailModalView(view,project_id){
 			}
 		});
 	}
-	
-	
 	
 </script>
 
@@ -550,11 +583,11 @@ function detailModalView(view,project_id){
 <div class="col-md-12" align="center">
 <button class="btn btn-inverse width-100 mb-xs" role="button" id="taskChart" onclick="ajaxView('analysisU.ajax')">차트</button>
 
-<button class="btn btn-inverse width-100 mb-xs" role="button" id="file">파일</button>
+<button class="btn btn-inverse width-100 mb-xs" role="button" id="file" onclick="location.href='Schedule.htm'">캘린더</button>
 </div>
 </div>
 
-<div class="row ">
+<!-- <div class="row ">
 	<div class="col-md-1">
 		<button class="btn btn-default dropdown-toggle" type="button"
 			id="menu1" data-toggle="dropdown" style="margin-left:45px">
@@ -568,11 +601,19 @@ function detailModalView(view,project_id){
 			<li role="presentation" class="divider"></li>
 			
 				<li role="presentation" ><a role="menuitem" tabindex="-1"
-				href="#cateTitle_Update" data-toggle="modal">카테고리제목   수정</a>
+				href="#">카테고리제목   수정</a>
 				</li>
 			
 		</ul>
 	</div>
+</div> -->
+      
+      
+      
+   
+      <br><br>
+<div class="row">
+      <button type="button" class="btn btn-primary mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">업무리스트 추가</button>
 </div>
       
 	<!--카테고리 title 수정 모달  -->
@@ -589,23 +630,16 @@ function detailModalView(view,project_id){
                                     </div>
                                     <div class="modal-body bg-gray-lighter">
                                     
-                                        <div class="row">
-                                                &nbsp;<i class="fa fa-circle text-danger"></i> &nbsp; 수정할 카테고리 제목 선택
+                                       <div class="row">
+                                                &nbsp;<i class="fa fa-circle text-danger"></i> &nbsp; 이전 카테고리 제목 
                                         		<div class="col-md-12">
-                                                    <div class="form-group">
-                                                   
-                                                   
-                                           			
-                                           			<select id="categoryTitle">
-                                           			<option value="0" selected>선택하기</option>
-														<c:forEach items="${list}" var="n">
-						 								<option value="${n.category_id}">${n.title}</option>		
-														</c:forEach> 
-											
-    		        								</select>
+                                                    <div class="form-group" id="select_cateTitle" style="margin-left: 13px; margin-top: 5px">
+                                                  
+                                                  		
                                                     </div>
+                                                      <input type="hidden" id="sel_cateID">
                                                 </div>
-                                            </div>
+                                            </div> 
                                         
                                             <div class="row">
                                                 &nbsp;<i class="fa fa-circle text-warning"></i>&nbsp; 카테고리 제목 수정
@@ -620,7 +654,7 @@ function detailModalView(view,project_id){
                                     </div>
                                     <div class="modal-footer">
                                          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="cateUpdate()">Save changes</button>
-                                        <button type="button" class="btn btn-gray" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-gray" data-dismiss="modal" id="upclose">Close</button>
                                    
                                     </div>
                                 </div>

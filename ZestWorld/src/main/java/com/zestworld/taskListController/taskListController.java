@@ -437,6 +437,17 @@ public class taskListController {
 		return jsonview;
 	}
 	
+	@RequestMapping(value="getcateTitle.htm", method=RequestMethod.GET)
+	public View getCatetitle(int category_id,Model model) throws ClassNotFoundException, SQLException{
+		
+		Category_DTO dto = new Category_DTO();
+		dto.setCategory_id(category_id);
+		
+		Category_DTO list = service.getCatetitle(dto);
+		
+		model.addAttribute("category", list);
+		
+		return jsonview;
+	}
 
-	
 }

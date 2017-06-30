@@ -14,9 +14,15 @@
 	<div class="membername" id="membername_${n.category_id}" style="padding-top: 15px;padding-left:10px;color: #fff;">${n.title}
 	<input type="hidden" class="cateValue" value="${n.category_id}">
 	</div>
-	<div class="task_add" style="padding-top: 15px; padding-left: 20px">
+	<div class="task_add" style="padding-top: 15px;padding-left: 50px;">
 		<span class="glyphicon glyphicon-plus" style="color: #fff;"></span>
 	</div>
+	<div class="task_update" style="padding-left:30px;padding-top: 15px" data-toggle="modal" 
+			data-target="#cateTitle_Update"  onclick="cateTitleView(${n.category_id})">
+	<span class="glyphicon glyphicon-pencil" id="cateUpdate" style="color: #fff;"></span>
+	</div>
+	
+	
      
   
 	<div class="task_menu" id="task_menu" data-toggle="dropdown" style="padding-top: 15px;" align="center">
@@ -60,3 +66,4 @@
 </div>
 </div>
 </c:forEach>
+

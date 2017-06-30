@@ -51,6 +51,9 @@ public interface taskListDao {
 	
 	//체크리스트 삭제
 	public int chkListDelete(int check_id) throws ClassNotFoundException, SQLException;
-		
+	
+	//수정할 category 정보가져오기
+	public Category_DTO getCatetitle(Category_DTO dto) throws ClassNotFoundException, SQLException;
+	
 		
 }
