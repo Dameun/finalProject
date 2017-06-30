@@ -737,7 +737,7 @@ function deleteTaskMember(memberId){
 	<div id="filter" style=" width: 880px">
 	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
-		<button type="button" class="btn btn-primary" data-toggle="modal"
+		<button type="button" class="btn btn-warning" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
 	         
 	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
@@ -770,7 +770,7 @@ function deleteTaskMember(memberId){
 					 </c:forEach>
  --%>
 
-					<select id="project" onchange="projectchange();">
+					<select style="margin-top:5px; margint-bottom:5px" id="project" onchange="projectchange();">
 						<option value="before" selected="selected">  </option>
 						<c:forEach items="${projectlist}" var="n">
 						 	<option value="${n.project_id}">${n.p_title}</option>		
