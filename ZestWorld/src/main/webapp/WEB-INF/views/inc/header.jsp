@@ -394,8 +394,35 @@ function popupOpen()
 	var popOption = "width=380, height=400, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 	window.open(popUrl, "", popOption);
 }
-//});
+
+function dialogPopup(contents, callback_Y, callback_N ) {
+
+	  $("#dialogContent").val(contents);
+	  $( "#dialog-confirm" ).dialog({
+	      resizable: false,
+	      height: "auto",
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "예": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_Y.call();
+	                }
+	          $( this ).dialog( "close" );
+	        },
+	        "아니오": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_N.call();
+	                }
+	          $( this ).dialog( "close" );
+	        }
+	      }
+	    });
+}
 </script>
+<div id="dialog-confirm" title="알림메세지">
+	<input type="text" id = "dialogContent" style="width:300px" readonly></div>
+</div> 
 </html>
 
 
