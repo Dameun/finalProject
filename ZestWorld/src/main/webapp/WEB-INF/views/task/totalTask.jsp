@@ -770,8 +770,8 @@ function deleteTaskMember(memberId){
 					 </c:forEach>
  --%>
 
-					<select style="margin-top:5px; margint-bottom:5px" id="project" onchange="projectchange();">
-						<option value="before" selected="selected">  </option>
+					<select style="margin-top:5px; margin-bottom:5px" id="project" onchange="projectchange();">
+						<option value="before" selected="selected" > 카테고리 </option>
 						<c:forEach items="${projectlist}" var="n">
 						 	<option value="${n.project_id}">${n.p_title}</option>		
 						</c:forEach>
