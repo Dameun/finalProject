@@ -235,7 +235,7 @@
       this.progress = 0;
     }
 
-    Bar.prototype.getElement = function() {
+/*    Bar.prototype.getElement = function() {
       var targetElement;
       if (this.el == null) {
         targetElement = document.querySelector(options.target);
@@ -254,7 +254,7 @@
         }
       }
       return this.el;
-    };
+    };*/
 
     Bar.prototype.finish = function() {
       var el;
