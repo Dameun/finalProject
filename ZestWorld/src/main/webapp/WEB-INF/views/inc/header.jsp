@@ -180,7 +180,7 @@
     </div>
 </nav>
 
-<div id="domMessage" style="display:hidden;"> 
+<div id="domMessage" style="display:none;"> 
 
 </div> 
 <script>
@@ -200,7 +200,7 @@
 <script src="resources/build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
 <script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 <script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
-
+<script src="resources/Js/jquery.blockUI.js"></script>
 <!-- common app js -->
 <script src="resources/build/bootstrap/js/settings.js"></script>
 <script src="resources/build/bootstrap/js/app.js"></script>
