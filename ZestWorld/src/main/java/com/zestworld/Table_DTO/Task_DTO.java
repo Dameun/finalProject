@@ -20,7 +20,13 @@ public class Task_DTO
 	private String success_f;
 	private String projectname;
 	
-	//************************�닔�젙
+	private String essence;
+	public String getEssence() {
+		return essence;
+	}
+	public void setEssence(String essence) {
+		this.essence = essence;
+	}
 	private String filterDay;
 	private String order;
 	private String endrolldate;

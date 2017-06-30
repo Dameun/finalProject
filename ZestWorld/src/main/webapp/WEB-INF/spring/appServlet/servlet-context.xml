@@ -10,48 +10,32 @@
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing 
-		infrastructure -->
-
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
-		up static resources in the ${webappRoot}/resources directory -->
-
 	<resources mapping="/resources/**" location="/resources/" /> 
-	<!-- <resources mapping="/resources/css/**" location="/resources/build/bootstrap/css/" />  -->
     <resources mapping="/img/**" location="/resources/img/" /> 
     <resources mapping="/Js/**" location="/resources/Js/" /> 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory -->
-	<context:annotation-config></context:annotation-config>
 
+	<context:annotation-config></context:annotation-config>
+	
 	<context:component-scan base-package="com.zestworld.main" />
 	<context:component-scan base-package="com.zestworld.Join_Service" />
 	<context:component-scan base-package="com.zestworld.Join_Controller" />
 	<context:component-scan base-package="com.zestworld.userStateService"/>
 	<context:component-scan base-package="com.zestworld.workspaceController"/>
-
 	<context:component-scan base-package="com.zestworld.ProjectService"/>
 	<context:component-scan base-package="com.zestworld.ProjectController"/>
-	
 	<context:component-scan base-package="com.zestworld.OutlineController"/>
 	<context:component-scan base-package="com.zestworld.OutlineService"/>
 	<context:component-scan base-package="com.zestworld.websocket" />
 	<context:component-scan base-package="com.zestworld.taskListController"/>
 	<context:component-scan base-package="com.zestworld.taskListService"/>
-	
 	<context:component-scan base-package="com.zestworld.fullcalendarController"/>
 	<context:component-scan base-package="com.zestworld.fullcalendarService"/>
-	
 	<context:component-scan base-package="com.zestworld.TemplateController"/>
 	<context:component-scan base-package="com.zestworld.TemplateService"/>
 
 
 	<beans:bean class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
-	
-	
 	<beans:bean id="dataController" class="com.zestworld.util.DataController" factory-method="getInstance">
 	</beans:bean>
 	
@@ -63,8 +47,7 @@
 	</websocket:handlers> 
 
 	<beans:bean id="chatHandler" class="com.zestworld.websocket.WebSocketHandler" />
-	
-	
+
 	<mvc:default-servlet-handler /> 
 	
 	<beans:bean id="tilesConfigurer"
@@ -105,7 +88,4 @@
             </beans:props>
         </beans:property>
     </beans:bean> 
-
-	
-
 </beans:beans>

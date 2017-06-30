@@ -3,7 +3,6 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="com.zestworld.taskDAO.TaskDataDAO">
 
    <select id="GetWorkSpaceList" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
@@ -20,9 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		delete* FROM Workspace where workspace_id=#{workspace_id}
    </delete>
     <insert id="insertWorkSpace" >
-    	<!-- <selectKey order="BEFORE" keyProperty="workspace_id" resultType="String">
-			SELECT MAX(TO_NUMBER(workspace_id))+1 FROM workspace
-		</selectKey> -->
 		INSERT INTO Workspace(workspace_id, workspace_name, visit_id, description, user_id)
 	    VALUES( workspace_seq.nextval, #{workspace_name}, #{visit_id}, #{description}, #{user_id})
    </insert>
@@ -49,18 +45,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="GetProjectByname" resultType="com.zestworld.Table_DTO.Project_DTO">
    		SELECT* FROM Project where p_title=#{p_title} and p_admin=#{p_admin}
    </select>
-   
    <select id="GetWorkSpaceMemberChk" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
    		select* from Workspace_User where user_id=#{user_id} and workspace_id=#{workspace_id}
    </select>
-   <!-- 상세보기 수정 -->
 	<update id ="updateProject" parameterType="com.zestworld.Table_DTO.Project_DTO" >
 		update project set p_title=#{p_title},explain=#{explain} where project_id=#{project_id}
 	</update>
 	<update id ="deleteProject" parameterType="com.zestworld.Table_DTO.Project_DTO" >
 		delete FROM project where project_id=#{project_id}
 	</update>
-	 <delete id="deleteTaskByProjectid"  parameterType="com.zestworld.Table_DTO.Project_DTO">
+	<update id ="updateWorkspace" parameterType="com.zestworld.Table_DTO.Workspace_DTO" >
+		update workspace set workspace_name=#{workspace_name},description=#{description} where workspace_id=#{workspace_id}
+	</update>
+
+	<delete id="deleteTaskByProjectid"  parameterType="com.zestworld.Table_DTO.Project_DTO">
    		delete FROM task where project_id=#{project_id}
    </delete>
 </mapper>

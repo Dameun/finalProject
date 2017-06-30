@@ -181,7 +181,6 @@ public class EssenceController {
 		project.setOpen_f(0);
 		
 		taskDao.insertProject(project);
-
 		Project_DTO projectNew = taskDao.GetProjectByname(project);
 		Project_user_DTO projectUsers = new Project_user_DTO();
 		projectUsers.setProject_id(projectNew.getProject_id());
@@ -189,7 +188,6 @@ public class EssenceController {
 	
 		taskDao.InsertProjectUsers(projectUsers);
 
-	
 		DataController.getInstance().dataChangeProject();
 		eProject = projectNew.getProject_id();
 		return eProject;

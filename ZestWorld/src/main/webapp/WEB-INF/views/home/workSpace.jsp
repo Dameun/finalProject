@@ -32,9 +32,69 @@
 </head>
 
 <script type="text/javascript">
+var workSpace_id='';
+function workspaceEditModalView(workSpace_id,p_title,explain)
+{
+	workSpace_id= workSpace_id;
+	$('#modalDetailTitle').val(p_title);
+	$('#modalDetailExplain').val(explain);projectUpdate
+}
+function yes()
+{
+	var p_title = $('#p_title').val();
+	var explain = $('#explain').val();
+	var etcStr = "0";
+
+	if ($("#private").is(':checked'))
+		etcStr = "1"; //공개 0,비공개 1
+		
+	$.ajax({
+		type : "get",
+		url : "CreateProjectProcess.ajax",
+		data : {
+			"p_title" : p_title,
+			"explain" : explain,
+			"etcStr" : etcStr
+		},
+
+		success : function(data) {
+			ajaxView('projectMain.ajax');
+		},
+		error : function() {
+			alert('error');
+		},
+	});
+}
+
+function no()
+{
+	$('#p_title').val("");
+	$('#explain').val("");
+}
+
+
+function workspaceUpdate()
+{
+	var workSpaceTitle = $('#modalDetailTitle').val();
+	var workSpaceExplain = $('#modalDetailExplain').val();
+
+	$.ajax({
+		type:"get",
+		url:"workspacdEdit.ajax",
+		data:{"workSpace_id" : workSpace_id,
+			"workSpaceTitle" : workSpaceTitle,
+			"workSpaceExplain" : workSpaceExplain},
+		success:function(data){
+			ajaxView('projectMain.ajax');
+		},
+		error:function(){
+			alert('error');
+		}
+	});	
+}
+
 function CreateWorkspace()
 {
-	
 	console.log('CreateWorkspace');
 	$.ajax({
 		type:"get",
@@ -48,9 +108,40 @@ function CreateWorkspace()
 		},
 	});	
 }
+
+function dialogPopup(contents, callback_Y, callback_N ) {
+
+	  $("#dialogContent").val(contents);
+	  $( "#dialog-confirm" ).dialog({
+	      resizable: false,
+	      height: "auto",
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "예": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_Y.call();
+	                }
+	          $( this ).dialog( "close" );
+	        },
+	        "아니오": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_N.call();
+	                }
+	          $( this ).dialog( "close" );
+	        }
+	      }
+	    });
+}
 </script>
+
 </head>
 <body>
+
+<div id="dialog-confirm" title="알림메세지">
+	<input type="text" id = "dialogContent" style="width:300px" readonly></div>
+</div> 
+
 <div id="contentDiv"  style="display:inline;overflow-x:auto;">
 
  	<div class="container">
@@ -75,6 +166,10 @@ function CreateWorkspace()
 		                                <h3 class="fw-normal">${workSpace.workspace_name}</h3>
 		                                <div class="widget-footer-bottom">
 		                                    <div class="mb-sm">${workSpace.description}</div>
+		                                    <a  data-widgster="restore" title="Edit"
+												data-toggle="modal" data-target="#workspaceModal"
+												onclick="workspaceEditModalView(${workSpace.workspace_id},'${workSpace.workspace_name}','${workSpace.description}');"
+												href="#"><i class="glyphicon glyphicon-resize-small"></i></a> 
 		                                    <p><button class="btn btn-default btn-block"  onclick="location.href='selectWorkspace.htm?selectWorkspaceID=${workSpace.workspace_id}'">Enter</button></p>
 		                                </div>
 		                            </div>
@@ -103,4 +198,57 @@ function CreateWorkspace()
     </div>
 </div>
 </body>
+
+<!--워크스페이스 수정  -->
+<div class="modal fade" id="workspaceModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<section class="widget">
+				<div class="widget-body">
+					<form id="validation-form" class="form-horizontal form-label-left"
+						method="post" data-parsley-priority-enabled="false"
+						novalidate="novalidate">
+						<fieldset>
+							<div class="form-group row">
+								<label class="control-label col-sm-2" for="number">워크스페이스명 </label>
+								<div class="col-sm-9">
+									<textarea rows="3"
+										class="autogrow form-control transition-height"
+										id="modalDetailTitle"></textarea>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="control-label col-sm-2" for="number">상세 설명 </label>
+								<div class="col-sm-9">
+									<textarea rows="3"
+										class="autogrow form-control transition-height"
+										id="modalDetailExplain"></textarea>
+								</div>
+							</div>
+						</fieldset>
+
+						<div class="">
+							<div class="row">
+								<div class="col-sm-10">
+									<button style="margin-left: 20px" type="button"
+										class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
+								</div>
+								<div class="col-sm-2">
+									<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
+									<button style="margin-left: 20px" type="button"
+										class="btn btn-warning" id="detailClose" data-dismiss="modal"
+										onclick="workspaceUpdate(${project.project_id});">Submit</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
 </html>
