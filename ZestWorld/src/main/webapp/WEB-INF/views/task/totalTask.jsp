@@ -704,27 +704,9 @@ function taskInsertDialog()
 }
 </style>
 
-
-<div class="row">
-	<div id="nav">
-		<div class="col-sm-5"></div>
-		<div class="col-sm-2">
-			<!-- <nav> <span>
-				<ul>
-					<li class="active"><a href="#">업무</a></li>
-					<li><a href="#">캘린더</a></li>
-				</ul>
-			</span> </nav> -->
-		</div>
-	</div>
-	<div class="col-sm-5"></div>
-</div>
-
-
-
 <div class="row" >
 
-	<div class="col-sm-2" style="background-color: #ffffff; height: 900px">
+	<div class="col-sm-2" style="background-color: #ffffff; height: auto;">
 	<br>
 	정렬<br>
 			<select id="select_order" onchange="myfilter();">
@@ -733,7 +715,7 @@ function taskInsertDialog()
 	            
 	        </select>
 	    <hr>
-	<br>
+
 		기간<br> 
 		<select id="dayfilter" onChange="myfilter();">
 			<option value="">전체</option>
@@ -747,11 +729,11 @@ function taskInsertDialog()
 		<br>
 		<input type="radio" name="task" value="alltask" checked="checked">전체업무
 		<hr> -->
-		<br>
+	
 		빠른필터<br>
 		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();"><br>
 		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
-		<br><hr>
+		<hr>
 		 프로젝트<br>
 			<input type="radio" name="projectlist" onclick="myfilter();" value="500000" checked>전체<br>
 		<c:forEach items="${projectlist}"  var="n">
@@ -771,7 +753,7 @@ function taskInsertDialog()
 		
 		
 		<input type="radio" id="ing"  name="success_f" onclick="myfilter();" value="" checked >진행중인 업무<br>-->
-		<input type="checkbox" id="complete" name="success_f" onclick="myfilter();" value="" >마감 업무<br>
+		<input type="checkbox" id="complete" name="success_f" onclick="myfilter();" value="" >마감 업무<br><br>
 
 		
 		</div>
@@ -782,7 +764,7 @@ function taskInsertDialog()
 	<div id="filter" style=" width: 880px">
 	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
-		<button type="button" class="btn btn-primary" data-toggle="modal"
+		<button type="button" class="btn btn-warning" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
 	<!--          
 	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
@@ -854,7 +836,7 @@ function taskInsertDialog()
 
 	         
       </div>
-      <br><br>
+
 		<div id="container" data-activity-id="320">
 	
 			<div class="row"></div>

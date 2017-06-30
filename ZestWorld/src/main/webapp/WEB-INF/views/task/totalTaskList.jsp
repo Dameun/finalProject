@@ -8,35 +8,9 @@
 %>
 
 <div style="margin-top: 30px">
-	<div>
-		<%-- <button onclick="myfilter(${paging},0);">
-			<c:if test="${cpage>1}">
-					onclick="backPaging(${cpage-1},${pagesize});"
-				<a href="activityboardcontent?cp=${cpage-1}&ps=${pagesize}">이전</a>
-				<!--페이지 리스트 구현  -->
-			</c:if>>
-				<    
-		</button> --%>
-		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
-		<button 
-			<c:if test="${paging>1}">
-					onclick="myfilter(${paging},0);"
-				
-			</c:if>>
-				<    
-		</button>
-		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
-		
-		
-		<button 
-			<c:if test="${paging<count}">
-					onclick="myfilter(${paging},1);"
-				
-			</c:if>>
-			    >
-		</button>
-    </div>
+	
     <div><input type="hidden" id="paging" value='${paging}'></div>
+   
 	<c:forEach items="${list}" var="n">
 		<div id="totalTaskajax" >
 			<div class="articlesteam" >
@@ -94,8 +68,40 @@
 						</li>
 				</ol>
 			</div>
+		
 		</div>
 		<input type="hidden" id="hiddenFollower" value="${n.follower}">
 		<input type="hidden" id="hiddenUserId" value="${userId}">
 	</c:forEach> 
+		 <div class="clearfix"style="text-align:center;">
+		<%-- <button onclick="myfilter(${paging},0);">
+			<c:if test="${cpage>1}">
+					onclick="backPaging(${cpage-1},${pagesize});"
+				<a href="activityboardcontent?cp=${cpage-1}&ps=${pagesize}">이전</a>
+				<!--페이지 리스트 구현  -->
+			</c:if>>
+				<    
+		</button> --%>
+		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
+		<button class="btn btn-default btn-rounded"
+			<c:if test="${paging>1}">
+					onclick="myfilter(${paging},0);"
+				
+			</c:if>>
+			<i class="fa fa-caret-left"></i>
+				이전
+		</button>
+		<%-- <button onclick="myfilter(${paging},1);">></button> --%>
+		
+		
+		<button class="btn btn-inverse btn-rounded"
+			<c:if test="${paging<count}">
+					onclick="myfilter(${paging},1);"
+				
+			</c:if>>
+			다음
+			   <i class="fa fa-caret-right"></i>
+			 
+		</button>
+    </div>
 </div>
