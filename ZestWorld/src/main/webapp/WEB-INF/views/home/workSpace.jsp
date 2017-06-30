@@ -138,10 +138,6 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 </head>
 <body>
 
-<div id="dialog-confirm" title="알림메세지">
-	<input type="text" id = "dialogContent" style="width:300px" readonly></div>
-</div> 
-
 <div id="contentDiv"  style="display:inline;overflow-x:auto;">
 
  	<div class="container">
@@ -158,6 +154,10 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 				<div class="col-md-3"style="padding-bottom:20px;">
 		                <div class="live-tile flip ha" data-mode="flip" data-direction="horizontal" data-speed="600" data-delay="3000" data-height="373" data-play-onhover="true" style="height: 373px;">
 		                    <div class="flip-front ha" style="transform: rotateY(360deg); transition: all 600ms ease 0s;">
+		                     <div class="widget-controls"> <a  data-widgster="restore" title="Edit"
+												data-toggle="modal" data-target="#workspaceModal"
+												onclick="workspaceEditModalView(${workSpace.workspace_id},'${workSpace.workspace_name}','${workSpace.description}');"
+												href="#"><i class="glyphicon glyphicon-resize-small"></i></a></div>
 		                        <section class="widget windget-padding-lg widget-md bg-gray-dark text-white">
 		                            <div class="widget-body widget-body-container">
 		                                <div class="text-align-center">
@@ -166,10 +166,7 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 		                                <h3 class="fw-normal">${workSpace.workspace_name}</h3>
 		                                <div class="widget-footer-bottom">
 		                                    <div class="mb-sm">${workSpace.description}</div>
-		                                    <a  data-widgster="restore" title="Edit"
-												data-toggle="modal" data-target="#workspaceModal"
-												onclick="workspaceEditModalView(${workSpace.workspace_id},'${workSpace.workspace_name}','${workSpace.description}');"
-												href="#"><i class="glyphicon glyphicon-resize-small"></i></a> 
+		                                   
 		                                    <p><button class="btn btn-default btn-block"  onclick="location.href='selectWorkspace.htm?selectWorkspaceID=${workSpace.workspace_id}'">Enter</button></p>
 		                                </div>
 		                            </div>
@@ -246,8 +243,6 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 			</section>
 		</div>
 	</div>
-</div>
-
 </div>
 
 

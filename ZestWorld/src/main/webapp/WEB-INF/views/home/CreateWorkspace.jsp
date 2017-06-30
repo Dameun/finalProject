@@ -89,7 +89,7 @@ function CreateProjcetProcess()
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control"
-									placeholder="Discription" id="workspaceDiscription"
+									placeholder="Description" id="workspaceDiscription"
 									name="workspaceDiscription">
 							</div>
 							<div class="form-group">

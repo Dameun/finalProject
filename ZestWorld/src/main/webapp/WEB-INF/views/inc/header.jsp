@@ -36,8 +36,8 @@
 			message: $('#domMessage') 
 			}); 
 		});
-	
-	
+	});
+	$(document).ready(function(){
 		$(document).ajaxStop($.unblockUI); 
 
 	});
@@ -197,7 +197,7 @@
 <script src="resources/build/bootstrap/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
 <script src="resources/build/bootstrap/vendor/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="resources/build/bootstrap/vendor/widgster/widgster.js"></script>
-<script src="resources/build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+<script src="resources/build/bootstrap/vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 100 }'></script>
 <script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 <script src="resources/build/bootstrap/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
 <script src="resources/Js/jquery.blockUI.js"></script>
@@ -430,7 +430,7 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 }
 </script>
 <div id="dialog-confirm" title="알림메세지">
-	<input type="text" id = "dialogContent" style="width:300px" readonly></div>
+	<input type="text" id = "dialogContent" style="width:300px; border:none;" readonly/>
 </div> 
 </html>
 
