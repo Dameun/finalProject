@@ -19,4 +19,6 @@ public interface IProjectDAO {
 	
 	//프로젝트 멤버 배정
 	public int projectAssignMember(Project_user_DTO dto);
+	
+	public String stateselect(String user_id);
 }

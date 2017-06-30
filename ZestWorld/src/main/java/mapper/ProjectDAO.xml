@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="assignMemberDelete" parameterType="com.zestworld.Table_DTO.Project_user_DTO"  >
 		delete from project_user where user_id=#{user_id} and project_id=#{project_id}
 	</delete> 
-	
+	<select id="stateselect" resultType="String">
+		select state from userstate where user_id=#{user_id}
+	</select>
 	
 </mapper>
