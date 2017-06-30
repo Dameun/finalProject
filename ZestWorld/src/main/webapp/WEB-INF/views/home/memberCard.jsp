@@ -18,7 +18,7 @@
                     <div class="row">
                         
                             <div class="col-sm-4 col-md-4">
-                                <img class="img-rounded img-responsive" style="height:250px;width:500px;"src="resources/img/pictures/19.jpg">
+                                <img class="img-rounded img-responsive" style="height:250px;width:500px;"src="upload/${member.img }">
                             </div>
                             <!-- <div class="btn-toolbar">
                                 <a href="#" class="btn btn-outline btn-sm pull-right">

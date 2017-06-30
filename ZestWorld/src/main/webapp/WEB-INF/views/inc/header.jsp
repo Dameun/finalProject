@@ -70,6 +70,7 @@
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
 		     		 <li class="nav-item nav-item-cta"style="list-style-type: none;">
 							<sec:authorize access="!hasRole('ROLE_USER')">
 								<a class="btn btn-cta btn-cta-secondary" href="login.htm">로그인</a>
@@ -86,10 +87,10 @@
 								<a class="btn btn-cta btn-cta-secondary" href="join.htm">회원가입</a>
 							</li>
 							</sec:authorize>
+			</ul>
              <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown" id="dropdownid" onclick="AlarmReadCheck()" >
-                    <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown"
-                   >
+                    <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
                            <!--  <img class="img-circle" src="./resource/img/people/a5.jpg" alt="..."> -->
                         </span>
@@ -146,10 +147,17 @@
                         </section>
                     </div>
                 </li>
+                <li style="padding-top:5px;">
+     				<a href="#" >
+            			<i class="fa fa-user-plus fa-lg">
+            			</i>
+            		</a>
+            	</li>
                 <li  style="padding-top:5px;">
                     <a href="workSpace.htm">
                         <i class="fa fa-globe fa-lg"></i>
-                    <i class="chat-notification-sing animated bounceIn"></i></a>
+                    <!-- <i class="chat-notification-sing animated bounceIn"></i> -->
+                    </a>
                    
                 </li>
            
@@ -163,7 +171,9 @@
         </div>
     </div>
 </nav>
-
+<div class="loader-wrap hiding hide">
+    <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+</div>
 <script>
 		
 		</script>
