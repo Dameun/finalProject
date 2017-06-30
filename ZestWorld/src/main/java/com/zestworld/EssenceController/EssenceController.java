@@ -17,6 +17,7 @@ import org.springframework.web.servlet.View;
 
 import com.zestworld.EssenceService.EssenceService;
 import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.EssenceDefine_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
@@ -73,7 +74,7 @@ public class EssenceController {
 	
 	//마일스톤 및 카테고리 선택 화면 구성
 	@RequestMapping(value="CreateEssenceData.ajax", method=RequestMethod.GET)
-	public View CreateEssence ( Model model) {
+	public View CreateEssence ( Model model ) {
 		
 		EssenceDefine_DTO define_dto = new EssenceDefine_DTO();
 		
@@ -188,6 +189,7 @@ public class EssenceController {
 	
 		taskDao.InsertProjectUsers(projectUsers);
 
+	
 		DataController.getInstance().dataChangeProject();
 		eProject = projectNew.getProject_id();
 		return eProject;
@@ -219,6 +221,8 @@ public class EssenceController {
 				define.setEcate_id(cateidx);
 				defineNew = essenceService.getDefineByid(define);
 				String taskName = cateStrList[idx]+ ": "+defineNew.getSubTitle();
+				String[] cheakList = defineNew.getContent().split("/");
+				
 				Category_DTO cateDtoNew= essenceService.getCategory(cateDto);
 				task.setCategory_id(cateDtoNew.getCategory_id());
 				task.setTitle(taskName);
@@ -226,8 +230,16 @@ public class EssenceController {
 				task.setUser_id(DataController.getInstance().GetUser().getUser_id());
 				task.setProject_id(project_id);
 				task.setWorkspace_id(DataController.getInstance().getCurrentWorkspace().getWorkspace_id());
-				
 				essenceService.tasktitleInsert(task);
+				int taskID = essenceService.getTask(task);
+				CheckList_DTO dto;
+				for( int k=0; k<cheakList.length; k++)
+				{
+					dto= new CheckList_DTO();
+					dto.setContents(cheakList[k]);
+					dto.setTask_id(taskID);	
+					essenceService.checkListReg(dto);
+				}
 			}
 		}
 	

@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zestworld.Join_Service.JoinService;
+import com.zestworld.ProjectDAO.IProjectDAO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
@@ -127,5 +129,22 @@ public class workspaceController {
 		userState.setUser_id(user_id);
 		userState.setWorkspace_id(workspace_id);
 		userstateService.InsertUserState(userState);
+	}
+	@RequestMapping("/userstateView.htm")
+	@ResponseBody
+	private String UserStateView(){
+		IProjectDAO ipd=sqlsession.getMapper(IProjectDAO.class);
+		String state= ipd.stateselect(	DataController.getInstance().GetUser().getUser_id());
+		System.out.println(state);
+		if(state.equals("업무중")){
+			return "1";
+		}else if(state.equals("외출중")){
+			return "2";			
+		}else if(state.equals("회의중")){
+			return "3";
+		}else{
+			return "4";
+		}
+	
 	}
 }

@@ -70,6 +70,7 @@
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
 		     		 <li class="nav-item nav-item-cta"style="list-style-type: none;">
 							<sec:authorize access="!hasRole('ROLE_USER')">
 								<a class="btn btn-cta btn-cta-secondary" href="login.htm">로그인</a>
@@ -86,10 +87,10 @@
 								<a class="btn btn-cta btn-cta-secondary" href="join.htm">회원가입</a>
 							</li>
 							</sec:authorize>
+			</ul>
              <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown" id="dropdownid" onclick="AlarmReadCheck()" >
-                    <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown"
-                   >
+                    <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
                            <!--  <img class="img-circle" src="./resource/img/people/a5.jpg" alt="..."> -->
                         </span>
@@ -115,19 +116,19 @@
                                     </strong>
                                 </div>
                                 <div class="btn-group btn-group-sm btn-group-justified" id="notifications-toggle" data-toggle="buttons">
-                                    <label class="btn btn-default active" onclick="userState('01');">
+                                    <label class="btn btn-default" id="1" onclick="userState('01');">
                                         <!-- ajax-load plugin in action. setting data-ajax-load & data-ajax-target is the
                                              only requirement for async reloading -->
-                                        <input type="radio" checked = ""  data-ajax-trigger="change" data-ajax-load="demo/ajax/notifications.html" data-ajax-target="#notifications-list"> 업무
+                                        <input type="radio" id="01"  data-ajax-trigger="change" data-ajax-load="demo/ajax/notifications.html" data-ajax-target="#notifications-list"> 업무
                                     </label>
-                                    <label class="btn btn-default" onclick="userState('02');">
-                                        <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/messages.html" data-ajax-target="#notifications-list"> 외출
+                                    <label class="btn btn-default" id="2"onclick="userState('02');">
+                                        <input type="radio" id="02" data-ajax-trigger="change" data-ajax-load="demo/ajax/messages.html" data-ajax-target="#notifications-list"> 외출
                                     </label>
-                                    <label class="btn btn-default" onclick="userState('03');">
-                                        <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/progress.html" data-ajax-target="#notifications-list"> 회의
+                                    <label class="btn btn-default" id="3"onclick="userState('03');">
+                                        <input type="radio" id="03" data-ajax-trigger="change" data-ajax-load="demo/ajax/progress.html" data-ajax-target="#notifications-list"> 회의
                                     </label>
-                                     <label class="btn btn-default" onclick="userState('04');" >
-                                        <input type="radio" data-ajax-trigger="change" data-ajax-load="demo/ajax/progress.html" data-ajax-target="#notifications-list"> 식사
+                                     <label class="btn btn-default" id="4" onclick="userState('04');" >
+                                        <input type="radio" id="04" data-ajax-trigger="change" data-ajax-load="demo/ajax/progress.html" data-ajax-target="#notifications-list"> 식사
                                     </label>
                                 </div>
                             </header>
@@ -146,10 +147,17 @@
                         </section>
                     </div>
                 </li>
+                <li style="padding-top:5px;">
+     				<a href="#" >
+            			<i class="fa fa-user-plus fa-lg">
+            			</i>
+            		</a>
+            	</li>
                 <li  style="padding-top:5px;">
                     <a href="workSpace.htm">
                         <i class="fa fa-globe fa-lg"></i>
-                    <i class="chat-notification-sing animated bounceIn"></i></a>
+                    <!-- <i class="chat-notification-sing animated bounceIn"></i> -->
+                    </a>
                    
                 </li>
            
@@ -163,7 +171,9 @@
         </div>
     </div>
 </nav>
-
+<div class="loader-wrap hiding hide">
+    <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+</div>
 <script>
 		
 		</script>
@@ -207,6 +217,62 @@
 
 <script type="text/javascript">
 //ajaxView에서 connect 성공하면 호출, 알람시 호출
+
+	$('#dropdownid').click(function() {
+		$.ajax({
+			type:"get",
+			url: "userstateView.htm",
+			success:function(data)
+			{
+							
+				if(data=="1"){
+					$('#1').addClass('active');
+					$('#01').attr('checked');
+					$('#2').removeClass('active');
+					$('#02').removeAttr('checked');
+					$('#3').removeClass('active');
+					$('#03').removeAttr('checked');
+					$('#4').removeClass('active');
+					$('#04').removeAttr('checked');
+				}else if(data=="2"){
+					$('#2').addClass('active');
+					$('#02').attr('checked');
+					$('#1').removeClass('active');
+					$('#01').removeAttr('checked');
+					$('#3').removeClass('active');
+					$('#03').removeAttr('checked');
+					$('#4').removeClass('active');
+					$('#04').removeAttr('checked');
+				}else if(data=="3"){
+					$('#3').addClass('active');
+					$('#03').attr('checked');
+					$('#1').removeClass('active');
+					$('#01').removeAttr('checked');
+					$('#2').removeClass('active');
+					$('#02').removeAttr('checked');
+					$('#4').removeClass('active');
+					$('#04').removeAttr('checked');
+				}else if(data=="4"){
+					$('#4').addClass('active');
+					$('#04').attr('checked');
+					$('#1').removeClass('active');
+					$('#01').removeAttr('checked');
+					$('#3').removeClass('active');
+					$('#03').removeAttr('checked');
+					$('#2').removeClass('active');
+					$('#02').removeAttr('checked');
+				}
+				
+			},
+			
+			error:function(){
+				alert('error:' + "alarmCount.ajax");
+			},
+		});	
+	
+	});
+	
+	
 
 function AlarmCountView() 
 {
@@ -309,7 +375,8 @@ function userState(userStateStr)
 			data : "state="+userStateStr,
 			success:function(data)
 			{
-				conselo.log("success");
+				
+				console.log("success");
 			},
 			
 			error:function(){
@@ -323,12 +390,39 @@ function userState(userStateStr)
 //2017-06-21 은경
 function popupOpen() 
 {
-	var popUrl = "http://192.168.0.152:3000"; //팝업창에 출력될 페이지 URL
+	var popUrl = "http://localhost:3000"; //팝업창에 출력될 페이지 URL
 	var popOption = "width=380, height=400, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 	window.open(popUrl, "", popOption);
 }
-//});
+
+function dialogPopup(contents, callback_Y, callback_N ) {
+
+	  $("#dialogContent").val(contents);
+	  $( "#dialog-confirm" ).dialog({
+	      resizable: false,
+	      height: "auto",
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "예": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_Y.call();
+	                }
+	          $( this ).dialog( "close" );
+	        },
+	        "아니오": function() {
+	        	  if ($.isFunction(callback_Y)) {
+	        		  callback_N.call();
+	                }
+	          $( this ).dialog( "close" );
+	        }
+	      }
+	    });
+}
 </script>
+<div id="dialog-confirm" title="알림메세지">
+	<input type="text" id = "dialogContent" style="width:300px" readonly></div>
+</div> 
 </html>
 
 

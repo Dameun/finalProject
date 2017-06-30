@@ -15,4 +15,12 @@
    <select id="getCategory" parameterType="com.zestworld.Table_DTO.Category_DTO" resultType="com.zestworld.Table_DTO.Category_DTO">
 	select category_id from category where title=#{title} and project_id=#{project_id}
 	</select>
+	
+	<select id="getTask" resultType="int"  parameterType="com.zestworld.Table_DTO.Task_DTO" >
+		select task_id from task where title=#{title} and project_id=#{project_id}
+	</select>
+	
+	<insert id ="checkListReg"  parameterType="com.zestworld.Table_DTO.CheckList_DTO" >
+		insert into checkList(check_id,task_id,contents,success_f,enrolldate) values (checklist_seq.nextval,#{task_id},#{contents},0,sysdate)
+	</insert>
 </mapper>

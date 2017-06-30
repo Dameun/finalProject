@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="titleInsert" parameterType="com.zestworld.Table_DTO.Category_DTO">
-	insert into category(project_id,category_id,title) values(#{project_id},category_seq.nextval, #{title})
+	insert into category(workspace_id,project_id,category_id,title) values(#{workspace_id},#{project_id},category_seq.nextval, #{title})
 	</insert>
 	
 	<insert id="tasktitleInsert" parameterType="com.zestworld.Table_DTO.Task_DTO">
