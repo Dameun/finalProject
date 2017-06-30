@@ -236,7 +236,7 @@ function projectAssign(){
 						novalidate="novalidate">
 						<fieldset>
 							<div class="form-group row">
-								<label class="control-label col-sm-3" for="number"> 프로젝트
+								<label class="control-label col-sm-2" for="number"> 프로젝트
 									명 </label>
 								<div class="col-sm-9">
 									<textarea rows="3"
@@ -245,7 +245,7 @@ function projectAssign(){
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="control-label col-sm-3" for="number"> 상세
+								<label class="control-label col-sm-2" for="number"> 상세
 									설명 </label>
 								<div class="col-sm-9">
 									<textarea rows="3"
@@ -255,7 +255,7 @@ function projectAssign(){
 							</div>
 						</fieldset>
 
-						<div class="form-actions">
+						<div class="">
 							<div class="row">
 								<div class="col-sm-10">
 									<button style="margin-left: 20px" type="button"
@@ -264,7 +264,7 @@ function projectAssign(){
 								<div class="col-sm-2">
 									<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
 									<button style="margin-left: 20px" type="button"
-										class="btn btn-success" id="detailClose" data-dismiss="modal"
+										class="btn btn-warning" id="detailClose" data-dismiss="modal"
 										onclick="projectUpdate(${project.project_id});">Submit</button>
 								</div>
 							</div>
