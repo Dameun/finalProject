@@ -23,5 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="stateselect" resultType="String">
 		select state from userstate where user_id=#{user_id}
 	</select>
+	<select id="AssignMemberList"  resultType="com.zestworld.Table_DTO.Project_user_DTO" >
+		select * from project_user where project_id=#{project_id} 
+	</select>
 	
 </mapper>

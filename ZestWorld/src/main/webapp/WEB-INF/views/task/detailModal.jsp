@@ -125,7 +125,7 @@
 							<div id="wMemberList" style="background-color:#EAEAEA">
 						                    
 							</div>
-							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
+							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssignDialog(${n.task_id});">Assign</button>
                             
                          <%--    <div class="modal fade" id="taskAssignMember" style="display: none;">
 								<div class="modal-dialog">
@@ -198,7 +198,7 @@
                     	</div>
                     	<div class="col-sm-2">
                     		<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
-                			<button style="margin-left:20px" type="button" class="btn btn-success" id="detailClose"  data-dismiss="modal" onclick="detailUpdate();">Submit</button> 
+                			<button style="margin-left:20px" type="button" class="btn btn-success" id="detailClose"  data-dismiss="modal" onclick="detailUpdateDialog();">Submit</button> 
                 		</div>
                 	</div>
                 </div>

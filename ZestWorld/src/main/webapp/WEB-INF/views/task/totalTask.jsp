@@ -338,7 +338,7 @@ function submit2(){
 		title=$("#title").val();
 		var project_id= $('#project').val();
 	 	console.log(title); 
-	 	if(title==""){
+	 	/* if(title==""){
 			alert('제목을 입력해주세요');
 			$('#add-modal').modal('show');
 			return;
@@ -353,7 +353,7 @@ function submit2(){
 			alert('카테고리 선택');
 			return;
 			//return false; 
-		}
+		} */
 		 $.ajax({
 		       type : "get",
 		       url : "taskInsert.htm?title="+title+"&categoryId="+categoryId+"&enddate="+enddate+"&project_id="+project_id,
@@ -616,6 +616,50 @@ function deleteTaskMember(memberId){
 		}
 	});	
 }
+//업무
+function submitBtn() 
+{
+	return;
+}
+//yes클릭
+function yes()
+{
+	submit2();
+}
+//no 클릭
+function no()
+{
+	dataErase();
+	return;
+}
+
+//업무 추가
+function taskInsertDialog()
+{
+/* 	var enddate = $("#datepicker").val();
+	title=$("#title").val();
+	var project_id= $('#project').val();
+ 	console.log(title); 
+ 	if(title==""){
+		alert('제목을 입력해주세요');
+		$('#add-modal').modal('show');
+		return;
+		//return false; 
+	}
+ 	if(project_id=="before"){
+		alert('프로젝트 선택');
+		return;
+		//return false; 
+	}
+	if(categoryId=="cateBefore"){
+		alert('카테고리 선택');
+		return;
+		//return false; 
+	} */
+	dialogPopup("업무를 추가하시겠습니까?", yes, no);
+}
+
+
 </script>
 
 
@@ -740,11 +784,11 @@ function deleteTaskMember(memberId){
 		<div class="col-sm-11">
 		<button type="button" class="btn btn-primary" data-toggle="modal"
 	         data-target="#add-modal">+ 새업무</button>
-	         
+	<!--          
 	    <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
 	   		<span class="glyphicon glyphicon-stats"></span> 
 	         	차트보기
-		</button>
+		</button> -->
 		</div>
 		
 	</div>
@@ -789,7 +833,7 @@ function deleteTaskMember(memberId){
                   <div class="modal-footer">
 
                      <button type="button" class="btn btn-info btn-circle btn-lg"
-                        id="addbtn" onclick="submit2();"   data-dismiss="modal">
+                        id="addbtn" onclick="taskInsertDialog();"   data-dismiss="modal">
                         <i class="fa fa-check"></i>
                      </button>
                      <button type="button" class="btn btn-warning btn-circle btn-lg"
@@ -807,49 +851,7 @@ function deleteTaskMember(memberId){
       </form>
       <!-- /modal  -->
 	<!--<a class="glyphicon glyphicon-search"></a> -->
-		
-			
-	
-	
-		
-         
-         
-	  	  	 
-	  	 <!-- 차트보기 (모달) --> 	 
-	  	 <div class="modal fade" id="myModal" >
-	     	<div class="modal-dialog modal-lg">
-	     	 <div class="modal-content">
-	      
-	        	<div class="modal-header">
-	         		 <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          		 <h4 class="modal-title">전체분석</h4>
-	          
-	        	</div>
-	        
-	        	<div class="modal-body">
-	        		<table class="columns">
-	      		 		<tr>
-		      		 		<td><div style="width: 200px; height: 200px;"></div></td>
-		       				<td><div id="donutchart" style="width: 500px; height: 300px;"></div></td>
-	     	   	  	  </tr>
-	    	    	</table>
-	    	    
-	    	    	<table class="columns">
-	      		 		<tr>
-	      		 			<td><div style="width: 200px; height: 200px;"></div></td>
-	       					<td><div id="combochart" style="width: 500px; height: 300px;"></div></td>
-	     	   	   	    </tr>
-	    	    	</table>
-	        	</div>
-	        
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="button22();">Close</button>
-	        </div>
-	        
-	       </div>
-	    </div>
-	  </div>
+
 	         
       </div>
       <br><br>
