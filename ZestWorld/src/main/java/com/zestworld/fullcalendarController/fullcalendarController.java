@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zestworld.Table_DTO.Category_DTO;
-import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.fullcalendarDAO.CalendarDAO;
 import com.zestworld.taskListDAO.taskListDao;
@@ -71,6 +71,7 @@ public class fullcalendarController {
 			JSONObject obj =new JSONObject();
 			String start = calendarList.get(i).getStart_date();
 			String end = calendarList.get(i).getEnd_date();
+			obj.put("task_id", calendarList.get(i).getTask_id());
 			obj.put("title", calendarList.get(i).getTitle());
 			obj.put("explain", calendarList.get(i).getExplain());
 			obj.put("start",start);
@@ -87,11 +88,11 @@ public class fullcalendarController {
 			obj.put("end", end);
 			
 			array.add(obj);
-			
-			System.out.println(array);
+		
 			
 		}
 		
+		System.out.println(array);
 		try{
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().print(array);
@@ -104,7 +105,7 @@ public class fullcalendarController {
 	
 	//일정 추가
 	@RequestMapping("CalendarIns.htm")
-	public String scheduleInsert(int cateID, String title, String content, String start_date, String end_date) throws ClassNotFoundException, SQLException {
+	public String scheduleInsert(String cateID, String title, String content, String start_date, String end_date) throws ClassNotFoundException, SQLException {
 		
 		System.out.println("카테고리 아이디 : " + cateID);
 		System.out.println("업무제목 : " + title);
@@ -122,8 +123,9 @@ public class fullcalendarController {
 		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
 		
 		Task_DTO dto = new Task_DTO();
-			
-		dto.setCategory_id(cateID);
+		
+		int cate_id = Integer.parseInt(cateID);
+		dto.setCategory_id(cate_id);
 		dto.setUser_id(user_id);
 		dto.setWorkspace_id(workspace_id);
 		dto.setProject_id(project_id);
@@ -142,18 +144,18 @@ public class fullcalendarController {
 	
 	//일정삭제
 	@RequestMapping("CalendarDel.htm")
-	public String scheduleDel(String title, String content) throws ClassNotFoundException, SQLException {
+	public String scheduleDel(HttpServletRequest request) throws ClassNotFoundException, SQLException {
 		
-
+		int taskId = Integer.parseInt(request.getParameter("cal_taskId"));
+	
+		System.out.println(taskId);
 		
-		System.out.println("컨텐츠 : "+content);
 		CalendarDAO dao = sqlsession.getMapper(CalendarDAO.class);
 		
 		Task_DTO dto = new Task_DTO();
-		dto.setTitle(title);
-		dto.setExplain(content);
-		
+		dto.setTask_id(taskId);
 		dao.scheduleDelete(dto);
+		
 		
 		return "calendar.calendar";
 	}

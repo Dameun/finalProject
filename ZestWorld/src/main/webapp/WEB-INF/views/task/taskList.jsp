@@ -13,8 +13,6 @@
 
 <link rel="stylesheet" type="text/css" href="resources/dist/css/taskList.css">
 
-<!-- dropdown -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 var categoryId='';
@@ -29,7 +27,8 @@ var clickTask='';
 
 var detailpid='';
 var modalCount=0;
-	
+var task_num=''; 
+var click_btn='';
 	$(function(){
 	
 		//리스트 비동기로 뿌리는 ajax부분
@@ -135,7 +134,7 @@ var modalCount=0;
 	
 	});
 	
-	
+/* 	
 	//업무 title 추가
 	function createBtn(number)
 	{
@@ -160,7 +159,8 @@ var modalCount=0;
 		
 		
 		
-	}
+	} 
+	*/
 
 	 //카테고리 타이틀 수정
 	 function cateTitleView(cateId){
@@ -513,8 +513,56 @@ var modalCount=0;
 		});
 	}
 	
+	
+	
+	
+	
+	function yes()
+	{
+		var title = $("#task-content_"+task_num).val();
+		
+		
+		$.ajax({
+			type : "post",
+			url : "tasktitleInsert.htm",
+			cache : false,
+			data : 'title='+title+'&cateId='+task_num,
+			success : function(data) {
+				console.log("taskinsert 성공^^");				
+				$("#View").empty();
+				$("#View").append(data); 	
+			},
+			error : function() {
+				alert('실패');
+			}
+		});
+	}
+	
+	function no()
+	{
+			alert(click_btn);
+			$(click_btn).parent().parent("#panel").toggle();
+			
+			$("#task-content_number_"+task_num).val("");
+			 
+	
+		
+	}
+	
+	//프로젝트 생성 
+	function createBtn(number,btn) 
+	{
+		dialogPopup("업무를 생성하시겠습니까?", yes, no);
+		task_num = number;
+		click_btn = btn;
+	}	
+	
+	
+	
+	
+	
+	
 </script>
-
 
 <div class="row" style="padding-left:20px;">
       <!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
@@ -777,7 +825,6 @@ var modalCount=0;
 
 
 <div id="View" style="white-space:nowrap;width:100000px">
-		
-</div> 
+
 </div>
 
