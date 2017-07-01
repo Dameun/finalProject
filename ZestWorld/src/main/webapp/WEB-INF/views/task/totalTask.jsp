@@ -93,7 +93,8 @@ function changeSuccessF(taskid){
 			dataType:'html',
 			success:function(data){
 				send('1','title',$('#hiddenFollower').val(), $('#hiddenUserId').val());
-				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+				$("#ajaxlist").append($('#ajaxlist').html(data)); 
+				refresh();
 			},
 			error:function(){
 				alert('검색 에러! 관리자에게 문의하세요');
@@ -110,7 +111,8 @@ function changeSuccessF_zero(taskid){
 			dataType:'html',
 			success:function(data){
 				$("input:checkbox[id='complete']").attr("checked", false);
-				$("#ajaxlist").append($('#ajaxlist').html(data)); 		
+				$("#ajaxlist").append($('#ajaxlist').html(data)); 	
+				refresh();
 			},
 			error:function(){
 				alert('검색 에러! 관리자에게 문의하세요');
@@ -134,6 +136,7 @@ function modalSuccessUpdateDialogY()
 //업무완료취소 여부 확인 dialog-N
 function modalSuccessUpdateDialogN()
 {
+	$("input:checkbox[id="+success_f_dialog+"]").attr("checked", true);
 	return;
 }
 
