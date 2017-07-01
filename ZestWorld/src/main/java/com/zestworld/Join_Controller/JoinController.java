@@ -32,8 +32,10 @@ import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Email_DTO;
 import com.zestworld.Table_DTO.Mail_DTO;
 import com.zestworld.Table_DTO.Role_DTO;
+import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
+import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
 
 @Controller
@@ -51,12 +53,9 @@ public class JoinController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	/*
-	 * @RequestMapping(value="join.htm" , method=RequestMethod.GET) public
-	 * String join(){ System.out.println("회원가입페이지 요청(UI)");
-	 * 
-	 * //return "join.jsp"; return "joinus.join"; }
-	 */
+	@Autowired
+	private UserStateService userstateService;
+
 
 	@RequestMapping(value = "join.htm", method = RequestMethod.GET)
 	public String join() {
@@ -78,12 +77,19 @@ public class JoinController {
 			role.setUser_id(member.getUser_id());
 			role.setAuthority_name("ROLE_USER");
 			result = service.insertRoll(role);
-
+			
 			if (member.getUser_id().equals("admin")) {
 				role = new Role_DTO();
 				role.setUser_id(member.getUser_id());
 				role.setAuthority_name("ROLE_ADMIN");
 				result = service.insertRoll(role);
+				
+				//userState도 생성
+				UserState_DTO userState = new UserState_DTO();
+				userState.setState("업무중");
+				userState.setUser_id(member.getUser_id());
+				userState.setUser_name(member.getName());
+				userstateService.InsertUserState(userState);
 			}
 
 			viewpage = "redirect:/index.htm"; // 경로를 이동시켜주는걸

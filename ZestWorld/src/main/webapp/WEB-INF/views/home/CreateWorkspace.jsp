@@ -8,10 +8,6 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
-function CreateBtn()
-{
-	
-}
 
 function BackBtn()
 {
@@ -95,7 +91,7 @@ function CreateProjcetProcess()
 							<div class="form-group">
 							<button type="button" class="btn btn-secondary btn-sm"onclick="BackBtn()">Cancel</button>
 								<button type="button" class="btn btn-inverse btn-sm"
-									onclick="CreateBtn()">Create</button>
+									onclick="yes()">Create</button>
 								
 							</div>
 						</fieldset>
@@ -106,47 +102,7 @@ function CreateProjcetProcess()
 		</main>
 	</div>
 </div>
-<!-- <div id="content">
- 		<div class="bs-calltoaction bs-calltoaction-primary">
-			<div class="row">
-				<div>
-	                  <div>
-	                     <h4 class="modal-title" style="align: center">워크스페이스 추가</h4>
-	                  </div>
-	                  <div class="modal-body">
-	                    		<input type="text" class="form-control" style="font-size:12pt; color:#ff0000;  value="" placeholder="input workspacename" id="workspacename" name="workspacename">
-				            	<label class="login-field-icon fui-user" font-color ="blue"  label for="uid">워크스페이스 이름</label>
-					</div>
-						<button type="button" onclick="CreateBtn()"
-						class="btn btn-lg btn-block btn-primary" >만들기</button>
-						
-	              		<button type="button" onclick="BackBtn()"
-						class="btn btn-lg btn-block btn-primary" >뒤로</button>
-	                                   
-	                 
-	               </div>
-	          </div>
-	    </div>   
-</div>	 -->
-<!-- <div id="content">
-		<div class="bs-calltoaction bs-calltoaction-primary">
-			<div class="row">
-				<div class="col-md-9 cta-contents">
-					<h1 class="cta-title">워크스페이스 만들기
-						워크스페이스는 회사, 부서, 팀, 혹은 개인이 될 수 있습니다.	</h1>
-					    <div class="control-group">
-			            	<input type="text" class="login-field" style="font-size:12pt; color:#ff0000;  value="" placeholder="input workspacename" id="workspacename" name="workspacename">
-			            	<label class="login-field-icon fui-user" font-color ="blue"  label for="uid">워크스페이스 이름</label>
-			            </div>
-			             <div class="control-group">
-			            	<input type="text" "class="login-field" value="" placeholder="discription" id="workspaceDiscription" name="workspaceDiscription"
-			            	style="font-size:12pt; color:#ff0000; font-weight:bold;">
-			            	<label class="login-field-icon fui-user" label for="uid">설명</label>
-			            </div>
-				</div>
-				<div class="col-md-3 cta-button">
-					<button type="button" onclick="CreateBtn()"
-					class="btn btn-lg btn-block btn-primary" >만들기</button>
-				</div>
-					
-			</div> -->
+<div id="dialog-confirm" title="알림메세지">
+	<input type="text" id = "dialogContent" style="width:300px; border:none;" readonly/>
+</div> 
+

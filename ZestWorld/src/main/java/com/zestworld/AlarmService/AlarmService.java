@@ -12,9 +12,9 @@ import com.zestworld.util.DataController;
 /*
  * @FileName : AlarmService.java
  * @Project : ZestWorld
- * @Date : 2017.06.18
+ * @Date : 2017.07.01
  * @Author : 장윤희
- * @Desc : 알람 Service 
+ * @Desc : AlarmService
  * */
 @Service
 public class AlarmService {

@@ -1,17 +1,20 @@
 package com.zestworld.userStateService;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.userStateDAO.IUserStateDAO;
 
+/*
+ * @FileName : IEssenceDAO.java
+ * @Project : ZestWorld
+ * Date : 2017.06.23
+ * @Author : 장윤희
+ * @Desc : 에센스 DAO
+ */
 @Service
 public class UserStateService {
 	

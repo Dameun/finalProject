@@ -1,6 +1,5 @@
 package com.zestworld.EssenceService;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zestworld.Essence_DAO.IEssenceDAO;
-import com.zestworld.OutlineDAO.IOutlineDAO;
 import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.EssenceDefine_DTO;

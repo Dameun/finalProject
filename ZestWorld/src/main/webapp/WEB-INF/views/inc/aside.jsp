@@ -44,17 +44,7 @@
                     	개별업무
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="ajaxView('wSpace.ajax')">
-                    <span class="icon">
-                        <i class="glyphicon glyphicon-folder-open" style="padding-top:5px;"></i>
-                    </span>
-                   	프로젝트
-                    <!-- <span class="label label-danger">
-                        new
-                    </span> -->
-                </a>
-            </li>
+           
             <li>
                 <a href="#" onclick="ajaxView('analysis.ajax')">
                     <span class="icon">
@@ -76,14 +66,7 @@
                 </a>
             </li>
             
-            <li>
-                <a href="#" onclick="ajaxView('template.ajax')">
-                    <span class="icon">
-                        <i class="glyphicon glyphicon-save" style="padding-top:5px;"></i>
-                    </span>
-                    Template
-                </a>
-            </li>
+          
         </ul>
         <!-- every .sidebar-nav may have a title -->
        </div>

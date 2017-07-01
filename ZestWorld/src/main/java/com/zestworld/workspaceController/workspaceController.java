@@ -41,9 +41,6 @@ public class workspaceController {
 	@Autowired
 	private JoinService service;
 	
-	@Autowired
-	private UserStateService userstateService;
-	
 	//
 	@RequestMapping("/workSpace.htm")
 	public String GetWorkSpace(Principal principal,HttpSession session, Model model)
@@ -98,7 +95,7 @@ public class workspaceController {
 	}
 	
 	@RequestMapping("/createWorkspace.htm")
-	public String createWorkspace(String workspaceName,String workspaceDiscription,Model model)
+	public String createWorkspace(String workspaceName,String workspaceDiscription,Model model, HttpSession session)
 	{
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Workspace_DTO workspace = new Workspace_DTO ();
@@ -117,20 +114,10 @@ public class workspaceController {
 		List<Workspace_DTO>workspaceList = new ArrayList<Workspace_DTO>();
 		workspaceList = DataController.getInstance().GetWorkspaceList();
 		model.addAttribute ("workspaceList", workspaceList);
-		UserStateCreate(workspace.getWorkspace_id(),DataController.getInstance().GetUser().getUser_id() );
 		return "home/workSpace";
 	}
 	
-	//워크스페이스 생성시 상태테이블도 같이 생성 
-	private void UserStateCreate(int workspace_id, String user_id)
-	{
-		UserState_DTO userState = new UserState_DTO();
-		userState.setState("업무중");
-		userState.setUser_id(user_id);
-		userState.setWorkspace_id(workspace_id);
-		userstateService.InsertUserState(userState);
-	}
-	
+
 	@RequestMapping("/userstateView.htm")
 	@ResponseBody
 	private String UserStateView(){

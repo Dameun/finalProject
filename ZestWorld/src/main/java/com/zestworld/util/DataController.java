@@ -235,7 +235,6 @@ public class DataController {
 	}
 	
 
-	
 	public String getSelectEssenPage() {
 		return selectEssenPage;
 	}

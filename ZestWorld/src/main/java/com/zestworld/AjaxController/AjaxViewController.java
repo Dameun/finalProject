@@ -26,7 +26,6 @@ import com.zestworld.util.DataController;
  * @Date : 2017.06.18
  * @Author : 장윤희
  * @Desc : 비동기 페이지 처리 
- * 
  * */
 @Controller
 public class AjaxViewController {
@@ -37,7 +36,6 @@ public class AjaxViewController {
 	private OutlineService service;
 	@Autowired
 	private UserStateService userstatesService;
-
 	
 	@RequestMapping(value = "/CreateDefineEssence.ajax", method = RequestMethod.GET)
 	public String createDefineEssence() {
@@ -230,7 +228,6 @@ public class AjaxViewController {
 		UserState_DTO userState = new UserState_DTO();
 		userState.setUser_id(DataController.getInstance().GetUser().getUser_id());
 		userState.setState(Str);
-		userState.setWorkspace_id(DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
 		userstatesService.UpdateUserState(userState);
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
@@ -276,17 +273,16 @@ public class AjaxViewController {
 		DataController.getInstance().dataChange();
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
-/*	
+	
 	//워크 스페이스 삭제시 
-	@RequestMapping(value = "/projectDelete.ajax", method = RequestMethod.GET)
-	public String deleteWorkspace(String project_id) 
+	@RequestMapping(value = "/workspaceDelete.ajax", method = RequestMethod.GET)
+	public String deleteWorkspace(String workSpace_id) 
 	{
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		Project_DTO project = taskDao.GetProject(project_id);
-		taskDao.deleteTaskByProjectid(project);
-		taskDao.deleteProject(project);
-		DataController.getInstance().dataChangeProject();
+		Workspace_DTO workspace = taskDao.GetWorkSpace(Integer.parseInt(workSpace_id));
+		taskDao.deleteWorkspace(workspace);
+
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
-*/
+
 }

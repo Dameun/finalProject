@@ -16,15 +16,16 @@ import com.zestworld.Table_DTO.Alarm_DTO;
 import com.zestworld.util.DataController;
 
 /*
- * @FileName : AlarmDAO.java
+ * @FileName : AlarmAjaxController.java
  * @Project : ZestWorld
- * @Date : 2017.06.18
- * @Author : �옣�쑄�씗
- * @Desc : �븣�엺 而⑦듃濡ㅻ윭( 	alarmList.ajax �븣�엺由ъ뒪�듃 議곗쇅/
- * 					 	alarmCount.ajax �븣�엺 移댁슫�듃 議고쉶/ 
- * 						updateAlarm.ajax �겢由��떆 移댁슫�듃 蹂�寃� / 
- * 						newAlarm �븣�엺�떆 DB泥섎━ )
- */
+ * @Date : 2017.07.01
+ * @Author : 장윤희
+ * @Desc : 알람 컨트롤러 
+ * 		   alarmList: 알람 리스트 호출 
+ * 		   alarmCount : 헤더부분 알람카운터 
+ * 		   updateAlarm : 알람 읽은후 처리 
+ * 		   newAlarm : 새로운 알람 등록
+ * */
 @Controller
 public class AlarmAjaxController {
 

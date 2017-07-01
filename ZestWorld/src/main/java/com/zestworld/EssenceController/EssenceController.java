@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
-
 import com.zestworld.EssenceService.EssenceService;
 import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.CheckList_DTO;
@@ -24,7 +22,13 @@ import com.zestworld.Table_DTO.Project_user_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
 import com.zestworld.util.DataController;
-
+/*
+ * @FileName : IEssenceDAO.java
+ * @Project : ZestWorld
+ * Date : 2017.06.23
+ * @Author : 장윤희
+ * @Desc : 에센스 생성 및 저장 사용자 UX 정보제어
+ */
 @Controller
 public class EssenceController {
 	
@@ -33,6 +37,7 @@ public class EssenceController {
 	
 	@Autowired(required=false)
 	private View jsonview; 
+	
 	@Autowired
 	private SqlSession sqlsession;
 	
@@ -155,7 +160,6 @@ public class EssenceController {
 	{
 		int eProject=0;
 		String user_id = DataController.getInstance().GetUser().getUser_id();
-		//String[] strArr = etcStr.split(",");
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Project_DTO project = new Project_DTO();
 		project.setWorkspace_id(DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
@@ -243,12 +247,6 @@ public class EssenceController {
 			}
 		}
 	
-	}
-	
-	//클릭 다 되었는지 체크
-	private void EssenceInputCheck()
-	{
-		
 	}
 
 }
