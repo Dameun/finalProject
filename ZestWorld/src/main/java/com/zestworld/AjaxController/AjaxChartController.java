@@ -281,7 +281,7 @@ public class AjaxChartController {
 	List<Task_DTO> getTaskAllFlow_enddateNo_countU;
 	List<Task_DTO> getTaskAllFlow_ing_countU;	
 	
-	@RequestMapping(value="/analysisU.ajax", method=RequestMethod.GET)
+	/*@RequestMapping(value="/analysisU.ajax", method=RequestMethod.GET)
 	public String analysisU(Model model) throws ClassNotFoundException, SQLException
 	{	
 		
@@ -384,5 +384,5 @@ public class AjaxChartController {
 		getTaskAllFlow_enddateNo_countU = analysisService.getTaskAllFlow_enddateNo_countU(project_id);
 		getTaskAllFlow_ing_countU = analysisService.getTaskAllFlow_ing_countU(project_id);		
 		
-	}
+	}*/
 }
