@@ -516,17 +516,17 @@ var modalCount=0;
 </script>
 
 
-<div class="row">
+<div class="row" style="padding-left:20px;">
       <!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
-		<div class="btn-toolbar pull-right">
-		<button class="btn btn-inverse mb-xs" role="button">
+	<div class="btn-toolbar pull-left">
+		<button class="btn btn-inverse mb-xs" role="button" href="#add-modal"data-toggle="modal">
                                 <i class="fa fa-plus text-warning"></i>
                                업무리스트 추가
                             </button>
 		<button class="btn btn-inverse mb-xs" role="button" id="file" onclick="location.href='Schedule.htm'">
 		<i class="fa fa-calendar text-warning"></i>
 		캘린더</button>
-</div>
+</div> 
 </div>
       
 	<!--카테고리 title 수정 모달  -->
@@ -777,6 +777,7 @@ var modalCount=0;
 
 
 <div id="View" style="white-space:nowrap;width:100000px">
-
+		
+</div> 
 </div>
 

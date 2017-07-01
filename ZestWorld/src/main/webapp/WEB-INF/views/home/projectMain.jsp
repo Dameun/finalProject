@@ -208,20 +208,21 @@ function projectAssign(){
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
-					<h4 class="modal-title text-xl-center fw-bold mt"
+					<h4 class="modal-title"
 						id="myModalLabel18">프로젝트 멤버 배정</h4>
-					<p class="text-xl-center text-muted mt-sm fs-mini"></p>
+					
 				</div>
 				<div class="modal-body">
 
 					<div id="wMemberList"></div>
 
+			
+				<div class="form-group"style="text-align:right;">
+					<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-warning btn-sm"
+						onclick="projectAssign();" data-dismiss="modal">Finish</button>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-warning"
-						onclick="projectAssign();" data-dismiss="modal">Assign</button>
-				</div>
+					</div>
 			</div>
 		</div>
 	</div>
