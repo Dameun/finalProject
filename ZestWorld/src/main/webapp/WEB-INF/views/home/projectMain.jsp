@@ -225,53 +225,59 @@ function projectAssign(){
 	</div>
 <!--프로젝트 수정  -->
 <div class="modal fade" id="editProjectModal" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<section class="widget">
+	<div class="modal-dialog modal-lg"  style="padding-left:10%;">
+		
+		   
+			<section class="widget"style="width:90%;">
 				<div class="widget-body">
 					<form id="validation-form" class="form-horizontal form-label-left"
 						method="post" data-parsley-priority-enabled="false"
 						novalidate="novalidate">
 						<fieldset>
-							<div class="form-group row">
+						<div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                     </button>
+                     <h4 class="modal-title">프로젝트명 수정</h4>
+                     </div>
+                     <br>
+							<div class="form-group">
 								<label class="control-label col-sm-2" for="number"> 프로젝트
 									명 </label>
-								<div class="col-sm-9">
-									<textarea rows="3"
-										class="autogrow form-control transition-height"
-										id="modalDetailTitle"></textarea>
+								<div class="col-sm-10">
+									<input type="text"
+										class="form-control"
+										id="modalDetailTitle">
 								</div>
 							</div>
-							<div class="form-group row">
+							<div class="form-group">
 								<label class="control-label col-sm-2" for="number"> 상세
 									설명 </label>
-								<div class="col-sm-9">
+								<div class="col-sm-10">
 									<textarea rows="3"
 										class="autogrow form-control transition-height"
 										id="modalDetailExplain"></textarea>
 								</div>
 							</div>
-						</fieldset>
-
-						<div class="">
-							<div class="row">
-								<div class="col-sm-10">
-									<button style="margin-left: 20px" type="button"
-										class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
-								</div>
-								<div class="col-sm-2">
+							<div class="form-group"style="text-align:right;">
+								<div class="col-sm-12">
+									<button type="button"
+										class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+								
+								
 									<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
-									<button style="margin-left: 20px" type="button"
-										class="btn btn-warning" id="detailClose" data-dismiss="modal"
-										onclick="projectUpdate(${project.project_id});">Submit</button>
-								</div>
+									<button type="button"
+										class="btn btn-warning btn-sm" id="detailClose" data-dismiss="modal"
+										onclick="projectUpdate(${project.project_id});">Finish</button>
 							</div>
-						</div>
+							</div>
+						</fieldset>
 					</form>
 				</div>
 			</section>
 		</div>
 	</div>
 </div>
-</div>
+
 

@@ -127,7 +127,7 @@
 </div>
 
 <div id="dialog-confirm" title="알람메세지">
-  <div id = "dialogContent"/>
+  <div id = "dialogContent"></div>
 </div>
 
  <!--마일스톤 팝업창  -->
@@ -141,20 +141,27 @@
                         aria-label="Close">
                         <span aria-hidden="true">×</span>
                      </button>
-                     <h4 class="modal-title">마일스톤 명을 입력하세요</h4>
+                     <h5 class="modal-title">마일스톤 명을 입력하세요</h5>
                   </div>
                   <br>
                   <div class="modal-body">
-                  <div class="input-group">
+                  <div class="form-group">
                      <input class="form-control" type="text" id="milestoneContent" name="milestoneContent"
-                        placeholder="',' 로구분해주세요"  style="width:90%;">
-                       
-                        <div class="input-group-btn">
-                     <button type="button" class="btn btn-warning"
-                        id="btn" onclick= "CreateMilestone()"   data-dismiss="modal">
-                        <i class="fa fa-check"></i>
+                        placeholder="',' 로구분해주세요"  style="width:100%;">
+                       </div>
+                       <div class="form-group" style="text-align:right;">
+                        
+                          <button type="button" class="btn btn-secondary btn-sm"
+                        id="cancleBtn" data-dismiss="modal">
+                       Cancel
                      </button>
-                     </div>
+                     <button type="button" class="btn btn-warning btn-sm"
+                        id="btn" onclick= "CreateMilestone()"  style="padding-right:10px" data-dismiss="modal">
+                        Finish
+                     </button>
+                   
+                     
+                     
                      </div>
                   </div>
                </div>
