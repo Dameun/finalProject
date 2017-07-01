@@ -11,12 +11,19 @@ import com.zestworld.Join_DAO.JoinDAO;
 import com.zestworld.Table_DTO.Role_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
-
+/*
+* @FileName : JoinService.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 28.
+* @Author : 양건휘
+* @Desc : 회원가입, 회원 수정
+*/
 @Service
 public class JoinService {
 
 	@Autowired
 	private SqlSession sqlsession;
+
 
 	public int insert(Users_DTO member) throws ClassNotFoundException, SQLException {
 		int result = 0;

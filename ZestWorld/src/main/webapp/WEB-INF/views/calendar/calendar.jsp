@@ -34,7 +34,7 @@ $(function() {
 	
       from = $( "#Insert_startdate" ).datepicker({
           changeMonth: true,
-          dateFormat: "yy/mm/dd"
+          dateFormat: "yy-mm-dd"
         })
         .on( "change", function() {
           to.datepicker( "option", "minDate", getDate( this ));
@@ -42,7 +42,7 @@ $(function() {
         
       to = $( "#Insert_enddate" ).datepicker({
         changeMonth: true,
-        dateFormat: "yy/mm/dd"
+        dateFormat: "yy-mm-dd"
       })
       .on( "change", function() {
         from.datepicker( "option", "maxDate", getDate( this ));
@@ -124,34 +124,42 @@ $(function() {
         width: 400,
   
     });
-      
-    $.ajax({
+     
+    $("#cDelete").click(function(){
     	
-    	type:"post",
-    	url:"CalendarDel.htm",
-    	data:"title="+$("#title").val()+"&content="+$("#content").val(),
-    	success : function(data){
-    	console.log("삭제");
-    	},
-    	error:function(){
-    		alert("삭제error");
-    	}
+    	alert($("#title").val());
+    	alert($("#content").val());
+    	
+    	
+    	  $.ajax({
+    	    	
+    	    	type:"post",
+    	    	url:"CalendarDel.htm",
+    	    	data:"title="+$("#title").val()+"&content="+$("#content").val(),
+    	    	success : function(data){
+    	    	console.log("삭제");
+    	    	},
+    	    	error:function(){
+    	    		alert("삭제error");
+    	    	}
+    	    });
+    	    
     });
-    
-
+   
     
 
 });      
-     
+    
     function calinsert(){
   	 
     	$.ajax({
     	
     	type:"get",
     	url:"CalendarIns.htm",
-    	data:"ctitle="+$("#categoryTitle option:selected").val()+"&title="+$("#Insert_title").val()+"&content="+$("#Insert_content").val()+"&start_date="+$("#Insert_startdate").val()+"&end_date="+$("#Insert_enddate").val(),
+    	data:"cateID="+$("#categoryTitle option:selected").val()+"&title="+$("#Insert_title").val()+"&content="+$("#Insert_content").val()+"&start_date="+$("#Insert_startdate").val()+"&end_date="+$("#Insert_enddate").val(),
     	success: function(data){
-    		console.log("추가");
+    		$("#calEventDialog").hide();
+    		$('.modal-backdrop').remove();
     	},
     	error:function(){
     		alert("추가 error");
@@ -160,27 +168,24 @@ $(function() {
  	   }); 
     	   
     }
- 
-     
+    
 </script>
 <body>
 
 	<div id="calEditDialog">
-		<form action="CalendarDel.htm" method="post">
+
 			<fieldset>
-				<label
-					for="eventTitle">Title</label> <input type="text" name="title"
-					id="title" style="width: 350px;"/><br> <label
-					for="eventContent">Content</label> <input type="text"
-					name="content" id="content" style="height: 100px; width: 350px;"
-					readonly="readonly" /><br>
-				<input type="submit" value="삭제하기">
+				<label for="eventTitle">Title</label>
+			    <input type="text" name="title" id="title" style="width: 350px;"readonly="readonly"/><br>
+			    <label for="eventContent">Content</label> 
+				<input type="text" name="content" id="content" style="height: 100px; width: 350px;"readonly="readonly" /><br>
+				<input type="button" value="삭제하기" id="cDelete">
 			</fieldset>
-		</form>
+		
 	</div>
 	
 	<div id="calEventDialog">
-		<form action="CalendarAdd.date" method="post">
+
 			<fieldset>
 				<label for="eventCtitle">Category Title</label><br>
 				<select id="categoryTitle">
@@ -192,7 +197,7 @@ $(function() {
 				<label for="eventTitle">Title</label> <br> 
 				<input type="text" name="title" id="Insert_title" style="width: 350px;"/><br> 
 				<label for="eventContent">Content</label> 
-				<input type="text" name="content" id="Insert_content" style="height: 100px; width: 350px;" /><br>
+				<input type="text" name="content" id="Insert_content" style="height: 100px; width: 350px;"/><br>
 
 				<label for="eventStart">Start Date</label> <br> <input
 					type="text" name="startdate" id="Insert_startdate" style="width: 200px;" /><br>
@@ -201,7 +206,7 @@ $(function() {
 					name="enddate" id="Insert_enddate" style="width: 200px;" /><br>
 				<br> <input type="button" value="추가하기" align="right" id="CalendarUpdate" onclick="calinsert()">
 			</fieldset>
-		</form>
+		
 	</div>
 	<br>
 	<br>
@@ -213,3 +218,10 @@ $(function() {
 	<div id='myCalendar'></div>
 
 </body>
+
+
+
+
+
+
+

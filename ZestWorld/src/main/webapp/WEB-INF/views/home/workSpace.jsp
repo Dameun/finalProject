@@ -35,9 +35,10 @@
 var workSpace_id='';
 function workspaceEditModalView(workSpace_id,p_title,explain)
 {
+	console.log("workspaceEditModalView enter");
 	workSpace_id= workSpace_id;
 	$('#modalDetailTitle').val(p_title);
-	$('#modalDetailExplain').val(explain);projectUpdate
+	$('#modalDetailExplain').val(explain);
 }
 function yes()
 {
@@ -85,7 +86,7 @@ function workspaceUpdate()
 			"workSpaceTitle" : workSpaceTitle,
 			"workSpaceExplain" : workSpaceExplain},
 		success:function(data){
-			ajaxView('projectMain.ajax');
+			ajaxView('wSpace.ajax');
 		},
 		error:function(){
 			alert('error');
@@ -133,6 +134,21 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 	      }
 	    });
 }
+
+function workspaceDelete(workSpace_id){
+	$.ajax({
+		type:"get",
+		url:"workspaceDelete.ajax?workSpace_id="+workSpace_id,
+		success:function(data){
+			console.log("워크스페이스 삭제 성공");
+			ajaxView('wSpace.ajax');
+			/* $("#contentDiv").append( $('#contentDiv').html(data)); 		 */
+		},
+		error:function(){
+			alert('error');
+		},
+	});		
+}
 </script>
 
 </head>
@@ -155,10 +171,10 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 		                <div class="live-tile flip ha" data-mode="flip" data-direction="horizontal" data-speed="600" data-delay="3000" data-height="373" data-play-onhover="true" style="height: 373px;">
 		                    <div class="flip-front ha" style="transform: rotateY(360deg); transition: all 600ms ease 0s;">
 		                     <div class="widget-controls"> 
-		                     <a  data-widgster="restore" title="Edit" data-toggle="modal" data-target="#workspaceModal"
+		                     <a data-widgster="restore" title="Edit" data-toggle="modal" data-target="#editWorkspaceModal"
 												onclick="workspaceEditModalView(${workSpace.workspace_id},'${workSpace.workspace_name}','${workSpace.description}');"
 												href="#"><i class="glyphicon glyphicon-edit"></i></a>
-							<a data-widgster="close" title="Close" 	onclick="" href="#">
+							<a data-widgster="close" title="Close" 	onclick="workspaceDelete(${workSpace.workspace_id})" href="#">
 							<i class="glyphicon glyphicon-remove"></i></a>
 							 </div>
 		                        <section class="widget windget-padding-lg widget-md bg-gray-dark text-white">
@@ -200,7 +216,7 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 </body>
 
 <!--워크스페이스 수정  -->
-<div class="modal fade" id="workspaceModal" role="dialog">
+<<div class="modal fade" id="editWorkspaceModal" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<section class="widget">
