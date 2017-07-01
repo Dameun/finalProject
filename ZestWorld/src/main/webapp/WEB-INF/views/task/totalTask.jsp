@@ -666,51 +666,65 @@ function detailModalUpdateDialogN()
 <div class="row" >
 
 	<div class="col-sm-2" style="background-color: #ffffff; height: auto;">
-	<br>
+
+	      
+	<div class="form-group">
+	    <br>
 	정렬<br>
-			<select id="select_order" onchange="myfilter();">
+		<select id="select_order" onchange="myfilter();" style="width:85px;">
 	            <option value="">최신순</option>
 	            <option value="end">마감순</option>
 	            
-	        </select>
-	    <hr>
-
-		기간<br> 
+	
+	        </select> 
+</div>
+<hr>
+<div class="form-group">		
+기간<br> 
 		<select id="dayfilter" onChange="myfilter();">
 			<option value="">전체</option>
 			<option value="30">최근 30일</option>
 			<option value="60">최근 60일</option>
 		</select>
+</div>
 
 		<hr>
-
+<div class="form-group">
 	
 		빠른필터<br>
 		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();"><br>
+		
 		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
+		</div>
+		
+		
 		<hr>
+		<div class="form-group">
 		 프로젝트<br>
 			<input type="radio" name="projectlist" onclick="myfilter();" value="500000" checked>전체<br>
 		<c:forEach items="${projectlist}"  var="n">
 			<input type="radio" name="projectlist" value="${n.project_id}" onclick="myfilter();">${n.p_title}<br>
 		</c:forEach> 
-		
+		</div>
 		<hr>
+		<div class="form-group">
 		작성자<br>
 		<input type="radio" id="writermember2" name="writermember" onclick="myfilter();" value="" checked>전체<br>
 		<c:forEach items="${assign}" var="n" >
 			<input  type="radio" id="writermember" name="writermember" onclick="myfilter();" value="${n.user_id}">${n.user_id}<br>
 		</c:forEach>
+		</div>
 		<hr>
+		<div class="form-group">
 		상태<br>
 		<!-- 
 		<input type="radio" id="all" name="success_f" onclick="myfilter();" value="" checked>전체<br>
 		
 		
 		<input type="radio" id="ing"  name="success_f" onclick="myfilter();" value="" checked >진행중인 업무<br>-->
-		<input type="checkbox" id="complete" name="success_f" onclick="myfilter();" value="" >마감 업무<br><br>
+		<input type="checkbox" id="complete" name="success_f" onclick="myfilter();" value="" >마감 업무<br>
 
-		
+		</div>
 		</div>
 	<div class="col-sm-10" style="height: 500px">
 
@@ -720,15 +734,15 @@ function detailModalUpdateDialogN()
 	<div class="row" style="margin-left:30px">
 		<div class="col-sm-11">
 		<button type="button" class="btn btn-warning" data-toggle="modal"
-	         data-target="#add-modal">+ 새업무</button>
+	         data-target="#add-modal">+ 새 업무</button>
 		</div>
 		
 	</div>
 
          <!-- modal -->
-         <form id="add_taskTitle" name="add_taskTitle" method="post">
+         <form id="add_taskTitle" name="add_taskTitle" method="post" >
          <div class="modal fade" id="add-modal" style="display: none;">
-            <div class="modal-dialog">
+            <div class="modal-dialog"style="width:30%;">
                <div class="modal-content">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal"  onclick="dataErase();"
@@ -738,43 +752,56 @@ function detailModalUpdateDialogN()
                      <h4 class="modal-title" style="align: center">새 업무</h4>
                   </div>
                   <div class="modal-body">
-                     <input class="form-control" type="text" id="title" name="title"
-                        placeholder="업무 제목" >
-
-
-					<select id="project" onchange="projectchange();">
-						<option value="before" selected="selected">  </option>
+                  <div class="form-group" style="float:left;">
+                  
+                     
+                 <!--  <label for="">프로젝트 선택</label> -->
+                 <div style="display:inline;">
+                  <select id="project" onchange="projectchange();">
+						<option value="before" selected disabled>프로젝트 선택  </option>
 						<c:forEach items="${projectlist}" var="n">
 						 	<option value="${n.project_id}">${n.p_title}</option>		
 						</c:forEach>
     		        </select>
-    		        
-    		        <!-- 프로젝트 별 카테고리 리스트  -->
-    		        <div id= "categoryList">
+    		      	</div>
+    		    
+    		         <!-- 프로젝트 별 카테고리 리스트  -->
+    		     <div id= "categoryList" style="display:inline;">
     		        
     		        </div>
-                  
-                  <!-- 마감일 선택 -->     
-                  <p>마감일: <input type="text" id="datepicker"></p>
+    		        
                   </div>
-                  <div class="modal-footer">
+                  <div class="form-group">
+                     <input class="form-control" type="text" id="title" name="title"
+                        placeholder="업무 제목" >
 
-                     <button type="button" class="btn btn-info btn-circle btn-lg"
-                        id="addbtn" onclick="taskReg();"   data-dismiss="modal">
-                        <i class="fa fa-check"></i>
-                     </button>
-                     <button type="button" class="btn btn-warning btn-circle btn-lg"
-                        data-dismiss="modal" id="ucancle">
-                        <i class="fa fa-times"></i>
-                     </button>
+					</div>
+					
+    		        
+    		       
+                  <div class="form-group">
+                  <!-- 마감일 선택 -->     
+                 마감일: <input type="text" id="datepicker" class="form-control">
+                 </div>
+                  
+				<div class="form-group"style="text-align:right;">
                      
-                  </div>
+                     <button type="button" class="btn btn-secondary btn-sm"
+                        data-dismiss="modal" id="ucancle">
+                        Cancel
+                     </button>
+                     <button type="button" class="btn btn-warning btn-sm"
+                        id="addbtn" onclick="taskReg();"   data-dismiss="modal">
+                        Finish
+                     </button>
+                    </div> 
+                 
                </div>
 
             </div>
 
          </div>
-     
+     </div>
       </form>
       <!-- /modal  -->
 	<!--<a class="glyphicon glyphicon-search"></a> -->

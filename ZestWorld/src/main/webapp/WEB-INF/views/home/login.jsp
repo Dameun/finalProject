@@ -116,8 +116,7 @@ $(document).ready(function () {
 							<a class="mr-n-lg" href="#myModal" data-toggle="modal"
 								data-target="#myModal">비밀번호를 잊으셨나요?</a>
 							<!-- Modal -->
-							<div class="modal fade" id="myModal" role="dialog"
-								>
+							<div class="modal fade" id="myModal" role="dialog">
 								<div class="modal-dialog">
 
 									<!-- Modal content-->
@@ -145,13 +144,15 @@ $(document).ready(function () {
 												name="phone" class="form-control" placeholder="'-'빼고입력해주세요" />
 										</div>
 									</form>
-									<div class="row" style="text-align: center;">
-										<div class="clearfix">
-											<button type="button" class="btn btn-inverse btn-sm"
-												data-dismiss="modal" onclick="search()">SEND</button>
+									<div class="form-group"style="text-align:right;">
+									
 											<button type="button" class="btn btn-secondary btn-sm"
 												data-dismiss="modal">CANCEL</button>
-										</div>
+											<button type="button" class="btn btn-inverse btn-sm"
+												data-dismiss="modal" onclick="search()">SEND</button>
+											
+										
+									
 									</div>
 									</section>
 								</div>

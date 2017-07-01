@@ -108,7 +108,7 @@
 			<div class="form-group">
 				<label for="explain">프로젝트
 					설명</label> <br><input type="text" class="form-control"
-					 placeholder="Discription" id="explain" name="explain">
+					 placeholder="Description" id="explain" name="explain">
 
 			</div>
 
@@ -141,7 +141,7 @@
                         aria-label="Close">
                         <span aria-hidden="true">×</span>
                      </button>
-                     <h5 class="modal-title">마일스톤 명을 입력하세요</h5>
+                     <h4 class="modal-title">마일스톤 명을 입력하세요</h4>
                   </div>
                   <br>
                   <div class="modal-body">

@@ -12,7 +12,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<div>
+
 
 	<c:if test="${empty category}" >
 		카테고리가 없습니다.
@@ -26,5 +26,3 @@
 				</c:forEach>
 	    </select>
 	</c:if>
-	
-</div>
