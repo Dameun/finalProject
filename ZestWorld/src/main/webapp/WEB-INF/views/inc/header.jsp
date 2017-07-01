@@ -41,6 +41,10 @@
 		$(document).ajaxStop($.unblockUI); 
 
 	});
+	
+	function searc() {
+		pwsearch.submit();
+}
 </script>
 
   </head>
@@ -157,8 +161,8 @@
                 </li>
                 <li style="padding-top:5px;">
      				<a href="#" >
-            			<i class="fa fa-user-plus fa-lg">
-            			</i>
+<i class="fa fa-user-plus fa-lg"
+				data-toggle="modal" data-target="#myModal">            			</i>
             		</a>
             	</li>
                 <li  style="padding-top:5px;">
@@ -432,6 +436,39 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 <div id="dialog-confirm" title="알림메세지">
 	<input type="text" id = "dialogContent" style="width:300px; border:none;" readonly/>
 </div> 
+
+
+<!-- 맴버초대 Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">초대할맴버 이메일입력</h4>
+			</div>
+			<div class="modal-body">
+				<!-- 내용 -->
+				<c:url value="/invitation.htm" var="loginURL" />
+				<form action="${loginURL}" name="pwsearch" id="pwsearch"
+					method="post">
+					<tr>
+						<td>초대하실분 이메일</td>
+						<td><input type="text" name="userid" /></td>
+					</tr>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"
+					onclick="searc()">전송</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
 </html>
 
 
