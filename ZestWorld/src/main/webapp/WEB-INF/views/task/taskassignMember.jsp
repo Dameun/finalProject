@@ -1,6 +1,6 @@
 <%--
 	@Project : ZestWorld
-	@File name : detailModal.jsp
+	@File name : taskassignMember.jsp
 	@Author : 최담은
 	@Data : 2017.6.26
 	@Desc : 전체개요 상세보기 -> 배정된 멤버리스트
