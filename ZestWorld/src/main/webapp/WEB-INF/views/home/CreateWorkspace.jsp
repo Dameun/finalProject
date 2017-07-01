@@ -5,6 +5,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
+  <link href="https://code.jquery.com/ui/1.11.4/themes/south-street/jquery-ui.css" type="text/css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
@@ -101,8 +102,9 @@ function CreateProjcetProcess()
 		</div>
 		</main>
 	</div>
-</div>
-<div id="dialog-confirm" title="알림메세지">
+	<div id="dialog-confirm" title="알림메세지" style="display:none;">
 	<input type="text" id = "dialogContent" style="width:300px; border:none;" readonly/>
 </div> 
+</div>
+
 
