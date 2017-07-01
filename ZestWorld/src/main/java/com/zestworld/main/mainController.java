@@ -3,6 +3,8 @@ package com.zestworld.main;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.zestworld.util.DataController;
+
 /*
  * @FileName : mainController.java
  * @Project : ZestWorld
@@ -27,5 +29,11 @@ public class mainController {
    @RequestMapping("/main.htm")
    public String main(){
       return "home.main";
+   }
+   @RequestMapping("infoDelete.htm")
+   public String infoDelete(){
+	  DataController.getInstance().Reset();
+	  System.out.println("infoDelete");
+      return "success";
    }
 }

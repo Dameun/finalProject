@@ -6,12 +6,23 @@
    xmlns:context="http://www.springframework.org/schema/context"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
 
+ <!--   <security:http pattern="/dist/**" security="none"/> -->
+   
    <security:http>
       <security:csrf disabled="true" />
       <security:form-login authentication-failure-url="/login.htm?error"
       	 default-target-url="/workSpace.htm"
-         login-page="/main.htm" />
+         login-page="/index.htm" />
       <security:logout logout-success-url="/index.htm" />
+      
+      <security:intercept-url pattern="/index.htm"  access="permitAll" />
+      <security:intercept-url pattern="/join.htm" access="permitAll" />
+      <security:intercept-url pattern="/login.htm"  access="permitAll" />
+      
+       <security:intercept-url pattern="/selectWorkspace.htm" access="isAuthenticated()" />
+      <security:intercept-url pattern="/workSpace.htm" access="hasRole('ROLE_USER')" />
+    <!--   <security:intercept-url pattern="/workSpace.htm/**" access="hasRole('ROLE_USER')" /> -->
+      <security:intercept-url pattern="/main.htm" access="hasRole('ROLE_USER')" /> 
    </security:http>   
    <security:authentication-manager>
       <security:authentication-provider>

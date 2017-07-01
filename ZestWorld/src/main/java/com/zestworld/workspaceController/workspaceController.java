@@ -43,8 +43,9 @@ public class workspaceController {
 	
 	//
 	@RequestMapping("/workSpace.htm")
-	public String GetWorkSpace(Principal principal,HttpSession session, Model model)
+	public String workSpace(Principal principal,HttpSession session, Model model)
 	{	
+		DataController.getInstance().Reset();
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		String workspaceid=" ";
 		String usernameid = principal.getName();

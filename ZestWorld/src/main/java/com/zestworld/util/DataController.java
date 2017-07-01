@@ -49,8 +49,16 @@ public class DataController {
 	{
 	}
 	
+	
 	public void Reset()
 	{	
+		 Users_DTO use =null;
+		 Project_DTO currentProject=null;
+		 Workspace_DTO currentWorkspace=null;
+		 workspaceList = new ArrayList<Workspace_DTO> ();
+		 projectList = new ArrayList<Project_DTO> ();
+		 taskList = new ArrayList<Task_DTO> ();
+		 selectEssenPage = "";
 	}
 	
 	//워크스페이스 추가/프로젝트 생성,삭제시 변화 있을때 호출 
