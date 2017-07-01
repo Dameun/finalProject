@@ -154,10 +154,13 @@ function dialogPopup(contents, callback_Y, callback_N ) {
 				<div class="col-md-3"style="padding-bottom:20px;">
 		                <div class="live-tile flip ha" data-mode="flip" data-direction="horizontal" data-speed="600" data-delay="3000" data-height="373" data-play-onhover="true" style="height: 373px;">
 		                    <div class="flip-front ha" style="transform: rotateY(360deg); transition: all 600ms ease 0s;">
-		                     <div class="widget-controls"> <a  data-widgster="restore" title="Edit"
-												data-toggle="modal" data-target="#workspaceModal"
+		                     <div class="widget-controls"> 
+		                     <a  data-widgster="restore" title="Edit" data-toggle="modal" data-target="#workspaceModal"
 												onclick="workspaceEditModalView(${workSpace.workspace_id},'${workSpace.workspace_name}','${workSpace.description}');"
-												href="#"><i class="glyphicon glyphicon-resize-small"></i></a></div>
+												href="#"><i class="glyphicon glyphicon-edit"></i></a>
+							<a data-widgster="close" title="Close" 	onclick="" href="#">
+							<i class="glyphicon glyphicon-remove"></i></a>
+							 </div>
 		                        <section class="widget windget-padding-lg widget-md bg-gray-dark text-white">
 		                            <div class="widget-body widget-body-container">
 		                                <div class="text-align-center">

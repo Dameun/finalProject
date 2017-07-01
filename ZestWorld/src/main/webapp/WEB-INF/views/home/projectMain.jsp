@@ -137,8 +137,6 @@ function projectAssign(){
 
 
 </script>
-
-<div class="row">
 	<div class="clearfix">
 		<div class="btn-toolbar pull-right">
 			<button type="button" class="btn btn-secondary btn-sm"
@@ -146,6 +144,7 @@ function projectAssign(){
 			<!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
 		</div>
 	</div>
+	<div class="row">
 	<c:forEach items="${projectList}" var="project">
 		<div class="col-md-6 widget-container" id="border1" >
 			<section class="widget" id="default-widget"
@@ -158,11 +157,11 @@ function projectAssign(){
 						<a  data-widgster="restore" title="Edit"
 							data-toggle="modal" data-target="#editProjectModal"
 							onclick="projectEditModalView(${project.project_id},'${project.p_title}','${project.explain}');"
-							href="#"><i class="glyphicon glyphicon-resize-small"></i></a> 
+							href="#"><i class="glyphicon glyphicon-edit"></i></a> 
 						<a
 							data-widgster="close" title="Close"
-							onclick="projectDelete(${project.project_id})" href="#"><i
-							class="glyphicon glyphicon-remove"></i></a>
+							onclick="projectDelete(${project.project_id})" href="#">
+							<i class="glyphicon glyphicon-remove"></i></a>
 					</div>
 				</header>
 
@@ -177,16 +176,16 @@ function projectAssign(){
 						data-toggle="modal" data-target="#assignMember"></span>
 				</div>
 
-				<div
+				<div 
 					class="select2-container select2-container-multi select2 form-control"
 					id="s2id_multiple-select">
 					<ul class="select2-choices">
 						<c:forEach items="${project.projectMember}" var="member">
 							<li class="select2-search-choice"><div>${member.user_id}</div>
 								<!-- <a href='javascript:void(0);' onclick="assignMemberDelete1234(${member.user_id},${member.project_id});" class="select2-search-choice-close" tabindex="-1"></a> -->
-								<a href='#'
+								<a href="#"
 								onclick="assignMemberDelete('${member.user_id}',${member.project_id});"
-								class="select2-search-choice-close" tabindex="-1"></a> <!-- <a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}&project_id=${member.project_id }'" class="select2-search-choice-close" tabindex="-1"></a> -->
+								class="select2-search-choice-close"tabindex="-1"></a> <!-- <a onclick="location.href='assignMemberDelete.htm?memberId=${member.user_id}&project_id=${member.project_id }'" class="select2-search-choice-close" tabindex="-1"></a> -->
 							</li>
 						</c:forEach>
 
@@ -224,7 +223,6 @@ function projectAssign(){
 			</div>
 		</div>
 	</div>
-	
 <!--프로젝트 수정  -->
 <div class="modal fade" id="editProjectModal" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -275,6 +273,5 @@ function projectAssign(){
 		</div>
 	</div>
 </div>
-
 </div>
 
