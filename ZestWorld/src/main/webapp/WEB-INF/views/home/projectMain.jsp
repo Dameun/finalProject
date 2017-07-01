@@ -139,8 +139,10 @@ function projectAssign(){
 </script>
 	<div class="clearfix">
 		<div class="btn-toolbar pull-right">
-			<button type="button" class="btn btn-secondary btn-sm"
-				onclick="ajaxView('Createproject.ajax')">+ 새로운 프로젝트</button>
+			<button role="button" class="btn btn-inverse mb-xs"
+				onclick="ajaxView('Createproject.ajax')">
+ <i class="fa fa-plus text-warning"></i>
+ 새로운 프로젝트</button>
 			<!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
 		</div>
 	</div>

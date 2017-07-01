@@ -516,19 +516,17 @@ var modalCount=0;
 </script>
 
 
-
-
-<div class="row ">
-<div class="col-md-12" align="center">
-<button class="btn btn-inverse width-100 mb-xs" role="button" id="taskChart" onclick="ajaxView('analysisU.ajax')">차트</button>
-
-<button class="btn btn-inverse width-100 mb-xs" role="button" id="file" onclick="location.href='Schedule.htm'">캘린더</button>
-</div>
-</div>
-   
-      <br><br>
 <div class="row">
-      <button type="button" class="btn btn-primary mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">업무리스트 추가</button>
+      <!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
+		<div class="btn-toolbar pull-right">
+		<button class="btn btn-inverse mb-xs" role="button">
+                                <i class="fa fa-plus text-warning"></i>
+                               업무리스트 추가
+                            </button>
+		<button class="btn btn-inverse mb-xs" role="button" id="file" onclick="location.href='Schedule.htm'">
+		<i class="fa fa-calendar text-warning"></i>
+		캘린더</button>
+</div>
 </div>
       
 	<!--카테고리 title 수정 모달  -->
@@ -742,21 +740,24 @@ var modalCount=0;
 							<h4 class="modal-title" style="align: center">업무리스트 추가</h4>
 						</div>
 						<div class="modal-body">
+						<div class="form-group">
 							<input class="form-control" type="text" id="title" name="title"
 								placeholder="업무리스트 이름">
-
 						</div>
-						<div class="modal-footer">
-
+						
+					
+							<div class="form-group" style="text-align:right;">
 							<!--   <button type="button" class="btn btn-primary">Save changes</button> -->
-							<button type="button" class="btn btn-info btn-circle btn-lg"  data-dismiss="modal"
-							 onclick="cateTitle_Add()">
-								<i class="fa fa-check"></i>
-							</button>
-							<button type="button" class="btn btn-warning btn-circle btn-lg"
+							
+							<button type="button" class="btn btn-secondary btn-sm"
 								data-dismiss="modal" id="ucancle">
-								<i class="fa fa-times"></i>
+								Cancel
 							</button>
+							<button type="button" class="btn btn-warning btn-sm"  data-dismiss="modal"
+							 onclick="cateTitle_Add()">
+								Finish
+							</button>
+						</div>
 						</div>
 					</div>
 

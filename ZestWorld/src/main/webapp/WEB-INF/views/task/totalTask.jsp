@@ -663,8 +663,20 @@ function detailModalUpdateDialogN()
 }
 </style>
 
-<div class="row" >
 
+<!-- <div id="filter" style=" width: 880px"> -->
+	
+		<div class="clearfix">
+		<div class="btn-toolbar pull-right">
+		<button type="role" class="btn btn-inverse mb-xs" data-toggle="modal"
+	         data-target="#add-modal">
+	         <i class="fa fa-plus text-warning"></i>
+	           업무 추가</button>
+		</div>
+		</div>
+		<div class="row">
+		
+	
 	<div class="col-sm-2" style="background-color: #ffffff; height: auto;">
 
 	      
@@ -728,16 +740,11 @@ function detailModalUpdateDialogN()
 		</div>
 	<div class="col-sm-10" style="height: 500px">
 
+
+			<div id="ajaxlist" style="margin-top:-30px;">
+			</div>
 	
 	
-	<div id="filter" style=" width: 880px">
-	<div class="row" style="margin-left:30px">
-		<div class="col-sm-11">
-		<button type="button" class="btn btn-warning" data-toggle="modal"
-	         data-target="#add-modal">+ 새 업무</button>
-		</div>
-		
-	</div>
 
          <!-- modal -->
          <form id="add_taskTitle" name="add_taskTitle" method="post" >
@@ -811,9 +818,7 @@ function detailModalUpdateDialogN()
 
 		<div id="container" data-activity-id="320">
 	
-			<div class="row"></div>
-			<div id="ajaxlist">
-			</div>
+			
 		</div>
 	</div>
 	
