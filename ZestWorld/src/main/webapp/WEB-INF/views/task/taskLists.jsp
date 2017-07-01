@@ -1,6 +1,15 @@
+<%--
+	@File name : taskLists.jsp
+	@Project : ZestWorld
+	@Author : 김민성
+	@Data : 2017.07.01
+	@Desc : 업무리스트 페이지에 리스트 뿌려줄 비동기 페이지
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
     
 <% 
 	request.setCharacterEncoding("UTF-8");

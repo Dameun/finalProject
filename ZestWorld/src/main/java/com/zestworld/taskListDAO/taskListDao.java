@@ -7,7 +7,13 @@ import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.WorkspaceUser_DTO;
-
+/*
+ * @FileName : taskListDao.java
+ * @Project : ZestWorld
+ * @Date : 2017.07.01
+ * @Author : 김민성
+ * @Desc : 업무 DAO
+ * */
 public interface taskListDao {
 
 	//카테고리 리스트

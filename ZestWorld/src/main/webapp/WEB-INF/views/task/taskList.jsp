@@ -1,18 +1,20 @@
+<%--
+	@File name : taskList.jsp
+	@Project : ZestWorld
+	@Author : 김민성
+	@Data : 2017.07.01
+	@Desc : 프로젝트 메인 -> 업무리스트 페이지
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!--민성 추가부분  -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" type="text/css" href="resources/dist/css/taskList.css">
-<!--/민성추가부분  -->
 
-
-<!--민성 dropdown 사용하기위해 필요한 부분 -->
+<!-- dropdown -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--민성 dropdown 사용하기위해 필요한 부분 -->
-   
 
 <script type="text/javascript">
 var categoryId='';
@@ -27,6 +29,7 @@ var clickTask='';
 
 var detailpid='';
 var modalCount=0;
+	
 	$(function(){
 	
 		//리스트 비동기로 뿌리는 ajax부분
@@ -42,58 +45,7 @@ var modalCount=0;
 				alert('Error while request..');
 			}
 		});
-		
-
-		
-		//category insert ajax부분
-/* 		
-		$("#add_taskTitle").on("submit", function(e) {
-
-			$.ajax({
-				type : "post",
-				url : "titleInsert.htm",
-				cache : false,
-				data : 'title=' + $("#title").val(),
-				success : function(data) {
-					console.log("insert 성공^^");	
-				 	$("#add-modal").hide();
-					$('.modal-backdrop').remove(); 
-					$("#View").empty();
-					$("#View").append(data); 
-					
-				},
-				error : function() {
-					alert('Error while request..');
-				}
-			});
-			e.preventDefault();
-		});
-			 */	
-		//카테고리 title 수정
-	/* 	$("#cateUpdate").on("submit", function(e) {
 			
-			$.ajax({
-				type : "post",
-				url : "cateUpdate.htm",
-				cache : false,
-				data : 'category_id='+$("#categoryTitle option:selected").val()+'&changeTitle='+$("#changeTitle").val(),
-				success : function(data){	
-					$("#cateTitle_Update").hide();
-					$('.modal-backdrop').remove();
-					$("#View").empty();
-					$("#View").append(data); 
-					
-				},
-				error : function() {
-					alert('Error while request..');
-				}
-			});
-			e.preventDefault();
-		});
-		 */
-		
-		
-		
 		
 		$(".close").click(function() {
 			$('.modal-backdrop').hide();
@@ -155,7 +107,7 @@ var modalCount=0;
 			}
 		}); 
 		
-
+		//datepicker
 		$(document).on("click","#calendar",function(){        
             
             $(this).parent(".form-btn").find(".datepicker").removeClass('hasDatepicker').datepicker({                        
@@ -171,9 +123,8 @@ var modalCount=0;
  				 dateFormat: 'yy-mm-dd'    
  			});
  	
-
  		
- 			$("#detailEnd").datepicker({
+ 		$("#detailEnd").datepicker({
  				 dateFormat: 'yy-mm-dd'    
  			}); 
  		
@@ -181,6 +132,7 @@ var modalCount=0;
  			$("#upclose").click(function(){
  				$("#changeTitle").val('');
  			});
+	
 	});
 	
 	
@@ -189,7 +141,7 @@ var modalCount=0;
 	{
 			
 		var title = $("#task-content_"+number).val();
-		//var cateTitle = $("#membername_"+number).text();
+		
 		
 		$.ajax({
 			type : "post",
@@ -210,6 +162,7 @@ var modalCount=0;
 		
 	}
 
+	 //카테고리 타이틀 수정
 	 function cateTitleView(cateId){
 	
 		 
@@ -225,8 +178,7 @@ var modalCount=0;
 					
 					document.getElementById('select_cateTitle').innerHTML = cateTitle;
 					$("#sel_cateID").val(cId);
-					
-				
+						
 				},
 				error : function(){
 					alert('Error while request..');
@@ -238,8 +190,8 @@ var modalCount=0;
 	
 	
 	
-	
-function detailModalView(view,project_id){
+	//상세업무 페이지 modal
+	function detailModalView(view,project_id){
 	 	var str='';
 	 	detailpid=project_id;
 	 	var strlist='';
@@ -331,11 +283,12 @@ function detailModalView(view,project_id){
 	 	
 	} 
 	
+	
+	//상세업무 수정
 	function detailUpdate(){
 		var startdate=$('#detailStart').val();
 		var enddate=$('#detailEnd').val();
 	    var member=$('#member').val();
-	/* 	var member="김민성" */
 		var follower=$('#follower22').val();
 		var explain=$('#modalDetailExplain').val();
 		
@@ -355,6 +308,7 @@ function detailModalView(view,project_id){
 		}); 
 	}
 	
+	//체크리스트 등록
 	function checkreg(){
 		var contents=$('#CheckContents').val();
 		if(contents!="" && contents!=null){
@@ -371,6 +325,7 @@ function detailModalView(view,project_id){
 	   }
 	}
 	
+	//체크리스트 완료여부
 	function updateChkFlag(chk){
 		$.ajax({
 		       type : "get",
@@ -400,7 +355,7 @@ function detailModalView(view,project_id){
 		
 	}
 	
-	
+	//업무삭제
 	function modalDeleteTask(){
 		
 		$.ajax({
@@ -421,7 +376,7 @@ function detailModalView(view,project_id){
 	}
 	
 	
-	
+	//체크리스트 삭제
 	function checkListDelete(chk){
 		$.ajax({
 		       type : "get",
@@ -435,7 +390,7 @@ function detailModalView(view,project_id){
 		});
 	}
 	
-	
+	//체크리스트 확인
 	function taskMemberListChk(){
 		console.log("taskMemberListChk");
 		console.log(detailpid);
@@ -449,7 +404,7 @@ function detailModalView(view,project_id){
 		 		$.each(data.assignmember,function(index,value){
 						console.log(index + "/" + value.user_id);
 						strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
-						/* "+value.user_id+" */
+						
 						
 				});
 		 		
@@ -462,7 +417,7 @@ function detailModalView(view,project_id){
 		 });
 	}
 	
-	
+	//배정된 멤버 등록
 	function taskAssign(taskId){
 		var checkboxValues = [];
 	    $("input[name='taskMemberChk']:checked").each(function(i) {
@@ -486,6 +441,7 @@ function detailModalView(view,project_id){
 		}); 
 	}
 	
+	//카테고리 타이틀 추가
 	function cateTitle_Add(){
 		$.ajax({
 			type : "post",
@@ -532,6 +488,7 @@ function detailModalView(view,project_id){
 		});	
 	}
 	
+	//카테고리 타이틀 수정
 	function cateUpdate(){
 				
 		$.ajax({
@@ -546,17 +503,9 @@ function detailModalView(view,project_id){
 				$('#changeTitle').val('');
 				
 				$('.modal-backdrop').remove();
-				//$("#categoryTitle").empty();
-				//$("#categoryTitle").append("<option selected>선택하기</option>");
 				
-				/* 
-				$("#categoryTitle").empty();
-				$("#categoryTitle").append("<option selected>선택하기</option><c:forEach items='${list}' var='n'><option value='${n.category_id}'>${n.title}</option></c:forEach>");
-				 */
-				 
 				$("#View").empty();
 				$("#View").append(data); 
-				//location.reload();
 			},
 			error : function() {
 				alert('Error while request..');
@@ -567,17 +516,7 @@ function detailModalView(view,project_id){
 </script>
 
 
-<!-- <div class="row">
-	<div class="col-md-5"></div>
-	<div class="col-md-2">
-		<ul class="nav nav-tabs">
-			<li><a href="Schedule.htm">캘린더</a></li>
-			<li><a href="#">분석</a></li>
-			<li><a href="#">파일</a></li>
-		</ul>
-	</div>
-	<div class="col-md-5"></div>
-</div> -->
+
 
 <div class="row ">
 <div class="col-md-12" align="center">
@@ -586,34 +525,10 @@ function detailModalView(view,project_id){
 <button class="btn btn-inverse width-100 mb-xs" role="button" id="file" onclick="location.href='Schedule.htm'">캘린더</button>
 </div>
 </div>
-
-<!-- <div class="row ">
-	<div class="col-md-1">
-		<button class="btn btn-default dropdown-toggle" type="button"
-			id="menu1" data-toggle="dropdown" style="margin-left:45px">
-			업무메뉴<span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#add-modal" data-toggle="modal">업무리스트 추가</a>
-				
-				</li>
-			<li role="presentation" class="divider"></li>
-			
-				<li role="presentation" ><a role="menuitem" tabindex="-1"
-				href="#">카테고리제목   수정</a>
-				</li>
-			
-		</ul>
-	</div>
-</div> -->
-      
-      
-      
    
       <br><br>
 <div class="row">
-      <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">업무리스트 추가</button>
+      <button type="button" class="btn btn-primary mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">업무리스트 추가</button>
 </div>
       
 	<!--카테고리 title 수정 모달  -->
@@ -673,17 +588,7 @@ function detailModalView(view,project_id){
     <section class="widget">
         <header>
             <h4>
-            	<%-- 
-            	<input type="checkbox" id="modal_successF" class="modal_successF"  data-dismiss="modal"
-            		<c:if test="${n.success_f eq 1}">
-			             checked= "checked"
-			             onclick="modalChangeSuccessF();"
-			        </c:if> 
-			        <c:if test="${n.success_f eq 0}">
-			             onclick="modalChangeSuccessF_zero();"
-			        </c:if>
-            	>
-            	 --%>
+            	
                 <span class="fw-semi-bold" id="span1">
                
                 </span>&nbsp;&nbsp; 
@@ -701,9 +606,7 @@ function detailModalView(view,project_id){
 
                 <fieldset>
                     <legend>
-                        <!-- <span class="label label-warning  text-gray-dark mr-xs">
-                            HTML5
-                        </span> -->
+                     
                        
                     </legend>
                       
@@ -741,10 +644,7 @@ function detailModalView(view,project_id){
                             <div>
                             <label class="control-label col-sm-3" for="range">
                                 	배정된 멤버
-                                	<!-- &nbsp;
-                                	<i class="fa fa-plus-square" aria-hidden="true" data-toggle="modal"
-									data-target="#taskAssignMember" onclick="taskMemberListChk();" style="cursor:pointer"></i>
-									 -->
+                                	
                             </label>
                            </div>
                             <div class="col-sm-9">
@@ -767,37 +667,7 @@ function detailModalView(view,project_id){
 							</div>
 							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
                             
-							
-							
-                            <!-- 프로젝트 멤버 배정 모달  -->
-                        <%--     
-                        <div class="modal fade" id="taskAssignMember"   aria-hidden="true" style="display: none;">
-								<div class="modal-dialog">
-						            <div class="modal-content">
-						                <div class="modal-header">
-						                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						                    <h4 class="modal-title text-xl-center fw-bold mt" id="myModalLabel18">프로젝트 멤버 배정</h4>
-						                    <p class="text-xl-center text-muted mt-sm fs-mini">
-						                        We need a bit of your detailed information to proceed. US ticketing system requires
-						                        us to process and check your personal infromation before we can go.
-						                    </p>
-						                </div>
-						                <div class="modal-body bg-gray-lighter">
-						                    	
-						                    <div id="wMemberList">
-						                    
-											</div>
-						                    
-						                </div>
-						                <div class="modal-footer">
-						                    <button type="button" class="btn btn-gray" id="taClose" aria-hidden="true" data-dismiss="modal">Close</button>
-						                    <button type="button" id="submitbtn" class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
-						                </div>
-						            </div>
-						       </div>
-							</div> 
-							--%>
-                          
+						
                    
                             </div>
                         </div>
@@ -900,16 +770,6 @@ function detailModalView(view,project_id){
 	</div>
 
 	<div class="col-md-7"></div>
-
-	<!-- <div class="col-md-2" align="right">
-		<button type="button" class="btn btn-default" data-toggle="modal"
-			data-target="#add-modal" data-dismiss="modal">업무리스트 추가</button>
-
-	</div> -->
-
-
-
-
 	
 <br>
  

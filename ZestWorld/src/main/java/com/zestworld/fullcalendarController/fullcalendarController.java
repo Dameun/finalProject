@@ -104,7 +104,14 @@ public class fullcalendarController {
 	
 	//일정 추가
 	@RequestMapping("CalendarIns.htm")
-	public String scheduleInsert(int category_id, String title, String content, String start_date, String end_date) throws ClassNotFoundException, SQLException {
+	public String scheduleInsert(int cateID, String title, String content, String start_date, String end_date) throws ClassNotFoundException, SQLException {
+		
+		System.out.println("카테고리 아이디 : " + cateID);
+		System.out.println("업무제목 : " + title);
+		System.out.println("설명 : " + content);
+		System.out.println("시작날짜 : " + start_date);
+		System.out.println("끝날짜 : " + end_date);
+		
 		
 		
 		taskListDao tdao = sqlsession.getMapper(taskListDao.class);
@@ -116,7 +123,7 @@ public class fullcalendarController {
 		
 		Task_DTO dto = new Task_DTO();
 			
-		dto.setCategory_id(category_id);
+		dto.setCategory_id(cateID);
 		dto.setUser_id(user_id);
 		dto.setWorkspace_id(workspace_id);
 		dto.setProject_id(project_id);
@@ -139,7 +146,7 @@ public class fullcalendarController {
 		
 
 		
-		System.out.println("타이틀과 컨텐츠 : " +title+"//"+content);
+		System.out.println("컨텐츠 : "+content);
 		CalendarDAO dao = sqlsession.getMapper(CalendarDAO.class);
 		
 		Task_DTO dto = new Task_DTO();
