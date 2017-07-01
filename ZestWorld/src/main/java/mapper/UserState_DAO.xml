@@ -12,6 +12,6 @@
 		select * from user_State where  USER_ID=#{user_id}
 	</select>
 	<update id="UpdateUserState" parameterType="com.zestworld.Table_DTO.UserState_DTO">
-       update userState set state=#{state}  where  user_id=#{user_id}
+       update user_State set state=#{state}  where  user_id=#{user_id}
    </update>
 </mapper>
