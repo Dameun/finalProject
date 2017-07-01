@@ -32,7 +32,6 @@ function finishMilstone()
 			url : 	"selectCateSaveByMilstone.ajax",
 			data : {"results" : results},
 			success : function(data) {
-				   alert('데이터저장성공');
 				   ajaxView('CreateEssence.ajax');
 			},
 			error : function() {
@@ -86,7 +85,6 @@ $(document).ready(function(){
 	 		$.each(data.defineist_0,function(index,value)
 	 		{	
 	 			
-	 			console.log(value.subTitle);
 	 			str += "<div class='checkbox checkbox-warning checkbox-circle' ><input id='0_"+ value.ecate_id+ "' type='checkbox' name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='0_"+ value.ecate_id +"'>"+
 		 			value.subTitle+
 		 		"</label></div>";
@@ -97,7 +95,7 @@ $(document).ready(function(){
 	 		str = "";
 	 		$.each(data.defineist_1,function(index,value)
 	 		{
-	 			console.log(value.subTitle);
+
 	 			str += "<div class='checkbox checkbox-warning checkbox-circle' ><input id='1_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='1_"+ value.ecate_id +"'>"+
 		 			value.subTitle+
 		 		"</label></div>";
@@ -148,6 +146,17 @@ $(document).ready(function(){
 			});
 	 		
 	 		$("#tab5_checkList").append ($('#tab5_checkList').html(str));
+	 		
+	 		str = "";
+	 		$.each(data.defineist_6,function(index,value)
+	 		{
+	 			console.log(value.subTitle);
+	 			str += "<div class='checkbox checkbox-warning checkbox-circle' ><input id='6_"+ value.ecate_id+ "' type='checkbox'  name='cateDefineCheckbox' onclick='subTitlechecked(this)'><label for='6_"+ value.ecate_id +"'>"+
+		 			value.subTitle+
+		 		"</label></div>";
+			});
+	 		
+	 		$("#tab6_checkList").append ($('#tab6_checkList').html(str));
 		},
 		
 		error : function() {
@@ -196,8 +205,11 @@ $(document).ready(function(){
                                             <small>5.팀</small>
                                             	</a></li>
                                             <li><a href="#tab5" data-toggle="tab">
-                                            <small>6.작업</small>
-                                           		</a></li>    
+                                            <small>6.작업방식</small>
+                                           		</a></li>   
+                                           	  <li><a href="#tab6" data-toggle="tab">
+                                            <small>7.작업</small>
+                                           		</a></li>    	 
                                     </ul>
                                   <!--   <div id="bar" class="progress progress-xs">
                                         <div class="progress-bar progress-bar-gray-light active" style="width: 25%;"></div>
@@ -253,6 +265,14 @@ $(document).ready(function(){
                                              <form action="" method="POST" data-parsley-priority-enabled="false" novalidate="novalidate">
 	                                                <fieldset>
 	                                                   <div id="tab5_checkList">
+	                                                   </div>
+	                                                </fieldset>
+	                                            </form>
+                                        </div>
+                                         <div class="tab-pane bg-gray-lighter" id="tab6" style="height: 444px;">
+                                             <form action="" method="POST" data-parsley-priority-enabled="false" novalidate="novalidate">
+	                                                <fieldset>
+	                                                   <div id="tab6_checkList">
 	                                                   </div>
 	                                                </fieldset>
 	                                            </form>

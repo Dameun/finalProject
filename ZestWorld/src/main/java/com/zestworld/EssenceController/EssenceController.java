@@ -42,7 +42,7 @@ public class EssenceController {
 	private SqlSession sqlsession;
 	
 	private String[] milestoneList = {};
-	private String[] cateStrList = {"기회","이해관계자","요구사항","팀","작업","소프트웨어시스템"};
+	private String[] cateStrList = {"기회","이해관계자","요구사항","소프트웨어시스템","팀","작업방식","작업"};
 	private HashMap<String, List<String>> selectEssenceMap = new HashMap();
 	private ArrayList<HashMap> totalEssenceInfo = new ArrayList<HashMap>();
 	private String p_title = "";
@@ -101,14 +101,18 @@ public class EssenceController {
 		define_dto.setTitle(cateStrList[5]);
 		List<EssenceDefine_DTO> defineist_5 = essenceService.GetdefineCateList(define_dto);
 		
+		define_dto.setTitle(cateStrList[6]);
+		List<EssenceDefine_DTO> defineist_6 = essenceService.GetdefineCateList(define_dto);
+		
 		model.addAttribute("milestoneList", milestoneList);
 		model.addAttribute("cateStrList", cateStrList);
 		model.addAttribute("defineist_0", defineist_0);	//기회
-		model.addAttribute("defineist_1", defineist_1); //이해관계짜
+		model.addAttribute("defineist_1", defineist_1); //이해관계자
 		model.addAttribute("defineist_2", defineist_2);	//요구사항
-		model.addAttribute("defineist_3", defineist_3);	//팀
-		model.addAttribute("defineist_4", defineist_4);	//작업
-		model.addAttribute("defineist_5", defineist_5); //소프트웨어시스템
+		model.addAttribute("defineist_3", defineist_3);	//소프트웨어시스템
+		model.addAttribute("defineist_4", defineist_4);	//팀
+		model.addAttribute("defineist_5", defineist_5); //작업방식
+		model.addAttribute("defineist_6", defineist_6); //작업
 		
 		return jsonview;
 	}
