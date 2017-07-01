@@ -34,7 +34,7 @@
 	
      
   
-	<div class="task_menu" id="task_menu" data-toggle="dropdown" style="padding-top: 15px;" align="center">
+	<div class="task_menu" id="task_menu" style="padding-top: 15px;" align="center" onclick="deleteBtn(${n.category_id})">
 
 		<!-- <span class="glyphicon glyphicon-option-vertical" style="color: #fff;"></span> -->
 		<span class="glyphicon glyphicon-trash" style="color: #fff;"></span>

@@ -29,6 +29,7 @@ var detailpid='';
 var modalCount=0;
 var task_num=''; 
 var click_btn='';
+var task_dnum='';
 	$(function(){
 	
 		//리스트 비동기로 뿌리는 ajax부분
@@ -65,7 +66,7 @@ var click_btn='';
 		  
 	
 			
-	  //카테고리 삭제
+	/*   //카테고리 삭제
 		  $(document).on("click","#task_menu",function(){
 			 
 			  $.ajax({
@@ -81,7 +82,8 @@ var click_btn='';
 					}
 				});
 				
-		  }); 
+		  });  
+	*/
 	
 		//task title 완료체크
 		
@@ -134,33 +136,7 @@ var click_btn='';
 	
 	});
 	
-/* 	
-	//업무 title 추가
-	function createBtn(number)
-	{
-			
-		var title = $("#task-content_"+number).val();
-		
-		
-		$.ajax({
-			type : "post",
-			url : "tasktitleInsert.htm",
-			cache : false,
-			data : 'title='+title+'&cateId='+number,
-			success : function(data) {
-				console.log("taskinsert 성공^^");				
-				$("#View").empty();
-				$("#View").append(data); 	
-			},
-			error : function() {
-				alert('실패');
-			}
-		});
-		
-		
-		
-	} 
-	*/
+
 
 	 //카테고리 타이틀 수정
 	 function cateTitleView(cateId){
@@ -540,7 +516,7 @@ var click_btn='';
 	
 	function no()
 	{
-			alert(click_btn);
+			
 			$(click_btn).parent().parent("#panel").toggle();
 			
 			$("#task-content_number_"+task_num).val("");
@@ -549,7 +525,7 @@ var click_btn='';
 		
 	}
 	
-	//프로젝트 생성 
+	//업무 생성 
 	function createBtn(number,btn) 
 	{
 		dialogPopup("업무를 생성하시겠습니까?", yes, no);
@@ -557,7 +533,36 @@ var click_btn='';
 		click_btn = btn;
 	}	
 	
+	//카테고리 삭제
+	function deleteBtn(number)
+	{
+		dialogPopup("카테고리를 삭제하시겠습니까?", dYes, dNo);
+		task_dnum = number;
+	}
 	
+	function dYes()
+	{
+		  
+			  $.ajax({
+					type:"get",
+					url:"deleteTaskList.htm",
+					data : "cateId="+task_dnum, 
+					success:function(data){
+						$("#View").empty();
+						$("#View").append(data); 		
+						},
+					error:function(){
+						alert('Error while request..');
+					}
+				});
+				
+		 
+	}
+	
+	function dNo()
+	{
+			
+	}
 	
 	
 	
