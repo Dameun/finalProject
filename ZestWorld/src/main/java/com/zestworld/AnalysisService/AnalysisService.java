@@ -1,6 +1,7 @@
 package com.zestworld.AnalysisService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -225,37 +226,37 @@ public class AnalysisService {
 /* BARCHART (ALL)	*/	
 	
 	//전체 업무 - 완료된 업무
-	public List<Task_DTO> getTaskAllFlow_comp() throws ClassNotFoundException, SQLException{
+	public List<Task_DTO> getTaskAllFlow_comp(int workspace_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_comp();
+		List<Task_DTO> result = dao.getTaskAllFlow_comp(workspace_id);
 		return result;
 	}
 	
 	
 	
 	//전체업무 = 완료된 업무 개수
-	public List<Task_DTO> getTaskAllFlow_comp_count() throws ClassNotFoundException, SQLException{
+	public int getTaskAllFlow_comp_count(int workspace_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_comp_count();
+		int result = dao.getTaskAllFlow_comp_count(workspace_id);
 		return result;
 	}
 		
 	//전체 업무 - 마감일 지난 업무 개수
-	public List<Task_DTO> getTaskAllFlow_enddateLate_count() throws ClassNotFoundException, SQLException{
+	public int getTaskAllFlow_enddateLate_count(int workspace_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_enddateLate_count();
+		int result = dao.getTaskAllFlow_enddateLate_count(workspace_id);
 		return result;
 	}
 	//전체 업무 - 마감일 없는 업무 개수
-	public List<Task_DTO> getTaskAllFlow_enddateNo_count() throws ClassNotFoundException, SQLException{
+	public int getTaskAllFlow_enddateNo_count(int workspace_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_enddateNo_count();
+		int result = dao.getTaskAllFlow_enddateNo_count(workspace_id);
 		return result;
 	}
 	//전체 업무 - 진행중인 업무 개수
-	public List<Task_DTO> getTaskAllFlow_ing_count() throws ClassNotFoundException, SQLException{
+	public int getTaskAllFlow_ing_count(int workspace_id) throws ClassNotFoundException, SQLException{
 		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
-		List<Task_DTO> result = dao.getTaskAllFlow_ing_count();
+		int result = dao.getTaskAllFlow_ing_count(workspace_id);
 		return result;
 	}
 	
@@ -297,5 +298,19 @@ public class AnalysisService {
 	}
 	
 
+	public List<Task_DTO> getTaskByProjectid(int project_id) {
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		List<Task_DTO> result = new ArrayList<Task_DTO>();
+		try {
+			result = dao.getTaskByProjectid(project_id);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }

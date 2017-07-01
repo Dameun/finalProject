@@ -93,18 +93,17 @@ public interface AnalysisDAO {
 	
 /*   BAR CHART	(ALL) */
 	
-	//전체업무흐름 - 완료된 업무
-	public List<Task_DTO> getTaskAllFlow_comp() throws ClassNotFoundException, SQLException;
+	public List<Task_DTO> getTaskAllFlow_comp(int workspace_id) throws ClassNotFoundException, SQLException;
 	
 	//전체업무흐름 - 완료된업무 갯수
-	public List<Task_DTO> getTaskAllFlow_comp_count() throws ClassNotFoundException, SQLException;
+	public int getTaskAllFlow_comp_count(int workspace_id) throws ClassNotFoundException, SQLException;
 	
 	//전체업무흐름 - 마감일 지남
-	public List<Task_DTO> getTaskAllFlow_enddateLate_count() throws ClassNotFoundException, SQLException;
+	public int getTaskAllFlow_enddateLate_count(int workspace_id) throws ClassNotFoundException, SQLException;
 	//전체업무흐름 - 마감일 없음
-	public List<Task_DTO> getTaskAllFlow_enddateNo_count() throws ClassNotFoundException, SQLException;
+	public int getTaskAllFlow_enddateNo_count(int workspace_id) throws ClassNotFoundException, SQLException;
 	//전체업무흐름 - 진행중인 업무
-	public List<Task_DTO> getTaskAllFlow_ing_count() throws ClassNotFoundException, SQLException;
+	public int getTaskAllFlow_ing_count(int workspace_id) throws ClassNotFoundException, SQLException;
 	
 	
 	
@@ -129,5 +128,5 @@ public interface AnalysisDAO {
 	public List<Task_DTO> getTaskAllFlow_ing_countU(int project_id) throws ClassNotFoundException, SQLException;
 	
 	
-	
+	public List<Task_DTO> getTaskByProjectid(int project_id) throws ClassNotFoundException, SQLException;
 }

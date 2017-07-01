@@ -20,75 +20,15 @@
     
     <script type="text/javascript">
 
-      google.charts.load('current', {'packages':['corechart', 'table']});
+      google.charts.load('current', {'packages':['corechart']});
       
-      google.charts.setOnLoadCallback(drawTable);  
+
       google.charts.setOnLoadCallback(drawChart_me); 
       google.charts.setOnLoadCallback(drawChart_i);
       google.charts.setOnLoadCallback(drawChart_follow);
       google.charts.setOnLoadCallback(drawChart_bar);
       google.charts.setOnLoadCallback(drawChart_Curve);
 	  
-      
-      
-      $( function() {
-    	  
-    	  
-    	  
-    	    var dateFormat = "mm/dd/yy",
-    	      from = $( "#from" )
-    	        .datepicker({
-    	          defaultDate: "+1w",
-    	          changeMonth: true,
-    	          numberOfMonths: 1
-    	        })
-    	        .on( "change", function() {
-    	          to.datepicker( "option", "minDate", getDate( this ) );
-    	        }),
-    	      to = $( "#to" ).datepicker({
-    	        defaultDate: "+1w",
-    	        changeMonth: true,
-    	        numberOfMonths: 1
-    	      })
-    	      .on( "change", function() {
-    	        from.datepicker( "option", "maxDate", getDate( this ) );
-    	      });
-    	 
-    	    function getDate( element ) {
-    	      var date;
-    	      try {
-    	        date = $.datepicker.parseDate( dateFormat, element.value );
-    	      } catch( error ) {
-    	        date = null;
-    	      }
-    	 
-    	      return date;
-    	    }
-    	  } );
-      
-      
-      function drawTable() {
-          var data = new google.visualization.DataTable();
-          data.addColumn('string', '멤버 이름');
-          data.addColumn('number', '전체 업무');
-          data.addColumn('number', '진행 중인 업무');
-          data.addColumn('number', '남은 업무');
-          data.addColumn('boolean', '완료 유무');
-          data.addRows([
-        	
-/*           for(i = 0; i < years.length; i++)
-        	  data.addRow([years[i], sales[i]]); */
-  
-            ['장윤희' ,{v: 8, f: '8'}, {v: 8, f: '8'}, {v: 0, f: '0'}, true],
-            
-            
-          ]);
-
-          var table = new google.visualization.Table(document.getElementById('table_div'));
-
-          table.draw(data, {showRowNumber: false,  width: '100%', height: '100%'});
-        }
-       
       
     
       
@@ -180,13 +120,15 @@
     	  
     	  var categoryTitle = new Array();
     	  var str;
+    	  console.log('============================================================1');
     	  <c:forEach items="${getTaskAllFlow_comp}" var ="categoryTitle">
     	  		var json = new Object();
-    	  		json =  "${categoryTitle.title}";
+    	  		json =  "${categoryTitle.p_title}";
     	  		categoryTitle.push(json);
+    	  		console.log(json);
     	  </c:forEach>
     	  
-    	  
+    	  console.log('============================================================2');
     	  var compCount = new Array();
     	  <c:forEach items="${getTaskAllFlow_comp_count}" var ="compCount">
     	  		var json = new Object();
@@ -195,6 +137,7 @@
 	  	  </c:forEach>    	  
     	  
     	  
+	  	  console.log('============================================================3');
     	  var endLateCount = new Array();
     	  <c:forEach items="${getTaskAllFlow_enddateLate_count}" var ="endLateCount">
     	  		var json = new Object();
@@ -202,6 +145,7 @@
   	  			endLateCount.push(json);
 	  	  </c:forEach>
 	  	  
+	  	  console.log('============================================================4');
     	  var endNoCount = new Array();
     	  <c:forEach items="${getTaskAllFlow_enddateNo_count}" var ="endNoCount">
     	  		var json = new Object();
@@ -209,6 +153,7 @@
 	  			endNoCount.push(json);
 	  	  </c:forEach>
 	  	  
+	  	  console.log('============================================================5');
     	  var ingCount = new Array();
     	  <c:forEach items="${getTaskAllFlow_ing_count}" var ="ingCount">
     	  		var json = new Object();
@@ -283,52 +228,15 @@
 </script>
 </head>
 <body>
-    <!-- <div class="row" style="background-color:white">
-    	<div class="col-md-4">
-    	</div>
-    	<div class="col-md-4">
-    		<ul class="nav nav-tabs">
-          		<li><a href="#">업무</a></li>
-          		<li><a href="#">분석</a></li>
-             	<li><a href="#">파일</a></li>
-       		</ul>
-       		
-    	</div>
-    	<div class="col-md-4">
-    	</div>
-	</div>&nbsp -->
 	
 	<b style="font-size:18px" >WorkSpace All Chart</b> <br><br>
 	
-<!-- 	<table class="columns">
-		<tr>
-			<td><p>시작일 <input type="text" id="datepicker"></p></td>
-			<td><p>마감일 <input type="text" id="datepicker2"></p></td>
-			<label for="from">&nbsp&nbsp&nbsp&nbsp시작일</label>
-			&nbsp&nbsp
-			<input type="text" id="from" name="from">
-			&nbsp&nbsp&nbsp&nbsp
-			
-			<label for="to">&nbsp마감일</label>
-			&nbsp&nbsp&nbsp&nbsp
-			<input type="text" id="to" name="to">
-			&nbsp&nbsp&nbsp&nbsp
-			<button type="button" class="btn btn-warning btn-sm">추가</button> -->
-			
-			<%-- <c:forEach items="${getTaskAllFlow_comp}"  var="n">
-				${n.categorytitle}
-			</c:forEach> --%>
-        	
-			<%-- for(List i = ${getTaskAllFlow_comp} ){
-    	  ${i.categorytitle}
-      		} --%>
+
 		</tr>
 	</table>
 					
         	
 	<br>
-	<!-- 테이블 차트 -->
-	<!-- <div id="table_div" style="width: 1350px; height: 200px;"></div> -->
 	<br>
 	
     <table class="columns">
@@ -339,13 +247,6 @@
       </tr>
     </table>
     <br>
-    <%-- <c:forEach items="${getTaskAllFlow_comp}"  var="n">
-				${n.categorytitle} 
-	</c:forEach>
-	
-	<c:forEach items="${getMemberListMe}"  var="n">
-				${n} 
-	</c:forEach> --%>
 
     <table class="columns">
     	<tr>
@@ -357,9 +258,6 @@
     
     <table class="columns">
     	<tr>
- 			<!-- <span id='colchart_diff' style='width: 450px; height: 250px; '></span> 
-			<span id='barchart_diff' style='width: 450px; height: 250px;'></span> -->
-			<!-- <div id='visualization' style='width: 450px; height: 250px;'></div> -->
 			<div id="curve_chart" style="width: 1300px; height: 300px"></div>
 		</tr>	
     </table> 

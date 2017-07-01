@@ -1,16 +1,22 @@
 package com.zestworld.AjaxController;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.method.annotation.CallableMethodReturnValueHandler;
 
 import com.zestworld.AnalysisService.AnalysisService;
+import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.util.DataController;
@@ -46,25 +52,32 @@ public class AjaxChartController {
 	int getTaskFollow_ing;
 	//바차트
 	List<Task_DTO> getTaskAllFlow_comp = new ArrayList<Task_DTO>();
-	List<Task_DTO> getTaskAllFlow_comp_count ;
-	List<Task_DTO> getTaskAllFlow_enddateLate_count= new ArrayList<Task_DTO>();
-	List<Task_DTO> getTaskAllFlow_enddateNo_count= new ArrayList<Task_DTO>();
-	List<Task_DTO> getTaskAllFlow_ing_count= new ArrayList<Task_DTO>();
+	int[] getTaskAllFlow_comp_count ;
+	int[] getTaskAllFlow_enddateLate_count ;
+	int[] getTaskAllFlow_enddateNo_count;
+	int[] getTaskAllFlow_ing_count;
 	 
 	@RequestMapping(value="/analysis.ajax", method=RequestMethod.GET)
 	public String analysis(Model model) throws ClassNotFoundException, SQLException
 	{	
 		
 		String user_id = DataController.getInstance().GetUser().getUser_id(); 
-		System.out.println("!! @@ user_id @@ !!"+ user_id);
+		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		
 		Task_DTO dto = new Task_DTO();
 		Users_DTO dto2 = new Users_DTO();
 		
 		dto.setUser_id(user_id);
+		System.out.println(user_id);
+		
+		dto.setWorkspace_id(workspace_id);
+		System.out.println(workspace_id);
+		
+		
 		donutChart_01(user_id);
 		donutChart_02(user_id);
 		donutChart_03(user_id);
-		barChart();
+		barChart(workspace_id);
 		
 		model.addAttribute("getTaskMe_comp", getTaskMe_comp);
 		model.addAttribute("getTaskMe_enddateLate", getTaskMe_enddateLate);
@@ -82,6 +95,8 @@ public class AjaxChartController {
 		model.addAttribute("getTaskFollow_ing", getTaskFollow_ing);
 		
 		model.addAttribute("getTaskAllFlow_comp", getTaskAllFlow_comp );
+		
+		
 		model.addAttribute("getTaskAllFlow_comp_count", getTaskAllFlow_comp_count);
 		model.addAttribute("getTaskAllFlow_enddateLate_count", getTaskAllFlow_enddateLate_count);
 		model.addAttribute("getTaskAllFlow_enddateNo_count", getTaskAllFlow_enddateNo_count);
@@ -125,17 +140,125 @@ public class AjaxChartController {
 	}
 
 	
-	private void barChart()throws ClassNotFoundException, SQLException
+	private void barChart(int workspace_id)throws ClassNotFoundException, SQLException
 	{
-		getTaskAllFlow_comp = analysisService.getTaskAllFlow_comp();
-		getTaskAllFlow_comp_count = analysisService.getTaskAllFlow_comp_count();
 		
-		getTaskAllFlow_enddateLate_count = analysisService.getTaskAllFlow_enddateLate_count();
-		getTaskAllFlow_enddateNo_count = analysisService.getTaskAllFlow_enddateNo_count();
-		getTaskAllFlow_ing_count = analysisService.getTaskAllFlow_ing_count();
+		Task_DTO dto = new Task_DTO();
+		System.out.println("바차트안 : " + workspace_id);  
+		dto.setWorkspace_id(workspace_id);
+		System.out.println("바차트 워크스페이스아이디 " +dto.getWorkspace_id());
+	
+		
+		ArrayList<Project_DTO> projectList = DataController.getInstance().GetProjectList();
+		Project_DTO project = new Project_DTO();
+		Task_DTO task = new Task_DTO();
+		
+		
+		getTaskAllFlow_comp_count  = new int[projectList.size()];
+		getTaskAllFlow_enddateLate_count = new int[projectList.size()];
+		getTaskAllFlow_enddateNo_count = new int[projectList.size()];
+		getTaskAllFlow_ing_count = new int[projectList.size()];
+		int comp = 0;
+		int enddateLate_count=0;
+		int enddateNo_count = 0;
+		int ing_count = 0;
+		
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+		String date = sd.format(new Date());
+		
+		
+		for( int i =0; i<projectList.size(); i ++)
+		{
+			project = projectList.get(i);
+			List<Task_DTO> taskList = analysisService.getTaskByProjectid(project.getProject_id());
+			for( int j=0; j< taskList.size(); j++)
+			{
+				task = taskList.get(j);
+				if( task.getSuccess_f().equals("1")) comp++;	//완료된거
+				if( task.getSuccess_f().equals("0")) ing_count++; //진행중인거
+				if( task.getEnd_date() != null )
+				{
+					int check = GetDateCheck( task.getEnd_date(), date); // 0 마감일 지난거 1 마감일 안지난거
+					if( check == 0 )enddateLate_count++;
+				}else{
+					enddateNo_count++; //마감일 없는거 
+				}
+			}
+				
+			getTaskAllFlow_comp_count[i] = comp;
+			getTaskAllFlow_enddateLate_count[i] =enddateLate_count;
+			getTaskAllFlow_enddateNo_count[i] =enddateNo_count;
+			getTaskAllFlow_ing_count[i] = ing_count;
+			
+			 comp = 0;
+			 enddateLate_count=0;
+			 enddateNo_count = 0;
+			 ing_count = 0; 
+		}
+		
+		getTaskAllFlow_comp = analysisService.getTaskAllFlow_comp(workspace_id);
+		/*System.out.println("예아베이비 " + workspace_id);
+		getTaskAllFlow_comp_count = analysisService.getTaskAllFlow_comp_count(workspace_id);
+		System.out.println("예아베이비22 " + workspace_id);
+		getTaskAllFlow_enddateLate_count = analysisService.getTaskAllFlow_enddateLate_count(workspace_id); //지난거 
+		getTaskAllFlow_enddateNo_count = analysisService.getTaskAllFlow_enddateNo_count(workspace_id);	//없는거 
+		getTaskAllFlow_ing_count = analysisService.getTaskAllFlow_ing_count(workspace_id);	//진행중 
+*/	}
+	
+	 //task 날짜 , 현재 
+	private int GetDateCheck(String dateTask, String dateNow)
+	{
+		DateDiff( dateTask, dateNow);
+		return showDatesBetween ();
 	}
 	
-	/* CHART(USER) */	
+	 	SimpleDateFormat	sdf = new SimpleDateFormat("yyyy/MM/dd");
+	 	Calendar calendar1;
+	    Calendar calendar2;
+	        
+	   
+	    public void DateDiff(String str1, String str2){
+	        try {
+	            Date date1 = sdf.parse(str1);
+	            calendar1 = Calendar.getInstance();
+	            calendar1.setTime(date1);
+	                
+	            Date date2 = sdf.parse(str2);
+	            calendar2 = Calendar.getInstance();
+	            calendar2.setTime(date2);
+	        }catch(java.text.ParseException e){
+	            System.err.println("ParseException ");
+	        }
+	    }
+
+	    public int getDiffByDay(){
+	        int diffInDays = (int)((calendar2.getTimeInMillis() - calendar1.getTimeInMillis())/(1000*3600*24));
+	        return diffInDays;
+	    }
+
+
+	    public int showDatesBetween(){
+	        Calendar cal = Calendar.getInstance();
+	        cal.setTimeInMillis(calendar1.getTimeInMillis());
+
+
+	        int diffInDays;
+	        int ix = 0;
+	       
+            Date date = cal.getTime(); 
+            System.out.println(sdf.format(date));
+            cal.add(Calendar.DATE, 1);
+            diffInDays = (int)((calendar2.getTimeInMillis() - cal.getTimeInMillis())/(1000*3600*24));
+            if( diffInDays >0 )
+            {
+            	return 0; //마감일이 지난거 
+            }
+            
+           return 1; //마감일이 남은거 
+	    }
+
+	
+/* CHART(USER) */	
 
 	int getTaskMe_compU;
 	int getTaskMe_enddateLateU;
