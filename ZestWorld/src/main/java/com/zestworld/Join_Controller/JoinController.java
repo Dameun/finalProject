@@ -37,7 +37,13 @@ import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
-
+/*
+* @FileName : JoinController.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 28.
+* @Author : 양건휘
+* @Desc : 회원가입, 회원 수정
+*/
 @Controller
 public class JoinController {
 

@@ -7,7 +7,13 @@ import java.util.Map;
 import com.zestworld.Table_DTO.Role_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
-
+/*
+* @FileName : JoinDAO.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 28.
+* @Author : 양건휘
+* @Desc : 회원가입, 회원 수정 
+*/
 public interface JoinDAO {
 	
 	//회원정보 얻기
