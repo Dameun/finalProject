@@ -276,11 +276,12 @@ public class AjaxViewController {
 	
 	//워크 스페이스 삭제시 
 	@RequestMapping(value = "/workspaceDelete.ajax", method = RequestMethod.GET)
-	public String deleteWorkspace(String workSpace_id) 
+	public String deleteWorkspace(int workSpace_id) 
 	{
+		System.out.println("deleteWorkspaceEnter");
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		Workspace_DTO workspace = taskDao.GetWorkSpace(Integer.parseInt(workSpace_id));
-		taskDao.deleteWorkspace(workspace);
+		//Workspace_DTO workspace = taskDao.GetWorkSpace(Integer.parseInt(workSpace_id));
+		taskDao.deleteWorkspace(workSpace_id);
 
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
