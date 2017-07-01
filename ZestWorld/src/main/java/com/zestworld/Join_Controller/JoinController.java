@@ -260,6 +260,7 @@ public class JoinController {
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
 		String wid = DataController.getInstance().GetUser().getUser_id();
+		String name = DataController.getInstance().GetUser().getName();
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true,"utf-8");
 		
@@ -272,6 +273,7 @@ public class JoinController {
 		VelocityContext velocityContext = new VelocityContext();
 		velocityContext.put("path", path2);
 		velocityContext.put("id", wid);
+		velocityContext.put("name", name);
 		StringWriter stringWriter = new StringWriter();
 		template.merge(velocityContext, stringWriter);
 		helper.setText(stringWriter.toString(),true);
