@@ -162,9 +162,11 @@ public class AjaxViewController {
 	public String totalTask(Model model) throws ClassNotFoundException, SQLException {
 		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		List<Project_DTO> list = service.projectlist(workspace_id);
+		List<Project_DTO> elist = service.essencelist(workspace_id);
 		System.out.println("AJAC: "+ workspace_id);
 		List<Workspace_DTO> assign = service.writerlist(workspace_id);
 		model.addAttribute("projectlist", list); // 자동 forward
+		model.addAttribute("essencelist", elist); // 자동 forward
 		model.addAttribute("assign", assign); // 자동 forward
 		System.out.println("LIST: " + list.size());
 

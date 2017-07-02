@@ -705,7 +705,7 @@ function detailModalUpdateDialogN()
 <div class="form-group">
 	
 		빠른필터<br>
-		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();"><br>
+		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();">
 		
 		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
 		</div>
@@ -717,6 +717,14 @@ function detailModalUpdateDialogN()
 			<input type="radio" name="projectlist" onclick="myfilter();" value="500000" checked>전체<br>
 		<c:forEach items="${projectlist}"  var="n">
 			<input type="radio" name="projectlist" value="${n.project_id}" onclick="myfilter();">${n.p_title}<br>
+		</c:forEach> 
+		</div>
+		<hr>
+		<div class="form-group">
+		Essence 프로젝트<br>
+		<input type="radio" name="projectlist" onclick="myfilter();" value="500000" checked>전체<br>
+		<c:forEach items="${essencelist}"  var="e">
+			<input type="radio" name="projectlist" value="${e.project_id}" onclick="myfilter();">${e.p_title}<br>
 		</c:forEach> 
 		</div>
 		<hr>

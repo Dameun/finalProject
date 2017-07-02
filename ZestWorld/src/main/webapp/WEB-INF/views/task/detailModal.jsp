@@ -17,7 +17,7 @@
 </script>
 
 <div class="modal fade" id = "detailModal" role="dialog">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog">
 <div class="modal-content">
     <section class="widget">
         <header>
@@ -28,7 +28,7 @@
                 <small><span id="Modalenrolldate"></span></small>
             </h4>
             <div class="widget-controls">
-            	<span class="label label-danger fw-normal" id="modal_delete" data-dismiss="modal" onclick="modalDeleteTask();">delete</span>
+            	
             	&nbsp;&nbsp;&nbsp;&nbsp;
                 <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
             </div>
@@ -48,7 +48,7 @@
                             </label>
                         	<div class="col-sm-9">
                         		<textarea rows="3" class="autogrow form-control transition-height" id="modalDetailExplain"
-                             	                     placeholder="Try to add few new lines.."></textarea>
+                             	                     placeholder=""></textarea>
                         	</div>
                         </div>
                         <div class="form-group row">
@@ -82,8 +82,8 @@
                             
                             <div
 								class="select2-container select2-container-multi select2 form-control"
-								id="s2id_multiple-select">
-							
+								id="s2id_multiple-select" style="width:410px;">
+							<button type="button"class="btn btn-warning" style="float:right;margin-left:10px;"onclick="taskAssign(${n.task_id});"><i class="fa fa-plus"></i></button> 
 								
 								<ul class="select2-choices">
 									<div id="assignMemberCheck">
@@ -92,13 +92,21 @@
 								</ul>
 							</div>
 							<br>
-							<div id="wMemberList" style="background-color:#EAEAEA">
+							<div class="form-group row"style="padding-left:20px;">
+							<div id="wMemberList" style="width:300px;">
 						                    
-							</div>
-							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button> 
+							 
+							
+                           </div>
+                            
                             </div>
+                         <!--    <div class="form-group" style="width:auto;"> -->
+							
+                          <!--  </div> -->
+                            </div>
+                            
                         </div>
-                        
+                        <br>
                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="password">
                                		 팔로워
@@ -114,38 +122,37 @@
 						<hr>        
                     
                        <div class="form-group row">
-                            <label class="control-label col-sm-3" for="password">
+                            <label class="control-label col-sm-3 " for="password">
                                		 체크리스트
                             </label>
-                            <div class="col-sm-8">
-                                <input type="text" id="CheckContents" name="CheckContents" class="form-control mb-sm" style="width:635px"
-                                       data-parsley-trigger="change"
-                                       data-parsley-minlength="6"
-                                       required="required">
+                            <div class="input-group" style="width:430px; padding-left:14px;">
+                                <input type="text" id="CheckContents"name="CheckContents" class="form-control mb-sm">
                                        
-                            </div>
-                            <div class="col-sm-1">
-                            	<button type="button" class="btn btn-warning" onclick="checkreg();"><i class="fa fa-plus" style="margin-left:5px"></i></button>
-                            </div>
                             
+                               <div class="input-group-btn" style="padding-left:10px;">
+                            	<button type="button" class="btn btn-warning" onclick="checkreg();"><i class="fa fa-plus"></i></button>
+                            </div>
+                            </div>
                         </div>   
 
                         <div id="checkListAjax">
                         
                         </div>
-                </fieldset>
-
-                <div class="form-actions">
-                	<div class="row">
-                		<div class="col-sm-10">
-                    		<button style="margin-left:20px" type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
-                    	</div>
-                    	<div class="col-sm-2">
+               
+<div class="widget-body no-padding">
+                	<div class="btn-toolbar pull-left">
+                		<button class="btn btn-danger mb-xs" role="button"id="modal_delete" data-dismiss="modal" onclick="modalDeleteTask();" style="float:left;">Delete</button>
+                    		</div>
+                    		<div class="btn-toolbar pull-right">
+                    		<button role="button" class="btn btn-secondary width-100 mb-xs" data-dismiss="modal">Cancel</button>
+                    	
+                    	
                     		<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
-                			<button style="margin-left:20px" type="button" class="btn btn-success" id="detailClose"  data-dismiss="modal" onclick="detailModalUpdateDialog();">Submit</button> 
+                			<button role="button" class="btn btn-warning width-100 mb-xs" id="detailClose"  data-dismiss="modal" onclick="detailModalUpdateDialog();">Finish</button> 
                 		</div>
-                	</div>
+                	
                 </div>
+                 </fieldset>
             </form>
         </div>
     </section>

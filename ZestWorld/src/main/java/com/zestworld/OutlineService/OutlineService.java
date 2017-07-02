@@ -68,6 +68,13 @@ public class OutlineService {
 		return list;
 	}
 	
+	//필터에 있는 프로젝트 목록
+	public List<Project_DTO> essencelist(int workspace_id) throws ClassNotFoundException, SQLException{
+		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
+		List<Project_DTO> list=dao.essencelist(workspace_id);
+		return list;
+	}
+	
 	//필터에 있는 작성자 목록
 	public List<Workspace_DTO> writerlist(int workspace_id) throws ClassNotFoundException, SQLException{
 		IOutlineDAO dao = sqlsession.getMapper(IOutlineDAO.class);
