@@ -309,8 +309,12 @@
 	<select id="getTaskByProjectid" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="int">
 		select* FROM task where project_id=#{project_id}
 	</select>
-	
-	     
+	<select id="getTaskByCategoryid" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="int">
+		select* FROM task where category_id=#{category_id}
+	</select>
+	<select id="getCateoryList" resultType="com.zestworld.Table_DTO.Category_DTO" parameterType="com.zestworld.Table_DTO.Project_DTO">
+		select* FROM category where project_id=#{project_id}
+	</select>
 </mapper>
 
 
