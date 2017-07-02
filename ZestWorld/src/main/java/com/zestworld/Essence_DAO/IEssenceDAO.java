@@ -23,4 +23,5 @@ public interface IEssenceDAO {
 	public EssenceDefine_DTO getDefineByid(EssenceDefine_DTO essenceDefine_DTO);
 	public int getTask(Task_DTO task_DTO);
 	public int checkListReg(CheckList_DTO checkList_DTO);
+	public int getMaxtaskId();
 }

@@ -1,7 +1,10 @@
 package com.zestworld.AlarmController;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,6 +93,14 @@ public class AlarmAjaxController {
     public @ResponseBody String newAlarm(@RequestParam(value="newAlarm") String newAlarm,Model model)
             throws ClassNotFoundException, SQLException{
 		 
+		
+		Calendar date = Calendar.getInstance();
+		String strTime = date.get(Calendar.HOUR_OF_DAY) + ":" +
+		date.get(Calendar.MINUTE) + ":" +
+		date.get(Calendar.SECOND);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String now = dateFormat.format(date.getTime());
+		
 		  String[] alarmIdArr={};
 		  String[] msgArr = newAlarm.split("/");
 		  int alarmType 	= Integer.parseInt(msgArr[0]);
@@ -99,9 +110,10 @@ public class AlarmAjaxController {
 		  alarm.setAlarm_type(alarmType);
 		  alarm.setCheck_f(0);
 		  alarm.setImg("img");
-		  alarm.setUser_id(msgArr[3]);
-		  alarm.setAcceptUsers(msgArr[2]);
+		  alarm.setUser_id(msgArr[3]);	//보내는 사람 
+		  alarm.setAcceptUsers(msgArr[2]);	//받는 사람 
 		  alarm.setAlarmTitle(alarmStrMak(newAlarm));
+		  alarm.setImg(now);
 		  service.insert(alarm);
 
 		  String success = "success";
@@ -109,6 +121,10 @@ public class AlarmAjaxController {
 	      return success;
 	}
 	
+	  
+    public static String getCurrentTime(String timeFormat){
+        return new SimpleDateFormat(timeFormat).format(System.currentTimeMillis());
+    }
 
 	private String alarmStrMak(String newAlarm)
 	{
@@ -124,17 +140,17 @@ public class AlarmAjaxController {
 		  if( alarmType.equals("0"))
 		  {
 			  if( taskAccept.equals(follower) )
-				  returnMsg = "업무 :  " + taskTitle +"가 배정되었습니다. ";
+				  returnMsg = "업무 :  " + taskTitle +"이/가 배정되었습니다. ";
 			  else
-				  returnMsg = "업무 :  " + taskTitle +"가 배정되었습니다. follower: "+ follower+ "입니다.";
-		  }/*else
+				  returnMsg = "업무 :  " + taskTitle +"이/가 배정되었습니다. follower: "+ follower+ "입니다.";
+		  }else
 		  //완료
 		  {
-			  if( !writer.equals(userId) )
-				  returnMsg = "�뾽臾� "+ taskTitle+ "瑜� �셿猷뚰븯���뒿�땲�떎.";
-			  else
-				  returnMsg = writer+"�떂�씠" +"�뾽臾대�� �셿猷뚰븯���뒿�땲�떎.";
-		  }*/
+			  //if( taskAccept.equals(follower) )
+				  returnMsg = "업무 :  " + taskTitle +"가 완료되었습니다.";
+			  //else
+				 // returnMsg = "업무 :  " + taskTitle +"가 완료되었습니다.";
+		  }
 		  
 		  return returnMsg;
 	}

@@ -99,7 +99,7 @@ public class workspaceController {
 	public String createWorkspace(String workspaceName,String workspaceDiscription,Model model, HttpSession session)
 	{
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		Workspace_DTO workspace = new Workspace_DTO ();
+		Workspace_DTO workspace = new Workspace_DTO();
 		workspace.setWorkspace_name(workspaceName);
 		workspace.setDescription(workspaceDiscription);
 		workspace.setUser_id(DataController.getInstance().GetUser().getUser_id());
