@@ -1,6 +1,7 @@
 package com.zestworld.taskListController;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -85,6 +86,7 @@ public class taskListController {
 		task.setWorkspace_id(workspace_id);
 		task.setEssence("0");
 		service.tasktitleInsert(task);
+		task.setFollower(userid);
 		
 		cateDto.setProject_id(project_id);
 		List<Category_DTO> list = service.tasklist(cateDto);
@@ -355,13 +357,15 @@ public class taskListController {
 	@RequestMapping(value="TaskAssign.htm", method=RequestMethod.GET)
 	public View taskAssign(String[] checkboxValues,int taskid,Model model) throws ClassNotFoundException, SQLException{
 		
-		TaskAssignMember_DTO dto= new TaskAssignMember_DTO();
-		for(int i=0; i<checkboxValues.length;i++){
+		String send = "";
+		TaskAssignMember_DTO dto = new TaskAssignMember_DTO();
+		for (int i = 0; i < checkboxValues.length; i++) {
 			dto.setUser_id(checkboxValues[i]);
 			dto.setTask_id(taskid);
-			int result2=service.assignMemberReg(dto);
+			int result2 = service.assignMemberReg(dto);
 		}
- 
+		send = DataController.getInstance().GetUser().getUser_id();
+		model.addAttribute("send", send);
 		return jsonview;
 		
 	}
@@ -410,13 +414,56 @@ public class taskListController {
 	
 	//배정된맴버 완료여부
 	@RequestMapping(value="taskMemberCheck.htm", method=RequestMethod.GET)
-	public View taskMemberListChk(int project_id , Model model) throws ClassNotFoundException, SQLException{
+	public View taskMemberListChk(int project_id, int task_id, Model model) throws ClassNotFoundException, SQLException{
 
-		List<Users_DTO> member=service.assignMemberList(project_id);
-		model.addAttribute("assignmember", member);		
+		List<String> projectMember= new ArrayList<String>();
+		List<String> projectAssignmember = new ArrayList<String>();
+		List<String> resultList = new ArrayList<String>();
+		List<Users_DTO> member = service.assignMemberList(project_id); //프로젝트 멤버
+		List<TaskAssignMember_DTO> assignmember = service.taskMemberList(task_id); 
+ 		
+		int count = 0;
+		int k = 0;
+		
+		//프로젝트 멤버
+		for (int i = 0; i < member.size(); i++) {
+			projectMember.add(i, member.get(i).getUser_id());
+		
+		}
+		
+		if(assignmember.size()==0){
+			for (int i = 0; i < member.size(); i++) {
+				resultList.add(i, member.get(i).getUser_id());
+			}
+		}else{
+			//배정된멤버
+			for (int i = 0; i < assignmember.size(); i++) {
+				projectAssignmember.add(i, assignmember.get(i).getUser_id());			
+			}
+	
+			for (int i = 0; i < projectMember.size(); i++) {
+				count=0;
+				for (int j = 0; j < projectAssignmember.size(); j++) {
+					if (projectMember.get(i).equals(projectAssignmember.get(j))) {
+						count++;
+						
+					}
+				}
+				if (count == 0) {
+					resultList.add(k, projectMember.get(i));
+					if(resultList.size()!=0){
+					}
+					k++;
+				}
+			}
+		}
+		model.addAttribute("assignmember", resultList);
+	
 		
 		return jsonview;
 	}
+	
+	
 	
 	//카테고리 타이틀 수정시 타이틀 정보 받아오는 곳 
 	@RequestMapping(value="getcateTitle.htm", method=RequestMethod.GET)

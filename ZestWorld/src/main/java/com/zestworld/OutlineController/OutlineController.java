@@ -309,6 +309,7 @@ public class OutlineController {
 	//멤버배정하기 위한 리스트 (업무 배정 테이블 insert)
 	@RequestMapping(value = "taskMemberListChk1.htm", method = RequestMethod.GET)
 	public View taskMemberListChk(int project_id, int task_id, Model model) throws ClassNotFoundException, SQLException {
+		
 		List<String> projectMember= new ArrayList<String>();
 		List<String> projectAssignmember = new ArrayList<String>();
 		List<String> resultList = new ArrayList<String>();
@@ -354,8 +355,6 @@ public class OutlineController {
 		
 		return jsonview;
 	}
-
-
 
 	//체크리스트 등록
 	@RequestMapping(value = "checkListReg.htm", method = RequestMethod.GET)

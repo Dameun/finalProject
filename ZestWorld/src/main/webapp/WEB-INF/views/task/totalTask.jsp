@@ -47,10 +47,10 @@ $(document).ready(function(){
 			alert('검색 에러! 관리자에게 문의하세요');
 		}
 	});
-	
+/* 	
 	 $(this).removeClass('hasDatepicker').datepicker();
 	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' });
-	
+	 */
 	  
 	 
 }); 
@@ -78,8 +78,8 @@ function refresh(){
 		}
 	});
 	
-	 $(this).removeClass('hasDatepicker').datepicker();
-	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' }); 
+	/*  $(this).removeClass('hasDatepicker').datepicker();
+	 $( "#datepicker" ).datepicker({ dateFormat: 'yy/mm/dd' });  */
 }
 
 //업무완료 
@@ -315,6 +315,9 @@ function detailModalView(view,project_id){
 	       alert('Error while request..');
 	    }
 	 });
+	
+	
+	
 } 
 
 //업무 추가
@@ -610,12 +613,12 @@ function detailModalUpdateDialog()
 function detailModalUpdateDialogY()
 {
 	detailUpdate();
-	alert('수정되었습니다.');
+	
 }
 //상세보기 수정 no
 function detailModalUpdateDialogN()
 {
-	alert('취소되었습니다.');
+	
 	dataErase();
 	return;
 }
