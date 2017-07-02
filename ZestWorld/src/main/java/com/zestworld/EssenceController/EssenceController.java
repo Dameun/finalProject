@@ -171,11 +171,11 @@ public class EssenceController {
 		if( Essence.length() >0)
 		{
 			project.setP_title(Essence);
-			project.setEssence_f(Integer.parseInt("0"));
+			project.setEssence_f(Integer.parseInt("1"));
 		}else
 		{
 			project.setP_title(p_title);
-			project.setEssence_f(Integer.parseInt("1"));
+			project.setEssence_f(Integer.parseInt("0"));
 		}
 		
 		project.setExplain(explain);
