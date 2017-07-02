@@ -172,8 +172,8 @@ $(document).ready(function(){
                 <section class="widget">
                     <header>
                         <h4>
-                            Wizard
-                            <small>Tunable widget</small>
+                            <b>마일스톤</b>	
+                           	<small>단계 설정</small>
                         </h4>
                        <!--  <div class="widget-controls">
                             <a data-widgster="expand" title="Expand" href="#" style="display: none;"><i class="glyphicon glyphicon-chevron-up"></i></a>
@@ -184,8 +184,8 @@ $(document).ready(function(){
                     <div class="widget-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <h4>Inpage <strong>Wizard</strong></h4>
-                                <p>An example of complete wizard form in widget.</p>
+                                <h4><b>단계 구체화</b></h4>
+                                <p>각 단계에 맞게 사용할 상태를 정의하세요.</p>
 
                                 <div id="wizard" class="form-wizard">
                                      <ul class="nav-justified mb-sm nav nav-pills">
@@ -294,17 +294,17 @@ $(document).ready(function(){
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                             <div class="col-md-4">
-                                <h4>Modal <strong>Application Wizard</strong></h4>
-                                <p >An example of complete wizard form in a modal.</p>
+                                <h4><!--  Modal <strong>Application Wizard</strong>  --></h4>
+                                <p ><!--  An example of complete wizard form in a modal. --> </p>
                                 <div id="detailTitle"> </div>
-                                <p>detail</p>
+                                <p><!-- detail --></p>
                                 <hr/>
                                	<div id="detailCateContent">
                                	<div class="alert alert-gray alert-sm">
-                   					<span class="fw-semi-bold">상세보기:</span>datail catagory, if select check!
+                   					 <!-- <span class="fw-semi-bold">상세보기:</span>datail catagory, if select check! -->
                					 </div>
                                 </div>
                                
