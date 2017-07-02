@@ -8,10 +8,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<link rel="stylesheet" type="text/css" href="resources/dist/css/taskList.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/dist/css/taskList.css">
 
 
 <script type="text/javascript">
@@ -551,268 +552,252 @@ $(function(){
 	
 	
 </script>
-
-<div class="row" style="padding-left:20px;">
-      <!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
-	<div class="btn-toolbar pull-left">
-		<button class="btn btn-inverse mb-xs" role="button" href="#add-modal"data-toggle="modal">
-                                <i class="fa fa-plus text-warning"></i>
-                               업무리스트 추가
-                            </button>
-		<button class="btn btn-inverse mb-xs" role="button" id="file" onclick="location.href='Schedule.htm'">
-		<i class="fa fa-calendar text-warning"></i>
-		캘린더</button>
-</div> 
+<!--  style="padding-left:20px;" -->
+<div class="row">
+	<!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
+	<div class="btn-toolbar pull-right" style="position: fixed; left: 82%;">
+		<button class="btn btn-inverse mb-xs" role="button" href="#add-modal"
+			data-toggle="modal">
+			<i class="fa fa-plus text-warning"></i> 업무리스트 추가
+		</button>
+		<button class="btn btn-inverse mb-xs" role="button" id="file"
+			onclick="location.href='Schedule.htm'">
+			<i class="fa fa-calendar text-warning"></i> 캘린더
+		</button>
+	</div>
 </div>
-      
-	<!--카테고리 title 수정 모달  -->
 
-	  <div class="modal fade" id="cateTitle_Update" >
-         <div class="modal-dialog">
-               <div class="modal-content">
-                 <div class="modal-header">
-                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title text-align-center fw-bold mt" id="myModalLabel18">카테고리 제목 수정</h4>
-                         <p class="text-align-center fs-mini text-muted mt-sm">
-                                           	원하시는 제목으로 수정이 가능합니다. 오타를 주의해주세요 ^_^
-                                        </p>
-                                    </div>
-                                    <div class="modal-body bg-gray-lighter">
-                                    
-                                       <div class="row">
-                                                &nbsp;<i class="fa fa-circle text-danger"></i> &nbsp; 이전 카테고리 제목 
-                                        		<div class="col-md-12">
-                                                    <div class="form-group" id="select_cateTitle" style="margin-left: 13px; margin-top: 5px">
-                                                  
-                                                  		
-                                                    </div>
-                                                      <input type="hidden" id="sel_cateID">
-                                                </div>
-                                            </div> 
-                                        
-                                            <div class="row">
-                                                &nbsp;<i class="fa fa-circle text-warning"></i>&nbsp; 카테고리 제목 수정
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control input-no-border"
-                                                        id="changeTitle" placeholder="변경할 제목을 적어주세요">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                      
-                                    </div>
-                                    <div class="modal-footer">
-                                         <button type="button" class="btn btn-success" data-dismiss="modal" onclick="cateUpdate()">Save changes</button>
-                                        <button type="button" class="btn btn-gray" data-dismiss="modal" id="upclose">Close</button>
-                                   
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                
-                
-	
-	
-	
-	<!-- detail task modal  -->
-	
-	<div class="modal fade" id = "detailModal" role="dialog"  aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-	     	 <div class="modal-content">
-    <section class="widget">
-        <header>
-            <h4>
-            	
-                <span class="fw-semi-bold" id="span1">
-               
-                </span>&nbsp;&nbsp; 
-                <span class="label label-danger fw-normal" id="modal_delete" style="cursor:pointer" data-dismiss="modal" onclick="modalDeleteTask();">delete</span>
-                <small><span id="Modalenrolldate"></span></small>
-            </h4>
-            <div class="widget-controls">
-                <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
-            </div>
-        </header>
-        <div class="widget-body">
-            <form id="validation-form" class="form-horizontal form-label-left" method="post"
-                  data-parsley-priority-enabled="false"
-                  novalidate="novalidate">
+<!--카테고리 title 수정 모달  -->
 
-                <fieldset>
-                    <legend>
-                     
-                       
-                    </legend>
-                      
-                        <div class="form-group row">
-                        	<label class="control-label col-sm-3" for="number">
-                                	상세 설명
-                            </label>
-                        	<div class="col-sm-9">
-                        		<textarea rows="3" class="autogrow form-control transition-height" id="modalDetailExplain"
-                             	                     placeholder="Try to add few new lines.."></textarea>
-                        	</div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-sm-3" for="number">
-                                	시작일
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" id="detailStart" name="detailStart" class="form-control"
-                                       data-parsley-type="number"
-                                       required="required">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-sm-3" for="number">
-                                	마감일
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" id="detailEnd" name="detailEnd" class="form-control"
-                                       data-parsley-type="number"
-                                       required="required">
-                            </div>
-                        </div>
-                        
-                  <div class="form-group row">
-                            <div>
-                            <label class="control-label col-sm-3" for="range">
-                                	배정된 멤버
-                                	
-                            </label>
-                           </div>
-                            <div class="col-sm-9">
-                            
-                            
-                            <div
-								class="select2-container select2-container-multi select2 form-control"
-								id="s2id_multiple-select">
-							
-								
-								<ul class="select2-choices">
-									<div id="assignMemberCheck">
-									
-									 </div>
-								</ul>
-							</div>
-							<br>
-							<div id="wMemberList" style="background-color:#EAEAEA">
-						                    
-							</div>
-							 <button type="button" style="margin-left: 568px"class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
-                            
-						
-                   
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <label class="control-label col-sm-3" for="password">
-                               		 팔로워
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" id="follower22" name="follower22" class="form-control mb-sm"
-                                       data-parsley-trigger="change"
-                                       data-parsley-minlength="6"
-                                       required="required">
-                            </div>
-                        </div>
-                        
-                               <hr>        
-                                       
-                                       
-                       <div class="form-group row">
-                            <label class="control-label col-sm-3" for="password">
-                               		 체크리스트
-                            </label>
-                            <div class="col-sm-8">
-                                <input type="text" id="CheckContents" name="CheckContents" class="form-control mb-sm" style="width:635px"
-                                       data-parsley-trigger="change"
-                                       data-parsley-minlength="6"
-                                       required="required">
-                                       
-                            </div>
-                            <div class="col-sm-1">
-                            	<button type="button" class="btn btn-warning" onclick="checkreg();"><i class="fa fa-plus" 
-                            	style="margin-left: 5px;margin-top: 5px;margin-right: 2px;"></i></button>
-                            </div>
-                        </div>  
-                    
-                        <div id="checkListAjax">
-                        
-                        </div>
-                   
-                </fieldset>
-
-                <div class="form-actions">
-                	<div class="row">
-                		<div class="col-sm-10">
-                    		<button style="margin-left:20px" type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
-                    	</div>
-                    	<div class="col-sm-2">
-                    		<button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button>
-                		</div>
-                	</div>
-                </div>
-            </form>
-        </div>
-    </section>
-</div>
-</div>
-</div>
-	
-	<!--/detail task modal  -->
-	
-	<!-- category title 모달  -->
-	
-			<div class="modal fade" id="add-modal" style="display: none;">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
-							<h4 class="modal-title" style="align: center">업무리스트 추가</h4>
-						</div>
-						<div class="modal-body">
-						<div class="form-group">
-							<input class="form-control" type="text" id="title" name="title"
-								placeholder="업무리스트 이름">
-						</div>
-						
-					
-							<div class="form-group" style="text-align:right;">
-							<!--   <button type="button" class="btn btn-primary">Save changes</button> -->
-							
-							<button type="button" class="btn btn-secondary btn-sm"
-								data-dismiss="modal" id="ucancle">
-								Cancel
-							</button>
-							<button type="button" class="btn btn-warning btn-sm"  data-dismiss="modal"
-							 onclick="cateTitle_Add()">
-								Finish
-							</button>
-						</div>
-						</div>
+<div class="modal fade" id="cateTitle_Update">
+	<div class="modal-dialog">
+		<form>
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel18">카테고리 제목 수정</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						카테고리 제목
+						<div class="form-control" id="select_cateTitle"
+							style="margin-top: 5px"></div>
+						<input type="hidden" id="sel_cateID">
 					</div>
 
+
+
+					카테고리 제목 수정
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="changeTitle"
+							placeholder="변경할 제목을 적어주세요">
+					</div>
+
+
+
+
+					<div class="form-group" style="text-align: right;">
+						<button type="button" class="btn btn-secondary btn-sm"
+							data-dismiss="modal" id="upclose">Cancel</button>
+						<button type="button" class="btn btn-warning btn-sm"
+							data-dismiss="modal" onclick="cateUpdate()">Finish</button>
+
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+
+
+<!-- detail task modal  -->
+
+<div class="modal fade" id="detailModal" role="dialog"
+	aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<section class="widget"> <header>
+			<h4>
+
+				<span class="fw-semi-bold" id="span1"> </span>&nbsp;&nbsp; <span
+					class="label label-danger fw-normal" id="modal_delete"
+					style="cursor: pointer" data-dismiss="modal"
+					onclick="modalDeleteTask();">delete</span> <small><span
+					id="Modalenrolldate"></span></small>
+			</h4>
+			<div class="widget-controls">
+				<a data-widgster="close" title="Close" href="#"><i
+					class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
+			</div>
+			</header>
+			<div class="widget-body">
+				<form id="validation-form" class="form-horizontal form-label-left"
+					method="post" data-parsley-priority-enabled="false"
+					novalidate="novalidate">
+
+					<fieldset>
+						<legend> </legend>
+
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="number"> 상세 설명
+							</label>
+							<div class="col-sm-9">
+								<textarea rows="3"
+									class="autogrow form-control transition-height"
+									id="modalDetailExplain"
+									placeholder="Try to add few new lines.."></textarea>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="number"> 시작일 </label>
+							<div class="col-sm-9">
+								<input type="text" id="detailStart" name="detailStart"
+									class="form-control" data-parsley-type="number"
+									required="required">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="number"> 마감일 </label>
+							<div class="col-sm-9">
+								<input type="text" id="detailEnd" name="detailEnd"
+									class="form-control" data-parsley-type="number"
+									required="required">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div>
+								<label class="control-label col-sm-3" for="range"> 배정된
+									멤버 </label>
+							</div>
+							<div class="col-sm-9">
+
+
+								<div
+									class="select2-container select2-container-multi select2 form-control"
+									id="s2id_multiple-select">
+
+
+									<ul class="select2-choices">
+										<div id="assignMemberCheck"></div>
+									</ul>
+								</div>
+								<br>
+								<div id="wMemberList" style="background-color: #EAEAEA"></div>
+								<button type="button" style="margin-left: 568px"
+									class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
+
+
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="password"> 팔로워
+							</label>
+							<div class="col-sm-9">
+								<input type="text" id="follower22" name="follower22"
+									class="form-control mb-sm" data-parsley-trigger="change"
+									data-parsley-minlength="6" required="required">
+							</div>
+						</div>
+
+						<hr>
+
+
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="password">
+								체크리스트 </label>
+							<div class="col-sm-8">
+								<input type="text" id="CheckContents" name="CheckContents"
+									class="form-control mb-sm" style="width: 635px"
+									data-parsley-trigger="change" data-parsley-minlength="6"
+									required="required">
+
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-warning"
+									onclick="checkreg();">
+									<i class="fa fa-plus"
+										style="margin-left: 5px; margin-top: 5px; margin-right: 2px;"></i>
+								</button>
+							</div>
+						</div>
+
+						<div id="checkListAjax"></div>
+
+					</fieldset>
+
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-sm-10">
+								<button style="margin-left: 20px" type="button"
+									class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
+							</div>
+							<div class="col-sm-2">
+								<button style="margin-left: 20px" type="button"
+									class="btn btn-success" data-dismiss="modal"
+									onclick="detailUpdate();">Submit</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<!--/detail task modal  -->
+
+<!-- category title 모달  -->
+
+<div class="modal fade" id="add-modal" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" style="align: center">업무리스트 추가</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input class="form-control" type="text" id="title" name="title"
+						placeholder="업무리스트 이름">
 				</div>
 
+
+				<div class="form-group" style="text-align: right;">
+					<!--   <button type="button" class="btn btn-primary">Save changes</button> -->
+
+					<button type="button" class="btn btn-secondary btn-sm"
+						data-dismiss="modal" id="ucancle">Cancel</button>
+					<button type="button" class="btn btn-warning btn-sm"
+						data-dismiss="modal" onclick="cateTitle_Add()">Finish</button>
+				</div>
 			</div>
-	
-	<!-- /category title 모달 -->
-	<div class="col-md-2">
+		</div>
 
 	</div>
 
-	<div class="col-md-7"></div>
-	
-<br>
- 
-
-
-<div id="View" style="white-space:nowrap;width:100000px">
-
 </div>
+
+<!-- /category title 모달 -->
+<div class="col-md-2"></div>
+
+<div class="col-md-7"></div>
+
+<br>
+
+
+
+<div id="View" style="white-space: nowrap; width: 100000px"></div>
 
