@@ -705,7 +705,7 @@ function detailModalUpdateDialogN()
 <div class="form-group">
 	
 		빠른필터<br>
-		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();"><br>
+		<input type="hidden" id="forme" name="filter" value="for" onclick="myfilter();">
 		
 		<input type="checkbox" id="follower" name="filter" value="${n.user_id}" onclick="myfilter();">내가 팔로우하는 업무<br>
 		</div>
