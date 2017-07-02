@@ -44,9 +44,9 @@ public class JoinService {
 		return result;
 	}
 
-	public Users_DTO GetSearchUser(String user_id) {
+	public int GetSearchUser(String user_id) {
 		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
-		Users_DTO users = dao.GetSearchUser(user_id);
+		int users = dao.GetSearchUser(user_id);
 		return users;
 	}
 

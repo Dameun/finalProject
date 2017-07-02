@@ -116,28 +116,25 @@ public class JoinController {
 		return "redirect:/index.htm";
 	}
 	
-	//아이디 중복 확인
-		
-	@RequestMapping(value="idchk.htm", method = RequestMethod.GET)
-	   public String idchk(Users_DTO user,@RequestParam String user_id) throws ClassNotFoundException, SQLException{
-	      System.out.println("111111");
-	      
-	      String wid = user.getUser_id();
-	      System.out.println(wid);
-	      Users_DTO result = service.GetSearchUser(wid);
-	      
-	      
-	      if (result != null) {
-	         //model.addAttribute("loginsuccess", "success");
-	         System.out.println("yes");
-	         return "yes";
-	      }else{
-	         System.out.println("no");
-	         return "no";
-	      }
-	   }   
-	   
-		
+	
+   //아이디 중복 확인
+   @RequestMapping(value="idchk.htm", method = RequestMethod.GET)
+   public View idchk(Users_DTO user,@RequestParam String user_id,Model model) throws ClassNotFoundException, SQLException{
+         System.out.println("111111");
+         
+         String wid = user.getUser_id();
+         System.out.println(wid);
+         int result = service.GetSearchUser(wid);
+         System.out.println("idchk : "+result );
+         if (result != 0) {
+            model.addAttribute("result", "success");
+         }else{
+        	model.addAttribute("result", "fail");
+         }
+         return jsonview;
+   }   
+   
+	
 	@RequestMapping(value = "/sendpw.htm", method = RequestMethod.POST)
 	public ModelAndView sendEmailAction(@RequestParam Map<String, Object> paramMap, Users_DTO member) throws Exception {
 		ModelAndView mav;

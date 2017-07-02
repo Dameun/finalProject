@@ -56,8 +56,9 @@ function idchkclk() {
                url:"idchk.htm",
                data:{"user_id": $('#user_id').val().toLowerCase()},
                success:function(data){
+            	   console.log("idchclk: "+data)
                   console.log(data);
-                  if(data == "yes"){
+                  if(data.result == "success"){
                      $("#idselect").html("중복되는 아이디입니다"); 
                    $('#user_id').focus();
                   

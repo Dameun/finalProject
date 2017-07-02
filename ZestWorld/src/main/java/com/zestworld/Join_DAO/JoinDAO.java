@@ -32,7 +32,7 @@ public interface JoinDAO {
 	public int updateUser(Users_DTO member);
 	
 	
-	public Users_DTO GetSearchUser(String user_id);
+	public int GetSearchUser(String user_id);
 	
 	
 	//비번 찾기
