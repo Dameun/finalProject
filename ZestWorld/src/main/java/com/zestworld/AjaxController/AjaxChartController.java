@@ -51,7 +51,7 @@ public class AjaxChartController {
 	int getTaskFollow_enddateNo;
 	int getTaskFollow_ing;
 	//바차트
-	List<Task_DTO> getTaskAllFlow_comp = new ArrayList<Task_DTO>();
+	List<String> getTaskAllFlow_comp = new ArrayList<String>();
 	int[] getTaskAllFlow_comp_count ;
 	int[] getTaskAllFlow_enddateLate_count ;
 	int[] getTaskAllFlow_enddateNo_count;
@@ -158,6 +158,7 @@ public class AjaxChartController {
 		getTaskAllFlow_enddateLate_count = new int[projectList.size()];
 		getTaskAllFlow_enddateNo_count = new int[projectList.size()];
 		getTaskAllFlow_ing_count = new int[projectList.size()];
+		getTaskAllFlow_comp.clear();
 		int comp = 0;
 		int enddateLate_count=0;
 		int enddateNo_count = 0;
@@ -170,6 +171,7 @@ public class AjaxChartController {
 		for( int i =0; i<projectList.size(); i ++)
 		{
 			project = projectList.get(i);
+			getTaskAllFlow_comp.add(project.getP_title());
 			List<Task_DTO> taskList = analysisService.getTaskByProjectid(project.getProject_id());
 			for( int j=0; j< taskList.size(); j++)
 			{
@@ -196,7 +198,8 @@ public class AjaxChartController {
 			 ing_count = 0; 
 		}
 		
-		getTaskAllFlow_comp = analysisService.getTaskAllFlow_comp(workspace_id);
+		
+		//getTaskAllFlow_comp = analysisService.getTaskAllFlow_comp(workspace_id);
 		/*System.out.println("예아베이비 " + workspace_id);
 		getTaskAllFlow_comp_count = analysisService.getTaskAllFlow_comp_count(workspace_id);
 		System.out.println("예아베이비22 " + workspace_id);
@@ -275,13 +278,14 @@ public class AjaxChartController {
 	int getTaskFollow_enddateNoU;
 	int getTaskFollow_ingU;
 	//바차트
-	List<Task_DTO> getTaskAllFlow_compU ;
-	List<Task_DTO> getTaskAllFlow_comp_countU ;
-	List<Task_DTO> getTaskAllFlow_enddateLate_countU;
-	List<Task_DTO> getTaskAllFlow_enddateNo_countU;
-	List<Task_DTO> getTaskAllFlow_ing_countU;	
+	List<String> getTaskAllFlow_compU = new ArrayList<String>() ;
+	int[] getTaskAllFlow_comp_countU ;
+	int[] getTaskAllFlow_enddateLate_countU;
+	int[] getTaskAllFlow_enddateNo_countU;
+	int[] getTaskAllFlow_ing_countU;	
 	
-	/*@RequestMapping(value="/analysisU.ajax", method=RequestMethod.GET)
+	
+	@RequestMapping(value="/analysisU.ajax", method=RequestMethod.GET)
 	public String analysisU(Model model) throws ClassNotFoundException, SQLException
 	{	
 		
@@ -376,13 +380,71 @@ public class AjaxChartController {
 		System.out.println("바차트안" + project_id);  
 		dto.setProject_id(project_id);
 		System.out.println("바차트유저아이디 " +dto.getProject_id());
+
 		
-		getTaskAllFlow_compU = analysisService.getTaskAllFlow_compU(project_id);
+		/*getTaskAllFlow_compU = analysisService.getTaskAllFlow_compU(project_id);
 		getTaskAllFlow_comp_countU = analysisService.getTaskAllFlow_comp_countU(project_id);
-		
 		getTaskAllFlow_enddateLate_countU = analysisService.getTaskAllFlow_enddateLate_countU(project_id);
 		getTaskAllFlow_enddateNo_countU = analysisService.getTaskAllFlow_enddateNo_countU(project_id);
-		getTaskAllFlow_ing_countU = analysisService.getTaskAllFlow_ing_countU(project_id);		
+		getTaskAllFlow_ing_countU = analysisService.getTaskAllFlow_ing_countU(project_id);*/		
+		ArrayList<Project_DTO> projectList = DataController.getInstance().GetProjectList();
+		Project_DTO project = new Project_DTO();
+		Task_DTO task = new Task_DTO();
 		
-	}*/
+		
+		getTaskAllFlow_ing_countU  = new int[projectList.size()];
+		getTaskAllFlow_comp_countU = new int[projectList.size()];
+		getTaskAllFlow_enddateLate_countU = new int[projectList.size()];
+		getTaskAllFlow_enddateNo_countU = new int[projectList.size()];
+		getTaskAllFlow_compU.clear(); 
+		int comp = 0;
+		int enddateLate_count=0;
+		int enddateNo_count = 0;
+		int ing_count = 0;
+		
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+		String date = sd.format(new Date());
+		
+		
+		for( int i =0; i<projectList.size(); i ++)
+		{
+			project = projectList.get(i);
+			getTaskAllFlow_compU.add(project.getP_title());
+			List<Task_DTO> taskList = analysisService.getTaskByProjectid(project.getProject_id());
+			for( int j=0; j< taskList.size(); j++)
+			{
+				task = taskList.get(j);
+				if( task.getSuccess_f().equals("1")) comp++;	//완료된거
+				if( task.getSuccess_f().equals("0")) ing_count++; //진행중인거
+				if( task.getEnd_date() != null )
+				{
+					int check = GetDateCheck( task.getEnd_date(), date); // 0 마감일 지난거 1 마감일 안지난거
+					if( check == 0 )enddateLate_count++;
+				}else{
+					enddateNo_count++; //마감일 없는거 
+				}
+			}
+				
+			getTaskAllFlow_comp_countU[i] = comp;
+			getTaskAllFlow_enddateLate_countU[i] =enddateLate_count;
+			getTaskAllFlow_enddateNo_countU[i] =enddateNo_count;
+			getTaskAllFlow_ing_countU[i] = ing_count;
+			
+			 comp = 0;
+			 enddateLate_count=0;
+			 enddateNo_count = 0;
+			 ing_count = 0; 
+		}
+		
+		
+		//getTaskAllFlow_comp = analysisService.getTaskAllFlow_comp(workspace_id);
+		/*System.out.println("예아베이비 " + workspace_id);
+		getTaskAllFlow_comp_count = analysisService.getTaskAllFlow_comp_count(workspace_id);
+		System.out.println("예아베이비22 " + workspace_id);
+		getTaskAllFlow_enddateLate_count = analysisService.getTaskAllFlow_enddateLate_count(workspace_id); //지난거 
+		getTaskAllFlow_enddateNo_count = analysisService.getTaskAllFlow_enddateNo_count(workspace_id);	//없는거 
+		getTaskAllFlow_ing_count = analysisService.getTaskAllFlow_ing_count(workspace_id);	//진행중 
+*/	}
+	
+	 //task 날짜 , 현재 
 }

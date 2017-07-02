@@ -110,81 +110,81 @@
 		
 	
 	<!-- 나에게 배정된 업무 - 완료된 업무 -->
-	<!-- <select id="getTaskMe_compU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskMe_compU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where success_f = 1 and member = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select> 
 	
 	 <!-- 나에게 배정된 업무 - 마감일지난 업무 -->
-	<!-- <select id="getTaskMe_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskMe_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and member = #{user_id}
 		and project_id = #{project_id}
 		
-	</select> -->
+	</select> 
 	
 	<!-- 나에게 배정된 업무 - 마감일없는 업무 -->
-	<!-- <select id="getTaskMe_enddateNoU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskMe_enddateNoU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where end_date is null and member = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 	
 	<!-- 나에게 배정된 업무 - 진행중인 업무 -->
-	<!-- <select id="getTaskMe_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskMe_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and member = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 	
 	
 	
 	<!-- 내가 작성한 업무 - 완료된 업무 -->
-	<!-- <select id="getTaskI_compU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskI_compU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where success_f = 1 and user_id = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 	
 	<!-- 내가 작성한 업무 - 마감일지난 업무 -->
-	<!-- <select id="getTaskI_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskI_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and user_id = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 	
 	<!-- 내가 작성한 업무 - 마감일없는 업무 -->
-	<!-- <select id="getTaskI_enddateNoU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskI_enddateNoU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where end_date is null and user_id = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select> 
 	 
 	<!-- 내가 작성한 업무 - 진행중인 업무 -->
-	<!-- <select id="getTaskI_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskI_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and user_id = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 	
 	
 	
 	<!-- 내가 팔로우 업무 - 완료된 업무 -->
-	<!-- <select id="getTaskFollow_compU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskFollow_compU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where success_f = 1 and follower = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select> 
 	
 	<!-- 내가 팔로우 업무 - 마감일지난 업무 -->
-	<!-- <select id="getTaskFollow_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskFollow_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and follower = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 	
 	<!-- 내가 팔로우 업무 - 마감일없는 업무 -->
-	<!-- <select id="getTaskFollow_enddateNoU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskFollow_enddateNoU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where end_date is null and follower = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 	 
 	<!-- 내가 팔로우 업무 - 진행중인 업무 -->
-	<!-- <select id="getTaskFollow_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
+	<select id="getTaskFollow_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and follower = #{user_id}
 		and project_id = #{project_id}
-	</select> -->
+	</select>
 
 
 	

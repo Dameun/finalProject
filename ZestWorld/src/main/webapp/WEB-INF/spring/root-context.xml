@@ -10,7 +10,7 @@
 
    <beans:bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></beans:property>
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.0.131:1521:XE"></beans:property>
+		<beans:property name="url" value="jdbc:oracle:thin:@192.168.1.71:1521:XE"></beans:property>
 		<beans:property name="username" value="localzestWorld"></beans:property>
 		<beans:property name="password" value="1004"></beans:property>
 	</beans:bean>

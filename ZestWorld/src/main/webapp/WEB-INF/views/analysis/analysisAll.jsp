@@ -126,7 +126,7 @@
     	  console.log('============================================================1');
     	  <c:forEach items="${getTaskAllFlow_comp}" var ="categoryTitle">
     	  		var json = new Object();
-    	  		json =  "${categoryTitle.p_title}";
+    	  		json =  "${categoryTitle}";
     	  		categoryTitle.push(json);
     	  		console.log(json);
     	  </c:forEach>
