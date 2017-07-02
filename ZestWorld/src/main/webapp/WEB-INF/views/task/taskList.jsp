@@ -31,7 +31,7 @@ var modalCount=0;
 var task_num=''; 
 var click_btn='';
 var task_dnum='';
-	$(function(){
+$(function(){
 	
 		//리스트 비동기로 뿌리는 ajax부분
 		$.ajax({
@@ -52,12 +52,6 @@ var task_dnum='';
 			$('.modal-backdrop').hide();
 		});
 
-
-		//토글 보이게
-		  	$(document).on("click",".task_add",function(){
-			 	$(this).parent(".tasklist").find("#panel").toggle();
-					
-			});
 		
 		//취소 눌렀을 때 토글 닫히게	 
 			$(document).on("click","#cancleBtn",function(){
@@ -65,26 +59,7 @@ var task_dnum='';
 
 			});
 		  
-	
-			
-	/*   //카테고리 삭제
-		  $(document).on("click","#task_menu",function(){
-			 
-			  $.ajax({
-					type:"get",
-					url:"deleteTaskList.htm",
-					data : "cateId=" + $(this).parent(".tasklist").find(".cateValue").val(),
-					success:function(data){
-						$("#View").empty();
-						$("#View").append(data); 		
-						},
-					error:function(){
-						alert('Error while request..');
-					}
-				});
-				
-		  });  
-	*/
+
 	
 		//task title 완료체크
 		
@@ -441,6 +416,7 @@ var task_dnum='';
 		
 	}
 	
+	
 	/* 배정된 멤버 삭제  */
 	function deleteTaskMember(memberId){
 		console.log('멤버삭제 들어가라');
@@ -464,6 +440,7 @@ var task_dnum='';
 			}
 		});	
 	}
+	
 	
 	//카테고리 타이틀 수정
 	function cateUpdate(){
@@ -490,9 +467,11 @@ var task_dnum='';
 		});
 	}
 	
-	
-	
-	
+	//토글이벤트
+	function taskAdd(number)
+	{
+		$("#task_add_"+number).parent(".tasklist").find("#panel").toggle();	
+	}
 	
 	function yes()
 	{
@@ -529,22 +508,26 @@ var task_dnum='';
 	//업무 생성 
 	function createBtn(number,btn) 
 	{
+		
 		dialogPopup("업무를 생성하시겠습니까?", yes, no);
 		task_num = number;
 		click_btn = btn;
+		
 	}	
 	
 	//카테고리 삭제
 	function deleteBtn(number)
 	{
+		
 		dialogPopup("카테고리를 삭제하시겠습니까?", dYes, dNo);
 		task_dnum = number;
+	
 	}
 	
 	function dYes()
 	{
-		  
-			  $.ajax({
+		
+		$.ajax({
 					type:"get",
 					url:"deleteTaskList.htm",
 					data : "cateId="+task_dnum, 
@@ -555,7 +538,7 @@ var task_dnum='';
 					error:function(){
 						alert('Error while request..');
 					}
-				});
+			});
 				
 		 
 	}
