@@ -568,10 +568,10 @@ var task_dnum='';
 	
 	
 </script>
-
-<div class="row" style="padding-left:20px;">
+<!--  style="padding-left:20px;" -->
+<div class="row">
       <!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
-	<div class="btn-toolbar pull-left">
+	<div class="btn-toolbar pull-right"style="position:fixed;left:82%;">
 		<button class="btn btn-inverse mb-xs" role="button" href="#add-modal"data-toggle="modal">
                                 <i class="fa fa-plus text-warning"></i>
                                업무리스트 추가
@@ -589,15 +589,13 @@ var task_dnum='';
                <div class="modal-content">
                  <div class="modal-header">
                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title text-align-center fw-bold mt" id="myModalLabel18">카테고리 제목 수정</h4>
-                         <p class="text-align-center fs-mini text-muted mt-sm">
-                                           	원하시는 제목으로 수정이 가능합니다. 오타를 주의해주세요 ^_^
-                                        </p>
+                      <h4 class="modal-title" id="myModalLabel18">카테고리 제목 수정</h4>
+                      
                                     </div>
-                                    <div class="modal-body bg-gray-lighter">
+                                    <div class="modal-body">
                                     
                                        <div class="row">
-                                                &nbsp;<i class="fa fa-circle text-danger"></i> &nbsp; 이전 카테고리 제목 
+                                                 이전 카테고리 제목 
                                         		<div class="col-md-12">
                                                     <div class="form-group" id="select_cateTitle" style="margin-left: 13px; margin-top: 5px">
                                                   
@@ -608,7 +606,7 @@ var task_dnum='';
                                             </div> 
                                         
                                             <div class="row">
-                                                &nbsp;<i class="fa fa-circle text-warning"></i>&nbsp; 카테고리 제목 수정
+                                               카테고리 제목 수정
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control input-no-border"
