@@ -46,6 +46,8 @@ public interface JoinDAO {
 	//맴버초대 이메일
 	public List<Workspace_DTO> invitation (Workspace_DTO wo)  throws Exception;
 	
+	//아이디 중복체크
+	public String selectId (Users_DTO member) throws ClassNotFoundException, SQLException;
 	
 	
 }

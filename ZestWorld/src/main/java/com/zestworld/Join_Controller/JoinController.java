@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -26,8 +27,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zestworld.Join_DAO.JoinDAO;
 import com.zestworld.Join_Service.JoinService;
 import com.zestworld.Table_DTO.Email_DTO;
 import com.zestworld.Table_DTO.Mail_DTO;
@@ -61,7 +64,9 @@ public class JoinController {
 
 	@Autowired
 	private UserStateService userstateService;
-
+	
+	@Autowired
+	public SqlSession sqlsession;
 
 	@RequestMapping(value = "join.htm", method = RequestMethod.GET)
 	public String join() {
@@ -69,7 +74,7 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "join.htm", method = RequestMethod.POST)
-	public String join(Users_DTO member) throws ClassNotFoundException, SQLException {
+	public String join(Users_DTO member,Model model) throws ClassNotFoundException, SQLException {
 
 		String viewpage = "";
 		member.setPassword(this.bCryptPasswordEncoder.encode(member.getPassword()));
@@ -77,7 +82,8 @@ public class JoinController {
 		member.setPhone(member.getPhone());
 
 		int result = service.insert(member);
-
+		
+		
 		if (result > 0) {
 			Role_DTO role = new Role_DTO();
 			role.setUser_id(member.getUser_id());
@@ -105,7 +111,29 @@ public class JoinController {
 		}
 		return "redirect:/index.htm";
 	}
-
+	
+	//아이디 중복 확인
+		
+	@RequestMapping("/idchk.ajax")
+	public String idchk(Users_DTO user,@RequestParam String user_id) throws ClassNotFoundException, SQLException{
+		/*String wid = DataController.getInstance().GetUser().getUser_id();*/
+		
+		/*JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
+		Users_DTO dto = dao.selectId(wid);*/
+		
+		Users_DTO Member = new Users_DTO();
+		Member.setUser_id(user.getUser_id());
+		
+		String result = service.selectId(Member);
+		System.out.println(user_id);
+		if (result != null) {
+			//model.addAttribute("loginsuccess", "success");
+			return "yes";
+		}else{
+			return "no";
+		}
+	}   
+		
 	@RequestMapping(value = "/sendpw.htm", method = RequestMethod.POST)
 	public ModelAndView sendEmailAction(@RequestParam Map<String, Object> paramMap, Users_DTO member) throws Exception {
 		ModelAndView mav;
@@ -281,4 +309,5 @@ public class JoinController {
 
 	}
 
+	
 }

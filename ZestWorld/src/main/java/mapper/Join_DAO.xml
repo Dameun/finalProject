@@ -27,4 +27,9 @@
 		from users where user_id=#{user_id} or phone=#{phone}
 	</select>	  
 	
+	<!-- 비밀번호 유효성 -->
+	<select id="selectId" resultType="com.zestworld.Table_DTO.Users_DTO">
+		select user_id from users where user_id =#{user_id}
+	</select>
+	
 </mapper>

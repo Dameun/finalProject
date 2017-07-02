@@ -80,4 +80,11 @@ public class JoinService {
 		return result;
 	}
 
+	//아이디 유효성 검사
+	public String selectId(Users_DTO member) throws ClassNotFoundException, SQLException {
+		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
+		String result = dao.selectId(member);
+		return result;
+	}
+	
 }
