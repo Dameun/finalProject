@@ -31,125 +31,6 @@
    
 </head>
 
-<script type="text/javascript">
-var workSpace_id='';
-function workspaceEditModalView(workSpace_id,p_title,explain)
-{
-	console.log("workspaceEditModalView enter");
-	workSpace_id= workSpace_id;
-	$('#modalDetailTitle').val(p_title);
-	$('#modalDetailExplain').val(explain);
-}
-function yes()
-{
-	var p_title = $('#p_title').val();
-	var explain = $('#explain').val();
-	var etcStr = "0";
-
-	if ($("#private").is(':checked'))
-		etcStr = "1"; //공개 0,비공개 1
-		
-	$.ajax({
-		type : "get",
-		url : "CreateProjectProcess.ajax",
-		data : {
-			"p_title" : p_title,
-			"explain" : explain,
-			"etcStr" : etcStr
-		},
-
-		success : function(data) {
-			ajaxView('projectMain.ajax');
-		},
-		error : function() {
-			alert('error');
-		},
-	});
-}
-
-function no()
-{
-	$('#p_title').val("");
-	$('#explain').val("");
-}
-
-
-function workspaceUpdate()
-{
-	var workSpaceTitle = $('#modalDetailTitle').val();
-	var workSpaceExplain = $('#modalDetailExplain').val();
-
-	$.ajax({
-		type:"get",
-		url:"workspacdEdit.ajax",
-		data:{"workSpace_id" : workSpace_id,
-			"workSpaceTitle" : workSpaceTitle,
-			"workSpaceExplain" : workSpaceExplain},
-		success:function(data){
-			ajaxView('wSpace.ajax');
-		},
-		error:function(){
-			alert('error');
-		}
-	});	
-}
-
-function CreateWorkspace()
-{
-	console.log('CreateWorkspace');
-	$.ajax({
-		type:"get",
-		url:"addWorkspace.ajax",
-		success:function(data){
-			
-			$("#contentDiv").append( $('#contentDiv').html(data)); 		
-		},
-		error:function(){
-			alert('error');
-		},
-	});	
-}
-
-function dialogPopup(contents, callback_Y, callback_N ) {
-
-	  $("#dialogContent").val(contents);
-	  $( "#dialog-confirm" ).dialog({
-	      resizable: false,
-	      height: "auto",
-	      width: 400,
-	      modal: true,
-	      buttons: {
-	        "예": function() {
-	        	  if ($.isFunction(callback_Y)) {
-	        		  callback_Y.call();
-	                }
-	          $( this ).dialog( "close" );
-	        },
-	        "아니오": function() {
-	        	  if ($.isFunction(callback_Y)) {
-	        		  callback_N.call();
-	                }
-	          $( this ).dialog( "close" );
-	        }
-	      }
-	    });
-}
-
-function workspaceDelete(workSpace_id){
-	$.ajax({
-		type:"get",
-		url:"workspaceDelete.ajax?workSpace_id="+workSpace_id,
-		success:function(data){
-			console.log("워크스페이스 삭제 성공");
-			ajaxView('wSpace.ajax');
-			/* $("#contentDiv").append( $('#contentDiv').html(data)); 		 */
-		},
-		error:function(){
-			alert('error');
-		},
-	});		
-}
-</script>
 
 </head>
 <body>
@@ -213,7 +94,7 @@ function workspaceDelete(workSpace_id){
       </main>
     </div>
 </div>
-</body>
+
 
 <!--워크스페이스 수정  -->
 <<div class="modal fade" id="editWorkspaceModal" role="dialog">
@@ -264,5 +145,97 @@ function workspaceDelete(workSpace_id){
 	</div>
 </div>
 
+<script type="text/javascript">
+var workSpace_id='';
+function workspaceEditModalView(workSpace_id,p_title,explain)
+{
+	console.log("workspaceEditModalView enter");
+	workSpace_id= workSpace_id;
+	$('#modalDetailTitle').val(p_title);
+	$('#modalDetailExplain').val(explain);
+}
+function yes()
+{
+	var p_title = $('#p_title').val();
+	var explain = $('#explain').val();
+	var etcStr = "0";
+
+	if ($("#private").is(':checked'))
+		etcStr = "1"; //공개 0,비공개 1
+		
+	$.ajax({
+		type : "get",
+		url : "CreateProjectProcess.ajax",
+		data : {
+			"p_title" : p_title,
+			"explain" : explain,
+			"etcStr" : etcStr
+		},
+		success : function(data) {
+			ajaxView('projectMain.ajax');
+		},
+		error : function() {
+			alert('error');
+		},
+	});
+}
+
+function no()
+{
+	$('#p_title').val("");
+	$('#explain').val("");
+}
+
+function workspaceUpdate()
+{
+	var workSpaceTitle = $('#modalDetailTitle').val();
+	var workSpaceExplain = $('#modalDetailExplain').val();
+
+	$.ajax({
+		type:"get",
+		url:"workspacdEdit.ajax",
+		data:{"workSpace_id" : workSpace_id,
+			"workSpaceTitle" : workSpaceTitle,
+			"workSpaceExplain" : workSpaceExplain},
+		success:function(data){
+			ajaxView('wSpace.ajax');
+		},
+		error:function(){
+			alert('error');
+		}
+	});	
+}
+
+function CreateWorkspace()
+{
+	console.log('CreateWorkspace');
+	$.ajax({
+		type:"get",
+		url:"addWorkspace.ajax",
+		success:function(data){
+			
+			$("#contentDiv").append( $('#contentDiv').html(data)); 		
+		},
+		error:function(){
+			alert('error');
+		},
+	});	
+}
+
+
+function workspaceDelete(clkworkSpace_id){
+	$.ajax({
+		type:"get",
+		url:"workspaceDelete.ajax?workSpace_id="+clkworkSpace_id,
+		success:function(data){
+			location.href='workSpace.htm';	 
+		},
+		error:function(){
+			alert('error');
+		},
+	});		
+}
+</script>
+</body>
 
 </html>

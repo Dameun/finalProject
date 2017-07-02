@@ -15,6 +15,7 @@ import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
 import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
+import com.zestworld.Table_DTO.WorkspaceUser_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
 import com.zestworld.userStateService.UserStateService;
@@ -280,9 +281,21 @@ public class AjaxViewController {
 	{
 		System.out.println("deleteWorkspaceEnter");
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		//Workspace_DTO workspace = taskDao.GetWorkSpace(Integer.parseInt(workSpace_id));
-		taskDao.deleteWorkspace(workSpace_id);
+		List<Project_DTO> projectList = taskDao.GetProjectList(workSpace_id);
+		for( int i=0; i<projectList.size(); i++)
+		{
+			taskDao.deleteTaskByProjectid(projectList.get(i));	//task 지움
+			taskDao.deleteProject(projectList.get(i));			//프로젝트 지움
+		}
 
+		taskDao.deleteWorkspace(workSpace_id);
+		List<WorkspaceUser_DTO> list = taskDao.GetWorkSpaceMember(workSpace_id);
+		for( int j=0; j<list.size(); j++ )
+		{
+			WorkspaceUser_DTO user= list.get(j);
+			taskDao.deleteWorkspaceUsers(user);
+		}
+		
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
 

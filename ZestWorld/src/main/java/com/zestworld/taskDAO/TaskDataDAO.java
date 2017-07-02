@@ -23,6 +23,8 @@ public interface TaskDataDAO
    public void deleteProject(Project_DTO project);
    public void updateWorkspace(Workspace_DTO project);
    public void deleteWorkspace(int workspaceid);
+   public void deleteWorkspaceUsers(WorkspaceUser_DTO workspaceUser );
+   public List<WorkspaceUser_DTO> GetWorkSpaceMember(int workspaceid);
    public void deleteTaskByProjectid(Project_DTO project);
    public List<WorkspaceUser_DTO> GetWorkSpaceMemberChk(WorkspaceUser_DTO workspaceUser_DTO);
 }
