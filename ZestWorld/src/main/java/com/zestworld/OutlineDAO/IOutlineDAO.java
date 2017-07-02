@@ -31,6 +31,8 @@ public interface IOutlineDAO {
 	
 	//필터에 있는 프로젝트 목록
 	public List<Project_DTO> projectlist(int workspace_id) throws ClassNotFoundException, SQLException;
+	//필터에 있는 목록
+	public List<Project_DTO> essencelist(int workspace_id) throws ClassNotFoundException, SQLException;
 	//필터에 있는 작성자 목록
 	public List<Workspace_DTO> writerlist(int workspace_id) throws ClassNotFoundException, SQLException;
 	//필터된 리스트 개수

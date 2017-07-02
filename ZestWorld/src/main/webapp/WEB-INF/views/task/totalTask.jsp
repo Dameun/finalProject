@@ -721,6 +721,14 @@ function detailModalUpdateDialogN()
 		</div>
 		<hr>
 		<div class="form-group">
+		Essence 프로젝트<br>
+		<input type="radio" name="projectlist" onclick="myfilter();" value="500000" checked>전체<br>
+		<c:forEach items="${essencelist}"  var="e">
+			<input type="radio" name="projectlist" value="${e.project_id}" onclick="myfilter();">${e.p_title}<br>
+		</c:forEach> 
+		</div>
+		<hr>
+		<div class="form-group">
 		작성자<br>
 		<input type="radio" id="writermember2" name="writermember" onclick="myfilter();" value="" checked>전체<br>
 		<c:forEach items="${assign}" var="n" >

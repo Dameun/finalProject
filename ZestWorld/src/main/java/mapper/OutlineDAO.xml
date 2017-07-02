@@ -135,10 +135,14 @@
    	 
 	</select>
 	<select id="projectlist" resultType="com.zestworld.Table_DTO.Project_DTO">
+		select * from project where workspace_id=#{workspace_id} and essence_f=0
 		
-		select * from project where workspace_id=#{workspace_id}
+	</select>
+	
+	<select id="essencelist" resultType="com.zestworld.Table_DTO.Project_DTO">
+		select * from project where workspace_id=#{workspace_id} and essence_f=1
 		
-	</select> 
+	</select>  
 	
 	<select id="writerlist" parameterType="int" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
 		
