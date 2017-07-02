@@ -1,6 +1,6 @@
 $(function(){
     function pageLoad(){
-        $('#external-events').find('div.external-event').each(function() {
+     /*   $('#external-events').find('div.external-event').each(function() {
 
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
@@ -18,122 +18,63 @@ $(function(){
                 revertDuration: 0  //  original position after the drag
             });
 
-        });
+        });*/
 
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-        var $calendar = $('#calendar').fullCalendar({
-            header: {
-                left: '',
-                center: '',
-                right: ''
-            },
-
+        var $calendar=$('#calendar').fullCalendar({
+            
+            /*
+            editable: true,
             selectable: true,
             selectHelper: true,
-            select: function(start, end, allDay) {
-                var $modal = $("#edit-modal"),
-                    $btn = $('#create-event');
-                $btn.off('click');
-                $btn.click(function () {
-                    var title = $("#event-name").val();
-                    if (title) {
-                        $calendar.fullCalendar('renderEvent',
-                            {
-                                title: title,
-                                start: start,
-                                end: end,
-                                allDay: allDay,
-                                backgroundColor: '#64bd63',
-                                textColor: '#fff'
-                            },
-                            true
-                        );
-                    }
-                    $calendar.fullCalendar('unselect');
-                });
-                $modal.modal('show');
-                $calendar.fullCalendar('unselect');
+            */
+            height: 700,
+            /*titleFormat: {month: 'yyyy년 MM월'},*/
+    		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] ,
+    		monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], 
+    		dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+     		dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+     	/*	buttonText: {
+     			prev: "<span class='fc-text-arrow'>&lsaquo;</span>",
+     			next: "<span class='fc-text-arrow'>&rsaquo;</span>",
+     			prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
+     			nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
+     			today: 'today',
+     			month: 'month',
+     			week: 'week',
+     			day: 'day'
+     		},*/
+     		
+     		displayEventTime: false,
+     		 selectable: true,
+             selectHelper: true,
+     		 select: function(start, end, allDay) {
+                 $('#startdate').datepicker("setDate", new Date(start));
+                 $('#enddate').datepicker("setDate", new Date(end)); 
+                    
+                 $('#calEventDialog').dialog('open');   
+     		 },
+             
+             events:
+                 {
+            	  url:"calendarList.htm" 
+                 }
+             , 
+           
+            eventClick: function(calEvent, jsEvent, view) {
+            	
+                $('#calEditDialog #title').val(calEvent.title);
+                $('#calEditDialog #content').val(calEvent.explain);
+                $('#calEditDialog #cal_taskId').val(calEvent.task_id);
+                $('#calEditDialog').dialog('open');
+                
+                
+                
             },
-            editable: true,
-            droppable:true,
-
-            drop: function(date, allDay) { // this function is called when something is dropped
-
-                // retrieve the dropped element's stored Event Object
-                var originalEventObject = $(this).data('eventObject');
-
-                // we need to copy it, so that multiple events don't have a reference to the same object
-                var copiedEventObject = $.extend({}, originalEventObject);
-
-                // assign it the date that was reported
-                copiedEventObject.start = date;
-                copiedEventObject.allDay = allDay;
-
-                var $categoryClass = $(this).data('event-class');
-                if ($categoryClass)
-                    copiedEventObject['className'] = [$categoryClass];
-
-                // render the event on the calendar
-                // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-                $(this).remove();
-
-            },
-
-            // US Holidays
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1),
-                    backgroundColor: '#79A5F0',
-                    textColor: '#fff'
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d+5),
-                    end: new Date(y, m, d+7)
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d-3, 16, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Click for Flatlogic',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://flatlogic.com/',
-                    backgroundColor: '#e5603b',
-                    textColor: '#fff'
-                }
-            ],
-
-            eventClick: function(event) {
-                // opens events in a popup window
-                if (event.url){
-                    window.open(event.url, 'gcalevent', 'width=700,height=600');
-                    return false
-                } else {
-                    var $modal = $("#myModal"),
-                        $modalLabel = $("#myModalLabel");
-                    $modalLabel.html(event.title);
-                    $modal.find(".modal-body p").html(function(){
-                        if (event.allDay){
-                            return "All day event"
-                        } else {
-                            return "Start At: <strong>" + event.start.getHours() + ":" + (event.start.getMinutes() == 0 ? "00" : event.start.getMinutes()) + "</strong></br>"
-                                + (event.end == null ? "" : "End At: <strong>" + event.end.getHours() + ":" + (event.end.getMinutes() == 0 ? "00" : event.end.getMinutes()) + "</strong>")
-                        }
-                    }());
-                    $modal.modal('show');
-                }
-            }
-
+        
         });
 
         $("#calendar-switcher").find("label").click(function(){
@@ -143,7 +84,7 @@ $(function(){
         var currentDate = $calendar.fullCalendar('getDate');
 
         $('#calender-current-date').html(
-                $.fullCalendar.formatDate(currentDate, "MMM yyyy") +
+                $.fullCalendar.formatDate(currentDate, "yyyy MMM d") +
                 " - <span class='fw-semi-bold'>" +
                 $.fullCalendar.formatDate(currentDate, "dddd") +
                 "</span>"
@@ -154,7 +95,7 @@ $(function(){
             $calendar.fullCalendar( 'prev' );
             currentDate = $calendar.fullCalendar('getDate');
             $('#calender-current-date').html(
-                    $.fullCalendar.formatDate(currentDate, "MMM yyyy") +
+                    $.fullCalendar.formatDate(currentDate, "yyyy MMM d") +
                     " - <span class='fw-semi-bold'>" +
                     $.fullCalendar.formatDate(currentDate, "dddd") +
                     "</span>"
@@ -164,7 +105,7 @@ $(function(){
             $calendar.fullCalendar( 'next' );
             currentDate = $calendar.fullCalendar('getDate');
             $('#calender-current-date').html(
-                    $.fullCalendar.formatDate(currentDate, "MMM yyyy") +
+                    $.fullCalendar.formatDate(currentDate, "yyyy MMM d") +
                     " - <span class='fw-semi-bold'>" +
                     $.fullCalendar.formatDate(currentDate, "dddd") +
                     "</span>"

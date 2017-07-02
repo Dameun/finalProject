@@ -270,7 +270,7 @@ function Calendar(element, options, eventSources) {
 			element.addClass('ui-widget');
 		}
 
-		content = $("<div class='fc-content' style='position:relative'/>")
+		content = $("<div class='fc-content' style='position:relative;'/>")
 			.prependTo(element);
 
 		header = new Header(t, options);
@@ -746,7 +746,7 @@ function Header(calendar, options) {
 		tm = options.theme ? 'ui' : 'fc';
 		var sections = options.header;
 		if (sections) {
-			element = $("<table class='fc-header' style='width:100%'/>")
+			element = $("<table class='fc-header' style='width:100%;display:none;'/>")
 				.append(
 					$("<tr/>")
 						.append(renderSection('left'))
@@ -764,7 +764,7 @@ function Header(calendar, options) {
 	
 	
 	function renderSection(position) {
-		var e = $("<td class='fc-header-" + position + "'/>");
+		var e = $("<td class='fc-header-" + position + "display:none;'/>");
 		var buttonStr = options.header[position];
 		if (buttonStr) {
 			$.each(buttonStr.split(' '), function(i) {
@@ -774,7 +774,7 @@ function Header(calendar, options) {
 				var prevButton;
 				$.each(this.split(','), function(j, buttonName) {
 					if (buttonName == 'title') {
-						e.append("<span class='fc-header-title'><h2>&nbsp;</h2></span>");
+						e.append("<span class='fc-header-title' style='display:none;'><h2>&nbsp;</h2></span>");
 						if (prevButton) {
 							prevButton.addClass(tm + '-corner-right');
 						}

@@ -18,6 +18,7 @@ import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.WorkspaceUser_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
+import com.zestworld.taskListDAO.taskListDao;
 import com.zestworld.userStateService.UserStateService;
 import com.zestworld.util.DataController;
 
@@ -101,7 +102,14 @@ public class AjaxViewController {
 
 	
 	@RequestMapping(value = "/calendar.ajax", method = RequestMethod.GET)
-	public String calendar() {
+	public String calendar(Model model) throws ClassNotFoundException, SQLException {
+		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+		Category_DTO cateDto = new Category_DTO();
+		cateDto.setProject_id(project_id);
+		
+		taskListDao dao = sqlsession.getMapper(taskListDao.class);
+		List<Category_DTO> list = dao.tasklist(cateDto);
+		model.addAttribute("list",list);
 		return DataController.getInstance().GetviewPath("calendar") + "calendar.jsp";
 	}
 

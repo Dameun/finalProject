@@ -3,6 +3,7 @@ package com.zestworld.fullcalendarController;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -44,62 +45,69 @@ public class fullcalendarController {
 	}
 	
 	
+	
 	@RequestMapping("calendarList.htm")
-	public void calendarList(HttpServletResponse response) throws ClassNotFoundException, SQLException, ParseException{
-		System.out.println("calendarList.htm접근");
-		
-		int project_id = DataController.getInstance().getCurrentProject().getProject_id();
-		String user_id = DataController.getInstance().GetUser().getUser_id();
-		
-		Task_DTO taskDto = new Task_DTO();
-		
-	
-		taskDto.setProject_id(project_id);
-		taskDto.setUser_id(user_id);
-	
-		System.out.println("프젝ID: "+taskDto.getProject_id());
+public void calendarList(HttpServletResponse response) throws ClassNotFoundException, SQLException, ParseException{
+    System.out.println("calendarList.htm접근");
+    
+    int project_id = DataController.getInstance().getCurrentProject().getProject_id();
+    String user_id = DataController.getInstance().GetUser().getUser_id();
+    List<String> startDate= new ArrayList<String>();
+    List<String> endDate= new ArrayList<String>();
+    Task_DTO taskDto = new Task_DTO();
+ 
+    taskDto.setProject_id(project_id);
+    taskDto.setUser_id(user_id);
+ 
+    System.out.println("프젝ID: "+taskDto.getProject_id());
 
-		System.out.println("유저ID: "+taskDto.getUser_id());
-		CalendarDAO dao = sqlsession.getMapper(CalendarDAO.class);
-		
-		List<Task_DTO> calendarList = dao.scheduleList(taskDto);
-		
-		JSONArray array = new JSONArray();
-		
-		for(int i =0; i<calendarList.size();i++){
-			
-			JSONObject obj =new JSONObject();
-			String start = calendarList.get(i).getStart_date();
-			String end = calendarList.get(i).getEnd_date();
-			obj.put("task_id", calendarList.get(i).getTask_id());
-			obj.put("title", calendarList.get(i).getTitle());
-			obj.put("explain", calendarList.get(i).getExplain());
-			obj.put("start",start);
-			
-		
-			SimpleDateFormat sformat = new SimpleDateFormat("yyyy-mm-dd");	
-			Calendar cdar = Calendar.getInstance();
-			Date date = sformat.parse(end);
-			
-			cdar.setTime(date);
-			cdar.add(Calendar.DATE, +1);
-			end = sformat.format(cdar.getTime());
-			
-			obj.put("end", end);
-			
-			array.add(obj);
-		
-			
-		}
-		
-		System.out.println(array);
-		try{
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().print(array);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
+    System.out.println("유저ID: "+taskDto.getUser_id());
+    CalendarDAO dao = sqlsession.getMapper(CalendarDAO.class);
+    
+    List<Task_DTO> calendarList = dao.scheduleList(taskDto);
+    for(int i=0;i<calendarList.size();i++){
+       startDate.add(i, calendarList.get(i).getStart_date().replace("/","-"));
+    }
+    
+    for(int i=0;i<calendarList.size();i++){
+       endDate.add(i, calendarList.get(i).getEnd_date().replace("/","-"));
+    }
+    JSONArray array = new JSONArray();
+    
+    for(int i =0; i<calendarList.size();i++){
+       
+       JSONObject obj =new JSONObject();
+       String start = startDate.get(i);
+       String end = endDate.get(i);
+       obj.put("task_id", calendarList.get(i).getTask_id());
+       obj.put("title", calendarList.get(i).getTitle());
+       obj.put("explain", calendarList.get(i).getExplain());
+       obj.put("start",start);
+       
+    
+       SimpleDateFormat sformat = new SimpleDateFormat("yyyy-mm-dd");   
+       Calendar cdar = Calendar.getInstance();
+       Date date = sformat.parse(end);
+       
+       cdar.setTime(date);
+       cdar.add(Calendar.DATE, +1);
+       end = sformat.format(cdar.getTime());
+       
+       obj.put("end", end);
+       
+       array.add(obj);
+    
+       
+    }
+    
+    System.out.println(array);
+    try{
+       response.setCharacterEncoding("UTF-8");
+       response.getWriter().print(array);
+    }catch(Exception e){
+       e.printStackTrace();
+    }
+    
 }
 	
 	

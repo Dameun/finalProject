@@ -22,14 +22,14 @@
     <![endif]-->
 <!--  <link rel="shortcut icon" href="./resource/img/favicon.png"> -->
 <!-- 민성 Calendar 추가부분  -->
-<link
+<!-- <link
 	href="https://code.jquery.com/ui/1.11.4/themes/south-street/jquery-ui.css"
 	type="text/css" rel="stylesheet" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css"
-	type="text/css" rel="stylesheet" />
+	type="text/css" rel="stylesheet" /> -->
 <!-- /민성 Calendar 추가부분  -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
