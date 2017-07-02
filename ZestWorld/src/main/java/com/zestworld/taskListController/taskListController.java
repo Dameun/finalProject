@@ -83,7 +83,7 @@ public class taskListController {
 		task.setUser_id(userid);
 		task.setProject_id(project_id);
 		task.setWorkspace_id(workspace_id);
-		
+		task.setEssence("0");
 		service.tasktitleInsert(task);
 		
 		cateDto.setProject_id(project_id);
