@@ -7,20 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	
-	<!-- 
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-     -->
-     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    
     <script type="text/javascript">
 
       google.charts.load("current", {"packages":["corechart"]});
@@ -32,8 +21,7 @@
       google.charts.setOnLoadCallback(drawChart_bar);
       google.charts.setOnLoadCallback(drawChart_Curve);
 	  
-      
-    
+
       
       
       function drawChart_me() {
@@ -203,15 +191,14 @@
     	
       }
       
-              
-       
-        
+    
+      
         function drawChart_Curve() {
             var data = google.visualization.arrayToDataTable([
               ['업무', '나에게 배정된 업무', '내가 작성한 업무' , '내가 팔로우하는 업무'],
-              ['진행중인 업무',    2,            2 ,             3       ],
-              ['완료된 업무',   1,            5 ,             2       ],
-              ['마감일지난 업무',    2,            1,              0        ]
+              ['진행중인 업무',   ${getTaskMe_ing}, ${getTaskI_ing}, ${getTaskFollow_ing} ],
+              ['완료된 업무',   ${getTaskMe_comp}, ${getTaskI_comp}, ${getTaskFollow_comp} ],
+              ['마감일지난 업무', ${getTaskMe_enddateLate}, ${getTaskI_enddateLate}, ${getTaskFollow_enddateLate} ]
               
             ]);
 
@@ -231,16 +218,9 @@
 </script>
 </head>
 <body>
-	
-	<b style="font-size:18px" >WorkSpace All Chart</b> <br><br>
-	
 
-		</tr>
-	</table>
-					
-        	
-	<br>
-	<br>
+	<b class="glyphicon glyphicon-stats" style="font-size:22px; 
+		  background-color:#f0b518; text-weight:bold;" > WorkSpace All Chart </b> <br><br>
 	
     <table class="columns">
       <tr>
@@ -250,15 +230,12 @@
       </tr>
     </table>
     <br>
-
     <table class="columns">
     	<tr>
     		<div id="barchart" style="width: 1300px; height: 100px;"></div>
     	</tr>	
     </table>
-    
     <br><br><br><br><br><br><br><br><br><br><br>
-    
     <table class="columns">
     	<tr>
 			<div id="curve_chart" style="width: 1300px; height: 300px"></div>

@@ -562,7 +562,7 @@ $(function(){
 		</button>
 		<button class="btn btn-inverse mb-xs" role="button"
 			href="#" onclick="ajaxView('analysisU.ajax')" data-toggle="modal">
-			<i class="fa fa-plus text-warning"></i> 차트
+			<i class="fa fa-plus text-warning"></i> 차트보기
 		</button>
 		<button class="btn btn-inverse mb-xs" role="button" id="file"
 			onclick="location.href='Schedule.htm'">
