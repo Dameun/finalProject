@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.annotation.CallableMethodReturnValueHandler;
 
 import com.zestworld.AnalysisService.AnalysisService;
+import com.zestworld.Table_DTO.Category_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
@@ -249,7 +250,7 @@ public class AjaxChartController {
 	        int ix = 0;
 	       
             Date date = cal.getTime(); 
-            System.out.println(sdf.format(date));
+          
             cal.add(Calendar.DATE, 1);
             diffInDays = (int)((calendar2.getTimeInMillis() - cal.getTimeInMillis())/(1000*3600*24));
             if( diffInDays >0 )
@@ -376,27 +377,15 @@ public class AjaxChartController {
 	
 	private void barChartU(int project_id)throws ClassNotFoundException, SQLException
 	{
-		Task_DTO dto = new Task_DTO();
-		System.out.println("바차트안" + project_id);  
-		dto.setProject_id(project_id);
-		System.out.println("바차트유저아이디 " +dto.getProject_id());
 
-		
-		/*getTaskAllFlow_compU = analysisService.getTaskAllFlow_compU(project_id);
-		getTaskAllFlow_comp_countU = analysisService.getTaskAllFlow_comp_countU(project_id);
-		getTaskAllFlow_enddateLate_countU = analysisService.getTaskAllFlow_enddateLate_countU(project_id);
-		getTaskAllFlow_enddateNo_countU = analysisService.getTaskAllFlow_enddateNo_countU(project_id);
-		getTaskAllFlow_ing_countU = analysisService.getTaskAllFlow_ing_countU(project_id);*/		
-		ArrayList<Project_DTO> projectList = DataController.getInstance().GetProjectList();
-		Project_DTO project = new Project_DTO();
-		Task_DTO task = new Task_DTO();
-		
-		
-		getTaskAllFlow_ing_countU  = new int[projectList.size()];
-		getTaskAllFlow_comp_countU = new int[projectList.size()];
-		getTaskAllFlow_enddateLate_countU = new int[projectList.size()];
-		getTaskAllFlow_enddateNo_countU = new int[projectList.size()];
+		List<Category_DTO> categoryList = analysisService.getCateoryList(DataController.getInstance().getCurrentProject());
+	
+		getTaskAllFlow_ing_countU  = new int[categoryList.size()];
+		getTaskAllFlow_comp_countU = new int[categoryList.size()];
+		getTaskAllFlow_enddateLate_countU = new int[categoryList.size()];
+		getTaskAllFlow_enddateNo_countU = new int[categoryList.size()];
 		getTaskAllFlow_compU.clear(); 
+		
 		int comp = 0;
 		int enddateLate_count=0;
 		int enddateNo_count = 0;
@@ -405,12 +394,13 @@ public class AjaxChartController {
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
 		String date = sd.format(new Date());
 		
-		
-		for( int i =0; i<projectList.size(); i ++)
+		Category_DTO category = new Category_DTO();
+		Task_DTO task = new Task_DTO();
+		for( int i =0; i<categoryList.size(); i ++)
 		{
-			project = projectList.get(i);
-			getTaskAllFlow_compU.add(project.getP_title());
-			List<Task_DTO> taskList = analysisService.getTaskByProjectid(project.getProject_id());
+			category = categoryList.get(i);
+			getTaskAllFlow_compU.add(category.getTitle());
+			List<Task_DTO> taskList = analysisService.getTaskByCategoryid(category.getCategory_id());
 			for( int j=0; j< taskList.size(); j++)
 			{
 				task = taskList.get(j);
@@ -424,12 +414,13 @@ public class AjaxChartController {
 					enddateNo_count++; //마감일 없는거 
 				}
 			}
-				
-			getTaskAllFlow_comp_countU[i] = comp;
-			getTaskAllFlow_enddateLate_countU[i] =enddateLate_count;
-			getTaskAllFlow_enddateNo_countU[i] =enddateNo_count;
-			getTaskAllFlow_ing_countU[i] = ing_count;
 			
+			getTaskAllFlow_comp_countU[i]= comp;
+			getTaskAllFlow_enddateLate_countU[i]= enddateLate_count;
+			getTaskAllFlow_enddateNo_countU[i]= enddateNo_count;
+			getTaskAllFlow_ing_countU[i]= ing_count;	
+			
+			System.out.println("데이터값"+	comp+"/"+enddateLate_count+"/"+enddateNo_count+"/"+ing_count);
 			 comp = 0;
 			 enddateLate_count=0;
 			 enddateNo_count = 0;

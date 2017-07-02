@@ -560,6 +560,10 @@ $(function(){
 			data-toggle="modal">
 			<i class="fa fa-plus text-warning"></i> 업무리스트 추가
 		</button>
+		<button class="btn btn-inverse mb-xs" role="button"
+			href="#" onclick="ajaxView('analysisU.ajax')" data-toggle="modal">
+			<i class="fa fa-plus text-warning"></i> 차트
+		</button>
 		<button class="btn btn-inverse mb-xs" role="button" id="file"
 			onclick="location.href='Schedule.htm'">
 			<i class="fa fa-calendar text-warning"></i> 캘린더

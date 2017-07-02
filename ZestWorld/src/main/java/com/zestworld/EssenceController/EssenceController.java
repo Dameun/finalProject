@@ -239,7 +239,8 @@ public class EssenceController {
 				task.setEssence("1");
 				task.setFollower(DataController.getInstance().GetUser().getUser_id());
 				essenceService.tasktitleInsert(task);
-				int taskID = essenceService.getTask(task);
+			
+				int taskID = essenceService.getMaxtaskId();
 				CheckList_DTO dto;
 				
 				for( int k=0; k<cheakList.length; k++)
@@ -249,6 +250,8 @@ public class EssenceController {
 					dto.setTask_id(taskID);	
 					essenceService.checkListReg(dto);
 				}
+				
+			
 			}
 		}
 	

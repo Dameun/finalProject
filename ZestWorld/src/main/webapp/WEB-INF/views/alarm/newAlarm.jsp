@@ -15,14 +15,20 @@
 	        <!--  <img class="img-circle" src="./resource/img/people/a5.jpg" alt="..."> -->
 	     </span>
 	         <p class="no-margin overflow-hidden">
-	             User <a href="#">${alarm.alarmTitle}</a>
+	           <c:if test="${alarm.alarm_type==0}">
+	           	[배정] &nbsp;
+	           </c:if>
+	           <c:if test="${alarm.alarm_type==1}">
+	           	[완료] &nbsp;
+	           </c:if>
+	             <a href="#">${alarm.alarmTitle}</a>
 	             &nbsp;&nbsp;
 	             <c:if test="${alarm.check_f==0}">
 	             <button class="btn btn-xs btn-success">hot</button>
 	             </c:if>
 	            <!--  <button class="btn btn-xs btn-danger">Deny</button> -->
 	             <time class="help-block no-margin">
-	                 12:18 AM
+	                 ${alarm.img}
 	             </time>
 	         </p>
 	     </div>  

@@ -71,8 +71,33 @@ function idchkclk() {
                error:function(){ //값이 안넘오 오나보네
                   $("#idselect").html("에러 입니다");   
                }
-            });   
-      } 
+            });
+            
+            $('#user_id').keyup(function(){
+            	var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+                	
+                	if(idRex.test($('#user_id').val())){
+                		$('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
+                	}else{
+                		$('#idselect').html("알맞은 이메일 형식으로 작성해주세요");
+                	} 
+                });
+            
+        
+	//핸드폰번호 유효성 검사
+		$('#phone').keyup(function() {
+
+			var phoneRex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+
+			if (phoneRex.test($('#phone').val())) {
+				$('#phonelbl').html("전화번호가 유효합니다");
+			} else {
+				$('#phonelbl').html("ex) '-' 빼고입력해주세요 ");
+			}
+
+		});
+
+	}
 </script>
 
 </head>
@@ -98,58 +123,46 @@ function idchkclk() {
                   <div class="form-group">
                      <input type="text" name="user_id" class="form-control"
                         id="user_id" placeholder="Email" required="required">
-                        <label id="idselect" class="col-md-4 control-label" for="user_id">아이디입력</label>
+                        <label id="idselect" class="col-md-4 control-label" for="user_id" >아이디입력</label>
                        <input type="button" id="idchk" name="idchk" class="col-sm-3 btn hvr-forward" value="이메일 중복확인" onclick="idchkclk()">
                   </div>
                   <!-- 비번 -->
-                  <div class="form-group">
-                     <input name="password" class="form-control" id="password" type="password"
-                        placeholder="Password">
-                  </div>
-                  <!-- 이름 -->
+						<div class="form-group">
+							<input type="password" class="form-control" name="password"
+								id="password" required="required"> <label
+								class="col-md-4 control-label" for="pwd">비밀번호 입력</label>
+						</div>
+						<!-- 이름 -->
                   <div class="form-group">
                      <input name="name" class="form-control" id="name" type="text"
                         placeholder="Name">
                   </div>
                   <!-- 폰번호 -->
-                  <div class="form-group">
-                     <input name="phone" class="form-control" id="phone" type="text"
-                        placeholder="Phone'-'빼고입력해주세요">
-                  </div>
-                  <div class="clearfix">
-                     <!-- 사진 업로드 -->
-                     <!-- <input type="file" id="input_file" /> <br /> <img
-                        id="img_preview" style="display: none;" /> -->
+						<div class="form-group">
+							<input type="text" name="phone" id="phone" class="form-control"
+								required="required"> <label
+								class="col-md-4 control-label" for="phone" id="phonelbl">핸드폰
+								번호 입력</label>
+						</div>
 
-
-                     <!-- 회원가입  -->
+						<!-- 회원가입  -->
                      <button type="button" class="btn btn-secondary btn-sm"
                         onclick="location.href='index.htm' ">Cancel</button>
                      <button type="submit" class="btn btn-inverse btn-sm">Sign up</button>
-                     <!-- <a class="btn btn-inverse btn-sm" href="index.html">Login</a> -->
-                  </div>
                   </form>
+                  </div>
             </div>
             <div class="row">
                <div class="col-sm-6 col-sm-push-6">
                   <div class="clearfix"></div>
-
                </div>
-
-
             </div>
-
             </section>
          </div>
 
          </section>
-
       </div>
-   </div>
-
    </main>
-   </div>
-
 </body>
 
 </html>

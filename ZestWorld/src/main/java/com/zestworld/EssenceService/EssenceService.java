@@ -45,7 +45,7 @@ public class EssenceService {
 	
 	public void tasktitleInsert(Task_DTO dto){
 		taskListDao dao = sqlsession.getMapper(taskListDao.class);
-		dao.tasktitleInsert(dto);
+		 dao.tasktitleInsert(dto);
 	}
 
 	public int InsertTask(Task_DTO task_DTO){
@@ -75,6 +75,13 @@ public class EssenceService {
 	 {
 	 	IEssenceDAO dao = sqlsession.getMapper(IEssenceDAO.class);
 		int result= dao.checkListReg(dto);
+		return result;
+	}
+	 
+	 public int getMaxtaskId() 
+	 {
+	 	IEssenceDAO dao = sqlsession.getMapper(IEssenceDAO.class);
+		int result= dao.getMaxtaskId();
 		return result;
 	}
 	 

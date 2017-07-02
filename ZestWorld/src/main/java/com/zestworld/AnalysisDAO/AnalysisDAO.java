@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 
@@ -129,4 +130,6 @@ public interface AnalysisDAO {
 	
 	
 	public List<Task_DTO> getTaskByProjectid(int project_id) throws ClassNotFoundException, SQLException;
+	public List<Task_DTO> getTaskByCategoryid(int category_id) throws ClassNotFoundException, SQLException;
+	public List<Category_DTO> getCateoryList(Project_DTO project);
 }

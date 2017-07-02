@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.hibernate.validator.internal.engine.resolver.CachingTraversableResolverForSingleValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSInput;
 
 import com.zestworld.AnalysisDAO.AnalysisDAO;
+import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 
@@ -312,5 +316,30 @@ public class AnalysisService {
 		}
 		return result;
 	}
+	
+	public List<Task_DTO> getTaskByCategoryid(int category_id) {
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		List<Task_DTO> result = new ArrayList<Task_DTO>();
+		try {
+			result = dao.getTaskByCategoryid(category_id);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<Category_DTO> getCateoryList(Project_DTO project)
+	{
+		AnalysisDAO dao = sqlsession.getMapper(AnalysisDAO.class);
+		List<Category_DTO> result = new ArrayList<Category_DTO>();
+		result = dao.getCateoryList(project);
+		return result;
+	}
+	
+
 	
 }
