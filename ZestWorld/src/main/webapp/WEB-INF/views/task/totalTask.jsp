@@ -104,7 +104,6 @@ function changeSuccessF(taskid){
 
 //업무완료 취소
 function changeSuccessF_zero(taskid){
-	 alert(taskid);
 	 $.ajax({
 			type:"get",
 			url:"updateFlagZero.htm?task_id="+taskid,
@@ -151,8 +150,9 @@ function modalSuccess_kUpdateDialog(task_id)
 function modalSuccess_kUpdateDialogY()
 {
 	changeSuccessF(success_f_dialog);
-	/* alert('업무가 완료되었습니다.'); */
- 	refresh(); 
+	
+	alert('업무가 완료되었습니다.');
+ 	
 }
 
 //업무완료 여부 확인 dialog-N
@@ -454,6 +454,7 @@ function modalDeleteTask(){
 	}); 
 	
 }
+
 
 //체크리스트 추가
 function checkreg(){

@@ -32,7 +32,7 @@
 									             onclick="modalSuccessUpdateDialog(${n.task_id});"
 									        </c:if> 
 									        <c:if test="${n.success_f eq 0}">
-									            onclick="changeSuccessF(${n.task_id});"
+									            onclick="modalSuccess_kUpdateDialog(${n.task_id});"
 									        </c:if>
 								>
 		                        </span>
