@@ -24,7 +24,7 @@
 		<div class="widget-body no-padding">
 		    <div class="list-group list-group-lg">
 		    
-		        <a href="#" class="list-group-item">
+		        <a href="#" class="list-group-item"style="height:auto;">
 			        <div class="row">
 				        <div class="col-sm-1">
 				           <span class="thumb-sm pull-xs-left mr">     
@@ -44,6 +44,7 @@
 				        <div class="col-sm-8">    
 				            <h5 class="no-margin">${n.contents}</h5>            
 				        </div>
+				        
 				        <div class="col-sm-3">
 					        <div class="row">
 					         	
@@ -58,6 +59,7 @@
 					        </div>
 				        </div>
 			        </div>
+			        
 		        </a>
 		    </div>
 		</div>
