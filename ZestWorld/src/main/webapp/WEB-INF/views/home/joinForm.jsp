@@ -33,46 +33,114 @@
    border: 1px solid silver;
 }
 </style>
-<script src="assets/js/jquery-1.11.1.min.js"></script>
-   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-   <script src="assets/js/jquery.backstretch.min.js"></script>
-   <script src="assets/js/wow.min.js"></script>
-   <script src="assets/js/retina-1.1.0.min.js"></script>
-   <script src="assets/js/jquery.magnific-popup.min.js"></script>
-   <script src="assets/js/masonry.pkgd.min.js"></script>
-   <script src="assets/js/scripts.js"></script>
-   <script src="assets/js/modernizr.custom.63321.js"></script>
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
-   <script src="ios-7-date-picker.js"></script>
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-   <script type="text/javascript" src="assets/js/jquery.dropdown.js"></script>
-   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script
+	src="http://www.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js" ></script>
 <script type="text/javascript">
+   $.fn.setPreview = function(opt) {
+      "use strict"
+      var defaultOpt = {
+         inputFile : $(this),
+         img : null,
+         w : 200,
+         h : 200
+      };
+      $.extend(defaultOpt, opt);
 
-/* 아이디 유효성 */
-function idchkclk() { 
-		
-	    	  $.ajax({
-	    		  type:"get",
-	    		  url:"idchk.ajax",
-	    		  data:{"user_id": $('#user_id').val().toLowerCase()},
-	    		  success:function(data){
-	    			  
-	    			  if(data == "yes"){
-	    			  	$("#idselect").html("중복되는 아이디입니다"); 
-	    				$('#user_id').focus();
-	    			  
-	    			  }else{
-	    				
-	    				  $("#idselect").html("사용가능한 아이디 입니다");
-	    				 $('#user_id').focus();
-	    			  }
-	    		  },
-	    		  error:function(){ //값이 안넘오 오나보네
-	    			  $("#idselect").html("에러 입니다");	
-	    		  }
-	    	  });	
-		} 
+      var previewImage = function() {
+         if (!defaultOpt.inputFile || !defaultOpt.img)
+            return;
+
+         var inputFile = defaultOpt.inputFile.get(0);
+         var img = defaultOpt.img.get(0);
+
+         // FileReader
+         if (window.FileReader) {
+            // image 파일만
+            if (!inputFile.files[0].type.match(/image\//))
+               return;
+
+            // preview
+            try {
+               var reader = new FileReader();
+               reader.onload = function(e) {
+                  img.src = e.target.result;
+                  img.style.width = defaultOpt.w + 'px';
+                  img.style.height = defaultOpt.h + 'px';
+                  img.style.display = '';
+               }
+               reader.readAsDataURL(inputFile.files[0]);
+            } catch (e) {
+               // exception...
+            }
+            // img.filters (MSIE)
+         } else if (img.filters) {
+            inputFile.select();
+            inputFile.blur();
+            var imgSrc = document.selection.createRange().text;
+
+            img.style.width = defaultOpt.w + 'px';
+            img.style.height = defaultOpt.h + 'px';
+            img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""
+                  + imgSrc + "\")";
+            img.style.display = '';
+            // no support
+         } else {
+            // Safari5, ...
+         }
+      };
+
+      // onchange
+      $(this).change(function() {
+         previewImage();
+      });
+   };
+
+   $(document).ready(function() {
+      var opt = {
+         img : $('#img_preview'),
+         w : 200,
+         h : 200
+      };
+
+      $('#input_file').setPreview(opt);
+   });
+   
+   $(document).ready(function () {  
+	//벨리데이션
+	   $('#registerForm').validate({
+	           rules: {
+	           	user_id: {required:true, email:true},
+	               password: "required",
+	               name: {required:true},
+	               phone: {required:true, regex:/^[0-9]+$/}
+	           },
+	           messages: {
+	           	user_id: {
+	                    required:"아이디를 입력하시오.",
+	                    minlength: jQuery.format("아이디는 {0}자 이상 입력해주세요!"),
+	                    remote : jQuery.format("입력하신 {0}는 이미존재하는 아이디입니다. ")
+	               },
+	               password:"암호를 입력하시오.",
+	               name: {required:"이름을 입력하시오."},
+	               user_id: {
+	                   required:"이메일을 입력하시오.",
+	                   email:"올바른 이메일을 입력하시오."},
+	               phone: {required:"- 빼고입력해주세요"}
+	           },
+	           submitHandler: function (frm){
+	               frm.submit();
+	           },
+	           success: function(e){
+	               
+	           }
+	          
+	       });
+});
+
+  
 </script>
 
 </head>
@@ -97,9 +165,7 @@ function idchkclk() {
                   <!-- 이메일 -->
                   <div class="form-group">
                      <input type="text" name="user_id" class="form-control"
-                        id="user_id" placeholder="Email" required="required">
-                        <label id="idselect" class="col-md-4 control-label" for="user_id">아이디입력</label>
-                 		<input type="button" id="idchk" name="idchk" class="col-sm-3 btn hvr-forward" value="이메일 중복확인" onclick="idchkclk()">
+                        id="user_id" placeholder="email">
                   </div>
                   <!-- 비번 -->
                   <div class="form-group">
