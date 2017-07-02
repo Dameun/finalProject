@@ -118,25 +118,25 @@ public class JoinController {
 	
 	//아이디 중복 확인
 		
-	@RequestMapping("/idchk.ajax")
-	public String idchk(Users_DTO user,@RequestParam String user_id) throws ClassNotFoundException, SQLException{
-		/*String wid = DataController.getInstance().GetUser().getUser_id();*/
-		
-		/*JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
-		Users_DTO dto = dao.selectId(wid);*/
-		
-		Users_DTO Member = new Users_DTO();
-		Member.setUser_id(user.getUser_id());
-		
-		String result = service.selectId(Member);
-		System.out.println(user_id);
-		if (result != null) {
-			//model.addAttribute("loginsuccess", "success");
-			return "yes";
-		}else{
-			return "no";
-		}
-	}   
+	@RequestMapping(value="idchk.htm", method = RequestMethod.GET)
+	   public String idchk(Users_DTO user,@RequestParam String user_id) throws ClassNotFoundException, SQLException{
+	      System.out.println("111111");
+	      
+	      String wid = user.getUser_id();
+	      System.out.println(wid);
+	      Users_DTO result = service.GetSearchUser(wid);
+	      
+	      
+	      if (result != null) {
+	         //model.addAttribute("loginsuccess", "success");
+	         System.out.println("yes");
+	         return "yes";
+	      }else{
+	         System.out.println("no");
+	         return "no";
+	      }
+	   }   
+	   
 		
 	@RequestMapping(value = "/sendpw.htm", method = RequestMethod.POST)
 	public ModelAndView sendEmailAction(@RequestParam Map<String, Object> paramMap, Users_DTO member) throws Exception {

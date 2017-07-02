@@ -82,7 +82,7 @@ $(document).ready(function () {
 						class="login-form mt-lg" id="registerForm">
 						<div class="form-group">
 							<input type="text" name="username" class="form-control"
-								id="exampleInputEmail1" placeholder="email">
+								id="username" placeholder="email">
 						</div>
 						<div class="form-group">
 							<input name="password" class="form-control" id="pswd"
