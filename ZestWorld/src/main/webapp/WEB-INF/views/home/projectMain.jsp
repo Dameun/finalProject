@@ -79,7 +79,7 @@ function assignMemberDelete(memberId,projectId){
 		url:"assignMemberDelete.htm?memberId="+memberId+"&projectId="+projectId,
 		success:function(data){
 		    if(data.check=="check"){
-				window.location.reload()
+		    	 ajaxView('projectMain.ajax');
 		    }
 			/* 
 			ajaxView('taskList.ajax'); */
@@ -125,8 +125,7 @@ function projectAssign(){
 	       url : "projectAssignChk.htm?project_id="+current_project_id+"&chkmember="+checkboxValues,
 	       success : function(data) {
 	    	   if(data.success=="success"){
-	    	   		console.log('성공');
-	    	   		location.reload();
+	    		   ajaxView('projectMain.ajax');
 	    	   }
 	       },
 	       error : function() {
