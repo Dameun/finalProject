@@ -32,7 +32,7 @@ public interface JoinDAO {
 	public int updateUser(Users_DTO member);
 	
 	
-	public int GetSearchUser(String user_id);
+	public Users_DTO GetSearchUser(String user_id);
 	
 	
 	//비번 찾기
@@ -47,7 +47,7 @@ public interface JoinDAO {
 	public List<Workspace_DTO> invitation (Workspace_DTO wo)  throws Exception;
 	
 	//아이디 중복체크
-	public String selectId (Users_DTO member) throws ClassNotFoundException, SQLException;
+	public int selectId (String member) throws ClassNotFoundException, SQLException;
 	
 	
 }

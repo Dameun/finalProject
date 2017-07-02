@@ -9,8 +9,8 @@
 		insert into Role(user_id, authority_name)
 		values(#{user_id}, #{authority_name})
 	</insert>
-	<select id="GetSearchUser" resultType="int">
-		select count(*) from users where user_id=#{user_id}
+	<select id="GetSearchUser" resultType="com.zestworld.Table_DTO.Users_DTO">
+		select * from users where user_id=#{user_id}
 	</select>
 	
 	<update id="pwEdit" >
@@ -28,8 +28,8 @@
 	</select>	  
 	
 	<!-- 비밀번호 유효성 -->
-	<select id="selectId" parameterType="String" resultType="String">
-		select user_id from users where user_id =#{user_id}
+	<select id="selectId" parameterType="String" resultType="int">
+		select count(*) from users where user_id =#{user_id}
 	</select>
 	
 </mapper>

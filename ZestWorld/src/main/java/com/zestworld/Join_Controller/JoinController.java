@@ -124,7 +124,7 @@ public class JoinController {
          
          String wid = user.getUser_id();
          System.out.println(wid);
-         int result = service.GetSearchUser(wid);
+         int result = service.selectId(wid);
          System.out.println("idchk : "+result );
          if (result != 0) {
             model.addAttribute("result", "success");

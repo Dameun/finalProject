@@ -44,9 +44,9 @@ public class JoinService {
 		return result;
 	}
 
-	public int GetSearchUser(String user_id) {
+	public Users_DTO GetSearchUser(String user_id) {
 		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
-		int users = dao.GetSearchUser(user_id);
+		Users_DTO users = dao.GetSearchUser(user_id);
 		return users;
 	}
 
@@ -81,9 +81,9 @@ public class JoinService {
 	}
 
 	//아이디 유효성 검사
-	public String selectId(Users_DTO member) throws ClassNotFoundException, SQLException {
+	public int selectId(String wid) throws ClassNotFoundException, SQLException {
 		JoinDAO dao = sqlsession.getMapper(JoinDAO.class);
-		String result = dao.selectId(member);
+		int result = dao.selectId(wid);
 		return result;
 	}
 	
