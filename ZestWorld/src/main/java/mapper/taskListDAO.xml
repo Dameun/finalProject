@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="tasktitleInsert" parameterType="com.zestworld.Table_DTO.Task_DTO">
-	insert into task(task_id,category_id,workspace_id,project_id,user_id,title,success_f,essence,enrolldate) values(task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{essence},#{title},0,sysdate)
+	insert into task(task_id,category_id,workspace_id,project_id,user_id,title,success_f,essence,enrolldate) values(task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{title},0,#{essence},sysdate)
 	</insert>
 
 
