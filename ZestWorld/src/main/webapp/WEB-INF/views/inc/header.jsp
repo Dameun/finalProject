@@ -50,8 +50,29 @@
 
 	});
 
-	function searc() {
+	/* function searc() {
 		pwsearch.submit();
+	} */
+	
+	function searc() {
+		
+	var sendEmail= $('#sendEmail').val();
+		console.log('searc Enter : '+sendEmail);
+		$.ajax({
+			type : "get",
+			url : "invitationSend.htm?email="+sendEmail,
+			success : function(data) {
+				console.log('success');
+				if(data=="success"){
+					console.log('초대');
+					alert('초대되었습니다.');
+				}
+				
+			},
+			error : function() {
+				alert('error');
+			},
+		});
 	}
 
 	function sessionDrop() {
@@ -474,21 +495,21 @@
 			<div class="modal-body">
 				<!-- 내용 -->
 				<c:url value="/invitation.htm" var="loginURL" />
-				<form action="${loginURL}" name="pwsearch" id="pwsearch"
-					method="post">
+				<%-- <form action="${loginURL}" name="pwsearch" id="pwsearch"
+					method="post"> --%>
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="number">
                                 	
                             </label>
-						<input type="text"class="form-control" name="userid" placeholder="초대할 이메일을 입력해주세요." />
+						<input type="text" class="form-control" id="sendEmail" name="userid" placeholder="초대할 이메일을 입력해주세요." />
 					</div>
-				</form>
+				<!-- </form> -->
 			
 			<div class="form-group"style="text-align:right;">
 				<button type="button" class="btn btn-secondary mb-xs"
 					data-dismiss="modal">Cancel</button>
 				<button type="button" class="btn btn-warning mb-xs"
-					data-dismiss="modal" onclick="searc()">Finish</button>
+					data-dismiss="modal" onclick="searc();">Finish</button>
 			</div>
 			</div>
 		</div>

@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import com.zestworld.Join_DAO.JoinDAO;
 import com.zestworld.Join_Service.JoinService;
@@ -64,6 +65,9 @@ public class JoinController {
 
 	@Autowired
 	private UserStateService userstateService;
+	
+	@Autowired(required = false)
+	private View jsonview;
 	
 	@Autowired
 	public SqlSession sqlsession;
@@ -262,24 +266,25 @@ public class JoinController {
 	}
 
 	// 맴버 초대 이메일
-	@RequestMapping(value = "/invitation.htm", method = RequestMethod.POST)
-	public String invitation(@RequestParam Map<String, Object> paramMap, Workspace_DTO member,
-			HttpServletRequest request, Model model, Mail_DTO mail, @RequestParam String userid) throws Exception {
-
-		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+	@RequestMapping(value = "/invitationSend.htm", method = RequestMethod.GET)
+	/*public View invitation(HttpServletRequest request, Model model, @RequestParam String userid) throws Exception {*/
+	public View invitation(Model model, String email) throws Exception {
 		
-		Users_DTO user = new Users_DTO();
-		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
-
-		String id = (String) paramMap.get("userid"); // 보내는 사람 아이디는 필요하니깐
-
+		//int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
+		Mail_DTO mail = new Mail_DTO();
+		
+		String my =DataController.getInstance().GetUser().getUser_id();
+		/*String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
+*/
+		/*String id = (String) paramMap.get("userid"); // 보내는 사람 아이디는 필요하니깐
+*/
 		mail.setMailFrom("rorkxso@gmail.com");// 보내는 사람
-		mail.setMailTo(userid);// 입력시 가는놈
-		mail.setMailSubject(id+"님이" + "ZESTWORLD와 함께하길 원합니다.");
-
+		mail.setMailTo(email);// 입력시 가는놈
+		mail.setMailSubject(my+"님이" + "ZESTWORLD와 함께하길 원합니다.");
+		
 		sendMail(mail);
-
-		return "task.workSpace";
+		model.addAttribute("success","success");
+		return jsonview;
 	}
 
 	// 벨로이메일
