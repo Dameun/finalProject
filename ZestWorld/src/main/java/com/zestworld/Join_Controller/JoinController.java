@@ -256,10 +256,11 @@ public class JoinController {
 
 	// 멤버 초대 로그인창
 	@RequestMapping(value = "/invitation.htm", method = RequestMethod.GET)
-	public String memberInvitation(String workspace_id, HttpSession session) throws Exception {
+	public String memberInvitation(String workspace_id, HttpSession session,Model model) throws Exception {
 
 		session.setAttribute("workspace_id", workspace_id);
-		return "home/loginOk";
+		model.addAttribute("invisit","invisit");
+		return "home/login";
 	}
 
 	// 맴버 초대 이메일

@@ -75,20 +75,6 @@
 		});
 	}
 
-	function sessionDrop() {
-		$.ajax({
-			type : "get",
-			url : "infoDelete.htm",
-			success : function(data) {
-
-				session.invalidate();
-			},
-			error : function() {
-				alert('error');
-			},
-		});
-
-	}
 </script>
 
 </head>
@@ -137,7 +123,6 @@
 				</sec:authorize> <sec:authorize access="hasAnyRole('ROLE_ADMIN, ROLE_USER')">
 					<sec:authentication property="name" var="loginUser" />
 					<a style="padding-top: 10px;" class="btn btn-cta btn-cta-secondary"
-						onclick="sessionDrop();"
 						href="${pageContext.request.contextPath}/logout">${loginUser}님
 						로그아웃</a>
 				</sec:authorize>
