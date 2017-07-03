@@ -148,7 +148,7 @@
                     	
                     	
                     		<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
-                			<button role="button" class="btn btn-warning width-100 mb-xs" id="detailClose"  data-dismiss="modal" onclick="detailModalUpdateDialog();">Finish</button> 
+                			<button role="button" class="btn btn-warning width-100 mb-xs" id="detailClose"  data-dismiss="modal" onclick="detailUpdate();">Finish</button> 
                 		</div>
                 	
                 </div>
