@@ -138,7 +138,10 @@ public class DataController {
 	{
 		return projectList;
 	}
-	
+	public void SetProjectList(ArrayList<Project_DTO> projcetList)
+	{
+		this.projectList=projcetList;
+	}
 	
 	public ArrayList<Task_DTO> GetTaskList ()
 	{

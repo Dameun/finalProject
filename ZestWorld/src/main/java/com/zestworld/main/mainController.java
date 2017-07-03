@@ -30,10 +30,10 @@ public class mainController {
    public String main(){
       return "home.main";
    }
-   @RequestMapping("infoDelete.htm")
+  /* @RequestMapping("infoDelete.htm")
    public String infoDelete(){
 	  DataController.getInstance().Reset();
 	  System.out.println("infoDelete");
       return "success";
-   }
+   }*/
 }
