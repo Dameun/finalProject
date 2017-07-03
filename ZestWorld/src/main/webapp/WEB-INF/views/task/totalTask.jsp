@@ -130,7 +130,6 @@ function modalSuccessUpdateDialog(task_id)
 function modalSuccessUpdateDialogY()
 {
 	changeSuccessF_zero(success_f_dialog);
-	alert('업무 완료가 취소되었습니다.');
 }
 //업무완료취소 여부 확인 dialog-N
 function modalSuccessUpdateDialogN()
@@ -150,8 +149,6 @@ function modalSuccess_kUpdateDialog(task_id)
 function modalSuccess_kUpdateDialogY()
 {
 	changeSuccessF(success_f_dialog);
-	
-	alert('업무가 완료되었습니다.');
  	
 }
 
@@ -725,7 +722,7 @@ function detailModalUpdateDialogN()
 		<hr>
 		<div class="form-group">
 		Essence 프로젝트<br>
-		<input type="radio" name="projectlist" onclick="myfilter();" value="500000" checked>전체<br>
+		
 		<c:forEach items="${essencelist}"  var="e">
 			<input type="radio" name="projectlist" value="${e.project_id}" onclick="myfilter();">${e.p_title}<br>
 		</c:forEach> 
