@@ -15,10 +15,10 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
-
+ <h3 class="page-title">Task Lists - <span class="fw-semi-bold">Individual Task</span></h3>
 <c:forEach items="${list}" var="n" varStatus="status">
 	
-<div class="task-section" style="padding-right:40px;padding-top:50px;float:left; height:400px">
+<div class="task-section" style="padding-right:40px;padding-top:52px;float:left; height:400px">
 <div class="tasklist">
 	<div class="membername" id="membername_${n.category_id}" style="padding-top: 15px;padding-left:10px;color: #fff;">${n.title}
 	<input type="hidden" class="cateValue" value="${n.category_id}">

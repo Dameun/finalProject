@@ -205,8 +205,7 @@
 </head>
 <body>
 	
-		<b class="glyphicon glyphicon-stats" style="font-size:22px; 
-		  background-color:#f0b518; text-weight:bold; "> Project All Chart </b> <br><br>
+		 <h3 class="page-title">Project Chart - <span class="fw-semi-bold">Task Lists</span></h3>
 		
     <table class="columns">
       <tr>
