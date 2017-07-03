@@ -69,7 +69,7 @@
 <!--             location.href=('joinEdit.htm') -->
                 <a href="#" onclick="ajaxView('Developers.ajax')">
                     <span class="icon">
-                        <i class="fa fa-puzzle-piece"style="padding-top:5px;"></i>
+                        <i class="glyphicon glyphicon-sunglasses"style="padding-top:5px;"></i>
                     </span>
                     Developers
                     <!-- <sup class="text-warning fw-semi-bold">
