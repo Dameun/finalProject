@@ -267,6 +267,7 @@ $(function(){
 		       url : "checklistReg.htm?task_id="+detailUpdateID+"&contents="+contents,
 		       success : function(data) { 
 		    	   $("#checkListAjax").append($('#checkListAjax').html(data)); 
+		    	   $("#CheckContents").val('');
 		       },
 		       error : function() {
 		          alert('Error while request..');

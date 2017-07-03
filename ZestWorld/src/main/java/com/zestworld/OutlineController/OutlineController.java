@@ -256,6 +256,7 @@ public class OutlineController {
 		List<Task_DTO> list = service.tasklist(workspace_id);
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
+		model.addAttribute("count", 2);
 		return "/task/totalTaskList";
 
 	}
