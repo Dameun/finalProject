@@ -52,10 +52,10 @@ $(function(){
      		 selectable: true,
              selectHelper: true,
      		 select: function(start, end, allDay) {
-                 $('#startdate').datepicker("setDate", new Date(start));
+               /*  $('#startdate').datepicker("setDate", new Date(start));
                  $('#enddate').datepicker("setDate", new Date(end)); 
                     
-                 $('#calEventDialog').dialog('open');   
+                 $('#calEventDialog').dialog('open');   */
      		 },
              
              events:
@@ -66,11 +66,11 @@ $(function(){
            
             eventClick: function(calEvent, jsEvent, view) {
             	
-                $('#calEditDialog #title').val(calEvent.title);
+             /*   $('#calEditDialog #title').val(calEvent.title);
                 $('#calEditDialog #content').val(calEvent.explain);
                 $('#calEditDialog #cal_taskId').val(calEvent.task_id);
                 $('#calEditDialog').dialog('open');
-                
+                */
                 
                 
             },

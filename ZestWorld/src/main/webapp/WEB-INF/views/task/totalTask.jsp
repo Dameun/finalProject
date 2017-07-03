@@ -53,6 +53,9 @@ $(document).ready(function(){
 	 */
 	  
 	 
+	$("#detailEnd").datepicker({ dateFormat: 'yy/mm/dd' });
+    $("#detailStart" ).datepicker({ dateFormat: 'yy/mm/dd'});
+	 
 }); 
 
 //리스트 새로고침

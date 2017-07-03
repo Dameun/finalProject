@@ -9,13 +9,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script>
+<!-- <script>
   $( function() {
 	  $("#detailEnd").datepicker({ dateFormat: 'yy/mm/dd' });
-      $("#detailStart" ).datepicker({ dateFormat: 'yy/mm/dd' });
+      $("#detailStart" ).datepicker({ dateFormat: 'yy/mm/dd'});
   } );
 </script>
-
+ -->
 <div class="modal fade" id = "detailModal" role="dialog">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -148,7 +148,7 @@
                     	
                     	
                     		<!-- <button style="margin-left:20px" type="button" class="btn btn-success" data-dismiss="modal" onclick="detailUpdate();">Submit</button> -->
-                			<button role="button" class="btn btn-warning width-100 mb-xs" id="detailClose"  data-dismiss="modal" onclick="detailUpdate();">Finish</button> 
+                			<button role="button" class="btn btn-warning width-100 mb-xs" id="detailClose"  data-dismiss="modal" onclick="detailModalUpdateDialog();">Finish</button> 
                 		</div>
                 	
                 </div>

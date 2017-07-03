@@ -80,6 +80,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getCatetitle" resultType="com.zestworld.Table_DTO.Category_DTO">
 	select * from category where category_id=#{category_id}
-	</select>	
+	</select>
 
 </mapper>
