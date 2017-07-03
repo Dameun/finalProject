@@ -219,8 +219,7 @@
 </head>
 <body>
 
-	<b class="glyphicon glyphicon-stats" style="font-size:22px; 
-		  background-color:#f0b518; text-weight:bold;" > WorkSpace All Chart </b> <br><br>
+	 <h3>Total Chart - <span class="fw-semi-bold">Chart</span></h3>
 	
     <table class="columns">
       <tr>

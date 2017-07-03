@@ -32680,6 +32680,9 @@ input[type=search], .input-group-lg>input[type=search], .input-group-sm>input[ty
 	overflow: hidden;
 	max-width: 100%
 }
+.gallery .thumbnail {
+	text-align:center;
+}
 
 .gallery .thumbnail a>img {
 	-webkit-transition: -webkit-transform 0.15s ease;
@@ -32687,7 +32690,14 @@ input[type=search], .input-group-lg>input[type=search], .input-group-sm>input[ty
 	-o-transition: -o-transform 0.15s ease;
 	transition: transform 0.15s ease
 }
-
+.gallery .thumbnail a>img {
+	
+	width:auto;
+	}
+	.gallery .thumbnail a {
+	
+	width:auto;
+	}
 .gallery .thumbnail:hover a>img {
 	-webkit-transform: scale(1.1, 1.1);
 	-ms-transform: scale(1.1, 1.1);

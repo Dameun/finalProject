@@ -65,7 +65,18 @@
                     </sup> -->
                 </a>
             </li>
-            
+            <li>
+<!--             location.href=('joinEdit.htm') -->
+                <a href="#" onclick="ajaxView('Developers.ajax')">
+                    <span class="icon">
+                        <i class="fa fa-puzzle-piece"style="padding-top:5px;"></i>
+                    </span>
+                    Developers
+                    <!-- <sup class="text-warning fw-semi-bold">
+                        new
+                    </sup> -->
+                </a>
+            </li>
           
         </ul>
         <!-- every .sidebar-nav may have a title -->

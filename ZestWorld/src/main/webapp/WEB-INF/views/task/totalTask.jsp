@@ -669,7 +669,7 @@ function detailModalUpdateDialogN()
 
 
 <!-- <div id="filter" style=" width: 880px"> -->
-	
+	 <h3>Total Task - <span class="fw-semi-bold">Project</span></h3>
 		<div class="clearfix">
 		<div class="btn-toolbar pull-right">
 		<button type="role" class="btn btn-inverse mb-xs" data-toggle="modal"

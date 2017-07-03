@@ -136,6 +136,7 @@ function projectAssign(){
 
 
 </script>
+ <h3>Individual Task - <span class="fw-semi-bold">Project</span></h3>
 	<div class="clearfix">
 		<div class="btn-toolbar pull-right">
 			<button role="button" class="btn btn-inverse mb-xs"

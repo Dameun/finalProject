@@ -53,6 +53,10 @@ public class AjaxViewController {
 	public String createProject() {
 		return DataController.getInstance().GetviewPath("home") + "CreateProject.jsp";
 	}
+	@RequestMapping(value="/Developers.ajax",method = RequestMethod.GET)
+	public String developers(){
+		return DataController.getInstance().GetviewPath("home")+"Developers.jsp";
+	}
 
 	@RequestMapping(value = "/addWorkspace.ajax", method = RequestMethod.GET)
 	public String addWorkspace() {
