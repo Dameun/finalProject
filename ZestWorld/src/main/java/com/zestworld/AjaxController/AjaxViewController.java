@@ -129,7 +129,7 @@ public class AjaxViewController {
 	@RequestMapping(value = "/projectMain.ajax", method = RequestMethod.GET)
 	public String projectMain(Model model) {
 		List<Project_DTO> projectList = DataController.getInstance().GetProjectList();
-		List<Project_DTO> projectUserList = new ArrayList<Project_DTO>();
+		ArrayList<Project_DTO> projectUserList = new ArrayList<Project_DTO>();
 		int projectid =0;
 		IProjectDAO projectDao = sqlsession.getMapper(IProjectDAO.class);
 		
@@ -162,6 +162,7 @@ public class AjaxViewController {
 		}
 		
 		model.addAttribute("projectList",  projectUserList);
+		DataController.getInstance().SetProjectList(projectUserList);
 		return DataController.getInstance().GetviewPath("home") + "projectMain.jsp";
 	}
 	
@@ -169,12 +170,37 @@ public class AjaxViewController {
 	@RequestMapping(value = "/totalTask.ajax", method = RequestMethod.GET)
 	public String totalTask(Model model) throws ClassNotFoundException, SQLException {
 		int workspace_id=DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
-		List<Project_DTO> list = service.projectlist(workspace_id);
+		List<Project_DTO> list = DataController.getInstance().GetProjectList(); 
+		//List<Project_DTO> list = service.projectlist(workspace_id);
+		List<Project_DTO> projectList = new ArrayList<Project_DTO>();
+		List<Project_DTO> essenceList = new ArrayList<Project_DTO>();
+		int pcount=0;
+		int ecount=0;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getEssence_f()==0){
+				Project_DTO projectDto= new Project_DTO();
+				projectDto.setProject_id(list.get(i).getProject_id());
+				projectDto.setP_title(list.get(i).getP_title());
+				projectList.add(pcount, projectDto);
+				pcount++;
+			}else{
+				Project_DTO projectDto= new Project_DTO();
+				projectDto.setProject_id(list.get(i).getProject_id());
+				projectDto.setP_title(list.get(i).getP_title());
+				essenceList.add(ecount, projectDto);
+				ecount++;
+			}
+			
+		}
 		List<Project_DTO> elist = service.essencelist(workspace_id);
 		System.out.println("AJAC: "+ workspace_id);
 		List<Workspace_DTO> assign = service.writerlist(workspace_id);
-		model.addAttribute("projectlist", list); // 자동 forward
+/*		model.addAttribute("projectlist", list); // 자동 forward
 		model.addAttribute("essencelist", elist); // 자동 forward
+		model.addAttribute("assign", assign); // 자동 forward
+*/		
+		model.addAttribute("projectlist", projectList); // 자동 forward
+		model.addAttribute("essencelist", essenceList); // 자동 forward
 		model.addAttribute("assign", assign); // 자동 forward
 		System.out.println("LIST: " + list.size());
 
