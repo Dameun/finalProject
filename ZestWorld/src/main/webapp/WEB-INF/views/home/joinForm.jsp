@@ -56,7 +56,7 @@ function idchkclk() {
                url:"idchk.htm",
                data:{"user_id": $('#user_id').val().toLowerCase()},
                success:function(data){
-            	   console.log("idchclk: "+data)
+                  console.log("idchclk: "+data)
                   console.log(data);
                   if(data.result == "success"){
                      $("#idselect").html("중복되는 아이디입니다"); 
@@ -74,30 +74,55 @@ function idchkclk() {
             });
             
             $('#user_id').keyup(function(){
-            	var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-                	
-                	if(idRex.test($('#user_id').val())){
-                		$('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
-                	}else{
-                		$('#idselect').html("알맞은 이메일 형식으로 작성해주세요");
-                	} 
+               var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+                   
+                   if(idRex.test($('#user_id').val())){
+                      $('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
+                   }else{
+                      $('#idselect').html("알맞은 이메일 형식으로 작성해주세요");
+                   } 
                 });
-            
+            $('#name').keyup(function(){
+                var regNm = /^[가-힣]{2,15}|[a-zA-Z]{2,15}\s[a-zA-Z]{2,15}$/;
+                   
+                   if(regNm.test($('#name').val())){
+                      $('#namelb').html("유효합니다");
+                   }else{
+                      $('#namelb').html("다시 확인해주세요");
+                   } 
+                });
+           
         
-	//핸드폰번호 유효성 검사
-		$('#phone').keyup(function() {
+   //핸드폰번호 유효성 검사
+      $('#phone').keyup(function() {
 
-			var phoneRex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+         var phoneRex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
 
-			if (phoneRex.test($('#phone').val())) {
-				$('#phonelbl').html("전화번호가 유효합니다");
-			} else {
-				$('#phonelbl').html("ex) '-' 빼고입력해주세요 ");
-			}
+         if (phoneRex.test($('#phone').val())) {
+            $('#phonelbl').html("전화번호가 유효합니다");
+         } else {
+            $('#phonelbl').html("'-' 빼고입력해주세요 ");
+         }
 
-		});
+      });
 
-	}
+      
+
+      //비밀번호 유효성 검사
+      $('#password').keyup(function() {
+
+         var regPw = /^[a-z0-9]{6,10}$/;
+
+         if (regPw.test($('#password').val())) {
+            $('#passwordlb').html("");
+         } else {
+            $('#passwordlb').html(" 6자이상 10자이하로 입력해주세요");
+         }
+
+      });
+
+   }
+
 </script>
 
 </head>
@@ -121,27 +146,37 @@ function idchkclk() {
                <form action="${loginURL}" method="post" class="login-form mt-lg" id="registerForm">
                   <!-- 이메일 -->
                   <div class="form-group">
+                  <div class="input-group">
                      <input type="text" name="user_id" class="form-control"
                         id="user_id" placeholder="Email" required="required">
-                        <label id="idselect" class="col-md-4 control-label" for="user_id" >아이디입력</label>
-                       <input type="button" id="idchk" name="idchk" class="col-sm-3 btn hvr-forward" value="이메일 중복확인" onclick="idchkclk()">
+                        
+                        <div class="input-group-btn">
+                       <button type="button" id="idchk" name="idchk" class="btn btn-inverse mb-xs" value="이메일 중복확인" onclick="idchkclk()">중복확인</button>
+                 		</div>
+                 		
+                 	</div>
+                 	<div class="form-group">
+                 		<label id="idselect" class="col-md-12" for="user_id" ></label>
+                 		</div>
                   </div>
                   <!-- 비번 -->
 						<div class="form-group">
 							<input type="password" class="form-control" name="password"
 								id="password" required="required" placeholder="Password" >
+								<label class="col-md-12" id="passwordlb"></label>
 						</div>
 						<!-- 이름 -->
 						<div class="form-group">
 							<input name="name" class="form-control" id="name" type="text"
-								placeholder="Name">
+								placeholder="Name">  
+								
+								
 						</div>
 						<!-- 폰번호 -->
 						<div class="form-group">
 							<input type="text" name="phone" id="phone" class="form-control"
-								required="required"> <label
-								class="col-md-4 control-label" for="phone" id="phonelbl">핸드폰
-								번호 입력</label>
+								required="required" placeholder="Phone"> <label
+								class="col-md-12" for="phone" id="phonelbl"></label>
 						</div>
 
 						<!-- 회원가입  -->
