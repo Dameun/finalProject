@@ -80,6 +80,7 @@
 				</h5>
 				<section class="widget widget-login animated fadeInUp"> <header>
 				<h3>Login to ZestWorld</h3>
+				<h5>로그인과 동시에 초대받은 주소로 이동합니다.</h5>
 				</header>
 				<div class="widget-body">
 

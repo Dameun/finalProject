@@ -129,15 +129,14 @@ function idchkclk() {
                   <!-- 비번 -->
 						<div class="form-group">
 							<input type="password" class="form-control" name="password"
-								id="password" required="required"> <label
-								class="col-md-4 control-label" for="pwd">비밀번호 입력</label>
+								id="password" required="required" placeholder="Password" >
 						</div>
 						<!-- 이름 -->
-                  <div class="form-group">
-                     <input name="name" class="form-control" id="name" type="text"
-                        placeholder="Name">
-                  </div>
-                  <!-- 폰번호 -->
+						<div class="form-group">
+							<input name="name" class="form-control" id="name" type="text"
+								placeholder="Name">
+						</div>
+						<!-- 폰번호 -->
 						<div class="form-group">
 							<input type="text" name="phone" id="phone" class="form-control"
 								required="required"> <label
