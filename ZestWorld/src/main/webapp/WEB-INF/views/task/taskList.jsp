@@ -586,11 +586,15 @@ $(function(){
 <!--  style="padding-left:20px;" -->
 <div class="row">
 	<!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
-	<div class="btn-toolbar pull-right" style="position: fixed; left: 82%;">
+	<div class="btn-toolbar pull-right" style="position: fixed; left: 73%;">
 		<button class="btn btn-inverse mb-xs" role="button" href="#add-modal"
 			data-toggle="modal">
 			<i class="fa fa-plus text-warning"></i> 업무리스트 추가
 		</button>
+		<button class="btn btn-inverse mb-xs" role="button"
+         	href="#" onclick="ajaxView('analysisU.ajax')" data-toggle="modal">
+         	<i class="glyphicon glyphicon-stats"></i> 차트보기
+      	</button>
 		<button class="btn btn-inverse mb-xs" role="button" id="file"
 			onclick="ajaxView('calendar.ajax')">	<!-- onclick="location.href='Schedule.htm'"  -->
 			<i class="fa fa-calendar text-warning"></i> 캘린더
