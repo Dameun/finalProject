@@ -66,8 +66,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		        	   //접속해있는 유져일경우 
 		        	   if(ids.get(s.getId()).equals(alarmIdArr[i]) )
 		        	   {
-		        		 //ajaxview.onMessage(evt)로 전송
-		        		 
 		                 s.sendMessage(new TextMessage(msg) );
 		                 System.out.println("접속시***************************");
 		                 System.out.println("sendmessage:"+alarmIdArr[i] +"애게 follower가 " +

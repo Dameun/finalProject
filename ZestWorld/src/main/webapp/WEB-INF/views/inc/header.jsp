@@ -433,7 +433,7 @@
 
 	//2017-06-21 은경
 	function popupOpen() {
-		var popUrl = "http://localhost:3000"; //팝업창에 출력될 페이지 URL
+		var popUrl = "http://192.168.0.152:3000"; //팝업창에 출력될 페이지 URL
 		var popOption = "width=380, height=400, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 		window.open(popUrl, "", popOption);
 	}

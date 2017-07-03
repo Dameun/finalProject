@@ -126,6 +126,7 @@ public class AlarmAjaxController {
         return new SimpleDateFormat(timeFormat).format(System.currentTimeMillis());
     }
 
+    //	send('1','title',$('#hiddenFollower').val(), $('#hiddenUserId').val());
 	private String alarmStrMak(String newAlarm)
 	{
 		  String[] msgArr = newAlarm.split("/");
@@ -146,10 +147,10 @@ public class AlarmAjaxController {
 		  }else
 		  //완료
 		  {
-			  //if( taskAccept.equals(follower) )
+			  if( !taskAccept.equals(follower) )
 				  returnMsg = "업무 :  " + taskTitle +"가 완료되었습니다.";
-			  //else
-				 // returnMsg = "업무 :  " + taskTitle +"가 완료되었습니다.";
+			  else
+				  returnMsg = "업무 :  " + taskTitle +"가 완료되었습니다.";
 		  }
 		  
 		  return returnMsg;

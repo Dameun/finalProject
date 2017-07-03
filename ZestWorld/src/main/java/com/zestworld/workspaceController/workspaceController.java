@@ -53,6 +53,7 @@ public class workspaceController {
 		session.setAttribute("user", user);
 		DataController.getInstance().SetUserSavedata(user);
 		
+		//초대
 		if( session.getAttribute("workspace_id") != null){
 			workspaceid = (String)session.getAttribute("workspace_id");
 			int strWorkspaceId=Integer.parseInt(workspaceid);
@@ -60,7 +61,6 @@ public class workspaceController {
 			workspaceUser.setWorkspace_id(strWorkspaceId);
 			workspaceUser.setUser_id(usernameid);
 			List<WorkspaceUser_DTO> listSize= taskDao.GetWorkSpaceMemberChk(workspaceUser);
-			
 			if(listSize.size()==0)taskDao.insertWorkSpaceUser(workspaceUser);				
 		}
 		
@@ -124,16 +124,21 @@ public class workspaceController {
 	private String UserStateView(){
 		IProjectDAO ipd=sqlsession.getMapper(IProjectDAO.class);
 		String state= ipd.stateselect(	DataController.getInstance().GetUser().getUser_id());
-		System.out.println(state);
-		if(state.equals("업무중")){
-			return "1";
-		}else if(state.equals("외출중")){
-			return "2";			
-		}else if(state.equals("회의중")){
-			return "3";
-		}else{
-			return "4";
+		if( state != null )
+		{
+			if(state.equals("업무중")){
+				return "1";
+			}else if(state.equals("외출중")){
+				return "2";			
+			}else if(state.equals("회의중")){
+				return "3";
+			}else{
+				return "4";
+			}
 		}
+		
+		return "1";
+	
 	
 	}
 }
