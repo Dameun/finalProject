@@ -12,6 +12,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <link rel="stylesheet" type="text/css"
+
 	href="resources/dist/css/taskList.css">
 
 
@@ -56,7 +57,7 @@ $(function(){
 		//취소 눌렀을 때 토글 닫히게	 
 			$(document).on("click","#cancleBtn",function(){
 				$(this).parent().parent("#panel").toggle();
-
+				/* $(this).parent().parent("#panel").find().val(""); */
 			});
 			
 		//task title 완료체크
@@ -96,12 +97,12 @@ $(function(){
  		 
  		 
  		$("#detailStart").datepicker({
- 				 dateFormat: 'yy-mm-dd'    
+ 				 dateFormat: 'yy/mm/dd'    
  			});
  	
  		
  		$("#detailEnd").datepicker({
- 				 dateFormat: 'yy-mm-dd'    
+ 				 dateFormat: 'yy/mm/dd'    
  			}); 
  		
  		
@@ -485,6 +486,51 @@ $(function(){
 		$("#task_add_"+number).parent(".tasklist").find("#panel").toggle();	
 	}
 	
+	
+	
+	function deleteBtn(number)
+	{
+		$.ajax({
+			type:"get",
+			url:"deleteTaskList.htm",
+			data : "cateId="+number, 
+			success:function(data){
+				$("#View").empty();
+				$("#View").append(data); 		
+				},
+			error:function(){
+				alert('Error while request..');
+			}
+	});
+		
+		
+	}
+	
+	
+	function createBtn(number)
+	{
+		
+	var title = $("#task-content_"+number).val();
+		
+		
+		$.ajax({
+			type : "post",
+			url : "tasktitleInsert.htm",
+			cache : false,
+			data : 'title='+title+'&cateId='+number,
+			success : function(data) {
+				console.log("taskinsert 성공^^");				
+				$("#View").empty();
+				$("#View").append(data); 	
+			},
+			error : function() {
+				alert('실패');
+			}
+		});
+	}
+	
+	
+	/* 
 	function yes()
 	{
 		var title = $("#task-content_"+task_num).val();
@@ -580,7 +626,7 @@ $(function(){
 		return;
 	}
 	
-	
+ */	
 	
 </script>
 <!--  style="padding-left:20px;" -->
