@@ -31,7 +31,6 @@ var modalCount=0;
 var task_num=''; 
 var click_btn='';
 var task_dnum='';
-
 $(function(){
 	
 		//리스트 비동기로 뿌리는 ajax부분
@@ -47,7 +46,8 @@ $(function(){
 				alert('Error while request..');
 			}
 		});
-
+			
+		
 		$(".close").click(function() {
 			$('.modal-backdrop').hide();
 		});
@@ -58,7 +58,9 @@ $(function(){
 				$(this).parent().parent("#panel").toggle();
 
 			});
-			
+		  
+
+	
 		//task title 완료체크
 		
 		 $(document).on("click",".chkSuccess",function(){
@@ -82,7 +84,7 @@ $(function(){
 			}
 		}); 
 		
-	/* 	//datepicker
+		//datepicker
 		$(document).on("click","#calendar",function(){        
             
             $(this).parent(".form-btn").find(".datepicker").removeClass('hasDatepicker').datepicker({                        
@@ -91,9 +93,9 @@ $(function(){
                     dateFormat: 'yy-mm-dd'                       
                 }).datepicker("show");
         });
- 		 */
- 		 
- 		/*  
+
+ 		
+ 		
  		$("#detailStart").datepicker({
  				 dateFormat: 'yy-mm-dd'    
  			});
@@ -102,7 +104,7 @@ $(function(){
  		$("#detailEnd").datepicker({
  				 dateFormat: 'yy-mm-dd'    
  			}); 
- 		 */
+ 		
  		
  			$("#upclose").click(function(){
  				$("#changeTitle").val('');
@@ -207,7 +209,7 @@ $(function(){
 		       }
 		    });
 
-	 	//멤버배정 후보 리스트
+	 	
 	 	$.ajax({
 		    type : "get",
 		    url : "taskMemberCheck.htm?project_id="+detailpid+"&task_id="+view,
@@ -216,8 +218,8 @@ $(function(){
 		 		console.log("data:    " + data);
 		 		
 		 		$.each(data.assignmember,function(index,value){
-						console.log(index + "/" + value);
-						strlist+="<input type='checkbox' value='"+value+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value + "<br>";
+						console.log(index + "/" + value.user_id);
+						strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
 						/* "+value.user_id+" */
 						
 						
@@ -354,7 +356,8 @@ $(function(){
 			
 		 		$.each(data.assignmember,function(index,value){
 						console.log(index + "/" + value.user_id);
-						strlist+="<input type='checkbox' value='"+value+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value+ "<br>";
+						strlist+="<input type='checkbox' value='"+value.user_id+"' name='taskMemberChk' >&nbsp&nbsp&nbsp&nbsp"+value.user_id + "<br>";
+						
 						
 				});
 		 		
@@ -390,10 +393,6 @@ $(function(){
 		       }
 		}); 
 	}
-	
-	
-	
-	
 	
 	//카테고리 타이틀 추가
 	function cateTitle_Add(){
@@ -467,15 +466,6 @@ $(function(){
 				alert('Error while request..');
 			}
 		});
-	}
-	
-	//데이터 초기화
-	function dataErase(){
-		$('#datepicker').val('');
-	    $('#title').val('');
-	    $('#project').val('');
-	    $('#catechange').val('');
-		
 	}
 	
 	//토글이벤트
@@ -559,25 +549,6 @@ $(function(){
 			
 	}
 	
-	//상세보기 수정
-	function detailModalUpdateDialog()
-	{
-		dialogPopup("업무를 수정하시겠습니까?", detailModalUpdateDialogY, detailModalUpdateDialogN);
-	}
-
-	//상세보기 수정 yes
-	function detailModalUpdateDialogY()
-	{
-		detailUpdate();
-
-	}
-	//상세보기 수정 no
-	function detailModalUpdateDialogN()
-	{
-	
-		dataErase();
-		return;
-	}
 	
 	
 	
@@ -590,8 +561,12 @@ $(function(){
 			data-toggle="modal">
 			<i class="fa fa-plus text-warning"></i> 업무리스트 추가
 		</button>
+		<button class="btn btn-inverse mb-xs" role="button"
+			href="#" onclick="ajaxView('analysisU.ajax')" data-toggle="modal">
+			<i class="fa fa-plus text-warning"></i> 차트보기
+		</button>
 		<button class="btn btn-inverse mb-xs" role="button" id="file"
-			onclick="ajaxView('calendar.ajax')">	<!-- onclick="location.href='Schedule.htm'"  -->
+			onclick="location.href='Schedule.htm'">
 			<i class="fa fa-calendar text-warning"></i> 캘린더
 		</button>
 	</div>
@@ -642,7 +617,151 @@ $(function(){
 	</div>
 </div>
 
- <!-- category title 모달  -->
+
+
+
+
+<!-- detail task modal  -->
+
+<div class="modal fade" id="detailModal" role="dialog"
+	aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<section class="widget"> <header>
+			<h4>
+
+				<span class="fw-semi-bold" id="span1"> </span>&nbsp;&nbsp; <span
+					class="label label-danger fw-normal" id="modal_delete"
+					style="cursor: pointer" data-dismiss="modal"
+					onclick="modalDeleteTask();">delete</span> <small><span
+					id="Modalenrolldate"></span></small>
+			</h4>
+			<div class="widget-controls">
+				<a data-widgster="close" title="Close" href="#"><i
+					class="glyphicon glyphicon-remove" data-dismiss="modal"></i></a>
+			</div>
+			</header>
+			<div class="widget-body">
+				<form id="validation-form" class="form-horizontal form-label-left"
+					method="post" data-parsley-priority-enabled="false"
+					novalidate="novalidate">
+
+					<fieldset>
+						<legend> </legend>
+
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="number"> 상세 설명
+							</label>
+							<div class="col-sm-9">
+								<textarea rows="3"
+									class="autogrow form-control transition-height"
+									id="modalDetailExplain"
+									placeholder="Try to add few new lines.."></textarea>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="number"> 시작일 </label>
+							<div class="col-sm-9">
+								<input type="text" id="detailStart" name="detailStart"
+									class="form-control" data-parsley-type="number"
+									required="required">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="number"> 마감일 </label>
+							<div class="col-sm-9">
+								<input type="text" id="detailEnd" name="detailEnd"
+									class="form-control" data-parsley-type="number"
+									required="required">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div>
+								<label class="control-label col-sm-3" for="range"> 배정된
+									멤버 </label>
+							</div>
+							<div class="col-sm-9">
+
+
+								<div
+									class="select2-container select2-container-multi select2 form-control"
+									id="s2id_multiple-select">
+
+
+									<ul class="select2-choices">
+										<div id="assignMemberCheck"></div>
+									</ul>
+								</div>
+								<br>
+								<div id="wMemberList" style="background-color: #EAEAEA"></div>
+								<button type="button" style="margin-left: 568px"
+									class="btn btn-success" onclick="taskAssign(${n.task_id});">Assign</button>
+
+
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="password"> 팔로워
+							</label>
+							<div class="col-sm-9">
+								<input type="text" id="follower22" name="follower22"
+									class="form-control mb-sm" data-parsley-trigger="change"
+									data-parsley-minlength="6" required="required">
+							</div>
+						</div>
+
+						<hr>
+
+
+						<div class="form-group row">
+							<label class="control-label col-sm-3" for="password">
+								체크리스트 </label>
+							<div class="col-sm-8">
+								<input type="text" id="CheckContents" name="CheckContents"
+									class="form-control mb-sm" style="width: 635px"
+									data-parsley-trigger="change" data-parsley-minlength="6"
+									required="required">
+
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-warning"
+									onclick="checkreg();">
+									<i class="fa fa-plus"
+										style="margin-left: 5px; margin-top: 5px; margin-right: 2px;"></i>
+								</button>
+							</div>
+						</div>
+
+						<div id="checkListAjax"></div>
+
+					</fieldset>
+
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-sm-10">
+								<button style="margin-left: 20px" type="button"
+									class="btn btn-secondary btn-rounded" data-dismiss="modal">Cancel</button>
+							</div>
+							<div class="col-sm-2">
+								<button style="margin-left: 20px" type="button"
+									class="btn btn-success" data-dismiss="modal"
+									onclick="detailUpdate();">Submit</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<!--/detail task modal  -->
+
+<!-- category title 모달  -->
 
 <div class="modal fade" id="add-modal" style="display: none;">
 	<div class="modal-dialog">
@@ -677,11 +796,13 @@ $(function(){
 </div>
 
 <!-- /category title 모달 -->
-	<jsp:include page="../task/detailModal.jsp"></jsp:include>
 <div class="col-md-2"></div>
 
 <div class="col-md-7"></div>
 
 <br>
 
+
+
 <div id="View" style="white-space: nowrap; width: 100000px"></div>
+
