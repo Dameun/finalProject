@@ -1,7 +1,9 @@
 package com.zestworld.util;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -181,13 +183,19 @@ public class DataController {
 		  alarmIdArr 		= msgArr[2].split(",");
 		  String writer 	= msgArr[3];
 		  
+			Calendar date = Calendar.getInstance();
+			String strTime = date.get(Calendar.HOUR_OF_DAY) + ":" +
+			date.get(Calendar.MINUTE) + ":" +
+			date.get(Calendar.SECOND);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String now = dateFormat.format(date.getTime());
 		  
-		  String DbMessage = alarmStrMake(msg);
+			String DbMessage = alarmStrMake(msg);
 		  //않읽은 db로 저장하고  알람 카운트 올려주기 
 		  Alarm_DTO alarm = new Alarm_DTO();
 		  alarm.setAlarm_type(alarmType);
 		  alarm.setCheck_f(0);
-		  alarm.setImg("img");
+		  alarm.setImg(now);
 		  alarm.setUser_id(writer);
 		  alarm.setAcceptUsers(alarmIdArr[0]); // 1명일
 		  alarm.setAlarmTitle(alarmStrMake(msg));

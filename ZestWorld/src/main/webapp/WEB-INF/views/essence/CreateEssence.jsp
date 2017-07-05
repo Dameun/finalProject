@@ -46,9 +46,7 @@ $(document).ready(function(){
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",  
 		success : function(data) {
 			var str= "";
-		
 			milestoneListView = data.milestoneList;
-			alert(milestoneListView[0]);
 	 		$.each(data.milestoneList,function(index,value)
 	 		{
 	 				str += "<button type='button' class='btn btn-warning btn-block' onclick='milestoneClick("+ index + ")''>"+ value +"</button>";
@@ -88,7 +86,6 @@ $(document).ready(function(){
 							완료되어야 할 상태에 대한 정의를 통해 각 단계의 정의를 명확히 한다.
 						</p>
 						<p id="tabs"></p>
-						
 							<div class="widget-controls">
 					<button class="btn btn-default width-100 mb-xs" id="open-wizard"
 							type="button" onclick="FinishCreateEssence()">Finish<span class="glyphicon glyphicon-ok"></span></button>

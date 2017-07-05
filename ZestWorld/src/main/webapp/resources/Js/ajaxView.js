@@ -6,7 +6,7 @@ var wsocket;
 var msg 
 function connect() {
 
-	wsocket = new WebSocket("ws://localhost:8081/main/chat-ws.htm");
+	wsocket = new WebSocket("ws://192.168.0.131:8081/main/chat-ws.htm");
 	wsocket.onopen = onOpen;
 	wsocket.onmessage = onMessage;
 	wsocket.onclose = onClose;
@@ -46,31 +46,29 @@ function send(alarmType, taskTitle, selectId , writerId) {
 	var alarmMsg = alarmType+'/'+ taskTitle +'/'+selectId + '/' + writerId;
 	console.log("메세지 받을 사람들:"+selectId);
 	wsocket.send(alarmMsg);
-	
+
 }
 
 function appendMessage(msg) {
 	console.log(msg);
-
 }
 
-//$(function() {
-	function ajaxView(menuName)
-	{
+//비동기 main화면 : tiles의 content부분에 비동기 화면 모든 콘텐츠 화면의 메인들은 이 메서드를 통해 불려진다. 
+function ajaxView(menuName)
+{
 
-		$.ajax({
-			type:"get",
-			url: menuName,
-			success:function(data)
-			{
-			
-				$('#binContent').empty();
-				$('#binContent').append( $('#binContent').html(data)); 		
-			},
-			
-			error:function(){
-				alert('ajaxView error:' + menuName);
-			},
-		});	
-	}
-//})
+	$.ajax({
+		type:"get",
+		url: menuName,
+		success:function(data)
+		{
+			$('#binContent').empty();
+			$('#binContent').append( $('#binContent').html(data)); 		
+		},
+		
+		error:function(){
+			alert('ajaxView error:' + menuName);
+		},
+	});	
+}
+

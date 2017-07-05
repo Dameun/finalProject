@@ -24,7 +24,7 @@
 	             <a href="#">${alarm.alarmTitle}</a>
 	             &nbsp;&nbsp;
 	             <c:if test="${alarm.check_f==0}">
-	             <button class="btn btn-xs btn-success">hot</button>
+	             <button class="btn btn-xs btn-danger">hot</button>
 	             </c:if>
 	            <!--  <button class="btn btn-xs btn-danger">Deny</button> -->
 	             <time class="help-block no-margin">

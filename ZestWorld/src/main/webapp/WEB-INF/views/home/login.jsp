@@ -59,6 +59,15 @@ $(document).ready(function () {
     });
   });
 </script>
+<style type="text/css">
+body {
+    background-image: url("resources/img/pictures/zestback.jpg");
+    background-size:100% 100%;
+    background-opacity: 0.4;
+    background-repeat:no-repeat;
+
+}
+</style>
 </head>
 <body class="login-page">
 

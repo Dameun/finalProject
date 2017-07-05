@@ -52,6 +52,7 @@ public class AlarmAjaxController {
 	      return DataController.getInstance().GetviewPath("alarm")+"newAlarm.jsp";
 	}
 
+	
 	@RequestMapping(value="alarmCount.ajax", method = RequestMethod.GET)
     public @ResponseBody String  alarmCount(Model model)
             throws ClassNotFoundException, SQLException{
@@ -109,7 +110,6 @@ public class AlarmAjaxController {
 		  Alarm_DTO alarm = new Alarm_DTO();
 		  alarm.setAlarm_type(alarmType);
 		  alarm.setCheck_f(0);
-		  alarm.setImg("img");
 		  alarm.setUser_id(msgArr[3]);	//보내는 사람 
 		  alarm.setAcceptUsers(msgArr[2]);	//받는 사람 
 		  alarm.setAlarmTitle(alarmStrMak(newAlarm));

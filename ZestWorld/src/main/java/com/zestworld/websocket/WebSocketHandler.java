@@ -55,7 +55,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		  String taskTitle = "";
 		  String[] alarmIdArr={};
 
-		  //var alarmMsg = alarmType+'/'+ taskTitle +'/'+selectId + '/' + follower;
 		  String msg = message.getPayload();
 		  String[] id_count_type = msg.split("/");
 		  alarmIdArr = id_count_type[2].split(",");

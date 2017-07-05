@@ -3,11 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>come.zestworld</groupId>
-	<artifactId>main</artifactId>
+	<artifactId>zestworld</artifactId>
 	<name>zestworld</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	<!-- 속성추가 -->
 	<properties>
 		<org.springframework-version>
 			4.2.5.RELEASE
@@ -15,13 +14,6 @@
 	</properties>
 	<!-- 의존 추가 -->
 	<dependencies>
-		<!-- 벨로시티 -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.6.2</version>
-		</dependency>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -184,7 +176,12 @@
 			<artifactId>spring-websocket</artifactId>
 			<version>4.0.9.RELEASE</version>
 		</dependency>
-
+		<!-- velocity -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 		<!-- Json -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>

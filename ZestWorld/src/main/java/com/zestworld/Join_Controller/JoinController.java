@@ -184,7 +184,7 @@ public class JoinController {
 
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		MimeMessage msg = mailSender.createMimeMessage();
-		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
+		String path2 = "http://192.168.0.131:8081/main/invitation.htm?workspace_id=" + workspace_id;
 		try {
 
 			// MimeMessageHelper messageHelper = new MimeMessageHelper(msg,
@@ -276,7 +276,7 @@ public class JoinController {
 */
 		/*String id = (String) paramMap.get("userid"); // 보내는 사람 아이디는 필요하니깐
 */
-		mail.setMailFrom("rorkxso@gmail.com");// 보내는 사람
+		mail.setMailFrom("ZESTWORLD@gmail.com");// 보내는 사람
 		mail.setMailTo(email);// 입력시 가는놈
 		mail.setMailSubject(my+"님이" + "ZESTWORLD와 함께하길 원합니다.");
 		
@@ -289,7 +289,7 @@ public class JoinController {
 	public void sendMail(Mail_DTO mail) throws Exception {
 
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
-		String path2 = "http://localhost:8081/main/invitation.htm?workspace_id=" + workspace_id;
+		String path2 = "http://192.168.0.131:8081/main/invitation.htm?workspace_id=" + workspace_id;
 		String wid = DataController.getInstance().GetUser().getUser_id();
 		String name = DataController.getInstance().GetUser().getName();
 		MimeMessage message = mailSender.createMimeMessage();

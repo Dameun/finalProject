@@ -630,9 +630,10 @@ $(function(){
 	
 </script>
 <!--  style="padding-left:20px;" -->
-<div class="row">
+ <h3 class="page-title">Task Lists - <span class="fw-semi-bold">Individual Task</span></h3>
+<div class="clearfix" style="padding-top:30px;padding-left:5px">
 	<!-- <button type="button" class="btn btn-warning mb-xs" href="#add-modal" data-toggle="modal" style="margin-left: 15px">+ 업무리스트 추가</button> -->
-	<div class="btn-toolbar pull-right" style="position: fixed; left: 70%;top:23%;">
+	<div class="btn-toolbar pull-left">
 		<button class="btn btn-inverse mb-xs" role="button" href="#add-modal"
 			data-toggle="modal">
 			<i class="fa fa-plus text-warning"></i> 업무리스트 추가

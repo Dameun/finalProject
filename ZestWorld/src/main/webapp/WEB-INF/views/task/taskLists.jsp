@@ -15,7 +15,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
- <h3 class="page-title">Task Lists - <span class="fw-semi-bold">Individual Task</span></h3>
+
 <c:forEach items="${list}" var="n" varStatus="status">
 	
 <div class="task-section" style="padding-right:40px;padding-top:52px;float:left; height:400px">
