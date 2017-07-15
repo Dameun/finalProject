@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		delete FROM Workspace where workspace_id=#{workspace_id}
    </delete>
     <insert id="insertWorkSpace" >
-		INSERT INTO Workspace(workspace_id, workspace_name, visit_id, description, user_id)
-	    VALUES( workspace_seq.nextval, #{workspace_name}, #{visit_id}, #{description}, #{user_id})
+		INSERT INTO Workspace(workspace_name, visit_id, description, user_id)
+	    VALUES(#{workspace_name}, #{visit_id}, #{description}, #{user_id})
    </insert>
     <insert id="insertWorkSpaceUser" >
 		INSERT INTO Workspace_User(workspace_id, user_id)
