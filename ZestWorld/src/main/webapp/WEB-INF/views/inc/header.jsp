@@ -140,14 +140,11 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown" id="dropdownid" onclick="AlarmReadCheck()">
 				<a href="#" class="dropdown-toggle dropdown-toggle-notifications"
-				id="notifications-dropdown-toggle" data-toggle="dropdown"> <span
-					class="thumb-sm avatar pull-left"> <!--  <img class="img-circle" src="./resource/img/people/a5.jpg" alt="..."> -->
-				</span> &nbsp;${member.name }&nbsp; <span
-					class="circle bg-warning fw-bold" id="alarmCount" name="alarmCount">
-						0 </span> <b class="caret"></b></a> <!-- ready to use notifications dropdown.  inspired by smartadmin template.
-                         consists of three components:
-                         notifications, messages, progress. leave or add what's important for you.
-                         uses Sing's ajax-load plugin for async content loading. See #load-notifications-btn -->
+				id="notifications-dropdown-toggle" data-toggle="dropdown"> 
+				<!-- <span class="thumb-sm avatar pull-left">  <img class="img-circle" src="./resource/img/people/a5.jpg" alt="...">
+				</span>  -->
+				&nbsp;${member.name }&nbsp; <span class="circle bg-warning fw-bold" id="alarmCount" name="alarmCount">
+						0 </span> <b class="caret"></b></a> 
 				<div class="dropdown-menu animated fadeInUp"
 					id="notifications-dropdown-menu">
 					<section class="panel notifications"> <header
@@ -195,6 +192,9 @@
 					<span class="fs-mini">Synced at: 21 Apr 2014 18:36</span> </footer> </section>
 				</div>
 			</li>
+			<li style="padding-top: 5px;"><a href="#"> <i
+					class="fa fa-question-circle fa-lg"> </i>
+			</a></li>
 			<li style="padding-top: 5px;"><a href="#"> <i
 					class="fa fa-user-plus fa-lg" data-toggle="modal"
 					data-target="#myModal"> </i>
