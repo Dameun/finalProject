@@ -88,8 +88,10 @@ public class workspaceController {
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Workspace_DTO workspace= taskDao.GetWorkSpace(Integer.parseInt(selectWorkspaceID));
 		DataController.getInstance().SetCurrentWorkspace(workspace);
-
+		
 		ArrayList<Project_DTO>projectList = DataController.getInstance().GetProjectList(); 
+		Users_DTO users = DataController.getInstance().GetUser();
+		model.addAttribute("member", users);
 		model.addAttribute("selectWorkspace", workspace);
 		model.addAttribute("projectList", projectList);
 		return "home.main";

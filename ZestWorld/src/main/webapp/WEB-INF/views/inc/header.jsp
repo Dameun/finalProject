@@ -136,12 +136,13 @@
 					class="btn btn-cta btn-cta-secondary" href="join.htm">회원가입</a></li>
 			</sec:authorize>
 		</ul>
+		<c:set var="member" value="${member}"/>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown" id="dropdownid" onclick="AlarmReadCheck()">
 				<a href="#" class="dropdown-toggle dropdown-toggle-notifications"
 				id="notifications-dropdown-toggle" data-toggle="dropdown"> <span
 					class="thumb-sm avatar pull-left"> <!--  <img class="img-circle" src="./resource/img/people/a5.jpg" alt="..."> -->
-				</span> &nbsp; User <strong>User</strong>&nbsp; <span
+				</span> &nbsp;${member.name }&nbsp; <span
 					class="circle bg-warning fw-bold" id="alarmCount" name="alarmCount">
 						0 </span> <b class="caret"></b></a> <!-- ready to use notifications dropdown.  inspired by smartadmin template.
                          consists of three components:
