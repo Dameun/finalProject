@@ -11,7 +11,14 @@ public class Task_DTO
 
 	private String user_id;
 	private String title;
-	private String explain;
+	private String description;
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	private String start_date;
 	private String end_date;
 	private String member;
@@ -72,12 +79,6 @@ public class Task_DTO
 		this.title = title;
 	}
 	
-	public String getExplain() {
-		return explain;
-	}
-	public void setExplain(String explain) {
-		this.explain = explain;
-	}
 	public String getStart_date() {
 		return start_date;
 	}

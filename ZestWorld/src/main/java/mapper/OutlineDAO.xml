@@ -181,7 +181,7 @@
 	
 	<!-- 상세보기 수정 -->
 	<update id ="detailUpdate" parameterType="com.zestworld.Table_DTO.Task_DTO" >
-		update task set follower=#{follower},start_date=#{start_date},end_date=#{end_date},explain=#{explain} where task_id=#{task_id}
+		update task set follower=#{follower},start_date=#{start_date},end_date=#{end_date},description=#{description} where task_id=#{task_id}
 	</update>
 	
 	<!-- 업무 삭제 -->

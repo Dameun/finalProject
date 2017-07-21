@@ -7,7 +7,7 @@ public class Project_DTO {
 	private int project_id;
 	private int workspace_id;
 	private String p_title;
-	private String explain;
+	private String description;
 	private String p_state;
 	private String start_date;
 	private String end_date;
@@ -15,14 +15,15 @@ public class Project_DTO {
 	private int open_f;
 	private int mark_f;
 	private int essence_f;
-	private String AUTHORITY;
+	private String authority;
+	
 	public List<Project_user_DTO> projectMember = new ArrayList();
 	
 	public String getAUTHORITY() {
-		return AUTHORITY;
+		return authority;
 	}
-	public void setAUTHORITY(String aUTHORITY) {
-		AUTHORITY = aUTHORITY;
+	public void setAUTHORITY(String authority) {
+		this.authority = authority;
 	}
 	public int getProject_id() {
 		return project_id;
@@ -42,11 +43,18 @@ public class Project_DTO {
 	public void setP_title(String p_title) {
 		this.p_title = p_title;
 	}
-	public String getExplain() {
-		return explain;
+
+	public String getDescription() {
+		return description;
 	}
-	public void setExplain(String explain) {
-		this.explain = explain;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 	public String getP_state() {
 		return p_state;

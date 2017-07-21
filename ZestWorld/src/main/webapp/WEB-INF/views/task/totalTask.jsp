@@ -245,7 +245,7 @@ function detailModalView(view,project_id){
 	    	   detailStart=data.detail.start_date;
 	    	   detailEnd=data.detail.end_date;
 	    	   member=data.detail.member;
-	    	   detailExplain=data.detail.explain;
+	    	   detailExplain=data.detail.description;
 	    		   
 	    	   document.getElementById('span1').innerHTML=datailTitle;
 	     	   document.getElementById('Modalenrolldate').innerHTML=datailEnrolldate;
@@ -257,7 +257,7 @@ function detailModalView(view,project_id){
 		    		$('#member').val(data.detail.member);
 		    		$('#follower22').val(data.detail.follower);
 		    		$('#modalTask').val(data.detail.datailTitle);
-		    		$('#modalDetailExplain').val(data.detail.explain);
+		    		$('#modalDetailExplain').val(data.detail.description);
 	     	   }
 	    	   modalCount=0;
 	       },
@@ -690,8 +690,6 @@ function detailModalUpdateDialogN()
 		<select id="select_order" onchange="myfilter();" style="width:85px;">
 	            <option value="">최신순</option>
 	            <option value="end">마감순</option>
-	            
-	
 	        </select> 
 </div>
 <hr>
@@ -704,7 +702,7 @@ function detailModalUpdateDialogN()
 		</select>
 </div>
 
-		<hr>
+<hr>
 <div class="form-group">
 	
 		빠른필터<br>

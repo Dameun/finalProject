@@ -81,7 +81,7 @@ public void calendarList(HttpServletResponse response) throws ClassNotFoundExcep
        String end = endDate.get(i);
        obj.put("task_id", calendarList.get(i).getTask_id());
        obj.put("title", calendarList.get(i).getTitle());
-       obj.put("explain", calendarList.get(i).getExplain());
+       obj.put("explain", calendarList.get(i).getDescription());
        obj.put("start",start);
        
     
@@ -138,7 +138,7 @@ public void calendarList(HttpServletResponse response) throws ClassNotFoundExcep
 		dto.setWorkspace_id(workspace_id);
 		dto.setProject_id(project_id);
 		dto.setTitle(title);
-		dto.setExplain(content);
+		dto.setDescription(content);
 		dto.setStart_date(start_date);
 		dto.setEnd_date(end_date);
 		

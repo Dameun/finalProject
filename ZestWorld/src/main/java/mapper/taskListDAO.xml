@@ -36,11 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="titleInsert" parameterType="com.zestworld.Table_DTO.Category_DTO">
-	insert into category(workspace_id,project_id,category_id,title) values(#{workspace_id},#{project_id},category_seq.nextval, #{title})
+	insert into category(workspace_id,project_id,category_id,title) values(#{workspace_id},#{project_id},#{category_id}, #{title})
 	</insert>
 	
 	<insert id="tasktitleInsert" parameterType="com.zestworld.Table_DTO.Task_DTO">
-	insert into task(task_id,category_id,workspace_id,project_id,user_id,title,success_f,essence,enrolldate,follower) values(task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{title},0,#{essence},sysdate,#{user_id})
+	insert into task(task_id,category_id,workspace_id,project_id,user_id,title,success_f,essence,enrolldate,follower) values(#{task_id},#{category_id},#{workspace_id},#{project_id},#{user_id},#{title},0,#{essence},sysdate,#{user_id})
 	</insert>
 
 
@@ -50,7 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 
-	
 	<delete id="catetitleDelete" parameterType="com.zestworld.Table_DTO.Category_DTO">
 	<!-- delete from task where title=#{title}-->
 

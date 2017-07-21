@@ -227,7 +227,7 @@ public class OutlineController {
 		dto.setTask_id(task_id);
 		dto.setStart_date(start);
 		dto.setEnd_date(end);
-		dto.setExplain(explain);
+		dto.setDescription(explain);
 		dto.setFollower(follower);
 
 		int result = service.detailUpdate(dto);

@@ -234,7 +234,7 @@ public class taskListController {
 		dto.setEnd_date(end);
 		dto.setMember(member);
 		
-		dto.setExplain(explain);
+		dto.setDescription(explain);
 		
 		
 		int result=service.detailUpdate(dto);

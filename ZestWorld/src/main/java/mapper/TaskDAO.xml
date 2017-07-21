@@ -31,10 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    VALUES( #{user_id}, #{project_id})
    </insert>
    <insert id="insertProject" >
-		INSERT INTO project(project_id, workspace_id,p_title,explain,p_state, start_date,end_date,p_admin,open_f,
-		mark_f,essence_f,AUTHORITY)
-	    VALUES( project_seq.nextval, #{workspace_id}, #{p_title}, #{explain}, #{p_state},#{start_date},#{end_date},
-	    #{p_admin},#{open_f},#{mark_f},#{essence_f},#{AUTHORITY})
+		INSERT INTO project(workspace_id,project_id,p_title,description,p_state, start_date,end_date,p_admin,open_f,
+		mark_f,essence_f,authority)
+	    VALUES(#{workspace_id},  #{project_id}, #{p_title}, #{description}, #{p_state},#{start_date},#{end_date},
+	    #{p_admin},#{open_f},#{mark_f},#{essence_f},#{authority})
    </insert>
    <select id="GetProjectList" resultType="com.zestworld.Table_DTO.Project_DTO">
    		select* from Project where workspace_id=#{workspace_id}
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		select* from Workspace_User where user_id=#{user_id} and workspace_id=#{workspace_id}
    </select>
 	<update id ="updateProject" parameterType="com.zestworld.Table_DTO.Project_DTO" >
-		update project set p_title=#{p_title},explain=#{explain} where project_id=#{project_id}
+		update project set p_title=#{p_title},description=#{description} where project_id=#{project_id}
 	</update>
 	<update id ="deleteProject" parameterType="com.zestworld.Table_DTO.Project_DTO" >
 		delete FROM project where project_id=#{project_id}

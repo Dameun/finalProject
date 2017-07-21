@@ -158,7 +158,7 @@ function projectAssign(){
 					<div class="widget-controls">
 						<a  data-widgster="restore" title="Edit"
 							data-toggle="modal" data-target="#editProjectModal"
-							onclick="projectEditModalView(${project.project_id},'${project.p_title}','${project.explain}');"
+							onclick="projectEditModalView(${project.project_id},'${project.p_title}','${project.description}');"
 							href="#"><i class="glyphicon glyphicon-edit"></i></a> 
 						<a
 							data-widgster="close" title="Close"
@@ -169,7 +169,7 @@ function projectAssign(){
 
 				<div class="widget-body">
 					<p>${project.p_title}</p>
-					<p>${project.explain}</p>
+					<p>${project.description}</p>
 
 					<legend></legend>
 

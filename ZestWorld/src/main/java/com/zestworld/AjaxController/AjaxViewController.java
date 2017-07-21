@@ -231,7 +231,7 @@ public class AjaxViewController {
 		Project_DTO project = new Project_DTO();
 		project.setWorkspace_id(DataController.getInstance().GetSelectWorkSpace().getWorkspace_id());
 		project.setP_title(p_title);
-		project.setExplain(explain);
+		project.setDescription(explain);
 		project.setP_admin(DataController.getInstance().GetUser().getUser_id());
 		// test
 		project.setStart_date("2017-06-14");
@@ -281,7 +281,7 @@ public class AjaxViewController {
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
 		Project_DTO project = taskDao.GetProject(project_id);
 		project.setP_title(editTitle);
-		project.setExplain(editExplain);
+		project.setDescription(editExplain);
 		
 		taskDao.updateProject(project);
 		 DataController.getInstance().dataChangeProject();

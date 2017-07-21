@@ -178,7 +178,7 @@ public class EssenceController {
 			project.setEssence_f(Integer.parseInt("0"));
 		}
 		
-		project.setExplain(explain);
+		project.setDescription(explain);
 		project.setP_admin(DataController.getInstance().GetUser().getUser_id());
 		// test
 		project.setStart_date("2017-06-14");

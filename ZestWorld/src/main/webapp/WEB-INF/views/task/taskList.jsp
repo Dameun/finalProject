@@ -163,7 +163,7 @@ $(function(){
 		    	   detailStart=data.detail.start_date;
 		    	   detailEnd=data.detail.end_date;
 		    	   member=data.detail.member;
-		    	   detailExplain=data.detail.explain;
+		    	   detailExplain=data.detail.description;
 		    		   
 		    	   document.getElementById('span1').innerHTML=datailTitle;
 		     	   document.getElementById('Modalenrolldate').innerHTML=datailEnrolldate;
@@ -174,7 +174,7 @@ $(function(){
 		    		$('#member').val(data.detail.member);
 		    		$('#follower22').val(data.detail.follower);
 		    		$('#modalTask').val(data.detail.datailTitle);
-		    		$('#modalDetailExplain').val(data.detail.explain);
+		    		$('#modalDetailExplain').val(data.detail.description);
 		    	   }
 		    		
 		    	  modalCount=0; 
