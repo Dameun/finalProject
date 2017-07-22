@@ -41,7 +41,7 @@
 		                        <p class="fs-sm text-muted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		                        		follower > ${n.follower}</p>
 		                        <p class="fs-mini">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                           ${n.explain}
+		                           ${n.description}
 		                        </p>
 		                        <br>
 	                      </section>			

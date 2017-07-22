@@ -41,6 +41,7 @@ $(document).ready(function(){
 		url:"taskTotalList.htm?forme="+forme+"&follower="+follower+"&writermember="+writermember+"&success="+success+"&datefilter="+datefilter+"&order="+order+"&project_id="+p+"&paging=1",
 		
 		success:function(data){
+			
 			$("#ajaxlist").append($('#ajaxlist').html(data)); 		
 		},
 		error:function(){
@@ -240,6 +241,7 @@ function detailModalView(view,project_id){
 	    	  console.log("detailmodal success: "+data.detail.user_id);
 	    	   datailTitle=data.detail.title;
 	    	   var datailEnrolldate=data.detail.endrolldate;
+	    	   console.log("dasdasdasdasd: " +datailEnrolldate);
 	    	   console.log(data.detail.endrolldate);
 	    	   detailUpdateID=data.detail.task_id;
 	    	   detailStart=data.detail.start_date;

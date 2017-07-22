@@ -31,7 +31,7 @@ public class Task_DTO
 	
 	private String filterDay;
 	private String order;
-	private String endrolldate;
+	private String enrolldate;
 	
 	private String p_title;
 	
@@ -133,11 +133,11 @@ public class Task_DTO
 	public void setProjectname(String projectname) {
 		this.projectname = projectname;
 	}
-	public String getEndrolldate() {
-		return endrolldate;
+	public String getEnrolldate() {
+		return enrolldate;
 	}
-	public void setEndrolldate(String endrolldate) {
-		this.endrolldate = endrolldate;
+	public void setEnrolldate(String enrolldate) {
+		this.enrolldate = enrolldate;
 	}
 	
 	public int getProject_id() {

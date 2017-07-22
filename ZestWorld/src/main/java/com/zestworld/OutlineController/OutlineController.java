@@ -58,7 +58,7 @@ public class OutlineController {
 		Calendar cal = Calendar.getInstance(new SimpleTimeZone(0x1ee6280, "KST"));
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
 		dto.setWorkspace_id(workspace_id);
-		dto.setPaging(paging);
+		dto.setPaging((paging - 1) * 5);
 
 		if (datefilter.equals("30")) {
 			cal.add(Calendar.MONTH, -1);
@@ -120,7 +120,7 @@ public class OutlineController {
 		} else {
 			resultCount = (count / 5) + 1;
 		}
-
+		System.out.println("listSize : "+ list.size());
 		model.addAttribute("count", resultCount);
 		model.addAttribute("paging", paging);
 
@@ -144,7 +144,7 @@ public class OutlineController {
 		Task_DTO dto = new Task_DTO();
 		String userid = "";
 		int workspace_id = DataController.getInstance().getCurrentWorkspace().getWorkspace_id();
-		int paging = 1;
+		int paging = 0;
 
 		dto.setTitle(title);
 		dto.setCategory_id(categoryId);

@@ -7,21 +7,46 @@
 	</select>
 	
 	<select id="tasklist" parameterType="int" resultType="com.zestworld.Table_DTO.Task_DTO">
-		<!-- select * from task where success_f='0' order by enrolldate desc -->
-		SELECT * FROM 
-					 (SELECT ROWNUM NUM, N.* 
-					  FROM 
-					      ( SELECT * 
-					        FROM task WHERE success_f='0' and workspace_id=#{workspace_id}
-                  			order by task_id desc) N
-				     ) WHERE NUM BETWEEN 1 + (1 - 1) *5 AND 5 + (1 - 1) * 5
+	<!-- SELECT * FROM (SELECT * 
+					        FROM task 
+					       where workspace_id=#{workspace_id}   and  success_f=#{success_f} order by task_id desc
+				     )CNT limit 0, 5 -->
+	SELECT * FROM (SELECT * 
+					        FROM task order by task_id desc
+				     )CNT limit 0, 5
 	</select>
  
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		
-		 <!-- select * from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f} -->
+		SELECT * FROM (SELECT * 
+					        FROM task 
+					       where workspace_id=#{workspace_id}   and  success_f=#{success_f}
+					       <if test="user_id!=null and user_id !=''">
+								and user_id=#{user_id}
+						   </if>
+							
+						   <if test="member!=null and member != ''"> 
+								and member=#{member}
+						   </if>
+							
+						   <if test="follower!=null and follower != ''">
+								and follower=#{follower}
+						   </if>
+						   <if test="!project_id.equals(500000)">
+						   		and project_id=#{project_id}
+						   </if>
+    					   <if test="order.equals('asc')">
+							    order by task_id desc
+					       </if>
+						   
+					  <if test="order.equals('desc')">
+							    order by end_date asc
+					  </if>
+				     
+				     )CNT limit #{paging}, 5
+				  
+		  <!-- select * from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f} -->
 		 
-	      SELECT * FROM
+	     <!--  SELECT * FROM
 					 (SELECT ROWNUM NUM, N.* 
 					  FROM 
 					      ( SELECT * 
@@ -31,11 +56,11 @@
 								and user_id=#{user_id}
 						   </if>
 							
-						   <if test="member!=null and member != ''">  <!-- 배정된 멤버  -->
+						   <if test="member!=null and member != ''">  배정된 멤버 
 								and member=#{member}
 						   </if>
 							
-						   <if test="follower!=null and follower != ''">  <!-- 팔로워  -->
+						   <if test="follower!=null and follower != ''">  팔로워 
 								and follower=#{follower}
 						   </if>
 						   <if test="!project_id.equals(500000)">
@@ -50,9 +75,9 @@
 					  </if>
 				     
 					       ) N
-				     ) WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
+				     )CNT WHERE NUM BETWEEN 1 + (#{paging} - 1) * 5 AND 5 + (#{paging} - 1) * 5
 				  
-				     
+				      -->
 				     <!-- 
 				     SELECT * FROM
 					 (SELECT ROWNUM NUM, N.* 
@@ -110,8 +135,11 @@
 	</select>
 	
 	<select id="countList" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-	    select count(*) from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
-		 
+<!-- 	    select count(*) from task t where workspace_id=#{workspace_id} and enrolldate between #{filterDay} and sysdate  and  success_f=#{success_f}
+ -->		
+ 
+			select count(*) from task t where workspace_id=#{workspace_id}  and  success_f=#{success_f}
+  
 		<if test="user_id!=null and user_id !=''">
 			and user_id=#{user_id}
 		</if>
@@ -151,7 +179,7 @@
 	</select> 
 	
 	<insert id="insertTask" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		insert into task(task_id,category_id,workspace_id,project_id,follower,user_id,title,end_date,success_f,enrolldate) values (task_seq.nextval,#{category_id},#{workspace_id},#{project_id},#{user_id},#{user_id},#{title},#{end_date},'0',sysdate)
+		insert into task(category_id,workspace_id,project_id,follower,user_id,title,end_date,success_f,enrolldate) values (#{category_id},#{workspace_id},#{project_id},#{user_id},#{user_id},#{title},#{end_date},'0',sysdate())
 	</insert>
 
 <!-- 	프로젝트에 속한 category name -->
@@ -191,7 +219,7 @@
 	
 	<!-- checkList 추가 --><!-- 민성 enrolldate 추가함 -->
 	<insert id ="checkListReg" parameterType="com.zestworld.Table_DTO.CheckList_DTO" >
-		insert into checkList(check_id,task_id,contents,success_f,enrolldate) values (checklist_seq.nextval,#{task_id},#{contents},0,sysdate)
+		insert into checkList(task_id,contents,success_f,enrolldate) values (#{task_id},#{contents},0,sysdate)
 	</insert>
 	
 	<!-- checkList 리스트 -->
