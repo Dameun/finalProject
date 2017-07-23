@@ -1,3 +1,10 @@
+<%--
+	@File name : createEssence.jsp
+	@Project : ZestWorld
+	@Author : 장윤희
+	@Data : 2017.07.19
+	@Desc : 에센스 생성될때 표시되는 화면 페이지 
+--%>
 <%@page import="com.zestworld.util.DataController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

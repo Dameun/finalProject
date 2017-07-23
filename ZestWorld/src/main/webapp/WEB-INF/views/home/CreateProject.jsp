@@ -1,5 +1,5 @@
 <%--
-	@File name : definEssence.jsp
+	@File name : CreateProject.jsp
 	@Project : ZestWorld
 	@Author : 장윤희
 	@Data : 2017.07.10
