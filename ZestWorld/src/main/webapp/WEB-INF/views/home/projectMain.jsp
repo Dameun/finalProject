@@ -1,3 +1,10 @@
+<%--
+	@File name : projectMain.jsp
+	@Project : ZestWorld
+	@Author : 장윤희
+	@Data : 2017.07.12
+	@Desc :  프로젝트  메인화면 (수정하거나 프로젝트 선택시)
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -72,7 +79,7 @@ function projectDelete(project_id)
 	});	
 }
 
-/* 배정된 멤버 삭제  */
+//맴버삭제
 function assignMemberDelete(memberId,projectId){
 	$.ajax({
 		type:"get",
@@ -90,7 +97,7 @@ function assignMemberDelete(memberId,projectId){
 	});	
 }
 
-
+//프로젝트 배정맴서 수정
 function projectAssignMemberList(workspace_id,project_id){
 	var str='';
 	$.ajax({
@@ -114,7 +121,7 @@ function projectAssignMemberList(workspace_id,project_id){
 	 });
 }
 
-
+//프로젝트 할당
 function projectAssign(){
 	var checkboxValues = [];
     $("input[name='AssignMemberChk']:checked").each(function(i) {

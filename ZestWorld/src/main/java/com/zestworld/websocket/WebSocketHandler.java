@@ -16,7 +16,15 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.zestworld.util.DataController;
-
+/*
+* @FileName : WebSocketHandler.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 19
+* @Author : 장윤희
+* @Desc : WebSocketHandler
+* 		    업부 생성시 담당자에게 알람 알려주기 위함
+* 		  
+*/
 public class WebSocketHandler extends TextWebSocketHandler {
 
 	private Map<Object, WebSocketSession> users = new ConcurrentHashMap();
@@ -66,18 +74,13 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		        	   if(ids.get(s.getId()).equals(alarmIdArr[i]) )
 		        	   {
 		                 s.sendMessage(new TextMessage(msg) );
-		                 System.out.println("접속시***************************");
-		                 System.out.println("sendmessage:"+alarmIdArr[i] +"애게 follower가 " +
-		                 id_count_type[3]+ "인" +id_count_type[1]+ "업무를 알람으로 전송합니다.");
 		                 connertUser++;
 		        	   }
 		        	   
 	        	   }
 	        	 if( connertUser== 0 )
 	   	         {
-	        		 System.out.println("미 접속시***************************");
-		             System.out.println("sendmessage:"+alarmIdArr[i] +"에개 follower가 " +
-		             id_count_type[2]+ "인" +id_count_type[1]+ "을 알람으로 전송합니다.");
+	        		 
 	   	        	 DataController.getInstance().SetAlarm(msg);
 	   	         }
 	        	 connertUser = 0;

@@ -12,7 +12,13 @@ import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.EssenceDefine_DTO;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.taskListDAO.taskListDao;
-
+/*
+ * @FileName : EssenceService.java
+ * @Project : ZestWorld
+ * @Date : 2017.06.23
+ * @Author : 장윤희
+ * @Desc : 에센스 생성 및 define 정의서 data 알려줌
+ * */
 @Service
 public class EssenceService {
 

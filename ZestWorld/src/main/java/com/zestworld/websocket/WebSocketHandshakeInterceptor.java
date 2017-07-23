@@ -15,7 +15,14 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.util.DataController;
-
+/*
+* @FileName : WebSocketHandler.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 19
+* @Author : 장윤희
+* @Desc : WebSocketHandshakeInterceptor
+* 		    업부 생성시 담당자에게 알람 알려주기 위함
+*/
 public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeInterceptor{
 	
 
@@ -29,7 +36,7 @@ public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeIntercept
         {
             Users_DTO user = (Users_DTO)req.getSession().getAttribute("user");
             attributes.put("userId", user.getUser_id());
-            System.out.println("로그인 아이디 id:"+ user.getUser_id());
+           // System.out.println("로그인 아이디 id:"+ user.getUser_id());
         }
   
         return super.beforeHandshake(request, response, wsHandler, attributes);

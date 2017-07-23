@@ -9,11 +9,11 @@ import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.userStateDAO.IUserStateDAO;
 
 /*
- * @FileName : IEssenceDAO.java
+ * @FileName : UserStateService.java
  * @Project : ZestWorld
  * Date : 2017.06.23
  * @Author : 장윤희
- * @Desc : 에센스 DAO
+ * @Desc : UserStateService
  */
 @Service
 public class UserStateService {

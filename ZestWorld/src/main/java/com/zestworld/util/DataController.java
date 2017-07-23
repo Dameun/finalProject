@@ -1,6 +1,7 @@
 package com.zestworld.util;
 
 import java.sql.SQLException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,15 +22,13 @@ import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.WorkspaceUser_DTO;
 import com.zestworld.Table_DTO.Workspace_DTO;
 import com.zestworld.taskDAO.TaskDataDAO;
-
 /*
- * 2017-06-07 
- * jang yoon hee
- * 공용 data/info 저장
- * data : user.currentWorkspace, currentProject
- * info : 
- */
-
+* @FileName : DataController.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 10
+* @Author : 장윤희
+* @Desc : 현재 유져가 선택한 워크스페이스 및 프로젝트 정보 저장 및 수정
+*/
 public class DataController {
 	
 	@Autowired

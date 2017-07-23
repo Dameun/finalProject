@@ -1,3 +1,10 @@
+<%--
+	@File name : definEssence.jsp
+	@Project : ZestWorld
+	@Author : 장윤희
+	@Data : 2017.07.10
+	@Desc :  프로젝트 생성시 프로젝트 이름 및 설명 유져입력받는 페이지 
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

@@ -1,3 +1,12 @@
+<%--
+	@File name : layout.jsp
+	@Project : ZestWorld
+	@Author : 장윤희
+	@Data : 2017.07.10
+	@Desc : tilles 적용 
+			<tiles:insertAttribute name="content" /> 비동기 화면 수정부분
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>    

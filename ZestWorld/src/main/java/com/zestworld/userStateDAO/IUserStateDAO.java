@@ -7,7 +7,13 @@ import java.util.Map;
 import com.zestworld.Table_DTO.Role_DTO;
 import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
-
+/*
+* @FileName : IUserStateDAO.java
+* @Project : ZestWorld
+* @Date : 2017. 6. 20.
+* @Author : 장윤희
+* @Desc : 유져상태 저장 및 변경
+*/
 public interface IUserStateDAO {
 	
 	//회원 상태가져오기

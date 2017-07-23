@@ -1,3 +1,10 @@
+<%--
+	@File name : workspace.jsp
+	@Project : ZestWorld
+	@Author : 장윤희
+	@Data : 2017.07.15
+	@Desc : 워크스페이시 리스트 및 수정 및 삭제 페이지
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
