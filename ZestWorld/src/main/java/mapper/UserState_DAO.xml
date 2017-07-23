@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zestworld.userStateDAO.IUserStateDAO">
 	<insert id="InsertUserState" parameterType="com.zestworld.Table_DTO.UserState_DTO">
-		INSERT INTO user_State(user_id, user_name, state)
+		INSERT INTO userState(user_id, user_name, state)
 	    VALUES( #{user_id}, #{user_name}, #{state})
 	</insert>
 	<select id="GetuserStateList" resultType="com.zestworld.Table_DTO.UserState_DTO">
-		select* from user_State 
+		select* from userState 
 	</select>
 		<select id="GetuserState" resultType="com.zestworld.Table_DTO.UserState_DTO">
-		select * from user_State where  USER_ID=#{user_id}
+		select * from userState where  USER_ID=#{user_id}
 	</select>
 	<update id="UpdateUserState" parameterType="com.zestworld.Table_DTO.UserState_DTO">
-       update user_State set state=#{state}  where  user_id=#{user_id}
+       update userState set state=#{state}  where  user_id=#{user_id}
    </update>
 </mapper>

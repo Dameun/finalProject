@@ -94,20 +94,12 @@ public class JoinController {
 			role.setAuthority_name("ROLE_USER");
 			result = service.insertRoll(role);
 			
-			if (member.getUser_id().equals("admin")) {
-				role = new Role_DTO();
-				role.setUser_id(member.getUser_id());
-				role.setAuthority_name("ROLE_ADMIN");
-				result = service.insertRoll(role);
-				
-				//userState도 생성
-				UserState_DTO userState = new UserState_DTO();
-				userState.setState("업무중");
-				userState.setUser_id(member.getUser_id());
-				userState.setUser_name(member.getName());
-				userstateService.InsertUserState(userState);
-			}
-
+			//userState도 생성
+			UserState_DTO userState = new UserState_DTO();
+			userState.setState("업무중");
+			userState.setUser_id(member.getUser_id());
+			userState.setUser_name(member.getName());
+			userstateService.InsertUserState(userState);
 			viewpage = "redirect:/index.htm"; // 경로를 이동시켜주는걸
 		} else {
 			System.out.println("삽입 실패");
