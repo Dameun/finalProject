@@ -62,17 +62,21 @@ function idchkclk() {
                      $("#idselect").html("중복되는 아이디입니다"); 
                    $('#user_id').focus();
                   
-                  }else{
+                  }else if($("#user_id").val()==""|| $("#user_id").val()==null){
                    
-                     $("#idselect").html("사용가능한 아이디 입니다");
+                     $("#idselect").html("아이디를 입력하세요.");
                     $('#user_id').focus();
+                  }else{
+                	  $("#idselect").html("사용가능한 아이디 입니다");
+                      $('#user_id').focus();
                   }
                },
                error:function(){ //값이 안넘오 오나보네
                   $("#idselect").html("에러 입니다");   
                }
             });
-            
+
+
             $('#user_id').keyup(function(){
                var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
                    
@@ -120,9 +124,18 @@ function idchkclk() {
          }
 
       });
-
-   }
-
+      
+}
+    
+function check() {
+	  if( $('#password').val().length < 6) {
+	    alert("비밀번호를 다시 입력해 주세요.");
+	    location.reload();
+	    return false;
+	  }
+	   else return true;
+	}
+	</script>
 </script>
 
 </head>
@@ -143,7 +156,7 @@ function idchkclk() {
             <div class="widget-body">
                <c:url value="" var="loginURL" />
                <%-- <form name="f" action="${loginURL}" method="post" class="login-form mt-lg"> --%>
-               <form action="${loginURL}" method="post" class="login-form mt-lg" id="registerForm">
+               <form action="${loginURL}" onsubmit="return check()" method="post" class="login-form mt-lg" id="registerForm">
                   <!-- 이메일 -->
                   <div class="form-group">
                   <div class="input-group">
@@ -182,7 +195,7 @@ function idchkclk() {
 						<!-- 회원가입  -->
                      <button type="button" class="btn btn-secondary btn-sm"
                         onclick="location.href='index.htm' ">Cancel</button>
-                     <button type="submit" class="btn btn-inverse btn-sm">Sign up</button>
+                     <button type="submit" class="btn btn-inverse btn-sm" id="sign_up">Sign up</button>
                   </form>
                   </div>
             </div>
