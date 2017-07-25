@@ -168,6 +168,7 @@ public class OutlineController {
 	@RequestMapping(value = "detailModal.htm", method = RequestMethod.GET)
 	public View detailTask(String task_id, int project_id, Model model) throws ClassNotFoundException, SQLException {
 		Task_DTO result = service.detailTask(task_id);
+		System.out.println("detailModal : "+ result.getEnrolldate());
 		List<Users_DTO> assignmember = service.assignMemberList(project_id);
 
 		model.addAttribute("detail", result);

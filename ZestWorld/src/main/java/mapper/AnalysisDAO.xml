@@ -14,7 +14,7 @@
 	
 	<!-- 전체 업무 - 마감일지난 업무 -->
 	<select id="getTaskAll_enddateLate" resultType="int">
-		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]>
+		select count(*) from task where end_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]>
 	</select>
 	
 	<!-- 전체 업무 - 마감일없는 업무 -->
@@ -24,7 +24,7 @@
 	 
 	 <!-- 전체 업무 - 진행중인 업무 -->
 	<select id="getTaskAll_ing" resultType="int">
-		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]>
+		select count(*) from task where start_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]>
 	</select>
 	
 	<!--********** DONUTCHART (ALL)  *************-->
@@ -41,7 +41,7 @@
 	<select id="getTaskMe_enddateLate" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) 
 		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
-		where a.task_id= t.task_id and end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]>
+		where a.task_id= t.task_id and end_date <![CDATA[< date_format(now(),'yyyy/mm/dd')]]>
 		
 	</select>
 	
@@ -56,7 +56,7 @@
 	<select id="getTaskMe_ing" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) 
 		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
-		where a.task_id= t.task_id and start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]>
+		where a.task_id= t.task_id and start_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]>
 	</select>
 	
 	
@@ -68,7 +68,7 @@
 	
 	<!-- 내가 작성한 업무 - 마감일지난 업무 -->
 	<select id="getTaskI_enddateLate" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and user_id = #{user_id}
+		select count(*) from task where end_date <![CDATA[< date_format(now(),'yyyy/mm/dd')]]> and user_id = #{user_id}
 		
 	</select>
 	
@@ -79,7 +79,7 @@
 	 
 	<!-- 내가 작성한 업무 - 진행중인 업무 -->
 	<select id="getTaskI_ing" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and user_id = #{user_id}
+		select count(*) from task where start_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]> and user_id = #{user_id}
 	</select>
 	
 	
@@ -91,7 +91,7 @@
 	
 	<!-- 내가 팔로우 업무 - 마감일지난 업무 -->
 	<select id="getTaskFollow_enddateLate" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and follower = #{user_id}
+		select count(*) from task where end_date <![CDATA[< date_format(now(),'yyyy/mm/dd')]]> and follower = #{user_id}
 	</select>
 	
 	<!-- 내가 팔로우 업무 - 마감일없는 업무 -->
@@ -101,7 +101,7 @@
 	 
 	<!-- 내가 팔로우 업무 - 진행중인 업무 -->
 	<select id="getTaskFollow_ing" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and follower = #{user_id}
+		select count(*) from task where start_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]> and follower = #{user_id}
 	</select>
 	
 	
@@ -120,7 +120,7 @@
 	<select id="getTaskMe_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) 
 		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
-		where a.task_id= t.task_id and end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]>
+		where a.task_id= t.task_id and end_date <![CDATA[< date_format(now(),'yyyy/mm/dd')]]>
 		and project_id = #{project_id}
 		
 	</select> 
@@ -136,7 +136,7 @@
 	<select id="getTaskMe_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		select count(*) 
 		from (select task_id from taskassignMember where user_id = #{user_id}) a, task t 
-		where a.task_id= t.task_id and start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]>
+		where a.task_id= t.task_id and start_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]>
 		and project_id = #{project_id}
 	</select>
 	
@@ -150,7 +150,7 @@
 	
 	<!-- 내가 작성한 업무 - 마감일지난 업무 -->
 	<select id="getTaskI_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and user_id = #{user_id}
+		select count(*) from task where end_date <![CDATA[< date_format(now(),'yyyy/mm/dd')]]> and user_id = #{user_id}
 		and project_id = #{project_id}
 	</select>
 	
@@ -162,7 +162,7 @@
 	 
 	<!-- 내가 작성한 업무 - 진행중인 업무 -->
 	<select id="getTaskI_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and user_id = #{user_id}
+		select count(*) from task where start_date <![CDATA[<=date_format(now(),'yyyy/mm/dd')]]> and user_id = #{user_id}
 		and project_id = #{project_id}
 	</select>
 	
@@ -176,7 +176,7 @@
 	
 	<!-- 내가 팔로우 업무 - 마감일지난 업무 -->
 	<select id="getTaskFollow_enddateLateU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]> and follower = #{user_id}
+		select count(*) from task where end_date <![CDATA[< date_format(now(),'yyyy/mm/dd')]]> and follower = #{user_id}
 		and project_id = #{project_id}
 	</select>
 	
@@ -188,7 +188,7 @@
 	 
 	<!-- 내가 팔로우 업무 - 진행중인 업무 -->
 	<select id="getTaskFollow_ingU" resultType="int" parameterType="com.zestworld.Table_DTO.Task_DTO">
-		select count(*) from task where start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]> and follower = #{user_id}
+		select count(*) from task where start_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]> and follower = #{user_id}
 		and project_id = #{project_id}
 	</select>
 
@@ -221,7 +221,7 @@
 		select count(*)
 		from project p inner join task t
 		on p.workspace_id = #{workspace_id}
-		where t.end_date <![CDATA[< to_char(sysdate, 'yyyy/mm/dd')]]>
+		where t.end_date <![CDATA[< date_format(now(),'yyyy/mm/dd')]]>
 		group by p.p_title
 		
 	</select>
@@ -241,7 +241,7 @@
 		select count(*)
 		from project p inner join task t
 		on p.workspace_id = #{workspace_id}
-		where t.start_date <![CDATA[<= to_char(sysdate, 'yyyy/mm/dd')]]>
+		where t.start_date <![CDATA[<= date_format(now(),'yyyy/mm/dd')]]>
 		group by p.p_title
 		
 	</select>	
