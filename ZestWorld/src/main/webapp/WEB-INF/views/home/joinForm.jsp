@@ -32,6 +32,11 @@
    text-align: center;
    border: 1px solid silver;
 }
+body {
+    background-image: url("resources/img/pictures/zestback.jpg");
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+}
 </style>
 <!-- <script src="assets/js/jquery-1.11.1.min.js"></script>
    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -136,8 +141,6 @@ function check() {
 	   else return true;
 	}
 	</script>
-</script>
-
 </head>
 <body class="login-page">
 
