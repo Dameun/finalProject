@@ -219,7 +219,7 @@
 	
 	<!-- checkList 추가 --><!-- 민성 enrolldate 추가함 -->
 	<insert id ="checkListReg" parameterType="com.zestworld.Table_DTO.CheckList_DTO" >
-		insert into checkList(task_id,contents,success_f,enrolldate) values (#{task_id},#{contents},0,sysdate)
+		insert into checkList(task_id,contents,success_f,enrolldate) values (#{task_id},#{contents},0,sysdate())
 	</insert>
 	
 	<!-- checkList 리스트 -->

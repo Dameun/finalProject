@@ -2,9 +2,10 @@
 	@Project : ZestWorld
 	@File name : totalTaskList.jsp
 	@Author : 최담은
-	@Data : 2017.07.01
+	@Data : 2017.07.22
 	@Desc : 전체개요 -> 기본 페이지(필터 선택)
 --%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -238,9 +239,9 @@ function detailModalView(view,project_id){
 	       type : "get",
 	       url : "detailModal.htm?task_id="+view+"&project_id="+project_id,
 	       success : function(data) {
-	    	  console.log("detailmodal success: "+data.detail.user_id);
+	    	   console.log("detailmodal success: "+data.detail.user_id);
 	    	   datailTitle=data.detail.title;
-	    	   var datailEnrolldate=data.detail.endrolldate;
+	    	   var datailEnrolldate=data.detail.enrolldate;
 	    	   console.log("dasdasdasdasd: " +datailEnrolldate);
 	    	   console.log(data.detail.endrolldate);
 	    	   detailUpdateID=data.detail.task_id;
