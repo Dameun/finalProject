@@ -21,7 +21,7 @@
 	</select>
 	
 	<insert id ="checkListReg"  parameterType="com.zestworld.Table_DTO.CheckList_DTO" >
-		insert into checkList(check_id,task_id,contents,success_f,enrolldate) values (check_id,#{task_id},#{contents},0,sysdate)
+		insert into checkList(task_id,contents,success_f,enrolldate) values (#{task_id},#{contents},0,sysdate())
 	</insert>
 
 	<select id="getMaxtaskId" resultType="int" >	

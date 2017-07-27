@@ -68,7 +68,6 @@
 		var eProjectCheck = "0";
 		if ($("#private").is(':checked'))
 			etcStr = "1"; //공개 0,비공개 1
-		
 			
 		$.ajax({
 		       type : "get",
