@@ -12,6 +12,13 @@ import com.zestworld.AnalysisService.AnalysisService;
 import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.util.DataController;
 
+/*
+ * @FileName : AjaxDataController.java
+ * @Project : ZestWorld
+ * @Date : 2017.06.25
+ * @Author : 황이준
+ * @Desc : chart data  
+ * */
 
 @Controller
 public class AnalysisController {
