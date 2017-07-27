@@ -53,6 +53,47 @@ body {
    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript">
 
+$(function(){
+var idcheck=0;
+
+    $('#user_id').keyup(function(){
+        var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+            
+            if(idRex.test($('#user_id').val()))	{
+               $('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
+            }else{
+               $('#idselect').html("알맞은 이메일 형식으로 작성해주세요");
+            } 
+         });
+
+    $('#name').keyup(function(){
+        var regNm = /^[가-힣]{2,15}|[a-zA-Z]{2,15}\s[a-zA-Z]{2,15}$/;
+           
+           if(regNm.test($('#name').val())){
+              $('#namelb').html("유효합니다");
+           }else{
+              $('#namelb').html("다시 확인해주세요");
+           } 
+        });
+   
+    //핸드폰번호 유효성 검사
+    $('#phone').keyup(function() {
+
+       var phoneRex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+
+       if (phoneRex.test($('#phone').val())) {
+          $('#phonelbl').html("전화번호가 유효합니다");
+       } else {
+          $('#phonelbl').html("'-' 빼고입력해주세요 ");
+       }
+
+    });
+
+    
+});
+
+
+
 /* 아이디 유효성 */
 function idchkclk() { 
       
@@ -69,54 +110,19 @@ function idchkclk() {
                   
                   }else if($("#user_id").val()==""|| $("#user_id").val()==null){
                    
-                     $("#idselect").html("아이디를 입력하세요.");
+                    $("#idselect").html("아이디를 입력하세요.");
                     $('#user_id').focus();
                   }else{
                 	  $("#idselect").html("사용가능한 아이디 입니다");
                       $('#user_id').focus();
+                      
                   }
                },
                error:function(){ //값이 안넘오 오나보네
                   $("#idselect").html("에러 입니다");   
                }
             });
-
-
-            $('#user_id').keyup(function(){
-               var idRex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-                   
-                   if(idRex.test($('#user_id').val())){
-                      $('#idselect').html("이메일 중복검사 버튼을 눌러주세요");
-                   }else{
-                      $('#idselect').html("알맞은 이메일 형식으로 작성해주세요");
-                   } 
-                });
-            $('#name').keyup(function(){
-                var regNm = /^[가-힣]{2,15}|[a-zA-Z]{2,15}\s[a-zA-Z]{2,15}$/;
-                   
-                   if(regNm.test($('#name').val())){
-                      $('#namelb').html("유효합니다");
-                   }else{
-                      $('#namelb').html("다시 확인해주세요");
-                   } 
-                });
            
-        
-   //핸드폰번호 유효성 검사
-      $('#phone').keyup(function() {
-
-         var phoneRex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
-
-         if (phoneRex.test($('#phone').val())) {
-            $('#phonelbl').html("전화번호가 유효합니다");
-         } else {
-            $('#phonelbl').html("'-' 빼고입력해주세요 ");
-         }
-
-      });
-
-      
-
       //비밀번호 유효성 검사
       $('#password').keyup(function() {
 
@@ -133,13 +139,16 @@ function idchkclk() {
 }
     
 function check() {
-	  if( $('#password').val().length < 6) {
-	    alert("비밀번호를 다시 입력해 주세요.");
-	    location.reload();
+	 var label = $('#idselect');
+	  console.log(label.text());
+	  if( $('#password').val().length < 6 || label.text() != '사용가능한 아이디 입니다') {
+	
+	   
 	    return false;
 	  }
 	   else return true;
 	}
+	
 	</script>
 </head>
 <body class="login-page">
@@ -185,7 +194,9 @@ function check() {
 						<div class="form-group">
 							<input name="name" class="form-control" id="name" type="text"
 								placeholder="Name">  
-								
+						<div class="form-group">
+                 		<label id="namelb" class="col-md-12" for="name" ></label>
+                 		</div>	
 								
 						</div>
 						<!-- 폰번호 -->
@@ -213,6 +224,7 @@ function check() {
          </section>
       </div>
    </main>
+   
 </body>
 
 </html>
