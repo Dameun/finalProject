@@ -646,6 +646,7 @@ $(function(){
 			onclick="ajaxView('calendar.ajax')">	<!-- onclick="location.href='Schedule.htm'"  -->
 			<i class="fa fa-calendar text-warning"></i> 캘린더
 		</button>
+
 	</div>
 </div>
 

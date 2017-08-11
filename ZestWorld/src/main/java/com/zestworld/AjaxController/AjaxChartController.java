@@ -179,7 +179,8 @@ public class AjaxChartController {
 				task = taskList.get(j);
 				if( task.getSuccess_f().equals("1")) comp++;	//완료된거
 				if( task.getSuccess_f().equals("0")) ing_count++; //진행중인거
-				if( task.getEnd_date() != null )
+			
+				if( task.getEnd_date() != null && task.getEnd_date().length() >1 && date.length()>1)
 				{
 					int check = GetDateCheck( task.getEnd_date(), date); // 0 마감일 지난거 1 마감일 안지난거
 					if( check == 0 )enddateLate_count++;
@@ -212,6 +213,13 @@ public class AjaxChartController {
 	 //task 날짜 , 현재 
 	private int GetDateCheck(String dateTask, String dateNow)
 	{
+		String date = "";
+		String[] test = dateTask.split("-");
+		if( test.length>1)
+		{
+			String test1 = dateTask.replace("-", "/");
+			dateTask = test1;
+		}
 		DateDiff( dateTask, dateNow);
 		return showDatesBetween ();
 	}
@@ -222,6 +230,7 @@ public class AjaxChartController {
 	        
 	   
 	    public void DateDiff(String str1, String str2){
+	    	
 	        try {
 	            Date date1 = sdf.parse(str1);
 	            calendar1 = Calendar.getInstance();

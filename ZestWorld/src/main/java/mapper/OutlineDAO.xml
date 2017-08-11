@@ -15,7 +15,9 @@
 					        FROM task order by task_id desc
 				     )CNT limit 0, 5
 	</select>
- 
+ 	<select id="tasklistByProject" parameterType="int" resultType="com.zestworld.Table_DTO.Task_DTO">
+		SELECT * FROM task where project_id=#{project_id}
+	</select>
 	<select id="taskTest" resultType="com.zestworld.Table_DTO.Task_DTO" parameterType="com.zestworld.Table_DTO.Task_DTO">
 		SELECT * FROM (SELECT * 
 					        FROM task 
@@ -211,7 +213,7 @@
 	<update id ="detailUpdate" parameterType="com.zestworld.Table_DTO.Task_DTO" >
 		update task set follower=#{follower},start_date=#{start_date},end_date=#{end_date},description=#{description} where task_id=#{task_id}
 	</update>
-	
+	 
 	<!-- 업무 삭제 -->
 	<update id ="detailDelete" >
 		delete from task where task_id=#{task_id}
@@ -258,6 +260,9 @@
 	<!-- 업무 배정 멤버 삭제 -->
 	<delete id ="deleteTaskMember" parameterType="com.zestworld.Table_DTO.TaskAssignMember_DTO" >
 		delete from TaskAssignMember where user_id=#{user_id} and task_id=#{task_id}
+	</delete>
+	<delete id ="deleteCategory" parameterType="int" >
+		delete from Category where category_id=#{category_id}
 	</delete>
 </mapper>
 

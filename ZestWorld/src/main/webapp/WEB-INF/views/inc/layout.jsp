@@ -19,10 +19,8 @@
 	<!-- <link href="index.css" type="text/css" rel="stylesheet"> -->
 </head>
 <body class="nav-collapsed chat-sidebar-container pace-done">
-
             	<tiles:insertAttribute name="header" />
             	<tiles:insertAttribute name="aside" />
-     
      <div class="content-wrap">
    
      <main id="content" class="content" role="main" style="overflow-x:scroll">

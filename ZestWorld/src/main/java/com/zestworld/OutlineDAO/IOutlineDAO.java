@@ -23,6 +23,10 @@ public interface IOutlineDAO {
 	public List<Task_DTO> basictasklist() throws ClassNotFoundException, SQLException;
 	//필터되기 전 (전체리스트)
 	public List<Task_DTO> tasklist(int workspace_id) throws ClassNotFoundException, SQLException;
+	
+	//프로젝트별 task
+	public List<Task_DTO> tasklistByProject(int project_id) throws ClassNotFoundException, SQLException;
+		
 	//내업무 (전체리스트)
 	public List<Task_DTO> tasklist_mytask(String user_id) throws ClassNotFoundException, SQLException;
 	//필터 (전체리스트)
@@ -48,7 +52,8 @@ public interface IOutlineDAO {
 	public int insertTask(Task_DTO dto) throws ClassNotFoundException, SQLException;
 	//업무등록에 필요한 카테고리 리스트
 	public List<Category_DTO> categorylist(int project_id) throws ClassNotFoundException, SQLException;
-	
+	//카테고리 삭제
+	public int deleteCategory(int category_id)throws ClassNotFoundException, SQLException;
 	//상세업무 보기
 	public Task_DTO detailTask(String user_id) throws ClassNotFoundException, SQLException;
 	//상세보기 수정

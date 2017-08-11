@@ -8,11 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.zestworld.OutlineDAO.IOutlineDAO;
 import com.zestworld.OutlineService.OutlineService;
 import com.zestworld.ProjectDAO.IProjectDAO;
 import com.zestworld.Table_DTO.Category_DTO;
+import com.zestworld.Table_DTO.CheckList_DTO;
 import com.zestworld.Table_DTO.Project_DTO;
 import com.zestworld.Table_DTO.Project_user_DTO;
+import com.zestworld.Table_DTO.Task_DTO;
 import com.zestworld.Table_DTO.UserState_DTO;
 import com.zestworld.Table_DTO.Users_DTO;
 import com.zestworld.Table_DTO.WorkspaceUser_DTO;
@@ -38,6 +42,11 @@ public class AjaxViewController {
 	private OutlineService service;
 	@Autowired
 	private UserStateService userstatesService;
+	
+	@RequestMapping(value = "/detailFilter.ajax", method = RequestMethod.GET)
+	public String helperPage() {
+		return DataController.getInstance().GetviewPath("home") + "detailFilter.jsp";
+	}
 	
 	@RequestMapping(value = "/CreateDefineEssence.ajax", method = RequestMethod.GET)
 	public String createDefineEssence() {
@@ -294,9 +303,55 @@ public class AjaxViewController {
 	public String projectDelete(String project_id) 
 	{
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
+		taskListDao taskListDao =  sqlsession.getMapper(taskListDao.class);
+		IOutlineDAO taskDao1 = sqlsession.getMapper(IOutlineDAO.class);
 		Project_DTO project = taskDao.GetProject(project_id);
-		taskDao.deleteTaskByProjectid(project);
-		taskDao.deleteProject(project);
+		
+		
+		List<Task_DTO> taksList = new ArrayList<Task_DTO>();
+		List<CheckList_DTO> checkList = new ArrayList<CheckList_DTO>();
+		List<Category_DTO> categoryList = new ArrayList<Category_DTO>();
+		
+		try {
+			//체크리스트지우기
+			taksList = taskDao1.tasklistByProject(project.getProject_id());
+			for( int i=0; i<taksList.size(); i++)
+			{
+				checkList = taskDao1.checkListView(taksList.get(i).getTask_id());
+				for( int j=0; j<checkList.size(); j++)	
+					taskDao1.checkListDelete(checkList.get(j).getCheck_id());
+			}
+		
+			//업무 지우기 
+			for( int k =0; k<taksList.size(); k++)
+			{
+				taskDao.deleteTask(taksList.get(k).getTask_id());
+			}
+
+			
+			//카테고리 지우기
+			categoryList = taskDao1.categorylist(project.getProject_id());
+			for( int m=0; m<categoryList.size(); m++)
+			{
+				taskDao1.deleteCategory(categoryList.get(m).getCategory_id());
+			}
+			
+			//프로젝트user 지우기 
+			List<Project_user_DTO> userList = taskDao.GetProejectMember(project.getProject_id());
+			for( int j=0; j<userList.size(); j++ )
+			{
+				Project_user_DTO user= userList.get(j);
+				taskDao.deleteProjectUsers(user);
+			}
+			
+			//프로젝트 지우기 
+			taskDao.deleteProject(project);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 		DataController.getInstance().dataChangeProject();
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
@@ -321,14 +376,7 @@ public class AjaxViewController {
 	{
 		System.out.println("deleteWorkspaceEnter");
 		TaskDataDAO taskDao = sqlsession.getMapper(TaskDataDAO.class);
-		List<Project_DTO> projectList = taskDao.GetProjectList(workSpace_id);
-		for( int i=0; i<projectList.size(); i++)
-		{
-			taskDao.deleteTaskByProjectid(projectList.get(i));	//task 지움
-			taskDao.deleteProject(projectList.get(i));			//프로젝트 지움
-		}
-
-		taskDao.deleteWorkspace(workSpace_id);
+		
 		List<WorkspaceUser_DTO> list = taskDao.GetWorkSpaceMember(workSpace_id);
 		for( int j=0; j<list.size(); j++ )
 		{
@@ -336,6 +384,58 @@ public class AjaxViewController {
 			taskDao.deleteWorkspaceUsers(user);
 		}
 		
+		taskListDao taskListDao =  sqlsession.getMapper(taskListDao.class);
+		IOutlineDAO taskDao1 = sqlsession.getMapper(IOutlineDAO.class);
+		List<Project_DTO> projectList = taskDao.GetProjectList(workSpace_id);
+		List<Task_DTO> taksList = new ArrayList<Task_DTO>();
+		List<CheckList_DTO> checkList = new ArrayList<CheckList_DTO>();
+		List<Category_DTO> categoryList = new ArrayList<Category_DTO>();
+		
+		for( int i=0; i<projectList.size(); i++)
+		{
+			Project_DTO project = taskDao.GetProjectId(projectList.get(i).getProject_id());
+			try {
+				//체크리스트지우기
+				taksList = taskDao1.tasklistByProject(project.getProject_id());
+				for( int s=0; s<taksList.size(); s++)
+				{
+					checkList = taskDao1.checkListView(taksList.get(s).getTask_id());
+					for( int j=0; j<checkList.size(); j++)	
+						taskDao1.checkListDelete(checkList.get(j).getCheck_id());
+				}
+			
+				//업무 지우기 
+				for( int k =0; k<taksList.size(); k++)
+				{
+					taskDao.deleteTask(taksList.get(k).getTask_id());
+				}
+
+				
+				//카테고리 지우기
+				categoryList = taskDao1.categorylist(project.getProject_id());
+				for( int m=0; m<categoryList.size(); m++)
+				{
+					taskDao1.deleteCategory(categoryList.get(m).getCategory_id());
+				}
+				
+				//프로젝트user 지우기 
+				List<Project_user_DTO> userList = taskDao.GetProejectMember(project.getProject_id());
+				for( int j=0; j<userList.size(); j++ )
+				{
+					Project_user_DTO user= userList.get(j);
+					taskDao.deleteProjectUsers(user);
+				}
+				
+				//프로젝트 지우기 
+				taskDao.deleteProject(project);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+		}
+		taskDao.deleteWorkspace(workSpace_id);
 		return DataController.getInstance().GetviewPath("home") + "success.jsp";
 	}
 

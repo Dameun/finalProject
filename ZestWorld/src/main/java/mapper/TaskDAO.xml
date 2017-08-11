@@ -15,8 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <select id="GetWorkSpaceByname" resultType="com.zestworld.Table_DTO.Workspace_DTO">
    		SELECT* FROM Workspace where workspace_name=#{workspace_name} and user_id=#{user_id}
    </select>
+   <update id="deleteSkip">
+   		SET foreign_key_checks = 0;
+   </update>
     <delete id="deleteWorkspace" >
    		delete FROM Workspace where workspace_id=#{workspace_id}
+   </delete>
+    <delete id="deleteTask" >
+   		delete FROM task where task_id=#{task_id}
    </delete>
     <insert id="insertWorkSpace" >
 		INSERT INTO Workspace(workspace_name, visit_id, description, user_id)
@@ -42,11 +48,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="GetProject" resultType="com.zestworld.Table_DTO.Project_DTO">
    		SELECT* FROM Project where project_id=#{project_id}
    </select>
+    <select id="GetProjectId" resultType="com.zestworld.Table_DTO.Project_DTO">
+   		SELECT* FROM Project where project_id=#{project_id}
+   </select>
    <select id="GetProjectByname" resultType="com.zestworld.Table_DTO.Project_DTO">
    		SELECT* FROM Project where p_title=#{p_title} and p_admin=#{p_admin}
    </select>
    <select id="GetWorkSpaceMemberChk" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
    		select* from Workspace_User where user_id=#{user_id} and workspace_id=#{workspace_id}
+   </select>
+   <select id="GetProejectMember" parameterType="int" resultType="com.zestworld.Table_DTO.Project_user_DTO">
+   		select* from Project_User where project_id=#{project_id}
    </select>
 	<update id ="updateProject" parameterType="com.zestworld.Table_DTO.Project_DTO" >
 		update project set p_title=#{p_title},description=#{description} where project_id=#{project_id}
@@ -63,7 +75,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <delete id="deleteWorkspaceUsers"  parameterType="com.zestworld.Table_DTO.Workspace_DTO">
    		delete FROM workspace_user where workspace_id=#{workspace_id} and user_id=#{user_id}
    </delete>
+   <delete id="deleteProjectUsers"  parameterType="com.zestworld.Table_DTO.Project_user_DTO">
+   		delete FROM project_User where project_id=#{project_id} and user_id=#{user_id}
+   </delete>
  <select id="GetWorkSpaceMember" resultType="com.zestworld.Table_DTO.WorkspaceUser_DTO">
    		select* from Workspace_User where workspace_id=#{workspace_id}
    </select>
+ 
+	
 </mapper>

@@ -17,14 +17,19 @@ public interface TaskDataDAO
    public void InsertProjectUsers(Project_user_DTO projectUsers);
    public void insertWorkSpaceUser(WorkspaceUser_DTO workspace);
    public List<Project_DTO> GetProjectList(int WorkSpaceid);	 
+   public Project_DTO GetProjectId(int projectid);		
    public Project_DTO GetProject(String projectid);			
    public Project_DTO GetProjectByname(Project_DTO project);			
    public void updateProject(Project_DTO project);
    public void deleteProject(Project_DTO project);
    public void updateWorkspace(Workspace_DTO project);
    public void deleteWorkspace(int workspaceid);
+   public void deleteTask(int task_id);
+   public void deleteSkip();
    public void deleteWorkspaceUsers(WorkspaceUser_DTO workspaceUser );
+   public void deleteProjectUsers(Project_user_DTO projectUser ); 
    public List<WorkspaceUser_DTO> GetWorkSpaceMember(int workspaceid);
+   public List<Project_user_DTO> GetProejectMember(int projectid);
    public void deleteTaskByProjectid(Project_DTO project);
    public List<WorkspaceUser_DTO> GetWorkSpaceMemberChk(WorkspaceUser_DTO workspaceUser_DTO);
 }

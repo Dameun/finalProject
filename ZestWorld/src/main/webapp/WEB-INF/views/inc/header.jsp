@@ -192,9 +192,7 @@
 					<span class="fs-mini">Synced at: 21 Apr 2014 18:36</span> </footer> </section>
 				</div>
 			</li>
-			<li style="padding-top: 5px;"><a href="#"> <i
-					class="fa fa-question-circle fa-lg"> </i>
-			</a></li>
+	
 			<li style="padding-top: 5px;"><a href="#"> <i
 					class="fa fa-user-plus fa-lg" data-toggle="modal"
 					data-target="#myModal"> </i>
